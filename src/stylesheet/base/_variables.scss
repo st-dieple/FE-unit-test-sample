@@ -1,0 +1,30 @@
+// == Breakpoints ===
+$breakpoints: (
+  small: 480px,
+  medium: 768px,
+  wide: 960px,
+  large: 1024px,
+  largest: 1280px,
+  super-largest: 1441px
+);
+
+$color: (
+  primary:  #FFB319,
+  secondary: #1A8917,
+  black: #000000,
+  white: #FFFFFF,
+  text: #333333,
+);
+
+$font-size: (
+  xs:     11px,
+  sm:     13px,
+  normal: 16px,
+  lg:     18px,
+  xl:     20px,
+  xxl:    24px,
+  xxxl:   30px
+);
+
+$font-primary: 'Lexend', sans-serif;
+$font-secondary: 'Josefin Sans', sans-serif;
