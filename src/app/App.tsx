@@ -9,8 +9,8 @@ import appRoutes from './app.routes';
 function App() {
   return (
     <BrowserRouter>
-      <Header/>
-      <RouterOutlet routes={appRoutes}/>
+        <Header/>
+        <RouterOutlet routes={appRoutes}/>
     </BrowserRouter>
   );
 }
