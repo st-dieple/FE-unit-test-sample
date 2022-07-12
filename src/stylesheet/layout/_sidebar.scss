@@ -1,7 +1,20 @@
 .sidebar {
+  position: sticky;
+  top: 10px;
+  margin-left: 30px;
   &-title {
+    position: relative;
+    display: flex;
+    align-items: center;
     font-size: map-get($font-size, xxl);
     margin-bottom: 30px;
+  }
+
+  &-border {
+    background-color: map-get($color, primary);
+    flex: 1;
+    height: 2px;
+    margin-left: 10px;
   }
 }
 
@@ -28,17 +41,20 @@
       }
 
       &-item {
-        position: relative;
-        width: 100px;
-        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80px;
+        height: 80px;
         background-color: map-get($color, primary);
         margin-right: 10px;
+
+        &:last-child {
+          margin-right: 0;
+        }
       }
 
       &-link {
-        position: absolute;
-        top: 25px;
-        left: 35px;
         font-size: map-get($font-size, xxxl);
         color: map-get($color, white);
       }

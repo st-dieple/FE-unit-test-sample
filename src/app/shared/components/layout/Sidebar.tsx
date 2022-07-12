@@ -6,7 +6,10 @@ export const Sidebar = () => {
   return (
     <aside className="sidebar">
       <div className="section-recent-post">
-        <h3 className="sidebar-title">Recent Posts</h3>
+        <h3 className="sidebar-title">
+          Recent Posts
+          <span className="sidebar-border"></span>
+        </h3>
         <ul className="post-list">
           <li className="post-item">
             <article className="post-small">
@@ -75,7 +78,7 @@ export const Sidebar = () => {
             </article>
           </li>
           <li className="post-item">
-            <article className="post-small"> 
+            <article className="post-small">
               <div className="post-header">
                 <div className="post-image">
                   <Link to="/" className="post-image-link">
@@ -99,18 +102,24 @@ export const Sidebar = () => {
         </ul>
       </div>
       <div className="section-tag">
-        <h3 className="sidebar-title">Tag</h3>
+        <h3 className="sidebar-title">
+          Tag
+          <span className="sidebar-border"></span>
+        </h3>
         <ul className="tag-list">
-          <Tag name="Health" path="/"/>
-          <Tag name="Lifestyle" path="/"/>
-          <Tag name="Music" path="/"/>
-          <Tag name="Technology" path="/"/>
-          <Tag name="Travel" path="/"/>
-          <Tag name="Video" path="/"/>
+          <Tag name="Health" path="/" />
+          <Tag name="Lifestyle" path="/" />
+          <Tag name="Music" path="/" />
+          <Tag name="Technology" path="/" />
+          <Tag name="Travel" path="/" />
+          <Tag name="Video" path="/" />
         </ul>
       </div>
       <div className="section-social">
-        <h3 className="sidebar-title">Social</h3>
+        <h3 className="sidebar-title">
+          Social
+          <span className="sidebar-border"></span>
+        </h3>
         <ul className="social-list">
           <li className="social-item">
             <Link className="social-link" to="/">
