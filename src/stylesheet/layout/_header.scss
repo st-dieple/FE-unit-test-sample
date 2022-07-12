@@ -1,17 +1,29 @@
-.section-header {
-  width: 100%;
-  height: 75px;
-  display: flex;
-  justify-content: space-between;
-  background-color: bisque;
+.header {
+  background-color: map-get($color, primary);
+
+  &-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 75px;
+  }
 }
 
-.nav-list {
-  display: flex;
-  align-items: center;
-}
+.nav {
+  &-list {
+    display: flex;
+    align-items: center;
+  }
 
-.nav-link {
-  margin-right: 10px;
-  color: map-get($color , text );
+  &-item {
+    margin-right: 20px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &-link {
+    color: map-get($color, text);
+  }
 }

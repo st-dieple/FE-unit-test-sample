@@ -2,9 +2,9 @@ import React from 'react';
 
 export const Header = () => {
   return (
-    <header>
+    <header className="header">
       <div className="container">
-        <div className="section-header">
+        <div className="header-inner">
           <h1 className="logo">
             Lotus
           </h1>
