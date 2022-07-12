@@ -15,7 +15,7 @@ export const Input = ({type, name, className, placeholder, register, errorsMsg}:
     <input 
       type={type}
       name={name} 
-      className={className} 
+      className={`form-control ${className}` }
       placeholder={placeholder} 
       {...register}
     />
