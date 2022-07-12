@@ -1,0 +1,29 @@
+.header {
+  background-color: map-get($color, primary);
+
+  &-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 75px;
+  }
+}
+
+.nav {
+  &-list {
+    display: flex;
+    align-items: center;
+  }
+
+  &-item {
+    margin-right: 20px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &-link {
+    color: map-get($color, text);
+  }
+}
