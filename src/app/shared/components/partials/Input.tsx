@@ -1,7 +1,13 @@
 import React from 'react';
 
-export const Input = () => {
+interface IInputProps {
+  fieldClass: string,
+  placeholder: string,
+  onChange : (e: any) => void;
+}
+
+export const Input = ({fieldClass, placeholder, onChange}: IInputProps) => {
   return (
-    <div>This is Input</div>
+    <input type="text" className={fieldClass} placeholder={placeholder} onChange={onChange}/>
   );
 };
