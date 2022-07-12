@@ -1,7 +1,25 @@
 import React from 'react';
 
-export const Input = () => {
+interface IInputProps {
+  type: string,
+  name: string,
+  className?: string,
+  placeholder?: string,
+  register?: any,
+  errorsMsg?: any
+}
+
+export const Input = ({type, name, className, placeholder, register, errorsMsg}: IInputProps) => {
   return (
-    <div>This is Input</div>
+    <>
+    <input 
+      type={type}
+      name={name} 
+      className={`form-control ${className}` }
+      placeholder={placeholder} 
+      {...register}
+    />
+    <span>{errorsMsg}</span>
+    </>
   );
 };
