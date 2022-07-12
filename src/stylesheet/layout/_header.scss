@@ -1,0 +1,17 @@
+.section-header {
+  width: 100%;
+  height: 75px;
+  display: flex;
+  justify-content: space-between;
+  background-color: bisque;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  margin-right: 10px;
+  color: map-get($color , text );
+}
