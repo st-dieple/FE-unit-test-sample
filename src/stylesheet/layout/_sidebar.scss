@@ -41,8 +41,8 @@
         }
     
         &-date {
-          font-size: map-get($font-size , sm);
-          color: map-get($color , gray );
+          font-size: map-get($font-size, sm);
+          color: map-get($color, gray );
         }
       }
   }
@@ -58,7 +58,7 @@
         margin-right: 5px;
       }
       &-link {
-        font-size: map-get($font-size , sm);
+        font-size: map-get($font-size, sm);
         color: map-get($color, text);
       }
     }
@@ -82,7 +82,7 @@
         position: absolute;
         top: 25px;
         left: 35px;
-        font-size: map-get($font-size , xxxl);
+        font-size: map-get($font-size, xxxl);
         color: map-get($color , white );
       }
     }
