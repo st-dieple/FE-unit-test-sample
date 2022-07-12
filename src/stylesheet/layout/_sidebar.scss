@@ -1,0 +1,79 @@
+.sidebar {
+  float: right;
+
+  .sidebar-title {
+    font-size: map-get($font-size, xxl);
+    margin-bottom: 30px;
+  }
+}
+
+.section-recent-post {
+  margin-bottom: 50px;
+  .post {
+    
+    &-item {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    &-img {
+      width: 60px;
+      height: 64px;
+      margin-right: 10px;
+    }
+
+    &-link {
+      &-title {
+        font-size: 15px;
+        color: map-get($color, text);
+        padding-bottom: 5px;
+      }
+
+      &-text {
+        font-size: 12px;
+        color: #cecece;
+      }
+    }
+  } 
+}
+
+.section-tag {
+  margin-bottom: 50px;
+  .tag {
+    &-item {
+      display: inline-block;
+      background-color: map-get($color, white);
+      box-shadow: 0px 2px 6px rgb(7 10 25 / 10%);
+      padding: 6px 8px 4px;
+      margin-right: 5px;
+    }
+    &-link {
+      font-size: 14px;
+      color: map-get($color, text);
+    }
+  }
+}
+
+.section-social {
+  .social {
+    &-list {
+      display: flex;
+    }
+
+    &-item {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      background-color: map-get($color, primary );
+      margin-right: 10px;
+    }
+
+    &-link {
+      position: absolute;
+      top: 25px;
+      left: 35px;
+      font-size: 30px;
+      color: #FFFFFF;
+    }
+  }
+}
