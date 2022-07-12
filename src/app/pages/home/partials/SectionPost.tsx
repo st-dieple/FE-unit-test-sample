@@ -15,4 +15,4 @@ const SectionPost = () => {
   )
 }
 
-export default SectionPost
+export default SectionPost;

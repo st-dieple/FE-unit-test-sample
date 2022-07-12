@@ -4,7 +4,7 @@ import { Tag } from './Tag';
 
 export const Post = () => {
   return (
-    <li>
+    <li className="post-item">
       <article className="post">
         <div className="post-header">
           <div className="post-image">
