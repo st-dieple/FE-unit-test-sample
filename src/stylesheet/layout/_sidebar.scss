@@ -1,4 +1,6 @@
 .sidebar {
+  position: sticky;
+  top: 10px;
   margin-left: 30px;
   &-title {
     position: relative;
