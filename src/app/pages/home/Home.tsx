@@ -1,9 +1,8 @@
 import React from 'react';
-import { Sidebar } from '../../shared/components/layout';
 
 const Home = () => {
   return (
-    <Sidebar />
+    <div>This is Home</div>
   );
 };
 
