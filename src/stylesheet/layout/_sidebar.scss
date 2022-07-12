@@ -35,13 +35,13 @@
       }
 
         &-title {
-          font-size: map-get($font-size, normal );
+          font-size: map-get($font-size, normal);
           color: map-get($color, text);
           padding-bottom: 5px;
         }
     
         &-date {
-          font-size: map-get($font-size , sm );
+          font-size: map-get($font-size , sm);
           color: map-get($color , gray );
         }
       }
@@ -58,7 +58,7 @@
         margin-right: 5px;
       }
       &-link {
-        font-size: map-get($font-size , sm );
+        font-size: map-get($font-size , sm);
         color: map-get($color, text);
       }
     }
@@ -74,7 +74,7 @@
         position: relative;
         width: 100px;
         height: 100px;
-        background-color: map-get($color, primary );
+        background-color: map-get($color, primary);
         margin-right: 10px;
       }
     
@@ -82,7 +82,7 @@
         position: absolute;
         top: 25px;
         left: 35px;
-        font-size: map-get($font-size , xxxl );
+        font-size: map-get($font-size , xxxl);
         color: map-get($color , white );
       }
     }
