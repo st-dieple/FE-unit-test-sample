@@ -1,13 +1,25 @@
 import React from 'react';
 
 interface IInputProps {
-  fieldClass: string,
-  placeholder: string,
-  onChange : (e: any) => void;
+  type: string,
+  name: string,
+  className?: string,
+  placeholder?: string,
+  register?: any,
+  errorsMsg?: any
 }
 
-export const Input = ({fieldClass, placeholder, onChange}: IInputProps) => {
+export const Input = ({type, name, className, placeholder, register, errorsMsg}: IInputProps) => {
   return (
-    <input type="text" className={fieldClass} placeholder={placeholder} onChange={onChange}/>
+    <>
+    <input 
+      type={type}
+      name={name} 
+      className={className} 
+      placeholder={placeholder} 
+      {...register}
+    />
+    <span>{errorsMsg}</span>
+    </>
   );
 };
