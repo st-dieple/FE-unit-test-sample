@@ -1,11 +1,18 @@
 .tag {
-  @include box-shadow(rgba(0, 0, 0, 0.16) 0px 1px 4px);
-  @include border-radius(4px);
-  margin-right: 12px;
-  padding: 0 8px;
-  background-color: map-get($color, white);
+  @include flexbox;
+  @include border-radius(20px);
+  background-color: map-get($color, gray-6);
+  @include transition(.2s linear);
   &-link {
-    font-size: map-get($font-size, sm);
-    color: map-get($color, gray);
+    padding: 4px 8px;
+    @include pxRem(font-size, 12);
+    font-weight: 400;
+    color: map-get($color, gray-4);
+  }
+  &:hover {
+    background-color: map-get($color, primary);
+    .tag-link {
+      color: map-get($color, white);
+    }
   }
 }
