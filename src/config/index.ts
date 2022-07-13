@@ -1,4 +1,4 @@
 import { ENDPOINT } from './endpoint';
-import { enviroment } from './environment';
+import { environment } from './environment';
 
-export { ENDPOINT, enviroment };
+export { ENDPOINT, environment };
