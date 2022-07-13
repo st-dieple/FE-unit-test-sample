@@ -1,16 +1,13 @@
 .loading-container {
   @extend %flex-centered;
-  position: relative;
-  height: 100vh;
-  width: 100vw;
   background-color: map-get($color, white);
   .spinner {
     @extend %flex-centered;
     @include border-radius(50%);
-    height: 14rem;
-    width: 14rem;
+    height: 10rem;
+    width: 10rem;
     border: 20px solid map-get($color, primary);
-    border-left: 20px solid map-get($color, gray);
+    border-left: 20px solid map-get($color, white);
     animation: spin infinite 1.5s linear;
     &-text {
       position: absolute;

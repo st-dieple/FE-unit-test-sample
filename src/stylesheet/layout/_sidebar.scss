@@ -1,91 +1,60 @@
 .sidebar {
-  float: right;
+  position: sticky;
+  top: 10px;
+  padding-left: 30px;
   &-title {
-    font-size: map-get($font-size, xxl);
-    margin-bottom: 30px;
+    @include pxRem(font-size, 14);
+    margin-bottom: 16px;
+  }
+
+  &-border {
+    background-color: map-get($color, primary);
+    flex: 1;
+    height: 2px;
+    margin-left: 10px;
   }
 }
 
 .section {
-  &-recent-post {
-    margin-bottom: 50px;
-
-    .post {
-      &-item {
-        margin-bottom: 20px
-      }
-
-      &-header {
-        @include flexbox;
-      }
-
-      &-image {
-        margin-right: 10px;
-
-        &-link {
-          display: block;
-          width: 64px;
-          height: 60px;
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
-        }
-      }
-
-        &-title {
-          font-size: map-get($font-size, normal);
-          color: map-get($color, text);
-          padding-bottom: 5px;
-        }
-    
-        &-date {
-          font-size: map-get($font-size, sm);
-          color: map-get($color, gray );
-        }
-      }
-  }
-  
   &-tag {
-    margin-bottom: 50px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid map-get($color, gray-5);
     .tag {
-      &-item {
-        display: inline-block;
-        background-color: map-get($color, white);
-        @include box-shadow(0px 2px 6px rgb(7 10 25 / 10%));
-        padding: 5px 4px 4px;
-        margin-right: 5px;
-      }
-      &-link {
-        font-size: map-get($font-size, sm);
-        color: map-get($color, text);
+      margin: 6px;
+      &-list {
+        @include flexbox;
+        @include flex-wrap(wrap);
+        margin: 0 -6px;
       }
     }
   }
-  
+
   &-social {
+    padding-top: 24px;
     .social {
       &-list {
         @include flexbox;
       }
-    
       &-item {
-        position: relative;
-        width: 100px;
-        height: 100px;
+        @include border-radius(4px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
         background-color: map-get($color, primary);
-        margin-right: 10px;
+
+        margin-right: 8px;
+        &:last-child {
+          margin-right: 0;
+        }
       }
-    
+
       &-link {
-        position: absolute;
-        top: 25px;
-        left: 35px;
-        font-size: map-get($font-size, xxxl);
-        color: map-get($color , white );
+        @include flexbox;
+        @include pxRem(font-size, 16);
+        color: map-get($color, white);
       }
     }
   }
 }
-
