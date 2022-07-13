@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Image from '../../../../assets/images';
 
 export const Header = () => {
+  const [sticky, setSticky] = useState<string>('');
+
+  useEffect(() => {
+    window.addEventListener('scroll', isSticky);
+    return () => {
+      window.removeEventListener('scroll', isSticky);
+    }
+  }, []);
+
+  const isSticky = () => {
+    const scrollTop = window.scrollY;
+    const stickyClass = scrollTop >= 100 ? 'header-sticky' : '';
+    setSticky(stickyClass);
+  };
+
   return (
-    <header className="header">
+    <header className={`header ${sticky}`}>
       <div className="container">
         <div className="header-inner">
           <h1 className="logo">
