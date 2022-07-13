@@ -13,7 +13,7 @@ const PostList = (props: any) => {
         })
       }
     </ul>
-  )
+  );
 };
 
 export default PostList;
