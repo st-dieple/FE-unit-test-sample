@@ -4,10 +4,10 @@
   .spinner {
     @extend %flex-centered;
     @include border-radius(50%);
-    height: 10rem;
-    width: 10rem;
-    border: 20px solid map-get($color, primary);
-    border-left: 20px solid map-get($color, white);
+    height: 3rem;
+    width: 3rem;
+    border: 8px solid map-get($color, primary);
+    border-left: 8px solid map-get($color, white);
     animation: spin infinite 1.5s linear;
     &-text {
       position: absolute;

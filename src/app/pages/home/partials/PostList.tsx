@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../app.reducers';
-import { getPosts } from './../home.actions';
+import React, { useEffect, useState } from 'react';
 import { IPost } from './../../../shared/interfaces/post';
 import { Post } from './../../../shared/components/partials/Post';
 
 const PostList = (props: any) => {
   const { posts } = props;  
-  
+
   return (
     <ul className="post-list">
       {
@@ -17,6 +14,6 @@ const PostList = (props: any) => {
       }
     </ul>
   )
-}
+};
 
 export default PostList;
