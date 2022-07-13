@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Tag } from './Tag';
 import { IPost } from './../../interfaces/post';
+import Image from '../../../../assets/images';
 
 interface IPostProps {
   post: IPost;
@@ -15,10 +16,7 @@ export const Post = ({ post }: IPostProps) => {
           <Link to="/" className="post-user">
             <div className="post-user-image">
               <img
-                src={
-                  post.user.picture ||
-                  "https://images.unsplash.com/photo-1657563495712-d581ce8e4f9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                }
+                src={post.user.picture || Image.Avatar}
                 alt={post.user.displayName}
               />
             </div>
@@ -29,7 +27,9 @@ export const Post = ({ post }: IPostProps) => {
         <div className="post-body">
           <div className="post-content">
             <h3 className="post-title">
-              <Link to="/" className="post-title-link">{post.title}</Link>
+              <Link to="/" className="post-title-link">
+                {post.title}
+              </Link>
             </h3>
             <p className="post-desc">{post.description}</p>
             <div className="post-bottom">
@@ -56,13 +56,7 @@ export const Post = ({ post }: IPostProps) => {
           </div>
           <div className="post-image">
             <Link to="/" className="post-image-link">
-              <img
-                src={
-                  post.cover ||
-                  "https://images.unsplash.com/photo-1657563495712-d581ce8e4f9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                }
-                alt={post.title}
-              />
+              <img src={post.cover || Image.Empty} alt={post.title} />
             </Link>
           </div>
         </div>
