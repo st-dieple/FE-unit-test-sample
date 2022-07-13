@@ -40,7 +40,7 @@ export const Header = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/auth/register" className="btn btn-primary">
+              <Link to="/auth/register" className="btn btn-secondary">
                 Get started
               </Link>
             </li>
