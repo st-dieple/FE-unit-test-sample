@@ -1,158 +1,47 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Tag } from '../partials';
+import Icon from './../../../../assets/icons/index';
 
 export const Sidebar = () => {
   return (
     <aside className="sidebar">
-      <div className="section-recent-post">
-        <h3 className="sidebar-title">Recent Posts</h3>
-        <ul className="post-list">
-          <li className="post-item">
-            <article className="post">
-              <div className="post-header">
-                <div className="post-image">
-                  <Link to="/" className="post-image-link">
-                    <img
-                      src="https://images.unsplash.com/photo-1657563495712-d581ce8e4f9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                      alt="Image"
-                    />
-                  </Link>
-                </div>
-                <div className="post-info">
-                  <Link to="/">
-                    <h2 className="post-title">
-                      Far far away, behind the word mountains
-                    </h2>
-                  </Link>
-                  <p className="post-date">August 15, 2019</p>
-                </div>
-              </div>
-            </article>
-          </li>
-          <li className="post-item">
-            <article className="post">
-              <div className="post-header">
-                <div className="post-image">
-                  <Link to="/" className="post-image-link">
-                    <img
-                      src="https://images.unsplash.com/photo-1657563495712-d581ce8e4f9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                      alt="Image"
-                    />
-                  </Link>
-                </div>
-                <div className="post-info">
-                  <Link to="/">
-                    <h2 className="post-title">
-                      Far far away, behind the word mountains
-                    </h2>
-                  </Link>
-                  <p className="post-date">August 15, 2019</p>
-                </div>
-              </div>
-            </article>
-          </li>
-          <li className="post-item">
-            <article className="post">
-              <div className="post-header">
-                <div className="post-image">
-                  <Link to="/" className="post-image-link">
-                    <img
-                      src="https://images.unsplash.com/photo-1657563495712-d581ce8e4f9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                      alt="Image"
-                    />
-                  </Link>
-                </div>
-                <div className="post-info">
-                  <Link to="/">
-                    <h2 className="post-title">
-                      Far far away, behind the word mountains
-                    </h2>
-                  </Link>
-                  <p className="post-date">August 15, 2019</p>
-                </div>
-              </div>
-            </article>
-          </li>
-          <li className="post-item">
-            <article className="post">
-              <div className="post-header">
-                <div className="post-image">
-                  <Link to="/" className="post-image-link">
-                    <img
-                      src="https://images.unsplash.com/photo-1657563495712-d581ce8e4f9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                      alt="Image"
-                    />
-                  </Link>
-                </div>
-                <div className="post-info">
-                  <Link to="/">
-                    <h2 className="post-title">
-                      Far far away, behind the word mountains
-                    </h2>
-                  </Link>
-                  <p className="post-date">August 15, 2019</p>
-                </div>
-              </div>
-            </article>
-          </li>
-        </ul>
-      </div>
       <div className="section-tag">
-        <h3 className="sidebar-title">Tag</h3>
+        <h3 className="sidebar-title">
+          DISCOVER MORE OF WHAT MATTERS TO YOU
+        </h3>
         <ul className="tag-list">
-          <li className="tag-item">
-            <Link className="tag-link" to="/">
-              #Health
-            </Link>
-          </li>
-          <li className="tag-item">
-            <Link className="tag-link" to="/">
-              #Lifestyle
-            </Link>
-          </li>
-          <li className="tag-item">
-            <Link className="tag-link" to="/">
-              #Music
-            </Link>
-          </li>
-          <li className="tag-item">
-            <Link className="tag-link" to="/">
-              #Technology
-            </Link>
-          </li>
-          <li className="tag-item">
-            <Link className="tag-link" to="/">
-              #Travel
-            </Link>
-          </li>
-          <li className="tag-item">
-            <Link className="tag-link" to="/">
-              #Video
-            </Link>
-          </li>
+          <Tag name="React" path="/" />
+          <Tag name="CSS" path="/" />
+          <Tag name="Framework" path="/" />
+          <Tag name="Entertainment" path="/" />
+          <Tag name="Travel" path="/" />
+          <Tag name="Video" path="/" />
         </ul>
       </div>
       <div className="section-social">
-        <h3 className="sidebar-title">Social</h3>
+        <h3 className="sidebar-title">
+          SOCIAL MEDIA
+        </h3>
         <ul className="social-list">
           <li className="social-item">
             <Link className="social-link" to="/">
-              <i className="fa-brands fa-twitter"></i>
+              <img src={Icon.Facebook} alt="facebook" />
             </Link>
           </li>
           <li className="social-item">
             <Link className="social-link" to="/">
-              <i className="fa-brands fa-facebook"></i>
+              <img src={Icon.Instagram} alt="instagram" />
             </Link>
           </li>
           <li className="social-item">
             <Link className="social-link" to="/">
-              <i className="fa-brands fa-instagram"></i>
+              <img src={Icon.Youtube} alt="youtube" />
             </Link>
           </li>
           <li className="social-item">
             <Link className="social-link" to="/">
-              <i className="fa fa-rss"></i>
+              <img src={Icon.Twitter} alt="twitter" />
             </Link>
           </li>
         </ul>

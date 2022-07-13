@@ -1,0 +1,11 @@
+.btn {
+  @include pxRem(padding, 10px 14px);
+  @include pxRem(font-size, 14px);
+  @include border-radius(100px);
+  display: inline-block;
+  font-weight: 500;
+  &-primary {
+    color: map-get($color, white);
+    background-color: map-get($color, text);
+  }
+}
