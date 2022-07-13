@@ -1,7 +1,7 @@
 .sidebar {
   position: sticky;
   top: 10px;
-  margin-left: 30px;
+  padding-left: 30px;
   &-title {
     @include pxRem(font-size, 14);
     margin-bottom: 16px;
