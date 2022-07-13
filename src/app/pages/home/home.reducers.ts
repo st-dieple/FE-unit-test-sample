@@ -24,7 +24,7 @@ export const postsReducer = (state: IStateData<IPost[]> = initialStatePosts, act
     case TYPES.GET_POSTS_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        data: [...state.data, ...action.payload],
         isLoading: false,
         error: ''
       }
