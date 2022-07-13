@@ -3,10 +3,11 @@ import React from 'react'
 interface IButtonProps {
   text: string,
   classBtn: string,
+  onClick?: (e?: any) => void;
 };
 
-export const Button = ({classBtn, text}: IButtonProps) => {
+export const Button = ({classBtn, text, onClick}: IButtonProps) => {
   return (
-    <button className={`btn btn-${classBtn}`}>{text}</button>
+    <button className={classBtn} onClick={onClick}>{text}</button>
   );
 };
