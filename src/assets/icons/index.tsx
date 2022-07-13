@@ -8,6 +8,6 @@ const Icon = {
   Instagram,
   Youtube,
   Twitter
-}
+};
 
 export default Icon;

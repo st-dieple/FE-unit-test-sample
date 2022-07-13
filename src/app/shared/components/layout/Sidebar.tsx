@@ -9,7 +9,6 @@ export const Sidebar = () => {
       <div className="section-tag">
         <h3 className="sidebar-title">
           DISCOVER MORE OF WHAT MATTERS TO YOU
-          <span className="sidebar-border"></span>
         </h3>
         <ul className="tag-list">
           <Tag name="React" path="/" />
