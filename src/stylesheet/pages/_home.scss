@@ -5,6 +5,9 @@
       background-color: map-get($color, primary);
       height: 450px;
     }
+    &-content {
+      margin-top: 40px;
+    }
   }
   .banner {
     &-inner {
