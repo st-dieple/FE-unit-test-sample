@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import PostList from './PostList';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../app.reducers';
 import { getPosts } from './../home.actions';
+import PostList from './PostList';
 import Loading from '../../../shared/components/partials/Loading';
 
 const SectionPost = () => {
