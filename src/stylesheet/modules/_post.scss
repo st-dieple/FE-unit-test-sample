@@ -23,11 +23,17 @@
   }
   &-title {
     @include ellipsis-special(2);
+    max-width: 420px;
+    width: 100%;
     margin-bottom: 12px;
     font-size: map-get($font-size, xxxl);
     font-family: $font-secondary;
     line-height: 1.2;
     color: map-get($color, text);
+    @include transition(0.2s linear);
+    &:hover {
+      @include opacity(0.7);
+    }
   }
   &-meta {
     @include flexbox;
