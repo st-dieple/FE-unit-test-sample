@@ -1,7 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-export const Button = () => {
+interface IButtonProps {
+  text: string,
+  classBtn: string,
+  onClick?: (e?: any) => void;
+};
+
+export const Button = ({classBtn, text, onClick}: IButtonProps) => {
   return (
-    <div>This is Button</div>
+    <button className={classBtn} onClick={onClick}>{text}</button>
   );
 };
