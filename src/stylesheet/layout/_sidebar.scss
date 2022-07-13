@@ -1,13 +1,10 @@
 .sidebar {
   position: sticky;
   top: 10px;
-  margin-left: 30px;
+  padding-left: 30px;
   &-title {
-    position: relative;
-    display: flex;
-    align-items: center;
-    font-size: map-get($font-size, xxl);
-    margin-bottom: 30px;
+    @include pxRem(font-size, 14);
+    margin-bottom: 16px;
   }
 
   &-border {
@@ -19,43 +16,43 @@
 }
 
 .section {
-  &-recent-post {
-    margin-bottom: 50px;
-  }
-
   &-tag {
-    margin-bottom: 50px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid map-get($color, gray-5);
     .tag {
-      margin-bottom: 12px;
+      margin: 6px;
       &-list {
         @include flexbox;
         @include flex-wrap(wrap);
+        margin: 0 -6px;
       }
     }
   }
 
   &-social {
+    padding-top: 24px;
     .social {
       &-list {
         @include flexbox;
       }
-
       &-item {
+        @include border-radius(4px);
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 80px;
-        height: 80px;
+        width: 24px;
+        height: 24px;
         background-color: map-get($color, primary);
-        margin-right: 10px;
 
+        margin-right: 8px;
         &:last-child {
           margin-right: 0;
         }
       }
 
       &-link {
-        font-size: map-get($font-size, xxxl);
+        @include flexbox;
+        @include pxRem(font-size, 16);
         color: map-get($color, white);
       }
     }

@@ -10,8 +10,8 @@ export const Tag = ({ name, path }: ITagProps) => {
   return (
     <li className="tag">
       <Link to={path} className="tag-link">
-        #{name}
+        {name}
       </Link>
     </li>
-  )
-}
+  );
+};

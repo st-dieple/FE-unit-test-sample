@@ -1,9 +1,15 @@
 .home-page {
   .section {
+    &-post {
+      padding-right: 65px;
+    }
     &-banner {
       border-bottom: 1px solid map-get($color, black);
       background-color: map-get($color, primary);
       height: 450px;
+    }
+    &-content {
+      margin-top: 40px;
     }
   }
   .banner {
