@@ -1,0 +1,27 @@
+.loading-container {
+  @extend %flex-centered;
+  background-color: map-get($color, white);
+  .spinner {
+    @extend %flex-centered;
+    @include border-radius(50%);
+    height: 3rem;
+    width: 3rem;
+    border: 8px solid map-get($color, primary);
+    border-left: 8px solid map-get($color, white);
+    animation: spin infinite 1.5s linear;
+    &-text {
+      position: absolute;
+      @include pxRem(font-size, 14);
+      color: map-get($color, text);
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
