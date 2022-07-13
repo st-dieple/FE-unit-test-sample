@@ -1,16 +1,18 @@
 import React from 'react';
-import '../stylesheet/styles.scss';
 import { BrowserRouter } from 'react-router-dom';
+import { RouterOutlet } from './core/modules/custom-router-dom';
+
 import { applyMiddleware, legacy_createStore as createStore } from 'redux';
 import { Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga';
 import { logger } from 'redux-logger';
+import createSagaMiddleware from 'redux-saga';
 
-import { Header } from './shared/components/layout';
-import { RouterOutlet } from './core/modules/custom-router-dom';
 import appRoutes from './app.routes';
 import appMiddleware from './app.middlewares';
 import rootReducer from './app.reducers';
+
+import { Header } from './shared/components/layout';
+import '../stylesheet/styles.scss';
 
 function App() {
   const middlewares = createSagaMiddleware();
@@ -26,6 +28,6 @@ function App() {
       </BrowserRouter>
     </Provider>
   );
-}
+};
 
 export default App;

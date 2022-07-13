@@ -8,6 +8,6 @@ const Image = {
   Logo,
   Avatar,
   Empty
-}
+};
 
 export default Image;

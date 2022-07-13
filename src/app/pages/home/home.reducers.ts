@@ -6,13 +6,13 @@ interface IStateData<D> {
   data: D,
   isLoading: boolean,
   error: string
-}
+};
 
 const initialStatePosts = {
   data: [],
   isLoading: true,
   error: ''
-}
+};
 
 export const postsReducer = (state: IStateData<IPost[]> = initialStatePosts, action: IAction) => {
   switch(action.type) {
@@ -37,4 +37,4 @@ export const postsReducer = (state: IStateData<IPost[]> = initialStatePosts, act
     default:
       return state;
   }
-}
+};
