@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Image from '../../../../assets/images';
 
 export const Header = () => {
-  const [sticky, setSticky] = useState<string>("");
+  const [sticky, setSticky] = useState<string>('');
 
   useEffect(() => {
     window.addEventListener('scroll', isSticky);
@@ -16,7 +16,7 @@ export const Header = () => {
     const scrollTop = window.scrollY;
     const stickyClass = scrollTop >= 100 ? 'header-sticky' : '';
     setSticky(stickyClass);
-  }
+  };
 
   return (
     <header className={`header ${sticky}`}>
