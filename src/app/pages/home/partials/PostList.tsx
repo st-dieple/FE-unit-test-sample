@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../app.reducers';
 import { getPosts } from './../home.actions';
@@ -8,9 +8,24 @@ import { Post } from './../../../shared/components/partials/Post';
 const PostList = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state: RootState) => state.posts.data);
-  
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
-    dispatch(getPosts({page: 1, size: 10}))
+    dispatch(getPosts({page, size: 5}));
+  }, [page]);
+
+  const handleScroll = (e: any) => {
+    if (window.innerHeight + e.target.documentElement.scrollTop + 20 >= e.target.documentElement.scrollHeight)
+    {      
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    }
   }, []);
 
   return (
@@ -22,6 +37,6 @@ const PostList = () => {
       }
     </ul>
   )
-}
+};
 
 export default PostList;
