@@ -44,9 +44,8 @@
   
   &-gender {
     color: map-get($color, text);
-    font-size: map-get($font-size, sm);
+    font-size: map-get($font-size, normal);
     font-weight: 400;
-    padding: 8px 15px;
   }
 }
 
