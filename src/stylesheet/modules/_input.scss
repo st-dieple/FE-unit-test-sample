@@ -22,6 +22,7 @@
     width: 100%;
     height: 100%;
     font-family: $font-primary;
+    font-size: map-get($font-size, normal);
     outline: none;
     border: 1px solid map-get($color, stroke);
     @include border-radius(5px);
