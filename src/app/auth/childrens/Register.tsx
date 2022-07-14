@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Input } from '../../shared/components/partials';
 import Image from '../../../assets/images';
+import { signUp } from './../auth.actions';
+import { RootState } from '../../app.reducers';
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors }, getValues } = useForm();
 
-  const onSubmit = (data: any) => {};
+  const { data, hasError } = useSelector((state: RootState) => state.register);
+  const onSubmit = (data: any) => {
+    dispatch(signUp({ data: {
+      ...data,
+      dob: data.dob.split('-').reverse().join('/')
+    }}));
+  };
+
+  useEffect(() => {
+    if(data.includes('Create an account successfully.')) {
+      navigate('/auth/login');
+    }
+  }, [data]);
 
   return (
     <div className="form-auth row">
@@ -82,15 +99,17 @@ const Register = () => {
           <div className="form-group">
             <select
               className="form-control form-gender"
-              {...register("render", { required: true })}
+              {...register("gender", { required: true })}
             >
-              <option disabled>Please Choose Genders</option>
-              <option>Male</option>
-              <option>Female</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
             </select>
             <label className="label">Gender</label>
           </div>
         </div>
+        {
+          hasError && <span className="txt-center txt-demi txt-error">Registration failed.</span>
+        }
         <Button classBtn="btn btn-primary btn-auth" text="Sign up" />
         <p className="tip-text">
           Already have an account?
