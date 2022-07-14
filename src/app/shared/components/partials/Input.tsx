@@ -1,27 +1,37 @@
 import React from 'react';
 
 interface IInputProps {
-  type: string,
-  name: string,
-  className?: string,
-  placeholder?: string,
-  register?: any,
-  errorsMsg?: any,
-  textLabel: any
-}
+  type: string;
+  name: string;
+  placeholder?: string;
+  register?: any;
+  errorsMsg?: string;
+  textLabel: string;
+  isError?: boolean;
+};
 
-export const Input = ({type, name, className, placeholder, register, errorsMsg, textLabel}: IInputProps) => {
+export const Input = ({
+  type,
+  name,
+  placeholder,
+  register,
+  errorsMsg,
+  textLabel,
+  isError,
+}: IInputProps) => {
   return (
-    <div className="input-group">
-      <input 
-        type={type}
-        name={name} 
-        className={`form-control ${className}` }
-        placeholder={placeholder} 
-        {...register}
-      />
-      <label className="label">{textLabel}</label>
-      <span>{errorsMsg}</span>
+    <div className={!isError ? "form-group form-error" : "form-group"}>
+      <div className="input-group">
+        <input
+          type={type}
+          name={name}
+          className="form-control"
+          placeholder={placeholder}
+          {...register}
+        />
+        <label className="label">{textLabel}</label>
+      </div>
+      {!isError && <span>{errorsMsg}</span>}
     </div>
   );
 };
