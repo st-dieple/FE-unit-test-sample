@@ -4,7 +4,6 @@ import { ENDPOINT, environment } from "../../config";
 import { signUpError, signUpSuccess } from "./auth.actions";
 import * as TYPES from '.././shared/constants/types';
 
-
 export function* signUp({ payload }: any) {  
   try {
     const res: AxiosResponse<any> = yield axios.post(
