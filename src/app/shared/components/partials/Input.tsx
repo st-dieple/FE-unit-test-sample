@@ -8,7 +8,7 @@ interface IInputProps {
   errorsMsg?: string;
   textLabel: string;
   isError?: boolean;
-}
+};
 
 export const Input = ({
   type,
