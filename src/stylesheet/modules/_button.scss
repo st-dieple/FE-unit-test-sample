@@ -16,9 +16,9 @@
   }
 
   &-auth {
+    @include border-radius(5px);
     max-width: 400px;
     width: 100%;
-    @include border-radius(5px);
     font-size: map-get($font-size, normal);
     font-weight: 600;
     font-family: $font-primary;
