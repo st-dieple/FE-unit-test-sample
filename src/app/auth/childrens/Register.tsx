@@ -6,40 +6,21 @@ import { Button, Input } from '../../shared/components/partials';
 const Register = () => {
   return (
       <div className="form-auth row">
-        <div className="signin-image col-5">
-          <img className="signin-mage-logo" src={Image.Logo} alt="Lotus" />
+        <div className="signup-image col-5">
+          <img className="signup-mage-logo" src={Image.Logo} alt="Lotus" />
           <img src={Image.LogoAuth} alt="Sign In Lotus" />
         </div>
         <form className="form col-7">
-          <h1 className="logo-title">
+          <h1 className="form-title">
             Sign Up Your Account
-            <span className="logo-title-border"></span>
           </h1>
           <div className="form-group">
-            <div className="input-group">
-              <Input type="text" name="firstname" placeholder="First Name"/>
-              <label className="label">First Name</label>
-            </div>
-            <div className="input-group">
-              <Input type="text" name="lastname" placeholder="Last Name"/>
-              <label className="label">Last Name</label>
-            </div> 
-            <div className="input-group">
-              <Input type="text" name="username" placeholder="User Name"/>
-              <label className="label">User Name</label>
-            </div>
-            <div className="input-group">
-              <Input type="email" name="email" placeholder="Email"/>
-              <label className="label">Email</label>
-            </div>
-            <div className="input-group">
-              <Input type="password" name="password" placeholder="Your password"/>
-              <label className="label">Password</label>
-            </div>
-            <div className="input-group">
-              <Input type="text" name="dob" placeholder="Date of Birth"/>
-              <label className="label">Date of Birth</label>
-            </div>
+            <Input type="text" name="firstname" placeholder="First Name" textLabel="First Name"/>
+            <Input type="text" name="lastname" placeholder="Last Name" textLabel="Last Name"/>
+            <Input type="text" name="username" placeholder="User Name" textLabel="User Name"/>
+            <Input type="email" name="email" placeholder="Email" textLabel="Email"/>
+            <Input type="password" name="password" placeholder="Your Password" textLabel="Password"/>
+            <Input type="date" name="dob" placeholder="Date of Birth" textLabel="Date of Birth"/>
             <div className="input-group">
               <select className="form-control form-gender">
                 <option>Please choose gender</option>

@@ -6,20 +6,22 @@ interface IInputProps {
   className?: string,
   placeholder?: string,
   register?: any,
-  errorsMsg?: any
+  errorsMsg?: any,
+  textLabel: any
 }
 
-export const Input = ({type, name, className, placeholder, register, errorsMsg}: IInputProps) => {
+export const Input = ({type, name, className, placeholder, register, errorsMsg, textLabel}: IInputProps) => {
   return (
-    <>
-    <input 
-      type={type}
-      name={name} 
-      className={`form-control ${className}` }
-      placeholder={placeholder} 
-      {...register}
-    />
-    <span>{errorsMsg}</span>
-    </>
+    <div className="input-group">
+      <input 
+        type={type}
+        name={name} 
+        className={`form-control ${className}` }
+        placeholder={placeholder} 
+        {...register}
+      />
+      <label className="label">{textLabel}</label>
+      <span>{errorsMsg}</span>
+    </div>
   );
 };

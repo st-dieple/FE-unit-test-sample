@@ -1,38 +1,43 @@
-.form-auth {
-  @include flexbox;
-  align-items: center;
-  width: 1218px;
-  height: 615px;
-  margin: 50px auto;
-  @include box-shadow(0px 10px 10px rgba(0, 0, 0, 0.25));
-  @include border-radius(20px);
-
-  .signin-image {
+.form {
+  &-auth {
     @include flexbox;
     align-items: center;
-    @include flex-direction(column);
+    width: 1218px;
+    height: 615px;
+    margin: 50px auto;
+    @include box-shadow(0px 10px 10px rgba(0, 0, 0, 0.25));
+    @include border-radius(20px);
   
-    &-logo {
-      width: 101px;
-      height: 42px;
+    .signup-image {
+      @include flexbox;
+      align-items: center;
+      @include flex-direction(column);
+    
+      &-logo {
+        width: 101px;
+        height: 42px;
+      }
     }
   }
 
-  .logo-title {
-    display: grid;
+  &-title {
+    position: relative;
     color: map-get($color, text);
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 53px;
 
-    &-border {
+    &::after {
+      content: "";
+      position: absolute;
+      top: 47px;
+      left: 0;
       width: 160px;
       height: 7px;
       background-color: map-get($color, primary);
     }
   }
-}
-
+}  
 .tip {
   &-text {
     color: map-get($color, text);

@@ -13,16 +13,16 @@
     color: map-get($color, white);
     background-color: map-get($color, primary);
   }
-}
 
-.btn-auth {
-  width: 400px;
-  height: 46px;
-  @include border-radius(5px);
-  color: map-get($color, white);
-  font-size: map-get($font-size, normal);
-  font-weight: 600;
-  font-family: $font-primary;
-  margin: auto;
-  margin-bottom: 12px;
+  &-auth {
+    width: 400px;
+    height: 46px;
+    @include border-radius(5px);
+    color: map-get($color, white);
+    font-size: map-get($font-size, normal);
+    font-weight: 600;
+    font-family: $font-primary;
+    margin: auto;
+    margin-bottom: 12px;
+  }
 }
