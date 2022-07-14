@@ -1,0 +1,63 @@
+.auth-page {
+  @include flexbox;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.form {
+  &-auth {
+    @include flexbox;
+    align-items: center;
+    max-width: 1218px;
+    width: 100%;
+    padding: 25px 30px;
+    @include box-shadow(0px 10px 10px rgba(0, 0, 0, 0.25));
+    @include border-radius(20px);
+  
+    .signup-image {
+      @include flexbox;
+      align-items: center;
+      @include flex-direction(column);
+    
+      &-logo {
+        width: 101px;
+        height: 42px;
+      }
+    }
+  }
+
+  &-title {
+    position: relative;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 53px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 47px;
+      left: 0;
+      width: 160px;
+      height: 7px;
+      background-color: map-get($color, primary);
+    }
+  }
+}  
+.tip {
+  &-text {
+    font-size: map-get($font-size, sm);
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  
+  &-link {
+    color: map-get($color, primary);
+  }
+
+  &-text:last-child {
+    max-width: 358px;
+    margin: auto;
+  }
+}
+

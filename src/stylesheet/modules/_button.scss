@@ -4,8 +4,24 @@
   @include border-radius(100px);
   display: inline-block;
   font-weight: 500;
-  &-primary {
+  &-secondary {
     color: map-get($color, white);
     background-color: map-get($color, text);
+  }
+
+  &-primary {
+    color: map-get($color, white);
+    background-color: map-get($color, primary);
+  }
+
+  &-auth {
+    max-width: 400px;
+    width: 100%;
+    @include border-radius(5px);
+    font-size: map-get($font-size, normal);
+    font-weight: 600;
+    font-family: $font-primary;
+    margin: auto;
+    margin-bottom: 12px;
   }
 }
