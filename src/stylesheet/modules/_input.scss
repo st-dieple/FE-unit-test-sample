@@ -35,6 +35,10 @@
 
     &:focus {
       border-color: map-get($color, primary);
+
+      &::placeholder {
+        color: transparent;
+      }
     }
   }
   
