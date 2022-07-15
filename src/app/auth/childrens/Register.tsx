@@ -21,9 +21,10 @@ const Register = () => {
   };
 
   useEffect(() => {
-    if(data.includes('Create an account successfully.')) {
+    if(data) {
       navigate('/auth/login');
     }
+    // eslint-disable-next-line
   }, [data]);
 
   return (

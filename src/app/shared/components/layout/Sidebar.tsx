@@ -26,22 +26,22 @@ export const Sidebar = () => {
         <ul className="social-list">
           <li className="social-item">
             <Link className="social-link" to="/">
-              <img src={Icon.Facebook} alt="facebook" />
+              <img src={Icon.Facebook} alt="icon facebook" />
             </Link>
           </li>
           <li className="social-item">
             <Link className="social-link" to="/">
-              <img src={Icon.Instagram} alt="instagram" />
+              <img src={Icon.Instagram} alt="icon instagram" />
             </Link>
           </li>
           <li className="social-item">
             <Link className="social-link" to="/">
-              <img src={Icon.Youtube} alt="youtube" />
+              <img src={Icon.Youtube} alt="icon youtube" />
             </Link>
           </li>
           <li className="social-item">
             <Link className="social-link" to="/">
-              <img src={Icon.Twitter} alt="twitter" />
+              <img src={Icon.Twitter} alt="icon twitter" />
             </Link>
           </li>
         </ul>
