@@ -1,4 +1,3 @@
-import React from 'react';
 import * as TYPES from '../../shared/constants/types';
 
 export const getPosts = (payload : any) => ({

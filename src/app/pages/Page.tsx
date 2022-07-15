@@ -7,9 +7,10 @@ import { getData } from '../core/helpers/localstorage';
 
 const Page = () => {
   const dispatch = useDispatch();
-  const getUserToken = parseJwt(getData("token", ""));
+
   useEffect(() => {
-    if (Object.keys(getUserToken).length) {
+    if (getData('token', '')) {
+      const getUserToken = parseJwt(getData('token', ''));
       dispatch(getUserInfo({id: getUserToken.userId}));
     }
   }, []);

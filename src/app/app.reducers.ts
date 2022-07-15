@@ -1,4 +1,3 @@
-import React from 'react';
 import { combineReducers } from 'redux';
 import { loginReducer, registerReducer } from './auth/auth.reducers';
 import { postsReducer } from './pages/home/home.reducers';

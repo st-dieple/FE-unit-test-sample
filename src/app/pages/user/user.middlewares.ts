@@ -1,7 +1,7 @@
-import axios, { AxiosResponse } from "axios";
-import { all, put, takeLatest } from "redux-saga/effects";
-import { ENDPOINT, environment } from "../../../config";
-import { getUserInfoError, getUserInfoSuccess } from "./user.actions";
+import axios, { AxiosResponse } from 'axios';
+import { all, put, takeLatest } from 'redux-saga/effects';
+import { ENDPOINT, environment } from '../../../config';
+import { getUserInfoError, getUserInfoSuccess } from './user.actions';
 import * as TYPES from '../../shared/constants/types';
 
 
