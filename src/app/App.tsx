@@ -17,7 +17,7 @@ import '../stylesheet/styles.scss';
 function App() {
   const middlewares = createSagaMiddleware();
   const store = createStore(rootReducer, applyMiddleware(middlewares, logger));
-
+  
   middlewares.run(appMiddleware);
 
   return (
