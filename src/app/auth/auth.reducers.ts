@@ -1,8 +1,8 @@
 import * as TYPES from '.././shared/constants/types';
 import { IAction } from '../shared/interfaces/reducer';
 
-interface IStateDataRegister {
-  data: string,
+interface IStateData {
+  data: any,
   isLoading: boolean,
   error: string,
   hasError: boolean
@@ -15,21 +15,14 @@ const IInitRegisterProps = {
   error: ''
 };
 
-interface IStateDataLogin {
-  dataLogin: {},
-  isLoading: boolean,
-  error: string,
-  hasError: boolean
-};
-
 const IInitLoginProps = {
-  dataLogin: {},
+  data: {},
   isLoading: true,
   hasError: false,
   error: ''
 };
 
-export const registerReducer = (state: IStateDataRegister = IInitRegisterProps, action: IAction) => {
+export const registerReducer = (state: IStateData = IInitRegisterProps, action: IAction) => {
   switch (action.type) {
     case TYPES.SIGN_UP:
       return {
@@ -56,7 +49,7 @@ export const registerReducer = (state: IStateDataRegister = IInitRegisterProps, 
   };
 };
 
-export const loginReducer = (state: IStateDataLogin = IInitLoginProps, action: IAction) => {
+export const loginReducer = (state: IStateData = IInitLoginProps, action: IAction) => {
   switch (action.type) {
     case TYPES.SIGN_IN:
       return {

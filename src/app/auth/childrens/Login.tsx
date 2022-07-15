@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../auth.actions';
 import { Input } from '../../shared/components/partials';
 import { Button } from '../../shared/components/partials';
 import Image from '../../../assets/images';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app.reducers';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -16,9 +19,18 @@ const Login = () => {
     getValues,
   } = useForm();
 
+  const dataLoginSuccess = useSelector((state: RootState) => state.login.data);
+  const hasError = useSelector((state: RootState) => state.login.hasError);
+
   const onSubmit = (data: any) => {
     dispatch(signIn({ dataLogin: { ...data } }));
   };
+
+  useEffect(() => {
+    if (Object.keys(dataLoginSuccess).length) {
+      navigate('/');
+    }
+  }, [dataLoginSuccess]);
 
   return (
     <div className="form-auth row">
@@ -60,6 +72,7 @@ const Login = () => {
             errorsMsg="Please enter at least 8 characters."
           />
         </div>
+          {hasError && <span className="txt-center txt-demi txt-error">Login failed.</span>}
         <Button classBtn="btn btn-primary btn-auth" text="Sign in" />
         <Link to="/auth" className="tip-link">
           Forgot your password?

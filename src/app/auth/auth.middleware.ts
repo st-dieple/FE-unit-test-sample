@@ -3,6 +3,7 @@ import { all, put, takeLatest } from 'redux-saga/effects';
 import { ENDPOINT, environment } from '../../config';
 import { signInError, signInSuccess, signUpError, signUpSuccess } from './auth.actions';
 import * as TYPES from '.././shared/constants/types';
+import { storeData } from '../core/helpers/localstorage';
 
 export function* signUp({ payload }: any) {  
   try {
@@ -15,12 +16,16 @@ export function* signUp({ payload }: any) {
   }
 };
 
-export function* signIn({ payload }: any) {  
+export function* signIn({ payload }: any) { 
   try {
     const res: AxiosResponse<any> = yield axios.post(
       `${environment.apiBaseUrl}${ENDPOINT.users.login}`, payload.dataLogin
     );
-    yield put(signInSuccess(res.data))
+    // SAVE STORAGE
+    storeData('token', res.data.accessToken);
+    // lấy thông tin user từ token
+    // dispatch action updateUserInfo vào redux
+    yield put(signInSuccess(res.data));
   } catch (error) {
     yield put(signInError(error));
   }
