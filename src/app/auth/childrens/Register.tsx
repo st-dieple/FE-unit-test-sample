@@ -113,7 +113,7 @@ const Register = () => {
         <Button classBtn="btn btn-primary btn-auth" text="Sign up" />
         <p className="tip-text">
           Already have an account?
-          <Link to="/auth" className="tip-link"> Sign In </Link>
+          <Link to="/auth/login" className="tip-link"> Sign In </Link>
         </p>
         <p className="tip-text">
           By signing up, you confirm that you've read and accepted our

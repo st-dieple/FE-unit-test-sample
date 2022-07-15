@@ -8,10 +8,6 @@ const authRoutes: PageRoute[] = [
     path: '/auth',
     element: Auth,
     children: [
-      {
-        path: '',
-        redirect: 'login'
-      },
       { 
         path: 'login', 
         element: Login 
