@@ -6,14 +6,14 @@ interface IStateData {
   isLoading: boolean,
   error: any,
   hasError: boolean
-}
+};
 
 const IInitStateProps = {
   data: '',
   isLoading: false,
   hasError: false,
   error: {}
-}
+};
 
 export const registerReducer = (state: IStateData = IInitStateProps, action: IAction) => {
   switch (action.type) {
