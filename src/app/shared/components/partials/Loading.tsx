@@ -1,10 +1,14 @@
 import React from 'react';
 
-const Loading = () => {
+interface ILoadingProps {
+  classType?: string
+}
+
+const Loading = ({ classType }: ILoadingProps) => {
   return (
-    <main className="loading-container">
+    <div className={classType ? `loading-container ${classType}` : "loading-container"}>
       <div className="spinner"></div>
-    </main>
+    </div>
   );
 };
 
