@@ -14,3 +14,18 @@ export const signUpError = (error: any) => ({
   type: TYPES.SIGN_UP_ERROR,
   payload: error
 });
+
+export const signIn = (payload: any) => ({
+  type: TYPES.SIGN_IN,
+  payload
+});
+
+export const signInSuccess = (data: any) => ({
+  type: TYPES.SIGN_IN_SUCCESS,
+  payload: data
+});
+
+export const signInError = (error: any) => ({
+  type: TYPES.SIGN_IN_ERROR,
+  payload: error
+});

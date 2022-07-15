@@ -50,4 +50,15 @@
     font-weight: 500;
     color: map-get($color, text);
   }
+
+  &-image {
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 }
