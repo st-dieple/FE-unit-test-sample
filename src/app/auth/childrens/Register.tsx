@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Input } from '../../shared/components/partials';
-import Image from '../../../assets/images';
 import { signUp } from './../auth.actions';
 import { RootState } from '../../app.reducers';
+import { Button, Input } from '../../shared/components/partials';
+import Image from '../../../assets/images';
 
 const Register = () => {
   const dispatch = useDispatch();
