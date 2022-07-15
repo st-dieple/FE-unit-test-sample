@@ -2,17 +2,17 @@ import * as TYPES from '.././shared/constants/types';
 import { IAction } from "../shared/interfaces/reducer";
 
 interface IStateData {
-  data: string,
+  data: any,
   isLoading: boolean,
-  error: string,
+  error: any,
   hasError: boolean
 }
 
 const IInitStateProps = {
   data: '',
-  isLoading: true,
+  isLoading: false,
   hasError: false,
-  error: ''
+  error: {}
 }
 
 export const registerReducer = (state: IStateData = IInitStateProps, action: IAction) => {

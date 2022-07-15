@@ -75,7 +75,17 @@
     font-size: map-get($font-size, normal);
     font-weight: 400;
   }
+  &-btn {
+    @include flexbox;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    .loading-container {
+      margin-left: 12px;
+    }
+  }
 }
+
 
 .form-control:focus ~ .label {
   opacity: 1;

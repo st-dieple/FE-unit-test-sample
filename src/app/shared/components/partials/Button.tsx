@@ -1,13 +1,16 @@
 import React from 'react';
+import Loading from './Loading';
 
 interface IButtonProps {
-  text: string,
-  classBtn: string,
+  text: string;
+  classBtn: string;
   onClick?: (e?: any) => void;
-};
+}
 
-export const Button = ({classBtn, text, onClick}: IButtonProps) => {
+export const Button = ({ classBtn, text, onClick }: IButtonProps) => {
   return (
-    <button className={classBtn} onClick={onClick}>{text}</button>
+    <button className={classBtn} onClick={onClick}>
+      {text}
+    </button>
   );
 };
