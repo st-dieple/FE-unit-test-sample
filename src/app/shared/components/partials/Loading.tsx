@@ -2,7 +2,7 @@ import React from 'react';
 
 interface ILoadingProps {
   classType?: string
-}
+};
 
 const Loading = ({ classType }: ILoadingProps) => {
   return (
