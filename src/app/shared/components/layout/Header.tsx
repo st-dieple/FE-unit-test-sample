@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import Image from '../../../../assets/images';
 import { RootState } from '../../../app.reducers';
+import { getData } from '../../../core/helpers/localstorage';
+import Image from '../../../../assets/images';
 
 export const Header = () => {
+  const user = useSelector((state: RootState) => state.users.data);
   const location = useLocation();
   const [sticky, setSticky] = useState<string>('');
 
@@ -36,16 +38,29 @@ export const Header = () => {
                 Write
               </Link>
             </li>
-            <li className="nav-item">
-              <Link to="/auth" className="nav-link">
-                Sign In
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/auth/register" className="btn btn-secondary">
-                Get started
-              </Link>
-            </li>
+            {getData("token", "") ? (
+              <li className="nav-item">
+                <div className="nav-image">
+                  <img
+                    src={user.picture || Image.Avatar}
+                    alt={user.displayName}
+                  />
+                </div>
+              </li>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link to="/auth" className="nav-link">
+                    Sign In
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/auth/register" className="btn btn-secondary">
+                    Get started
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
