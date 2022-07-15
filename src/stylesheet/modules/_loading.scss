@@ -1,21 +1,35 @@
-.loading-container {
-  @extend %flex-centered;
-  background-color: map-get($color, white);
-  .spinner {
+.loading {
+  &-container {
     @extend %flex-centered;
-    @include border-radius(50%);
-    height: 3rem;
-    width: 3rem;
-    border: 8px solid map-get($color, primary);
-    border-left: 8px solid map-get($color, white);
-    animation: spin infinite 1.5s linear;
-    &-text {
-      position: absolute;
-      @include pxRem(font-size, 14);
-      color: map-get($color, text);
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
+    background-color: map-get($color, white);
+    .spinner {
+      @extend %flex-centered;
+      @include border-radius(50%);
+      height: 3rem;
+      width: 3rem;
+      border: 8px solid map-get($color, primary);
+      border-left: 8px solid map-get($color, white);
+      animation: spin infinite 1.5s linear;
+      &-text {
+        position: absolute;
+        @include pxRem(font-size, 14);
+        color: map-get($color, text);
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+    }
+  }
+  &-small {
+    position: absolute;
+    top: 50%;
+    right: 90px;
+    transform: translateY(-50%);
+    .spinner {
+      height: 1.8rem;
+      width: 1.8rem;
+      border: 5px solid map-get($color, primary);
+      border-left: 5px solid map-get($color, white);
     }
   }
 }

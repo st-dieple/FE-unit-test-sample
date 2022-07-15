@@ -6,13 +6,15 @@ import { Button, Input } from '../../shared/components/partials';
 import Image from '../../../assets/images';
 import { signUp } from './../auth.actions';
 import { RootState } from '../../app.reducers';
+import Loading from '../../shared/components/partials/Loading';
 
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors }, getValues } = useForm();
 
-  const { data, hasError } = useSelector((state: RootState) => state.register);
+  const { data, hasError, isLoading, error } = useSelector((state: RootState) => state.register);
+  
   const onSubmit = (data: any) => {
     dispatch(signUp({ data: {
       ...data,
@@ -109,9 +111,12 @@ const Register = () => {
           </div>
         </div>
         {
-          hasError && <span className="txt-center txt-demi txt-error">Registration failed.</span>
+          hasError && <span className="txt-center txt-demi txt-error">{error.response.data.errors[0]}</span>
         }
-        <Button classBtn="btn btn-primary btn-auth" text="Sign up" />
+        <div className="form-btn">
+          <Button classBtn="btn btn-primary btn-auth" text="Sign up" />
+          {isLoading && <Loading classType="loading-small"/>}
+        </div>
         <p className="tip-text">
           Already have an account?
           <Link to="/auth/login" className="tip-link"> Sign In </Link>
