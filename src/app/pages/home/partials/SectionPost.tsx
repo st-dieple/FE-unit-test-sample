@@ -12,6 +12,7 @@ const SectionPost = () => {
 
   useEffect(() => {
     dispatch(getPosts({ page, size: 5 }));
+    // eslint-disable-next-line
   }, [page]);
 
   const handleScroll = (e: any) => {
