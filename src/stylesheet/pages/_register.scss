@@ -38,6 +38,27 @@
     }
   }
 
+  &-signin {
+    max-width: 400px;
+    width: 100%;
+    .form-title {
+      &::after {
+        width: 58px;
+      }
+    }
+    .form-group {
+      max-width: 400px;
+      width: 100%;
+      margin-right: 0;
+    }
+    .btn-auth {
+      margin: 0;
+    }
+    .tip-link {
+      margin-top: 12px;
+    }
+  }
+
   &-title {
     position: relative;
     font-size: 28px;
