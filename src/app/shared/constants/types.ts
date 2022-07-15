@@ -7,3 +7,6 @@ export const SIGN_UP_ERROR = 'SIGN_UP_ERROR';
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
+export const GET_USER_INFO = 'GET_USER_INFO';
+export const GET_USER_INFO_SUCCESS = 'GET_USER_INFO_SUCCESS';
+export const GET_USER_INFO_ERROR = 'GET_USER_INFO_ERROR';
