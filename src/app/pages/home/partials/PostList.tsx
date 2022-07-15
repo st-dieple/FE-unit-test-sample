@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { IPost } from './../../../shared/interfaces/post';
 import { Post } from './../../../shared/components/partials/Post';
 
