@@ -21,10 +21,9 @@ export function* signIn({ payload }: any) {
     const res: AxiosResponse<any> = yield axios.post(
       `${environment.apiBaseUrl}${ENDPOINT.users.login}`, payload.dataLogin
     );
-    // SAVE STORAGE
+
     storeData('token', res.data.accessToken);
-    // lấy thông tin user từ token
-    // dispatch action updateUserInfo vào redux
+    
     yield put(signInSuccess(res.data));
   } catch (error) {
     yield put(signInError(error));
