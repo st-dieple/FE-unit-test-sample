@@ -30,6 +30,7 @@ const Login = () => {
     if (Object.keys(dataLoginSuccess).length) {
       navigate('/');
     }
+    //eslint-disable-next-line
   }, [dataLoginSuccess]);
 
   return (
@@ -79,10 +80,7 @@ const Login = () => {
         </Link>
         <p className="tip-text">
           Don’t have an account?
-          <Link to="/auth/register" className="tip-link">
-            {" "}
-            Sign up{" "}
-          </Link>
+          <Link to="/auth/register" className="tip-link"> Sign up </Link>
         </p>
       </form>
     </div>
