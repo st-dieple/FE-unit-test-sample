@@ -8,6 +8,7 @@ import { Button } from '../../shared/components/partials';
 import Image from '../../../assets/images';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app.reducers';
+import Loading from '../../shared/components/partials/Loading';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -19,25 +20,26 @@ const Login = () => {
     getValues,
   } = useForm();
 
-  const dataLoginSuccess = useSelector((state: RootState) => state.login.data);
-  const hasError = useSelector((state: RootState) => state.login.hasError);
+  const { data, hasError, isLoading, error } = useSelector((state: RootState) => state.login);
 
   const onSubmit = (data: any) => {
     dispatch(signIn({ dataLogin: { ...data } }));
   };
 
   useEffect(() => {
-    if (Object.keys(dataLoginSuccess).length) {
+    if (Object.keys(data).length) {
       navigate('/');
     }
     //eslint-disable-next-line
-  }, [dataLoginSuccess]);
+  }, [data]);
 
   return (
     <div className="form-auth row">
-      <div className="signup-image col-5">
-        <img className="signup-mage-logo" src={Image.Logo} alt="Lotus" />
-        <img src={Image.LogoAuth} alt="Sign In Lotus" />
+      <div className="col-5">
+        <Link to="/" className="form-image ">
+          <img className="form-image-logo" src={Image.Logo} alt="Lotus" />
+          <img src={Image.LogoAuth} alt="Sign In Lotus" />
+        </Link>
       </div>
       <form
         className="form form-signin col-7"
@@ -73,8 +75,11 @@ const Login = () => {
             errorsMsg="Please enter at least 8 characters."
           />
         </div>
-          {hasError && <span className="txt-center txt-demi txt-error">Login failed.</span>}
-        <Button classBtn="btn btn-primary btn-auth" text="Sign in" />
+          {hasError && <span className="txt-center txt-demi txt-error">{error.response.data.errors[0]}</span>}
+        <div className="form-btn">
+          <Button classBtn="btn btn-primary btn-auth" text="Sign in" />
+          {isLoading && <Loading classType="loading-small loading-small-login"/>}
+        </div>
         <Link to="/auth" className="tip-link">
           Forgot your password?
         </Link>

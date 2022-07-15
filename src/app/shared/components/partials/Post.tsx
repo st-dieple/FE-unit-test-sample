@@ -18,6 +18,7 @@ export const Post = ({ post }: IPostProps) => {
               <img
                 src={post.user.picture || Image.Avatar}
                 alt={post.user.displayName}
+                // eslint-disable-next-line
               />
             </div>
             <h4 className="post-user-name">{post.user.displayName}</h4>

@@ -4,22 +4,22 @@ import { IAction } from '../shared/interfaces/reducer';
 interface IStateData {
   data: any,
   isLoading: boolean,
-  error: string,
+  error: any,
   hasError: boolean
-};
-
-const IInitRegisterProps = {
-  data: '',
-  isLoading: true,
-  hasError: false,
-  error: ''
 };
 
 const IInitLoginProps = {
   data: {},
-  isLoading: true,
+  isLoading: false,
   hasError: false,
-  error: ''
+  error: {}
+}
+
+const IInitRegisterProps = {
+  data: '',
+  isLoading: false,
+  hasError: false,
+  error: {}
 };
 
 export const registerReducer = (state: IStateData = IInitRegisterProps, action: IAction) => {

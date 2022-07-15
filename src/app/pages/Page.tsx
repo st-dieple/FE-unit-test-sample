@@ -13,6 +13,7 @@ const Page = () => {
       const getUserToken = parseJwt(getData('token', ''));
       dispatch(getUserInfo({id: getUserToken.userId}));
     }
+    // eslint-disable-next-line
   }, []);
 
   return (
