@@ -24,7 +24,7 @@ const Register = () => {
 
   useEffect(() => {
     if(data) {
-      navigate('/auth/login');
+      navigate('/auth/sign-in');
     }
     // eslint-disable-next-line
   }, [data]);
