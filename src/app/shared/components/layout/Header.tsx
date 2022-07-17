@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
 import { getData } from '../../../core/helpers/localstorage';
 import Image from '../../../../assets/images';
 
 export const Header = () => {
   const user = useSelector((state: RootState) => state.users.data);
-  const location = useLocation();
   const [sticky, setSticky] = useState<string>('');
 
   useEffect(() => {
@@ -23,7 +22,7 @@ export const Header = () => {
     setSticky(stickyClass);
   };
 
-  return location.pathname.includes('/auth') ? null : (
+  return (
     <header className={`header ${sticky}`}>
       <div className="container">
         <div className="header-inner">
@@ -50,12 +49,12 @@ export const Header = () => {
             ) : (
               <>
                 <li className="nav-item">
-                  <Link to="/auth/login" className="nav-link">
+                  <Link to="/auth/sign-in" className="nav-link">
                     Sign In
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/auth/register" className="btn btn-secondary">
+                  <Link to="/auth/sign-up" className="btn btn-secondary">
                     Get started
                   </Link>
                 </li>

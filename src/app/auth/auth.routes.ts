@@ -9,11 +9,11 @@ const authRoutes: PageRoute[] = [
     element: Auth,
     children: [
       { 
-        path: 'login', 
+        path: 'sign-in', 
         element: Login 
       },
       {       
-        path: 'register', 
+        path: 'sign-up', 
         element: Register 
       },
     ],

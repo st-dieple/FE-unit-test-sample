@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import { parseJwt } from '../core/helpers/parseJwt';
 import { getUserInfo } from './user/user.actions';
 import { getData } from '../core/helpers/localstorage';
+import { Header } from '../shared/components/layout';
 
 const Page = () => {
   const dispatch = useDispatch();
@@ -17,9 +18,12 @@ const Page = () => {
   }, []);
 
   return (
-    <main className="pages-container">
-      <Outlet />
-    </main>
+    <>
+      <Header />
+      <main className="pages-container">
+        <Outlet />
+      </main>
+    </>
   );
 };
 

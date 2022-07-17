@@ -23,7 +23,6 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Header />
         <RouterOutlet routes={appRoutes} />
       </BrowserRouter>
     </Provider>

@@ -121,7 +121,7 @@ const Register = () => {
         </div>
         <p className="tip-text">
           Already have an account?
-          <Link to="/auth/login" className="tip-link"> Sign In </Link>
+          <Link to="/auth/sign-in" className="tip-link"> Sign In </Link>
         </p>
         <p className="tip-text">
           By signing up, you confirm that you've read and accepted our
