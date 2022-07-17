@@ -60,7 +60,8 @@
     font-size: map-get($font-size, normal);
     border: 1px solid map-get($color, stroke);
     padding: 8px 15px;
-
+    outline: none;
+    
     &::placeholder {
       color: map-get($color, disable);
       font-size: map-get($font-size, normal);
