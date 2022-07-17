@@ -6,7 +6,6 @@ import { signUp } from './../auth.actions';
 import { RootState } from '../../app.reducers';
 import { Button, Input } from '../../shared/components/partials';
 import Image from '../../../assets/images';
-import Loading from '../../shared/components/partials/Loading';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -116,8 +115,7 @@ const Register = () => {
           hasError && <span className="txt-center txt-demi txt-error">{error.response.data.errors[0]}</span>
         }
         <div className="form-btn">
-          <Button classBtn="btn btn-primary btn-auth" text="Sign up" />
-          {isLoading && <Loading classType="loading-small"/>}
+          <Button classBtn="btn btn-primary btn-auth" text="Sign up" isLoading={isLoading}/>
         </div>
         <p className="tip-text">
           Already have an account?

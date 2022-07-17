@@ -77,8 +77,7 @@ const Login = () => {
         </div>
           {hasError && <span className="txt-center txt-demi txt-error">{error.response.data.errors[0]}</span>}
         <div className="form-btn">
-          <Button classBtn="btn btn-primary btn-auth" text="Sign in" />
-          {isLoading && <Loading classType="loading-small loading-small-login"/>}
+          <Button classBtn="btn btn-primary btn-auth" text="Sign in" isLoading={isLoading} />
         </div>
         <Link to="/auth" className="tip-link">
           Forgot your password?
