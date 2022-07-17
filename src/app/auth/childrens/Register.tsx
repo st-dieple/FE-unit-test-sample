@@ -46,24 +46,25 @@ const Register = () => {
     if (regex.test(time)) {
       const parts = time.split('-');
       const date = new Date();
-
+      
       if (date.getFullYear() < +parts[0]) {
-        return false;
-      } else {
+        return 'invalid';
+      }
+      if(date.getFullYear() === +parts[0]){
         if (date.getMonth() + 1 < +parts[1]) {
-          return false;
-        } else {
+          return 'invalid';
+        }
+        if(date.getMonth() + 1 === +parts[1]) {
           if (date.getDate() < +parts[2]) {
-            return false;
+            return 'invalid';
           }
         }
       }
     } else {
-      return false;
+      return 'invalid';
     }
-
     return true;
-  };
+  }; 
 
   return (
     <div className="form-auth row">
@@ -123,7 +124,7 @@ const Register = () => {
             })}
             isError={errors.email ? true : false}
             errorsMsg={`Email address is ${
-              getValues("email") ? "valid." : "required."
+              getValues("email") ? "invalid." : "required."
             }`}
           />
           <Input
@@ -145,11 +146,11 @@ const Register = () => {
             placeholder="Date of Birth"
             textLabel="Date of Birth"
             register={register("dob", {
-              required: true,
+              required: 'required',
               validate: validateDob,
             })}
             isError={errors.dob ? true : false}
-            errorsMsg={`Date of birth is ${errors.dob && errors.dob.type}.`}
+            errorsMsg={`Date of birth is ${errors.dob && errors.dob.message}.`}
           />
           <div className="form-group">
             <select
