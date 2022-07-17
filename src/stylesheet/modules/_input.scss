@@ -97,6 +97,10 @@
   opacity: 1;
 }
 
+.form-control:not(:placeholder-shown) + .label {
+  opacity: 1;
+}
+
 .label {
   position: absolute;
   top: -16px;
