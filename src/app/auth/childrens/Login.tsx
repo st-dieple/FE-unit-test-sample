@@ -75,7 +75,7 @@ const Login = () => {
             errorsMsg="Please enter at least 8 characters."
           />
         </div>
-          {hasError && <span className="txt-center txt-demi txt-error">{error.response.data.errors[0]}</span>}
+          {hasError && <span className="txt-center txt-demi txt-error">{error.response.data.errors}</span>}
         <div className="form-btn">
           <Button classBtn="btn btn-primary btn-auth" text="Sign in" isLoading={isLoading} />
         </div>
