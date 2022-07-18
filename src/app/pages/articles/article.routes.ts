@@ -1,11 +1,11 @@
 import { PageRoute } from '../../core/modules/custom-router-dom/router.interface';
-import SectionArticle from './partials/SectionArticle';
+import Articles from './Articles';
 
-const articleRoutes: PageRoute[] = [
+const postRoutes: PageRoute[] = [
   {
-    path: '/articles/:id',
-    element: SectionArticle
+    path: '/posts/:id',
+    element: Articles
   }
 ];
 
-export default articleRoutes;
+export default postRoutes;

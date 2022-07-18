@@ -1,11 +1,11 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import SectionArticle from './partials/SectionArticle';
 
 const Articles = () => {
   return (
-    <div className="articles-page">
-      <Outlet />
-    </div>
+    <main className="articles-page">
+      <SectionArticle />
+    </main>
   );
 };
 
