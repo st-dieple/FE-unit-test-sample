@@ -29,7 +29,7 @@ export const Post = ({ post }: IPostProps) => {
         <div className="post-body">
           <div className="post-content">
             <h3 className="post-title">
-              <Link to="/" className="post-title-link">
+              <Link to={`/posts/${post.id}`} className="post-title-link">
                 {post.title}
               </Link>
             </h3>
@@ -57,7 +57,7 @@ export const Post = ({ post }: IPostProps) => {
             </div>
           </div>
           <div className="post-image">
-            <Link to="/" className="post-image-link">
+            <Link to={`/posts/${post.id}`} className="post-image-link">
               <img src={post.cover || Image.Empty} alt={post.title} />
             </Link>
           </div>
