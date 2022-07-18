@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../app.reducers';
-import { getPostById } from './../article.actions';
-import Image from '../../../../assets/images';
-import Loading from '../../../shared/components/partials/Loading';
-import { formatDate } from '../../../shared/common/formatDate';
-import { convertHtml } from './../../../shared/common/convertHtml';
+import React, { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../app.reducers";
+import { getPostById } from "./../article.actions";
+import { formatDate } from "../../../shared/common/formatDate";
+import { convertHtml } from "./../../../shared/common/convertHtml";
+import { Tag, Button } from "../../../shared/components/partials";
+import Image from "../../../../assets/images";
+import Loading from "../../../shared/components/partials/Loading";
 
 const ArticleDetail = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,10 @@ const ArticleDetail = () => {
       <div className="article-header">
         <div className="author-image">
           <Link to="/">
-            <img src={Image.Avatar || data.user.picture} alt={data.user.displayName} />
+            <img
+              src={Image.Avatar || data.user.picture}
+              alt={data.user.displayName}
+            />
           </Link>
         </div>
         <div className="article-author">
@@ -41,13 +45,28 @@ const ArticleDetail = () => {
       </div>
       <div className="article-content">
         <h2 className="article-title">{data.title}</h2>
+        {data.tags.length ? (
+          <ul className="tag-article">
+            {data.tags.map((tag: any) => (
+              <Tag path="/" name={tag} />
+            ))}
+          </ul>
+        ) : null}
         <img
           className="article-image"
           src={data.cover || Image.Empty}
           alt={data.title}
         />
-        <div className="article-text">
-          {convertHtml(data.content)}
+        <div className="article-text">{convertHtml(data.content)}</div>
+        <div className="article-interact">
+          <Button
+            text={<i className="fa-regular fa-heart"></i>}
+            classBtn="btn btn-primary"
+          />
+          <Button
+            text={<i className="fa-regular fa-comment"></i>}
+            classBtn="btn btn-primary"
+          />
         </div>
       </div>
     </div>

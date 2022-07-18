@@ -15,4 +15,12 @@
       color: map-get($color, white);
     }
   }
+
+  &-article {
+    @include flexbox;
+    @include pxRem(margin, 30 0);
+    .tag {
+      @include pxRem(margin-right, 7);
+    }
+  }
 }
