@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Image from '../../../../assets/images';
 
 const Comment = () => {
@@ -6,11 +7,13 @@ const Comment = () => {
     <li className="comment">
       <div className="comment-item">
         <div className="comment-header">
-          <div className="user-avatar">
-            <img src={Image.Avatar} alt="avatar" />
-            <span className="user-active"></span>
-          </div>
-          <h4 className="user-name">Quoc Long</h4>
+          <Link to="/" className="comment-user">
+            <div className="user-avatar">
+              <img src={Image.Avatar} alt="avatar" />
+              <span className="user-active"></span>
+            </div>
+            <h4 className="user-name">Quoc Long</h4>
+          </Link>
         </div>
         <div className="comment-content">
           <p className="comment-desc">

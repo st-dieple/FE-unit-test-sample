@@ -4,9 +4,12 @@
     @include pxRem(padding, 20 0);
   }
   &-header {
+    margin-bottom: 8px;
+  }
+  &-user {
     @include flexbox;
     align-items: center;
-    margin-bottom: 8px;
+    color: map-get($color, text);
   }
   .user {
     &-avatar {
