@@ -6,7 +6,7 @@ const ArticleDetail = () => {
   return (
     <div className="article-page">
       <div className="article-header">
-        <div className="article-image">
+        <div className="author-image">
           <Link to="/">
             <img src={Image.Avatar} alt="avatar" />
           </Link>
@@ -26,7 +26,7 @@ const ArticleDetail = () => {
       </div>
       <div className="article-content">
         <h2 className="article-title">Who Is Gage Skidmore?</h2>
-        <img src="https://miro.medium.com/max/875/0*LHGUv2BrR7_tylp8.jpg" alt="picture" />
+        <img className="article-image" src="https://miro.medium.com/max/875/0*LHGUv2BrR7_tylp8.jpg" alt="picture" />
         <div className="article-text">
           <p>
           Whereas staying on top of your ‘to do list’ all the time can be tempting, 
