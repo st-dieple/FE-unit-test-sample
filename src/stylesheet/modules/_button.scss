@@ -1,0 +1,30 @@
+.btn {
+  @include pxRem(padding, 10px 14px);
+  @include pxRem(font-size, 14px);
+  @include border-radius(100px);
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+  cursor: pointer;
+  &-secondary {
+    color: map-get($color, white);
+    background-color: map-get($color, text);
+  }
+
+  &-primary {
+    color: map-get($color, white);
+    background-color: map-get($color, primary);
+  }
+
+  &-auth {
+    @include flexbox;
+    @include border-radius(5px);
+    align-items: center;
+    justify-content: center;
+    max-width: 400px;
+    width: 100%;
+    font-size: map-get($font-size, normal);
+    font-weight: 600;
+    font-family: $font-primary;
+  }
+}

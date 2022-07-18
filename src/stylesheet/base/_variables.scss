@@ -1,0 +1,41 @@
+// == Breakpoints ===
+$breakpoints: (
+  small: 480px,
+  medium: 768px,
+  wide: 960px,
+  large: 1024px,
+  largest: 1280px,
+  super-largest: 1441px
+);
+
+$color: (
+  primary:  #FFC017,
+  secondary: #1A8917,
+  black: #000000,
+  white: #FFFFFF,
+  gray: #596172,
+  gray-2: #757575,
+  gray-3: #485963,
+  gray-4: #485963,
+  gray-5: #E6E6E6,
+  gray-6: #F2F2F2,
+  gray-7:#9EA0A8,
+  red-1: #A83232,
+  red-2: #EB5757,
+  pink-1:#FFDBDC,
+  stroke: #D8DFEE,
+  disable: #9EA0A8,
+  text: #333333,
+);
+
+$font-size: (
+  xs:     11px,
+  sm:     13px,
+  normal: 16px,
+  lg:     18px,
+  xl:     20px,
+  xxl:    24px,
+  xxxl:   30px
+);
+
+$font-primary: 'Poppins', sans-serif;
