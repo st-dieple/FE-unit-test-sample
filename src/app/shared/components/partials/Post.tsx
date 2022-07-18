@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Tag } from './Tag';
 import { IPost } from './../../interfaces/post';
+import { formatDate } from './../../common/formatDate';
 import Image from '../../../../assets/images';
 
 interface IPostProps {
@@ -23,7 +24,7 @@ export const Post = ({ post }: IPostProps) => {
             </div>
             <h4 className="post-user-name">{post.user.displayName}</h4>
           </Link>
-          <p className="post-date">{post.createdAt.split("T")[0]}</p>
+          <p className="post-date">{formatDate(post.createdAt)}</p>
         </div>
         <div className="post-body">
           <div className="post-content">
@@ -33,7 +34,7 @@ export const Post = ({ post }: IPostProps) => {
               </Link>
             </h3>
             <p className="post-desc">{post.description}</p>
-            <div className="post-bottom">
+            <div className="post-footer">
               <div className="post-meta">
                 <div className="post-meta-info post-like">
                   <i className="fa-regular fa-thumbs-up"></i>
@@ -48,7 +49,7 @@ export const Post = ({ post }: IPostProps) => {
               </div>
               {post.tags && (
                 <ul className="post-tags">
-                  {post.tags.map((tag: any) => {
+                  {post.tags.slice(1, 4).map((tag: any) => {
                     return <Tag key={tag} name={tag} path="/" />;
                   })}
                 </ul>
