@@ -23,6 +23,7 @@
       overflow: hidden;
       p{
         @include pxRem(margin, 10 0);
+        overflow-wrap: break-word;
       }
     }
     &-image {
