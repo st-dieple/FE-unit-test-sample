@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../app.reducers";
-import { getPostById } from "./../article.actions";
+import { getComment, getPostById } from "./../article.actions";
 import { formatDate } from "../../../shared/common/formatDate";
 import { convertHtml } from "./../../../shared/common/convertHtml";
 import { Tag, Button } from "../../../shared/components/partials";
@@ -13,7 +13,7 @@ const ArticleDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { data, isLoading } = useSelector((state: RootState) => state.articles);
-
+  
   useEffect(() => {
     dispatch(getPostById({ id: id }));
     // eslint-disable-next-line
