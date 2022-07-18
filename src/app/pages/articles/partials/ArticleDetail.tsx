@@ -1,27 +1,16 @@
-import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../../app.reducers';
-import { getPostById } from './../article.actions';
 import { formatDate } from '../../../shared/common/formatDate';
 import { convertHtml } from './../../../shared/common/convertHtml';
 import { Tag, Button } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
-import Loading from '../../../shared/components/partials/Loading';
 
 const ArticleDetail = () => {
-  const dispatch = useDispatch();
-  const { id } = useParams();
-  const { data, isLoading } = useSelector((state: RootState) => state.articles);
-  
-  useEffect(() => {
-    dispatch(getPostById({ id: id }));
-    // eslint-disable-next-line
-  }, []);
+  const { data } = useSelector((state: RootState) => state.articles);
 
-  return isLoading ? (
-    <Loading />
-  ) : (
+  return (
     <div className="articles-item">
       <div className="article-header">
         <div className="author-image">
