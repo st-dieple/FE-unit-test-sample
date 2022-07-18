@@ -17,8 +17,8 @@ export function* getPostById({ payload }: any) {
     yield put(getPostByIdSuccess(res.data));
   } catch (error) {
     yield put(getPostByIdError(error));
-  }
-}
+  };
+};
 
 export function* getPostsRecommend({ payload }: any) {
   try {
@@ -28,12 +28,12 @@ export function* getPostsRecommend({ payload }: any) {
     yield put(getPostsRecommendSuccess(res.data.data));
   } catch (error) {
     yield put(getPostsRecommendError(error));
-  }
-}
+  };
+};
 
 export function* watchArticles() {
   yield all([
     takeLatest(TYPES.GET_POST_BY_ID, getPostById),
     takeLatest(TYPES.GET_POSTS_RECOMMEND, getPostsRecommend)
   ]);
-}
+};
