@@ -80,12 +80,12 @@ const Login = () => {
           <Button classBtn="btn btn-primary btn-auth" text="Sign in" />
           {isLoading && <Loading classType="loading-small loading-small-login"/>}
         </div>
-        <Link to="/auth" className="tip-link">
+        <Link to="/" className="tip-link">
           Forgot your password?
         </Link>
         <p className="tip-text">
           Don’t have an account?
-          <Link to="/auth/register" className="tip-link"> Sign up </Link>
+          <Link to="/auth/sign-up" className="tip-link"> Sign up </Link>
         </p>
       </form>
     </div>
