@@ -35,6 +35,16 @@ const ArticleDetail = () => {
           We’ve chosen three tried-and-true tips in this regard
           </p>
         </div>
+        <div className="comment-article">
+          <div className="comment-footer-item">
+            <i className="fa-regular fa-heart"></i>
+            <span>10</span>
+          </div>
+          <div className="comment-footer-item">
+            <i className="fa-regular fa-comment"></i>
+            <span>0</span>
+          </div>
+        </div>
       </div>
     </div>
   )

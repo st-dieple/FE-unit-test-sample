@@ -1,4 +1,8 @@
 .comment {
+  &-article {
+    @include flexbox;
+    @include pxRem(margin-bottom, 5);
+  }
   &-item {
     @include pxRem(padding, 20 0);
     border-bottom: 1px solid map-get($color, gray-5);
