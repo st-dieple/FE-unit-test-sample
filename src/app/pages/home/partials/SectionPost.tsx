@@ -17,7 +17,7 @@ const SectionPost = () => {
 
   const handleScroll = (e: any) => {
     if (
-      window.innerHeight + e.target.documentElement.scrollTop + 20 >=
+      window.innerHeight + e.target.documentElement.scrollTop >=
       e.target.documentElement.scrollHeight
     ) {
       setPage((prevPage) => prevPage + 1);
