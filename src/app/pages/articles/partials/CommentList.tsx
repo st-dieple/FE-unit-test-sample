@@ -10,6 +10,7 @@ const CommentList = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const data = useSelector((state: RootState) => state.comments.data);
+  console.log(data)
   useEffect(() => {
     dispatch(getComment({ id: id}));
     // eslint-disable-next-line

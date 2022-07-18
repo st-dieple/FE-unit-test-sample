@@ -20,7 +20,7 @@ export function* getComment({ payload }: any ) {
   try {
     const res: AxiosResponse<any> = yield axios.get(
       `${environment.apiBaseUrl}${ENDPOINT.posts.index}/${payload.id}/comments`
-    );
+      );
     yield put(getCommentSuccess(res.data));
   } catch (error) {
     yield put(getCommentError(error));

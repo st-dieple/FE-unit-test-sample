@@ -14,7 +14,7 @@ const initialStatePosts = {
 };
 
 const initialStateComments = {
-  data: {},
+  data: [],
   isLoading: true,
   error: ''
 };
