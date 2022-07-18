@@ -1,6 +1,6 @@
 import React from 'react';
-import ArticleItem from './ArticleItem';
 import { IPost } from './../../../shared/interfaces/post';
+import ArticleItem from './ArticleItem';
 
 interface IArticleListProps {
   data: any;
