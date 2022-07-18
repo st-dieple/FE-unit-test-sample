@@ -1,7 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Image from "../../../../assets/images";
-import { Button } from "../../../shared/components/partials";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '../../../shared/components/partials';
 
 const ArticleSidebar = () => {
   return (
@@ -18,45 +17,60 @@ const ArticleSidebar = () => {
       </div>
       <ul className="article-list">
         <li className="article-item">
-          <h4 className="article-item-title">
-            <Link to="/">Memories Are the Best Souvenirs</Link>
-          </h4>
+          <div className="article-item-content">
+            <h4 className="article-item-title">
+              <Link to="/">Memories Are the Best Souvenirs</Link>
+            </h4>
+            <span>31 Jul 2022</span>
+          </div>
           <img
             src="https://miro.medium.com/max/875/0*LHGUv2BrR7_tylp8.jpg"
             alt="article"
           />
         </li>
         <li className="article-item">
-          <h4 className="article-item-title">
-            <Link to="/">Memories Are the Best Souvenirs</Link>
-          </h4>
+          <div className="article-item-content">
+            <h4 className="article-item-title">
+              <Link to="/">Memories Are the Best Souvenirs</Link>
+            </h4>
+            <span>31 Jul 2022</span>
+          </div>
           <img
             src="https://miro.medium.com/max/875/0*LHGUv2BrR7_tylp8.jpg"
             alt="article"
           />
         </li>
         <li className="article-item">
-          <h4 className="article-item-title">
-            <Link to="/">Memories Are the Best Souvenirs</Link>
-          </h4>
+          <div className="article-item-content">
+            <h4 className="article-item-title">
+              <Link to="/">Memories Are the Best Souvenirs</Link>
+            </h4>
+            <span>31 Jul 2022</span>
+          </div>
           <img
             src="https://miro.medium.com/max/875/0*LHGUv2BrR7_tylp8.jpg"
             alt="article"
           />
         </li>
         <li className="article-item">
-          <h4 className="article-item-title">
-            <Link to="/">Memories Are the Best Souvenirs</Link>
-          </h4>
+          <div className="article-item-content">
+            <h4 className="article-item-title">
+              <Link to="/">Memories Are the Best Souvenirs</Link>
+            </h4>
+            <span>31 Jul 2022</span>
+          </div>
           <img
             src="https://miro.medium.com/max/875/0*LHGUv2BrR7_tylp8.jpg"
             alt="article"
           />
         </li>
         <li className="article-item">
-          <h4 className="article-item-title">
-            <Link to="/">Memories Are the Best Souvenirs</Link>
-          </h4>
+          <div className="article-item-content">
+            <h4 className="article-item-title">
+              <Link to="/">Memories Are the Best Souvenirs</Link>
+            </h4>
+            <span>31 Jul 2022</span>
+          </div>
           <img
             src="https://miro.medium.com/max/875/0*LHGUv2BrR7_tylp8.jpg"
             alt="article"
