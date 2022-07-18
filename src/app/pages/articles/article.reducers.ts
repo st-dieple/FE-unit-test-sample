@@ -13,6 +13,12 @@ const initialStatePosts = {
   error: ''
 };
 
+const initialStatePostsRecommend = {
+  data: [],
+  isLoading: true,
+  error: ''
+};
+
 const initialStateComments = {
   data: [],
   isLoading: true,
@@ -59,6 +65,31 @@ export const commentsReducer = (state: IStateData = initialStateComments, action
         error: ''
       }
     case TYPES.GET_COMMENT_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      }
+    default:
+      return state;
+  }
+};
+
+export const postsRecommendReducer = (state: IStateData = initialStatePostsRecommend, action: IAction) => {
+  switch(action.type) {
+    case TYPES.GET_POSTS_RECOMMEND:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case TYPES.GET_POSTS_RECOMMEND_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        isLoading: false,
+        error: ''
+      }
+    case TYPES.GET_POSTS_RECOMMEND_ERROR:
       return {
         ...state,
         isLoading: false,

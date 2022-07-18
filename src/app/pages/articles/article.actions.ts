@@ -15,6 +15,20 @@ export const getPostByIdError = (error: any) => ({
   payload: error,
 });
 
+export const getPostsRecommend= (payload : any) => ({
+  type: TYPES.GET_POSTS_RECOMMEND,
+  payload
+});
+
+export const getPostsRecommendSuccess = (payload : any) => ({
+  type: TYPES.GET_POSTS_RECOMMEND_SUCCESS,
+  payload
+});
+
+export const getPostsRecommendError = (payload : any) => ({
+  type: TYPES.GET_POSTS_RECOMMEND_ERROR,
+  payload
+});
 export const getComment = (payload : any) => ({
   type: TYPES.GET_COMMENT,
   payload
@@ -29,4 +43,3 @@ export const getCommentError = (error: any) => ({
   type: TYPES.GET_COMMENT_ERROR,
   payload: error,
 });
-

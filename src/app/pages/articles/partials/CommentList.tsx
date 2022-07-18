@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
 import { getComment } from '../article.actions';
-import { IComment } from '../../../shared/interfaces/post';
+import { IComment } from '../../../shared/interfaces/comment';
 import Comment from '../../../shared/components/partials/Comment';
 
 const CommentList = () => {

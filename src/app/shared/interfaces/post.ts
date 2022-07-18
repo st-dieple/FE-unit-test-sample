@@ -15,28 +15,3 @@ export interface IPost{
   updatedAt: any,
   user: any
 };
-
-export interface IPostDetail {
-  id: number,
-  title: string,
-  content: string,
-  status: string,
-  userId: number,
-  likes: number,
-  comments: number,
-  cover: string,
-  recommend: boolean,
-  isLiked: boolean,
-  isInBookmark: boolean,
-  user: any
-};
-
-export interface IComment {
-  id: number,
-  userId: number,
-  postId: 1,
-  comment: string,
-  createdAt: any,
-  updateAt: any,
-  user: any
-}

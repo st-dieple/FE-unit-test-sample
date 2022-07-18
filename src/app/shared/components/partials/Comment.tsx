@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Image from '../../../../assets/images';
 import { formatDate } from '../../common/formatDate';
-import { IComment } from '../../interfaces/post';
+import { IComment } from '../../interfaces/comment';
 
 interface ICommentProps {
   comment: IComment
