@@ -6,7 +6,7 @@ interface IButtonProps {
   classBtn: string;
   isLoading?: boolean;
   onClick?: (e?: any) => void;
-}
+};
 
 export const Button = ({
   classBtn,
