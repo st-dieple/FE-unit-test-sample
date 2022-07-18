@@ -48,7 +48,7 @@ const ArticleDetail = () => {
         {data.tags.length ? (
           <ul className="tag-article">
             {data.tags.map((tag: any) => (
-              <Tag path="/" name={tag} />
+              <Tag key={tag} path="/" name={tag} />
             ))}
           </ul>
         ) : null}

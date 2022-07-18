@@ -14,6 +14,7 @@
 
     &-title {
       @include pxRem(font-size, 34);
+      overflow-wrap: break-word;
       font-weight: 600;
     }
 
