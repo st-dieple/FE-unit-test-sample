@@ -3,11 +3,9 @@
     @include flexbox;
     @include pxRem(margin-bottom, 5);
   }
-
   &-list {
     @include pxRem(padding-top, 20);
   }
-
   &-item {
     @include pxRem(padding, 20 0);
     @include pxRem(font-size, 18);
@@ -73,5 +71,9 @@
   }
   &-name {
     font-weight: 600;
+  }
+  &-created {
+    @include pxRem(font-size, 16);
+    @include pxRem(margin-left, 6);
   }
 }

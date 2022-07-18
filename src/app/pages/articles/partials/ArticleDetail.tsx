@@ -1,54 +1,76 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Image from '../../../../assets/images';
-import { Button, Tag } from '../../../shared/components/partials';
+import React, { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../app.reducers";
+import { getPostById } from "./../article.actions";
+import { formatDate } from "../../../shared/common/formatDate";
+import { convertHtml } from "./../../../shared/common/convertHtml";
+import { Tag, Button } from "../../../shared/components/partials";
+import Image from "../../../../assets/images";
+import Loading from "../../../shared/components/partials/Loading";
 
 const ArticleDetail = () => {
-  return (
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const { data, isLoading } = useSelector((state: RootState) => state.articles);
+
+  useEffect(() => {
+    dispatch(getPostById({ id: id }));
+    // eslint-disable-next-line
+  }, []);
+
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="articles-item">
       <div className="article-header">
         <div className="author-image">
           <Link to="/">
-            <img src={Image.Avatar} alt="avatar" />
+            <img
+              src={Image.Avatar || data.user.picture}
+              alt={data.user.displayName}
+            />
           </Link>
         </div>
         <div className="article-author">
           <div className="author-name">
-            <Link to="/">
-            Benya Clark
-            </Link>
+            <Link to="/">{data.user.displayName}</Link>
           </div>
           <div className="author-time">
-            <span className="author-date">31 Jul 2022</span>
+            <span className="author-date">{formatDate(data.createdAt)}</span>
             <span>·</span>
             <span className="readingTime">5 min read</span>
           </div>
         </div>
       </div>
       <div className="article-content">
-        <h2 className="article-title">Who Is Gage Skidmore?</h2>
-        <ul className="tag-article">
-          <Tag name="React" path="/"/>
-          <Tag name="Javascript" path="/"/>
-          <Tag name="React" path="/"/>
-          <Tag name="Redux" path="/"/>
-        </ul>
-        <img className="article-image" src="https://miro.medium.com/max/875/0*LHGUv2BrR7_tylp8.jpg" alt="picture" />
-        <div className="article-text">
-          <p>
-          Whereas staying on top of your ‘to do list’ all the time can be tempting, 
-          it will simply kill your productivity in the long run. Therefore, defining a work schedule and learning 
-          to draw the line between work and leisure is essential in keeping you unplugged. 
-          We’ve chosen three tried-and-true tips in this regard
-          </p>
-        </div>
+        <h2 className="article-title">{data.title}</h2>
+        {data.tags.length ? (
+          <ul className="tag-article">
+            {data.tags.map((tag: any) => (
+              <Tag key={tag} path="/" name={tag} />
+            ))}
+          </ul>
+        ) : null}
+        <img
+          className="article-image"
+          src={data.cover || Image.Empty}
+          alt={data.title}
+        />
+        <div className="article-text">{convertHtml(data.content)}</div>
         <div className="article-interact">
-          <Button text={<i className="fa-regular fa-heart"></i>} classBtn="btn btn-primary"/>
-          <Button text={<i className="fa-regular fa-comment"></i>} classBtn="btn btn-primary"/>
+          <Button
+            text={<i className="fa-regular fa-heart"></i>}
+            classBtn="btn btn-primary"
+          />
+          <Button
+            text={<i className="fa-regular fa-comment"></i>}
+            classBtn="btn btn-primary"
+          />
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default ArticleDetail;

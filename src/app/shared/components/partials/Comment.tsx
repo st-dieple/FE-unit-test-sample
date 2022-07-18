@@ -12,6 +12,7 @@ const Comment = () => {
             <span className="user-active"></span>
           </div>
           <h4 className="user-name">Quoc Long</h4>
+          <p className="user-created">· July 12, 2022</p>
         </Link>
       </div>
       <div className="comment-content">
