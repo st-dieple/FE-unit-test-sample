@@ -96,3 +96,19 @@
   }
 }
 
+.error-box {
+  @include flexbox;
+  @include pxRem(max-width, 400);
+  @include pxRem(padding, 10 0);
+  @include pxRem(margin, 0 auto 30);
+  @include border-radius(5px);
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: map-get($color, pink-1);
+  color: map-get($color, red-1);
+  span {
+    @include pxRem(font-size, 13);
+  }
+}
+

@@ -56,7 +56,7 @@ const Login = () => {
               required: true,
               pattern: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
             })}
-            isError={!errors.email}
+            isError={errors.email ? true : false}
             errorsMsg={`Email address is ${
               getValues("email") ? "valid" : "required"
             }`}
@@ -71,11 +71,17 @@ const Login = () => {
               minLength: 8,
               maxLength: 20,
             })}
-            isError={!errors.password}
+            isError={errors.password ? true : false}
             errorsMsg="Please enter at least 8 characters."
           />
         </div>
-          {hasError && <span className="txt-center txt-demi txt-error">{error.response.data.errors}</span>}
+          {hasError && (
+            <div className="error-box">
+              <span className="txt-center txt-error">
+                {error.response.data.errors}
+              </span>
+            </div>
+          )}
         <div className="form-btn">
           <Button classBtn="btn btn-primary btn-auth" text="Sign in" isLoading={isLoading} />
         </div>
