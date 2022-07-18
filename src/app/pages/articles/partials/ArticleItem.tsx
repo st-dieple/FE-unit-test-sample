@@ -1,13 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { formatDate } from "./../../../shared/common/formatDate";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { formatDate } from './../../../shared/common/formatDate';
+import { IPost } from './../../../shared/interfaces/post';
 import Image from './../../../../assets/images/index';
 
 interface IArticleItemProps {
-  item: any;
+  item: IPost;
 }
 
-const ArticleItem = ({ item }: IArticleItemProps) => {
+const ArticleItem = ({ item }: IArticleItemProps) => { 
   return (
     <li className="article-item">
       <div className="article-item-content">
