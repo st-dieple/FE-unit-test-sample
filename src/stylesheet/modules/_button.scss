@@ -2,6 +2,7 @@
   @include pxRem(padding, 10px 14px);
   @include pxRem(font-size, 14px);
   @include border-radius(100px);
+  position: relative;
   display: inline-block;
   font-weight: 500;
   cursor: pointer;
@@ -16,7 +17,10 @@
   }
 
   &-auth {
+    @include flexbox;
     @include border-radius(5px);
+    align-items: center;
+    justify-content: center;
     max-width: 400px;
     width: 100%;
     font-size: map-get($font-size, normal);

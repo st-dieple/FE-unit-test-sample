@@ -78,20 +78,19 @@ const Login = () => {
           {hasError && (
             <div className="error-box">
               <span className="txt-center txt-error">
-                {error.response.data.errors[0]}
+                {error.response.data.errors}
               </span>
             </div>
           )}
         <div className="form-btn">
-          <Button classBtn="btn btn-primary btn-auth" text="Sign in" />
-          {isLoading && <Loading classType="loading-small loading-small-login"/>}
+          <Button classBtn="btn btn-primary btn-auth" text="Sign in" isLoading={isLoading} />
         </div>
-        <Link to="/auth" className="tip-link">
+        <Link to="/" className="tip-link">
           Forgot your password?
         </Link>
         <p className="tip-text">
           Don’t have an account?
-          <Link to="/auth/register" className="tip-link"> Sign up </Link>
+          <Link to="/auth/sign-up" className="tip-link"> Sign up </Link>
         </p>
       </form>
     </div>

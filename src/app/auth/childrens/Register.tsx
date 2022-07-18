@@ -6,7 +6,6 @@ import { signUp } from './../auth.actions';
 import { RootState } from '../../app.reducers';
 import { Button, Input } from '../../shared/components/partials';
 import Image from '../../../assets/images';
-import Loading from '../../shared/components/partials/Loading';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -34,8 +33,8 @@ const Register = () => {
   };
 
   useEffect(() => {
-    if (data) {
-      navigate('/auth/login');
+    if(data) {
+      navigate('/auth/sign-in');
     }
     // eslint-disable-next-line
   }, [data]);
@@ -166,17 +165,16 @@ const Register = () => {
         {hasError && (
           <div className="error-box">
             <span className="txt-center txt-error">
-              {error.response.data.errors[0]}
+              {error.response.data.errors}
             </span>
           </div>
         )}
         <div className="form-btn">
-          <Button classBtn="btn btn-primary btn-auth" text="Sign up" />
-          {isLoading && <Loading classType="loading-small" />}
+          <Button classBtn="btn btn-primary btn-auth" text="Sign up" isLoading={isLoading}/>
         </div>
         <p className="tip-text">
           Already have an account?
-          <Link to="/auth/login" className="tip-link"> Sign In </Link>
+          <Link to="/auth/sign-in" className="tip-link"> Sign In </Link>
         </p>
         <p className="tip-text">
           By signing up, you confirm that you've read and accepted our
