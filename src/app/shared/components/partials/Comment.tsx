@@ -15,7 +15,7 @@ const Comment = ({comment}: ICommentProps) => {
         <Link to="/" className="comment-user">
           <div className="user-avatar">
             <img src={comment.user.picture||Image.Avatar } alt="avatar" />
-            <span className="user-active"></span>
+            {comment.user.isActive === true && <span className="user-active"></span>}
           </div>
           <h4 className="user-name">{comment.user.displayName}</h4>
           <p className="user-created">· {formatDate(comment.createdAt)}</p>
