@@ -1,8 +1,8 @@
 import homeRoutes from './home/home.routes';
 import Page from './Page';
 import { PageRoute } from '../core/modules/custom-router-dom/router.interface';
-import articleRoutes from './articles/article.routes';
 import writeRoutes from './write/write.routes';
+import articleRoutes from './articles/article.routes';
 
 const pageRoutes: PageRoute[] = [
   {
