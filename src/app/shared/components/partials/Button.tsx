@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Bounce from './Bounce';
 
 interface IButtonProps {
-  text: string;
+  text: string | ReactNode;
   classBtn: string;
   isLoading?: boolean;
   onClick?: (e?: any) => void;
