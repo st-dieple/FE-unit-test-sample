@@ -4,7 +4,7 @@ import Image from '../../../../assets/images';
 
 const ArticleDetail = () => {
   return (
-    <div className="article-page">
+    <div className="articles-item">
       <div className="article-header">
         <div className="author-image">
           <Link to="/">
