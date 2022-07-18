@@ -6,6 +6,7 @@
   display: inline-block;
   font-weight: 500;
   cursor: pointer;
+  font-family: $font-primary;
   &-secondary {
     color: map-get($color, white);
     background-color: map-get($color, text);

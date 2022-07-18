@@ -29,6 +29,7 @@ export const getPostsRecommendError = (payload : any) => ({
   type: TYPES.GET_POSTS_RECOMMEND_ERROR,
   payload
 });
+
 export const getComment = (payload : any) => ({
   type: TYPES.GET_COMMENT,
   payload
