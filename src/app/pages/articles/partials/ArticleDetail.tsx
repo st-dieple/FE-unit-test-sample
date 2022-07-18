@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Image from '../../../../assets/images';
+import { Button, Tag } from '../../../shared/components/partials';
 
 const ArticleDetail = () => {
   return (
@@ -26,6 +27,12 @@ const ArticleDetail = () => {
       </div>
       <div className="article-content">
         <h2 className="article-title">Who Is Gage Skidmore?</h2>
+        <ul className="tag-article">
+          <Tag name="React" path="/"/>
+          <Tag name="Javascript" path="/"/>
+          <Tag name="React" path="/"/>
+          <Tag name="Redux" path="/"/>
+        </ul>
         <img className="article-image" src="https://miro.medium.com/max/875/0*LHGUv2BrR7_tylp8.jpg" alt="picture" />
         <div className="article-text">
           <p>
@@ -34,6 +41,10 @@ const ArticleDetail = () => {
           to draw the line between work and leisure is essential in keeping you unplugged. 
           We’ve chosen three tried-and-true tips in this regard
           </p>
+        </div>
+        <div className="article-interact">
+          <Button text={<i className="fa-regular fa-heart"></i>} classBtn="btn btn-primary"/>
+          <Button text={<i className="fa-regular fa-comment"></i>} classBtn="btn btn-primary"/>
         </div>
       </div>
     </div>

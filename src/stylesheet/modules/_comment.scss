@@ -1,6 +1,16 @@
 .comment {
+  &-article {
+    @include flexbox;
+    @include pxRem(margin-bottom, 5);
+  }
+
+  &-list {
+    @include pxRem(padding-top, 20);
+  }
+
   &-item {
     @include pxRem(padding, 20 0);
+    @include pxRem(font-size, 18);
     border-bottom: 1px solid map-get($color, gray-5);
   }
   &-header {
@@ -24,7 +34,7 @@
     &-item {
       @include flexbox;
       align-items: center;
-      margin-right: 8px; 
+      margin-right: 8px;
       i {
         @include pxRem(font-size, 16);
         margin-right: 2px;
