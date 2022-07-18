@@ -4,7 +4,7 @@ import Image from '../../../../assets/images';
 
 const ArticleDetail = () => {
   return (
-    <>
+    <div className="article-page">
       <div className="article-header">
         <div className="article-image">
           <Link to="/">
@@ -19,7 +19,7 @@ const ArticleDetail = () => {
           </div>
           <div className="author-time">
             <span className="author-date">31 Jul 2022</span>
-            <span>.</span>
+            <span>·</span>
             <span className="readingTime">5 min read</span>
           </div>
         </div>
@@ -36,7 +36,7 @@ const ArticleDetail = () => {
           </p>
         </div>
       </div>
-    </>
+    </div>
   )
 };
 
