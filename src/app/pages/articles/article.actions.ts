@@ -14,3 +14,18 @@ export const getPostByIdError = (error: any) => ({
   type: TYPES.GET_POST_BY_ID_ERROR,
   payload: error,
 });
+
+export const getPostsRecommend= (payload : any) => ({
+  type: TYPES.GET_POSTS_RECOMMEND,
+  payload
+});
+
+export const getPostsRecommendSuccess = (payload : any) => ({
+  type: TYPES.GET_POSTS_RECOMMEND_SUCCESS,
+  payload
+});
+
+export const getPostsRecommendError = (payload : any) => ({
+  type: TYPES.GET_POSTS_RECOMMEND_ERROR,
+  payload
+});

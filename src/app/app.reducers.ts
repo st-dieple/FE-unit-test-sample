@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { loginReducer, registerReducer } from './auth/auth.reducers';
 import { postsReducer } from './pages/home/home.reducers';
 import { usersReducer } from './pages/user/user.reducers';
-import { articlesReducer } from './pages/articles/article.reducers';
+import { articlesReducer, postsRecommendReducer } from './pages/articles/article.reducers';
 
 const rootReducer = combineReducers({
   posts: postsReducer,
@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
   login: loginReducer,
   users: usersReducer,
   articles: articlesReducer,
+  postsRecommend: postsRecommendReducer
 });
 
 export default rootReducer;
