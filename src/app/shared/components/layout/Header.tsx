@@ -33,7 +33,7 @@ export const Header = () => {
           </h1>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link to="/" className="nav-link">
+              <Link to="/write" className="nav-link">
                 Write
               </Link>
             </li>
