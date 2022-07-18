@@ -13,7 +13,7 @@ const ArticleDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { data, isLoading } = useSelector((state: RootState) => state.articles);
-
+  
   useEffect(() => {
     dispatch(getPostById({ id: id }));
     // eslint-disable-next-line

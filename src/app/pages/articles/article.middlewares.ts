@@ -5,6 +5,8 @@ import {
   getPostByIdError,
   getPostsRecommendSuccess,
   getPostsRecommendError,
+  getCommentSuccess, 
+  getCommentError
 } from './article.actions';
 import { environment, ENDPOINT } from '../../../config';
 import * as TYPES from '../../shared/constants/types';
@@ -31,9 +33,21 @@ export function* getPostsRecommend({ payload }: any) {
   };
 };
 
+export function* getComment({ payload }: any ) {
+  try {
+    const res: AxiosResponse<any> = yield axios.get(
+      `${environment.apiBaseUrl}${ENDPOINT.posts.index}/${payload.id}/comments`
+      );
+    yield put(getCommentSuccess(res.data));
+  } catch (error) {
+    yield put(getCommentError(error));
+  }
+};
+
 export function* watchArticles() {
   yield all([
     takeLatest(TYPES.GET_POST_BY_ID, getPostById),
-    takeLatest(TYPES.GET_POSTS_RECOMMEND, getPostsRecommend)
+    takeLatest(TYPES.GET_POSTS_RECOMMEND, getPostsRecommend),
+    takeLatest(TYPES.GET_COMMENT, getComment),  
   ]);
 };

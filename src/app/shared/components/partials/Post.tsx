@@ -7,7 +7,7 @@ import Image from '../../../../assets/images';
 
 interface IPostProps {
   post: IPost;
-}
+};
 
 export const Post = ({ post }: IPostProps) => {
   return (
