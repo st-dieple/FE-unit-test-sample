@@ -2,23 +2,28 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Image from '../../../../assets/images';
 import { formatDate } from '../../common/formatDate';
+import { IComment } from '../../interfaces/post';
 
-const Comment = (comment: any) => {
+interface ICommentProps {
+  comment: IComment
+};
+
+const Comment = ({comment}: ICommentProps) => {
   return (
     <li className="comment-item">
       <div className="comment-header">
         <Link to="/" className="comment-user">
           <div className="user-avatar">
-            <img src={comment.comment.user.picture||Image.Avatar } alt="avatar" />
+            <img src={comment.user.picture||Image.Avatar } alt="avatar" />
             <span className="user-active"></span>
           </div>
-          <h4 className="user-name">{comment.comment.user.displayName}</h4>
-          <p className="user-created">· {formatDate(comment.comment.createdAt)}</p>
+          <h4 className="user-name">{comment.user.displayName}</h4>
+          <p className="user-created">· {formatDate(comment.createdAt)}</p>
         </Link>
       </div>
       <div className="comment-content">
         <p className="comment-desc">
-          {comment.comment.comment}
+          {comment.comment}
         </p>
       </div>
       <div className="comment-footer">
