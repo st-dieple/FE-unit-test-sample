@@ -32,7 +32,7 @@ export const Sidebar = () => {
           <Tag name="Video" path="/" />
         </ul>
       </div>
-      <div className="article-recommend">
+      <div className="article-recommend sidebar-more">
         <h3 className="recommend-title">MORE FROM LOTUS</h3>
         <ArticleList data={postsRecommend.data} />
       </div>
