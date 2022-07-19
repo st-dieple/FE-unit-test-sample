@@ -96,7 +96,8 @@
   }
 }
 
-.error-box {
+.error{
+  &-box {
   @include flexbox;
   @include pxRem(max-width, 400);
   @include pxRem(padding, 10 0);
@@ -111,4 +112,8 @@
     @include pxRem(font-size, 13);
   }
 }
-
+  &-comment {
+    @include pxRem(margin, 8 0);
+    @include pxRem(max-width, 300px)  
+  }
+}

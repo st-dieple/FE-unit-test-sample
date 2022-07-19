@@ -78,18 +78,9 @@
   }
 }
 
-.section-comment {
+.form-comment {
   @include flexbox;
   @include flex-direction(column);
   align-items: flex-end;
-}
-
-.txtArea {
   width: 100%;
-  @include pxRem(padding, 16);
-  @include pxRem(border-radius, 5);
-  @include pxRem(margin-bottom, 8);
-  @include pxRem(font-size, 14);
-  overflow-y: hidden;
-  outline: none;
 }
