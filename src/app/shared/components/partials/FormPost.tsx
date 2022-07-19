@@ -14,7 +14,7 @@ const FormPost = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      cover: {},
+      cover: "",
       status: false,
       title: "",
       description: "",
@@ -22,14 +22,12 @@ const FormPost = () => {
     },
   });
 
-  const onSubmitForm = (data: any) => {
-    console.log(data);
-  };
+  const onSubmitForm = (data: any) => {};
 
   const handleChangeFile = (e: any) => {
     const file = e.target.files[0];    
-    setValue('cover', file, { shouldDirty: false, shouldValidate: true });
-    setSelectedImage(URL.createObjectURL(file));
+    setValue('cover', file);
+    setSelectedImage(URL.createObjectURL(file));    
   };
 
   return (
@@ -53,9 +51,6 @@ const FormPost = () => {
               className="form-post-input"
               accept="image/png, image/jpeg"
             />
-            {errors.cover && (
-              <span className="txt-center">Please upload image cover.</span>
-            )}
           </div>
           <div className="form-post-status">
             <label htmlFor="status">
