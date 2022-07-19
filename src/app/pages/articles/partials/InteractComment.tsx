@@ -21,23 +21,23 @@ const InteractComment = () => {
   };
 
   return (
-    <form className="section-comment" onSubmit={handleSubmit(onSubmit)}>
-      <div className="comment-content">
-        <textarea
-          className="txtArea form-control"
-          placeholder="Write a comment"
-          {...register("content", {
-            required: true,
-            maxLength: 800,
-          })}
-        />
-        {errors.content && (
-          <span className="error-comment">Please type comment</span>
-        )}
-      </div>
-      <Button classBtn="btn btn-primary btn-comment" text="Comment" />
-    </form>
-  );
-};
+    <form className="form-comment" onSubmit={handleSubmit(onSubmit)}>
+      <textarea 
+        className="comment-input form-control"
+        placeholder="Write a comment"
+        {...register("content", {
+          required: true,
+          maxLength: 800,
+        })}
+      />
+      {errors.content && 
+        <div className="error-box error-comment">
+          <span className="txt-center txt-error">Please type comment</span>
+        </div>
+      }
+      <Button classBtn="btn btn-primary btn-comment" text="Comment"/>
+    </form> 
+   );
+}
 
 export default InteractComment;
