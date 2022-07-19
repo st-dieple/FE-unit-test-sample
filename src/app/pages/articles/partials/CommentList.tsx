@@ -6,7 +6,6 @@ import Comment from '../../../shared/components/partials/Comment';
 
 const CommentList = () => {
   const data = useSelector((state: RootState) => state.comments.data);
-
   return (
     <ul className="comment-list">
       {data.map((comment: IComment) => (

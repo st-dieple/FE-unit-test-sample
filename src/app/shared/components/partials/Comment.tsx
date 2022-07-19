@@ -5,26 +5,26 @@ import { formatDate } from '../../common/formatDate';
 import { IComment } from '../../interfaces/comment';
 
 interface ICommentProps {
-  comment: IComment
-};
+  comment: IComment;
+}
 
-const Comment = ({comment}: ICommentProps) => {
+const Comment = ({ comment }: ICommentProps) => {
   return (
     <li className="comment-item">
       <div className="comment-header">
         <Link to="/" className="comment-user">
           <div className="user-avatar">
-            <img src={comment.user.picture||Image.Avatar } alt="avatar" />
-            {comment.user.isActive === true && <span className="user-active"></span>}
+            <img src={comment.user.picture || Image.Avatar} alt="avatar" />
+            {comment.user.isActive === true && (
+              <span className="user-active"></span>
+            )}
           </div>
           <h4 className="user-name">{comment.user.displayName}</h4>
           <p className="user-created">· {formatDate(comment.createdAt)}</p>
         </Link>
       </div>
       <div className="comment-content">
-        <p className="comment-desc">
-          {comment.comment}
-        </p>
+        <p className="comment-desc">{comment.comment}</p>
       </div>
       <div className="comment-footer">
         <div className="comment-footer-item">
