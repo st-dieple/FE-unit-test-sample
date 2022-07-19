@@ -18,7 +18,7 @@
   }
   &-image {
     @include pxRem(margin-bottom, 24);
-    @include pxRem(height, 350);
+    @include pxRem(height, 250);
     img {
       @include border-radius(8px);
       height: 100%;

@@ -91,7 +91,7 @@ const FormPost = () => {
             {...register("description", { required: true, minLength: 50 })}
             id="description"
             className="form-post-input"
-            rows={5}
+            rows={3}
           />
           {errors.title && <span>Description of post min 50 characters.</span>}
         </div>
@@ -110,7 +110,7 @@ const FormPost = () => {
                 initialValue=""
                 onEditorChange={(newText: string) => onChange(newText)}
                 init={{
-                  height: 500,
+                  height: 400,
                   menubar: false,
                   content_css: "http://localhost:3000/css/tinymce.css",
                   plugins: [
