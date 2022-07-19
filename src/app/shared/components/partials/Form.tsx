@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
-import { Editor } from "@tinymce/tinymce-react";
-import { useForm } from "react-hook-form";
-import Image from "../../../../assets/images";
+import React, { useRef } from 'react';
+import { Editor } from '@tinymce/tinymce-react';
+import { useForm } from 'react-hook-form';
+import Image from '../../../../assets/images';
 
 const Form = () => {
   const { register, handleSubmit } = useForm();
