@@ -1,0 +1,22 @@
+.form-post {
+  &-item {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    color: map-get($color, gray-4);
+    font-weight: 400;
+  }
+  input[type="text"], 
+  input[type="textarea"] {
+    @include pxRem(padding, 12 24);
+    @include pxRem(font-size, 16);
+    @include border-radius(4px);
+    font-family: $font-primary;
+    color: map-get($color, text);
+    border: 1px solid map-get($color, gray-7);
+  }
+  input[type="textarea"] {
+    height: 100px;
+  }
+}
