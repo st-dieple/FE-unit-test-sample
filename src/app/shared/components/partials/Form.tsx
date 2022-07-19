@@ -1,24 +1,25 @@
-import React from "react";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import React, { useRef } from "react";
+import { Editor } from "@tinymce/tinymce-react";
 import { useForm } from "react-hook-form";
-import { Button } from "./Button";
+import Image from "../../../../assets/images";
 
 const Form = () => {
   const { register, handleSubmit } = useForm();
-  
-  const handleChange = (event: any, editor: any) => {
-    const data = editor.getData();
-    console.log({ event, editor, data });
+  const editorRef = useRef<any>(null);
+
+  const onSubmitForm = (data: any) => {
+    const dataPost = {...data};
+    if(editorRef.current) {
+      dataPost.content = editorRef.current.getContent()
+    }
   };
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-  }
-
   return (
-    <form className="form-post" onSubmit={handleSubmit(onSubmit)}>
+    <form className="form-post" onSubmit={handleSubmit(onSubmitForm)}>
       <div className="form-post-group">
+        <div className="form-post-image">
+          <img src={Image.Empty} alt="post image" />
+        </div>
         <div className="form-post-header">
           <div className="form-post-file">
             <label htmlFor="cover">Upload file image</label>
@@ -26,17 +27,20 @@ const Form = () => {
               type="file"
               id="cover"
               className="form-post-input"
-              {...register('cover', { required: true })}
+              {...register("cover")}
             />
           </div>
           <div className="form-post-status">
-            <label htmlFor="status">Public</label>
-            <input
-              type="radio"
-              id="status"
-              className="form-post-input"
-              {...register('status', { required: true })}
-            />
+            <label htmlFor="status">
+              Public
+              <input
+                type="checkbox"
+                id="status"
+                className="form-post-checkbox"
+                {...register("status")}
+              />
+              <span className="check"></span>
+            </label>
           </div>
         </div>
         <div className="form-post-item">
@@ -45,24 +49,44 @@ const Form = () => {
             type="text"
             id="title"
             className="form-post-input"
-            {...register('title', { required: true })}
+            {...register("title")}
           />
         </div>
         <div className="form-post-item">
           <label htmlFor="description">Description</label>
-          <input
-            type="textarea"
+          <textarea
             id="description"
             className="form-post-input"
-            {...register('description', { required: true })}
+            rows={5}
+            {...register("description")}
           />
         </div>
         <div className="form-post-item">
-          <CKEditor editor={ClassicEditor} onChange={handleChange} className="ckeditor"/>
+          <label htmlFor="content">Content</label>
+          <Editor
+            onInit={(evt: any, editor: any) => (editorRef.current = editor)}
+            initialValue=""
+            init={{
+              height: 500,
+              menubar: false,
+              content_css: 'http://localhost:3000/css/tinymce.css',
+              plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste code help wordcount",
+              ],
+              toolbar:
+                "undo redo | formatselect | " +
+                "bold italic backcolor | alignleft aligncenter " +
+                "alignright alignjustify | bullist numlist outdent indent | " +
+                "removeformat | help | image code",
+              content_style:
+                "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+            }}
+          />
         </div>
         <div className="form-post-footer">
-          <Button classBtn="btn btn-primary" text="Save Draft" /> 
-          <input type="submit" className="btn btn-primary" value="Publish"/>
+          <input type="submit" className="btn btn-primary form-post-btn" value="Publish" />
         </div>
       </div>
     </form>
