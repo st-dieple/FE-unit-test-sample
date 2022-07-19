@@ -6,7 +6,7 @@ interface IInputProps {
   placeholder?: string;
   register?: any;
   errorsMsg?: string;
-  textLabel: string;
+  textLabel?: string;
   isError?: boolean;
 };
 
@@ -20,7 +20,7 @@ export const Input = ({
   isError,
 }: IInputProps) => {  
   return (
-    <div className={isError ? "form-group form-error" : "form-group"}>
+    <div className={isError ? "form-group form-error" : "form-group form-comment"}>
       <div className="input-group">
         <input
           type={type}

@@ -6,6 +6,7 @@ import { formatDate } from '../../../shared/common/formatDate';
 import { convertHtml } from './../../../shared/common/convertHtml';
 import { Tag, Button } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
+import InteractComment from './InteractComment';
 
 const ArticleDetail = () => {
   const { data } = useSelector((state: RootState) => state.articles);
@@ -58,6 +59,7 @@ const ArticleDetail = () => {
           />
         </div>
       </div>
+      <InteractComment />
     </div>
   );
 };
