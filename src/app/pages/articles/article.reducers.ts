@@ -10,19 +10,19 @@ interface IStateData {
 const initialStatePosts = {
   data: {},
   isLoading: true,
-  error: '',
+  error: ''
 };
 
 const initialStatePostsRecommend = {
   data: [],
   isLoading: true,
-  error: '',
+  error: ''
 };
 
 const initialStateComments = {
   data: [],
   isLoading: true,
-  error: '',
+  error: ''
 };
 
 export const articlesReducer = (
@@ -33,20 +33,20 @@ export const articlesReducer = (
     case TYPES.GET_POST_BY_ID:
       return {
         ...state,
-        isLoading: true,
+        isLoading: true
       };
     case TYPES.GET_POST_BY_ID_SUCCESS:
       return {
         ...state,
         data: action.payload,
         isLoading: false,
-        error: '',
+        error: ''
       };
     case TYPES.GET_POST_BY_ID_ERROR:
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        error: action.payload
       };
     default:
       return state;
@@ -61,37 +61,37 @@ export const commentsReducer = (
     case TYPES.GET_COMMENT:
       return {
         ...state,
-        isLoading: true,
+        isLoading: true
       };
     case TYPES.GET_COMMENT_SUCCESS:
       return {
         ...state,
         data: action.payload,
         isLoading: false,
-        error: '',
+        error: ''
       };
     case TYPES.GET_COMMENT_ERROR:
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        error: action.payload
       };
     case TYPES.POST_COMMENT:
       return {
-        ...state,
+        ...state
       };
     case TYPES.POST_COMMENT_SUCCESS:
       return {
         ...state,
         data: [...state.data.unshift(action.payload)],
         isLoading: false,
-        error: '',
+        error: ''
       };
     case TYPES.POST_COMMENT_ERROR:
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        error: action.payload
       };
     default:
       return state;
@@ -106,20 +106,20 @@ export const postsRecommendReducer = (
     case TYPES.GET_POSTS_RECOMMEND:
       return {
         ...state,
-        isLoading: true,
+        isLoading: true
       };
     case TYPES.GET_POSTS_RECOMMEND_SUCCESS:
       return {
         ...state,
         data: action.payload,
         isLoading: false,
-        error: '',
+        error: ''
       };
     case TYPES.GET_POSTS_RECOMMEND_ERROR:
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        error: action.payload
       };
     default:
       return state;

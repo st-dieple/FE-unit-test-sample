@@ -15,7 +15,7 @@ const Comment = ({ comment }: ICommentProps) => {
         <Link to="/" className="comment-user">
           <div className="user-avatar">
             <img src={comment.user.picture || Image.Avatar} alt="avatar" />
-            {comment.user.isActive === true && (
+            {comment.user.isActive && (
               <span className="user-active"></span>
             )}
           </div>

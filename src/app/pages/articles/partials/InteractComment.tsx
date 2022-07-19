@@ -1,7 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
 import { Button } from '../../../shared/components/partials';
