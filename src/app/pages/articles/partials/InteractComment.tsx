@@ -14,10 +14,12 @@ const InteractComment = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue
   } = useForm();
   const userInfo = useSelector((state: RootState) => state.users.data);
   const onSubmit = (data: any) => {
     dispatch(postComment({ id, data, userInfo }));
+    setValue('content', '');
   };
 
   return (
