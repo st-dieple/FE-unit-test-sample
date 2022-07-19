@@ -13,6 +13,7 @@
   &-file {
     @include flexbox;
     @include pxRem(max-width, 240);
+    flex-direction: column;
     width: 100%;
   }
   &-image {
@@ -102,6 +103,23 @@
   &-btn {
     @include pxRem(max-width, 160);
     width: 100%;
+  }
+  &-error {
+    input[type="text"]:focus, textarea:focus {
+      border: 1px solid map-get($color, red-2);
+    }
+    input[type="text"], textarea {
+      border: 1px solid map-get($color, red-2);
+    }
+    span {
+      @include pxRem(font-size, 14);
+      @include pxRem(margin-top, 4);
+      color: map-get($color, red-1);
+      font-weight: 500;
+    }
+    .tox-tinymce {
+      border: 1px solid map-get($color, red-2)!important;
+    }
   }
 }
 .tox-notifications-container {
