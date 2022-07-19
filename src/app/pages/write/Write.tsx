@@ -2,8 +2,9 @@ import React from 'react';
 
 const Write = () => {
   return (
-    <div>This is write article</div>
-  )
+    <main className="write-page">
+    </main>
+  );
 };
 
 export default Write;

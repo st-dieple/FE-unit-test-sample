@@ -1,0 +1,5 @@
+.write {
+  &-inner {
+    @include pxRem(padding, 50 100);
+  }
+}
