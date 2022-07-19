@@ -78,35 +78,9 @@
   }
 }
 
-.section-comment {
+.form-comment {
   @include flexbox;
   @include flex-direction(column);
   align-items: flex-end;
-}
-
-.comment-content {
-  @include flexbox;
-  @include flex-direction(column);
-  align-items: flex-start;
   width: 100%;
 }
-
-.error-comment {
-  @include pxRem(font-size, 14);
-  font-weight: 600;
-  @include pxRem(padding, 18);
-  border-radius: 6px;
-  color: #A83232;
-  background-color: #FFDBDC;
-}
-
-.txtArea {
-  width: 100%;
-  @include pxRem(padding, 16);
-  @include pxRem(border-radius, 5);
-  @include pxRem(margin-bottom, 8);
-  @include pxRem(font-size, 14);
-  overflow-y: hidden;
-  outline: none;
-}
-
