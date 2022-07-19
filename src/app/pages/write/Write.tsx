@@ -1,9 +1,11 @@
-import React from 'react';
+import React from 'react'
+import SectionWrite from './partials/SectionWrite';
 
 const Write = () => {
   return (
-    <main className="write-page">
-    </main>
+    <div className="write-page">
+      <SectionWrite />
+    </div>
   );
 };
 
