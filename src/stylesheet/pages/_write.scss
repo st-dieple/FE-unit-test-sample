@@ -1,6 +1,6 @@
 .write {
   &-inner {
-    @include pxRem(padding, 50 100);
+    @include pxRem(padding, 36 100);
   }
   &-title {
     @include pxRem(font-size, 28);
