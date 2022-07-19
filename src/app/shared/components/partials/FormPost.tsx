@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Editor } from "@tinymce/tinymce-react";
-import { Controller, useForm } from "react-hook-form";
-import Image from "../../../../assets/images";
+import React, { useState } from 'react';
+import { Editor } from '@tinymce/tinymce-react';
+import { Controller, useForm } from 'react-hook-form';
+import Image from '../../../../assets/images';
 
 const FormPost = () => {
   const [selectedImage, setSelectedImage] = useState<string>(Image.Empty);
