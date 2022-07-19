@@ -38,7 +38,7 @@ const Comment = ({ comment }: ICommentProps) => {
         <p className="comment-reply">Reply</p>
       </div>
     </li>
-  );
+  )
 };
 
 export default Comment;
