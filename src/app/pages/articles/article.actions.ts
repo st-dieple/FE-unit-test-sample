@@ -44,3 +44,18 @@ export const getCommentError = (error: any) => ({
   type: TYPES.GET_COMMENT_ERROR,
   payload: error,
 });
+
+export const getImageURL = (payload: any) => ({
+  type: TYPES.GET_IMAGE_URL,
+  payload
+});
+
+export const getImageURLSuccess = (data: any) => ({
+  type: TYPES.GET_IMAGE_URL_SUCCESS,
+  payload: data
+});
+
+export const getImageURLError = (error: any) => ({
+  type: TYPES.GET_IMAGE_URL_ERROR,
+  payload: error
+});

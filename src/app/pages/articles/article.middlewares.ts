@@ -6,9 +6,12 @@ import {
   getPostsRecommendSuccess,
   getPostsRecommendError,
   getCommentSuccess, 
-  getCommentError
+  getCommentError,
+  getImageURLSuccess,
+  getImageURLError
 } from './article.actions';
 import { environment, ENDPOINT } from '../../../config';
+import { getData } from '../../core/helpers/localstorage';
 import * as TYPES from '../../shared/constants/types';
 
 export function* getPostById({ payload }: any) {
@@ -44,10 +47,28 @@ export function* getComment({ payload }: any ) {
   }
 };
 
+export function* getImageURL({ payload }: any) {   
+  const token = getData('token', '');
+  try {
+    const res: AxiosResponse<any> = yield axios.get(
+      `${environment.apiBaseUrl}${ENDPOINT.signatures.index}?type_upload=${payload.type_upload}&file_name=${payload.file_name}&file_type=${payload.file_type}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    yield put(getImageURLSuccess(res.data));
+  } catch (error) {
+    yield put(getImageURLError(error));
+  };
+};
+
 export function* watchArticles() {
   yield all([
     takeLatest(TYPES.GET_POST_BY_ID, getPostById),
     takeLatest(TYPES.GET_POSTS_RECOMMEND, getPostsRecommend),
-    takeLatest(TYPES.GET_COMMENT, getComment),  
+    takeLatest(TYPES.GET_COMMENT, getComment),
+    takeLatest(TYPES.GET_IMAGE_URL, getImageURL)  
   ]);
 };

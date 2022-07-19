@@ -1,32 +1,44 @@
-import React, { useState } from 'react';
-import { Editor } from '@tinymce/tinymce-react';
+import React, { useState, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import Image from '../../../../assets/images';
+import { useDispatch, useSelector } from 'react-redux';
+import { Editor } from '@tinymce/tinymce-react';
+import { getImageURL } from '../../../pages/articles/article.actions';
+import { RootState } from '../../../app.reducers';
 
 const FormPost = () => {
-  const [selectedImage, setSelectedImage] = useState<string>(Image.Empty);
+  const dispatch = useDispatch();
+  const signatures = useSelector((state: RootState) => state.signatures);
+  const [selectedImage, setSelectedImage] = useState<string>('https://www.w3schools.com/css/img_5terre.jpg');
   const {
     register,
     handleSubmit,
     control,
     setValue,
-    getValues,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      cover: "",
+      cover: 'https://www.w3schools.com/css/img_5terre.jpg',
       status: false,
-      title: "",
-      description: "",
-      content: "",
+      title: '',
+      description: '',
+      content: '',
     },
-  });
+  }); 
 
+  useEffect(() => {
+    setValue('cover', signatures.data.url);
+  }, [signatures.data]);
+  
   const onSubmitForm = (data: any) => {};
 
   const handleChangeFile = (e: any) => {
-    const file = e.target.files[0];    
-    setValue('cover', file);
+    const file = e.target.files[0];
+    const payload = {
+      type_upload: 'cover-post',
+      file_name: file.name,
+      file_type: `image/${file.name.split('.')[1]}`
+    };
+    dispatch(getImageURL(payload));    
     setSelectedImage(URL.createObjectURL(file));    
   };
 
