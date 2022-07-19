@@ -1,5 +1,5 @@
 import React from 'react';
-import Form from '../../../shared/components/partials/Form';
+import FormPost from '../../../shared/components/partials/FormPost';
 
 const SectionWrite = () => {
   return (
@@ -7,7 +7,7 @@ const SectionWrite = () => {
       <div className="container">
         <div className="write-inner">
           <h2 className="write-title">Create New Blog</h2>
-          <Form />
+          <FormPost />
         </div>
       </div>
     </section>

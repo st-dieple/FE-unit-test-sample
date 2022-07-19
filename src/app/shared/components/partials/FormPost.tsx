@@ -3,7 +3,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import { useForm } from 'react-hook-form';
 import Image from '../../../../assets/images';
 
-const Form = () => {
+const FormPost = () => {
   const { register, handleSubmit } = useForm();
   const editorRef = useRef<any>(null);
 
@@ -93,4 +93,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default FormPost;

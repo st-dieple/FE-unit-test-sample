@@ -12,12 +12,12 @@
   }
   &-file {
     @include flexbox;
-    max-width: 240px;
+    @include pxRem(max-width, 240);
     width: 100%;
   }
   &-image {
     @include pxRem(margin-bottom, 24);
-    height: 350px;
+    @include pxRem(height, 350);
     img {
       @include border-radius(8px);
       height: 100%;
@@ -56,8 +56,8 @@
     }
   }
   input[type='checkbox'] {
+    @include pxRem(margin-left, 8);
     -webkit-appearance: none;
-    margin-left: 8px;
     &:checked {
       & ~ .check::after {
         background-color: map-get($color, gray-6);
@@ -73,39 +73,34 @@
     align-items: center;
   }
   .check {
+    @include pxRem(width, 60);
+    @include pxRem(height, 30);
+    @include border-radius(30px);
+    @include transition(ease-in 0.3s);
     position: relative;
     display: block;
-    width: 60px;
-    height: 30px;
     background-color: map-get($color, gray-6);
     cursor: pointer;
-    border-radius: 30px;
-    transition: ease-in 0.5s;
     &::after {
+      @include pxRem(width, 26);
+      @include pxRem(height, 26);
       @include border-radius(50%);
+      @include transition(ease-in 0.3s);
       content: '';
       position: absolute;
-      width: 26px;
-      height: 26px;
       top: 2px;
       right: 2px;
       background-color: map-get($color, primary);
-      transition: ease-in 0.5s;
     }
-  }
-  &-status {
-    @include flexbox;
-    justify-content: flex-end;
   }
   &-footer {
     @include pxRem(margin-top, 40);
     @include flexbox;
     align-items: center;
     justify-content: flex-end;
-    gap: 0 20px;
   }
   &-btn {
-    max-width: 160px;
+    @include pxRem(max-width, 160);
     width: 100%;
   }
 }
