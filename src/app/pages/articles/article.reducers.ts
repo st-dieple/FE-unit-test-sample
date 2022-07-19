@@ -51,6 +51,7 @@ export const articlesReducer = (state: IStateData = initialStatePosts, action: I
 };
 
 export const commentsReducer = (state: IStateData = initialStateComments, action: IAction) => {
+  console.log(state.data)
   switch(action.type) {
     case TYPES.GET_COMMENT:
       return {
@@ -65,6 +66,24 @@ export const commentsReducer = (state: IStateData = initialStateComments, action
         error: ''
       }
     case TYPES.GET_COMMENT_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      }
+    case TYPES.POST_COMMENT:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case TYPES.POST_COMMENT_SUCCESS:
+      return {
+        ...state,
+        data: [...state.data ,...action.payload],
+        isLoading: false,
+        error: ''
+      }
+    case TYPES.POST_COMMENT_ERROR:
       return {
         ...state,
         isLoading: false,

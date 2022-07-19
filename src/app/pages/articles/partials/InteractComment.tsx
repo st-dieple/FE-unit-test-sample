@@ -1,8 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { Button } from '../../../shared/components/partials';
+import { postComment } from '../article.actions';
 
 const InteractComment = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -10,7 +13,7 @@ const InteractComment = () => {
   } = useForm();
 
   const onSubmit = (data: any) => {
-    console.log(data)
+    dispatch(postComment(data));
   }
 
   return (

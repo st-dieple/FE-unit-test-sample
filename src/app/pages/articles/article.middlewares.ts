@@ -6,10 +6,13 @@ import {
   getPostsRecommendSuccess,
   getPostsRecommendError,
   getCommentSuccess, 
-  getCommentError
+  getCommentError,
+  postCommentSuccess,
+  postCommentError
 } from './article.actions';
 import { environment, ENDPOINT } from '../../../config';
 import * as TYPES from '../../shared/constants/types';
+import { getData } from '../../core/helpers/localstorage';
 
 export function* getPostById({ payload }: any) {
   try {
@@ -44,10 +47,22 @@ export function* getComment({ payload }: any ) {
   }
 };
 
+export function* postComment({ payload }: any ) {
+  try {
+    const res: AxiosResponse<any> = yield axios.post(
+      `${environment.apiBaseUrl}${ENDPOINT.posts.index}/${payload.id}/comments`
+      );
+    yield put(postCommentSuccess(res.data));
+  } catch (error) {
+    yield put(postCommentError(error));
+  }
+};
+
 export function* watchArticles() {
   yield all([
     takeLatest(TYPES.GET_POST_BY_ID, getPostById),
     takeLatest(TYPES.GET_POSTS_RECOMMEND, getPostsRecommend),
-    takeLatest(TYPES.GET_COMMENT, getComment),  
+    takeLatest(TYPES.GET_COMMENT, getComment), 
+    takeLatest(TYPES.POST_COMMENT, postComment),
   ]);
 };
