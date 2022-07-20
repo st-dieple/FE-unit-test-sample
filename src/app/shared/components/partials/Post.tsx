@@ -3,21 +3,14 @@ import { Link } from 'react-router-dom';
 import { Tag } from './Tag';
 import { IPost } from './../../interfaces/post';
 import { formatDate } from './../../common/formatDate';
+import { checkControl } from './../../common/checkControl';
 import Image from '../../../../assets/images';
-import { getData } from '../../../core/helpers/localstorage';
-import { parseJwt } from '../../../core/helpers/parseJwt';
 
 interface IPostProps {
   post: IPost;
 }
 
 export const Post = ({ post }: IPostProps) => {
-  const token = getData('token', '');
-  let userId;
-  if (token) {
-    userId = parseJwt(token).userId;
-  }
-
   return (
     <li className="post-item">
       <article className="post">
@@ -32,14 +25,13 @@ export const Post = ({ post }: IPostProps) => {
                     e.target['onerror'] = null;
                     e.target['src'] = Image.Avatar;
                   }}
-                  // eslint-disable-next-line
                 />
               </div>
               <h4 className="post-user-name">{post.user.displayName}</h4>
             </Link>
             <p className="post-date">{formatDate(post.createdAt)}</p>
           </div>
-          {userId && userId === post.user.id && (
+          {checkControl(post.user.id) && (
             <div className="post-control">
               <i className="fa-solid fa-ellipsis"></i>
               <ul className="post-control-list">
