@@ -1,5 +1,5 @@
 import React from 'react';
-import FormPost from '../../shared/components/partials/FormPost';
+import FormPost from '../../../shared/components/partials/FormPost';
 
 const Edit = () => {
   return (

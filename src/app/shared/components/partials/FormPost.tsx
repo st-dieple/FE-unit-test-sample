@@ -99,7 +99,7 @@ const FormPost = () => {
   if(id && isLoading) return <Loading/>;
   return (
     <>
-      <h2 className="write-title">{id ? "Edit Blog" : "Create New Blog"}</h2>
+      <h2 className="write-title txt-center">{id ? "Edit Blog" : "Create New Blog"}</h2>
       <form className="form-post" onSubmit={handleSubmit(onSubmitForm)}>
         <div className="form-post-group">
           <div className="form-post-image">
