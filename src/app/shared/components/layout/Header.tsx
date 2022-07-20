@@ -33,11 +33,11 @@ export const Header = () => {
           </h1>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link to="/post/write" className="nav-link">
+              <Link to="/posts/write" className="nav-link">
                 Write
               </Link>
             </li>
-            {getData("token", "") ? (
+            {getData('token', '') ? (
               <li className="nav-item">
                 <div className="nav-image">
                   <img
