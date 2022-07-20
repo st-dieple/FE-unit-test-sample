@@ -1,6 +1,9 @@
 import React from 'react';
 import { IPost } from './../../../shared/interfaces/post';
 import { Post } from './../../../shared/components/partials/Post';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../app.reducers';
+import { useParams } from 'react-router-dom';
 
 const PostList = (props: any) => {
   const { posts } = props;  

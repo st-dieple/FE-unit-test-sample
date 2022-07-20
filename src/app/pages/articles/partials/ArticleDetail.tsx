@@ -1,15 +1,34 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../app.reducers';
-import { formatDate } from '../../../shared/common/formatDate';
-import { convertHtml } from './../../../shared/common/convertHtml';
-import { Tag, Button } from '../../../shared/components/partials';
-import Image from '../../../../assets/images';
-import InteractComment from './InteractComment';
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../app.reducers";
+import { formatDate } from "../../../shared/common/formatDate";
+import { convertHtml } from "./../../../shared/common/convertHtml";
+import { Tag, Button } from "../../../shared/components/partials";
+import Image from "../../../../assets/images";
+import InteractComment from "./InteractComment";
+import { ILike } from "../../../shared/interfaces/like";
+import { useDispatch } from "react-redux";
+import { getLike, putLike } from "../article.actions";
 
-const ArticleDetail = () => {
+const ArticleDetail = ({ likes }: any) => {
+  const [liked, setLiked] = useState<number>(likes.length);
+  const dispatch = useDispatch();
+  const { id } = useParams();
   const { data } = useSelector((state: RootState) => state.articles);
+  const dataLike = useSelector((state: RootState) => state.likes);
+
+  useEffect(() => {
+    if (dataLike.data.liked) {
+      setLiked(liked + 1);
+    } else if (liked > 0) {
+      setLiked(liked - 1);
+    }
+  }, [dataLike]);
+
+  const handleLike = () => {
+    dispatch(putLike({ id }));
+  };
 
   return (
     <div className="articles-item">
@@ -52,7 +71,9 @@ const ArticleDetail = () => {
           <Button
             text={<i className="fa-regular fa-heart"></i>}
             classBtn="btn btn-primary"
+            onClick={handleLike}
           />
+          <span className="article-like">{liked}</span>
           <Button
             text={<i className="fa-regular fa-comment"></i>}
             classBtn="btn btn-primary"

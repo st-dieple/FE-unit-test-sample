@@ -7,6 +7,7 @@ import {
   getPostById,
   getPostsRecommend,
   getComment,
+  getLike,
 } from './../article.actions';
 import ArticleDetail from './ArticleDetail';
 import ArticleSidebar from './ArticleSidebar';
@@ -20,11 +21,13 @@ const SectionArticle = () => {
     (state: RootState) => state.postsRecommend
   );
   const comments = useSelector((state: RootState) => state.comments);
+  const likes = useSelector((state: RootState) => state.likes.data);
 
   useEffect(() => {
     dispatch(getPostById({ id: id }));
     dispatch(getPostsRecommend({ page: 1, size: 5 }));
     dispatch(getComment({ id: id }));
+    dispatch(getLike({ id: id }));
     // eslint-disable-next-line
   }, [id]);
 
@@ -37,7 +40,7 @@ const SectionArticle = () => {
       <div className="container">
         <div className="article row">
           <div className="col-8">
-            <ArticleDetail />
+            <ArticleDetail likes={likes} />
             <CommentList />
           </div>
           <div className="col-4">
