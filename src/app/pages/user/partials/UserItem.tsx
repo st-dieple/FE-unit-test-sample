@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import Image from "../../../../assets/images";
 import { Tag } from "../../../shared/components/partials";
 
-const UserItem = () => {
+const UserItem = ({postItem}: any) => {
+  console.log(postItem)
   return (
     <>
       <li className="post-item">
@@ -12,12 +13,12 @@ const UserItem = () => {
             <Link to="/" className="post-user">
               <div className="post-user-image">
                 <img
-                  src={Image.Avatar}
-                  alt="image"
+                  src={postItem.picture || Image.Avatar}
+                  alt=""
                   // eslint-disable-next-line
                 />
               </div>
-              <h4 className="post-user-name">st-tuduong</h4>
+              <h4 className="post-user-name">{postItem}</h4>
             </Link>
             <p className="post-date">July 20, 2022</p>
           </div>

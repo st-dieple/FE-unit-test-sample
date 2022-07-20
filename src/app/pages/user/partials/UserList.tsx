@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import UserItem from './UserItem';
 
-const UserList = () => {
+const UserList = ({postList}: any) => {
   return ( 
     <ul className="post-user-list">
-      <UserItem />
+      {postList.Posts.map((postItem: any) => (
+        <UserItem key={postItem.id} postItem={postItem}/>
+      ))}
     </ul>
    );
 }

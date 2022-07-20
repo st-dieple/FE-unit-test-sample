@@ -1,27 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import UserList from "./partials/UserList";
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { RootState } from "../../app.reducers";
+import { getUserPosts } from "./user.actions";
+import Image from "../../../assets/images";
 
 const User = () => {
+  const dispatch = useDispatch();
+  const {id} =useParams();
+  const userPost = useSelector((state: RootState) => state.usersPosts);
+  useEffect(() => {
+    dispatch(getUserPosts({id}))
+  }, [id]);
+
+
   return (
     <div className="container">
       <section className="section section-post">
         <div className="author-info-content">
           <div className="author-avatar">
             <Link to="/">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-BFO1-9_B8owATZcfnZc6FwA8GJjr-RMwHg&usqp=CAU" alt="image" />
+              <img src={userPost.data.picture || Image.Avatar} alt="image" />
             </Link>
           </div>
           <div className="author-info">
-            <h2 className="author-name">ST - Tu Duong</h2>
+            <h2 className="author-name">{userPost.data.displayName}</h2>
             <ul className="author-list">
-              <li className="author-item">5 Posts</li>
-              <li className="author-item">10 Followers</li>
-              <li className="author-item">15 Following</li>
+              <li className="author-item">{userPost?.data.Posts?.length || 0} Posts</li>
+              <li className="author-item">{userPost.data.followers} Followers</li>
+              <li className="author-item">{userPost.data.followings} Following</li>
             </ul>
           </div>
         </div>
-        <UserList />
+        <UserList postList = {userPost}/>
       </section>
     </div>
   );
