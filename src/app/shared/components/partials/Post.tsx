@@ -4,27 +4,61 @@ import { Tag } from './Tag';
 import { IPost } from './../../interfaces/post';
 import { formatDate } from './../../common/formatDate';
 import Image from '../../../../assets/images';
+import { getData } from '../../../core/helpers/localstorage';
+import { parseJwt } from '../../../core/helpers/parseJwt';
 
 interface IPostProps {
   post: IPost;
-};
+}
 
 export const Post = ({ post }: IPostProps) => {
+  const token = getData('token', '');
+  let userId;
+  if (token) {
+    userId = parseJwt(token).userId;
+  }
+
   return (
     <li className="post-item">
       <article className="post">
         <div className="post-header">
-          <Link to="/" className="post-user">
-            <div className="post-user-image">
-              <img
-                src={post.user.picture || Image.Avatar}
-                alt={post.user.displayName}
-                // eslint-disable-next-line
-              />
+          <div className="post-user">
+            <Link to="/" className="post-user-info">
+              <div className="post-user-image">
+                <img
+                  src={post.user.picture || Image.Avatar}
+                  alt={post.user.displayName}
+                  onError={(e: any) => {
+                    e.target['onerror'] = null;
+                    e.target['src'] = Image.Avatar;
+                  }}
+                  // eslint-disable-next-line
+                />
+              </div>
+              <h4 className="post-user-name">{post.user.displayName}</h4>
+            </Link>
+            <p className="post-date">{formatDate(post.createdAt)}</p>
+          </div>
+          {userId && userId === post.user.id && (
+            <div className="post-control">
+              <i className="fa-solid fa-ellipsis"></i>
+              <ul className="post-control-list">
+                <li className="post-control-item">
+                  <i className="fa-solid fa-pen"></i>
+                  <Link
+                    to={`/post/edit/${post.id}`}
+                    className="post-control-link"
+                  >
+                    Edit
+                  </Link>
+                </li>
+                <li className="post-control-item">
+                  <i className="fa-solid fa-trash-can"></i>
+                  Delete
+                </li>
+              </ul>
             </div>
-            <h4 className="post-user-name">{post.user.displayName}</h4>
-          </Link>
-          <p className="post-date">{formatDate(post.createdAt)}</p>
+          )}
         </div>
         <div className="post-body">
           <div className="post-content">
