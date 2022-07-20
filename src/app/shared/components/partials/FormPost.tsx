@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { Editor } from '@tinymce/tinymce-react';
 import { SignaturesService } from './../../../core/serivces/signatures.service';
-import { ArticleService } from '../../../core/serivces/article.service';
+import { createPost } from '../../../pages/home/home.actions';
+import { RootState } from '../../../app.reducers';
 
 const signaturesService = new SignaturesService();
-const articleService = new ArticleService();
 const FormPost = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const posts = useSelector((state: RootState) => state.posts);
   const [selectedImage, setSelectedImage] = useState<string>(
     'https://www.w3schools.com/css/img_5terre.jpg'
   );
@@ -28,17 +31,17 @@ const FormPost = () => {
     },
   });
 
+  useEffect(() => {
+    if(posts.createSuccess) {
+      alert('Create post successfully.');
+      navigate('/');
+    }
+  }, [posts.createSuccess]); 
+
   const onSubmitForm = (data: any) => {
     const dataPost = {...data};
     dataPost.status = data.status ? 'public' : 'private';    
-    try {
-      articleService.createArticle(dataPost).then(async (data: any) => {
-        alert('Create post successfully.');
-        navigate(`/posts/${data.id}`);
-      })
-    } catch(err) {
-      alert('Create post error.');
-    }
+    dispatch(createPost(dataPost));
   };
 
   const handleChangeFile = async (e: any) => {

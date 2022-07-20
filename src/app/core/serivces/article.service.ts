@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { ApiService } from './api.service';
 import { ENDPOINT } from './../../../config/endpoint';
 

@@ -44,4 +44,3 @@ export const getCommentError = (error: any) => ({
   type: TYPES.GET_COMMENT_ERROR,
   payload: error,
 });
-

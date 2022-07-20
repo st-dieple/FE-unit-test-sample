@@ -9,7 +9,6 @@ import {
   getCommentError,
 } from './article.actions';
 import { environment, ENDPOINT } from '../../../config';
-import { getData } from '../../core/helpers/localstorage';
 import * as TYPES from '../../shared/constants/types';
 
 export function* getPostById({ payload }: any) {
