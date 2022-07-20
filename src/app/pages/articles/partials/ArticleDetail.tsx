@@ -5,7 +5,7 @@ import { RootState } from '../../../app.reducers';
 import { formatDate } from '../../../shared/common/formatDate';
 import { convertHtml } from './../../../shared/common/convertHtml';
 import { Tag, Button } from '../../../shared/components/partials';
-import { checkControl } from '../../../shared/common/checkControl';
+import { checkUserId } from '../../../shared/common/checkUserId';
 import Image from '../../../../assets/images';
 
 const ArticleDetail = () => {
@@ -38,22 +38,19 @@ const ArticleDetail = () => {
             </div>
           </div>
         </div>
-        {checkControl(data.user.id) && (
+        {checkUserId(data.user.id) && (
           <div className="post-control">
             <i className="fa-solid fa-ellipsis"></i>
             <ul className="post-control-list">
-              <li className="post-control-item">
-                <i className="fa-solid fa-pen"></i>
-                <Link
-                  to={`/posts/edit/${data.id}`}
-                  className="post-control-link"
-                >
+              <li>
+                <Link to={`/posts/edit/${data.id}`} className="post-control-item">
+                  <i className="fa-solid fa-pen"></i>
                   Edit
                 </Link>
               </li>
               <li className="post-control-item">
                 <i className="fa-solid fa-trash-can"></i>
-                <p>Delete</p>
+                Delete
               </li>
             </ul>
           </div>

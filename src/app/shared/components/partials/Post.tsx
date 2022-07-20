@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Tag } from './Tag';
 import { IPost } from './../../interfaces/post';
 import { formatDate } from './../../common/formatDate';
-import { checkControl } from './../../common/checkControl';
+import { checkUserId } from '../../common/checkUserId';
 import Image from '../../../../assets/images';
 
 interface IPostProps {
@@ -31,16 +31,13 @@ export const Post = ({ post }: IPostProps) => {
             </Link>
             <p className="post-date">{formatDate(post.createdAt)}</p>
           </div>
-          {checkControl(post.user.id) && (
+          {checkUserId(post.user.id) && (
             <div className="post-control">
               <i className="fa-solid fa-ellipsis"></i>
               <ul className="post-control-list">
-                <li className="post-control-item">
-                  <i className="fa-solid fa-pen"></i>
-                  <Link
-                    to={`/posts/edit/${post.id}`}
-                    className="post-control-link"
-                  >
+                <li>
+                  <Link to={`/posts/edit/${post.id}`} className="post-control-item">
+                    <i className="fa-solid fa-pen"></i>
                     Edit
                   </Link>
                 </li>

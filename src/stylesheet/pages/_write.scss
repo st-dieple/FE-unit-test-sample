@@ -3,7 +3,7 @@
     @include pxRem(padding, 36 100);
   }
   &-title {
-    @include pxRem(font-size, 28);
+    @include pxRem(font-size, 32);
     @include pxRem(margin-bottom, 12);
   }
 }
