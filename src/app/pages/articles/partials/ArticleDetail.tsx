@@ -7,9 +7,8 @@ import { convertHtml } from "./../../../shared/common/convertHtml";
 import { Tag, Button } from "../../../shared/components/partials";
 import Image from "../../../../assets/images";
 import InteractComment from "./InteractComment";
-import { ILike } from "../../../shared/interfaces/like";
 import { useDispatch } from "react-redux";
-import { getLike, putLike } from "../article.actions";
+import { putLike } from "../article.actions";
 
 const ArticleDetail = ({ likes }: any) => {
   const [liked, setLiked] = useState<number>(likes.length);
@@ -21,10 +20,10 @@ const ArticleDetail = ({ likes }: any) => {
   useEffect(() => {
     if (dataLike.data.liked) {
       setLiked(liked + 1);
-    } else if (liked > 0) {
+    } else if (dataLike.data.liked!==undefined && liked > 0) {
       setLiked(liked - 1);
     }
-  }, [dataLike]);
+  }, [dataLike.data]);
 
   const handleLike = () => {
     dispatch(putLike({ id }));

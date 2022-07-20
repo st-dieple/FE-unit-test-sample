@@ -83,6 +83,11 @@
         @include pxRem(margin-right, 8);
       }
     }
+    
+    &-like {
+      @include pxRem (margin-right, 6);
+      font-weight: 600;
+    }
   }
 
   .author {
