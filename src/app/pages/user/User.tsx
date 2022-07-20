@@ -35,7 +35,7 @@ const User = () => {
             </ul>
           </div>
         </div>
-        <UserList postList = {userPost}/>
+        <UserList postList = {userPost?.data}/>
       </section>
     </div>
   );
