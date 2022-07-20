@@ -33,3 +33,13 @@
     @include pxRem(margin-top, 8);
   }
 }
+
+.fa {
+  &-liked {
+    color: map-get($color, red-2);
+  }
+
+  &-comment {
+    @include pxRem(margin-left, 4);
+  }
+}

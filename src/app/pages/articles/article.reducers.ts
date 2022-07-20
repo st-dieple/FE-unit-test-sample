@@ -25,6 +25,12 @@ const initialStateComments = {
   error: ''
 };
 
+const initialStateLikes = {
+  data: [],
+  isLoading: true,
+  error: ''
+};
+
 export const articlesReducer = (
   state: IStateData = initialStatePosts,
   action: IAction
@@ -122,6 +128,52 @@ export const postsRecommendReducer = (
         error: action.payload
       };
     default:
+      return state;
+  }
+};
+
+export const likesReducer = (
+  state: IStateData = initialStateLikes,
+  action: IAction
+) => {
+  switch (action.type) {
+    case TYPES.GET_LIKE:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case TYPES.GET_LIKE_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        isLoading: false,
+        error: ''
+      };
+    case TYPES.GET_LIKE_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+    case TYPES.PUT_LIKE:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case TYPES.PUT_LIKE_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        isLoading: false,
+        error: ''
+      };
+    case TYPES.PUT_LIKE_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };    
+      default:
       return state;
   }
 };
