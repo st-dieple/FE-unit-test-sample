@@ -29,3 +29,18 @@ export const createPostErorr = (error: any) => ({
   type: TYPES.CREATE_POST_ERROR,
   payload: error
 });
+
+export const updatePost = (payload: any) => ({
+  type: TYPES.UPDATE_POST,
+  payload
+});
+
+export const updatePostSuccess = (data: any) => ({
+  type: TYPES.UPDATE_POST_SUCCESS,
+  payload: data
+});
+
+export const updatePostErorr = (error: any) => ({
+  type: TYPES.UPDATE_POST_ERROR,
+  payload: error
+});
