@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { putLike } from '../article.actions';
 import { RootState } from '../../../app.reducers';
 import { formatDate } from '../../../shared/common/formatDate';
 import { convertHtml } from './../../../shared/common/convertHtml';
-import { Tag, Button } from '../../../shared/components/partials';
-import Image from '../../../../assets/images';
 import InteractComment from './InteractComment';
-import { useDispatch } from 'react-redux';
-import { putLike } from '../article.actions';
+import { Tag } from '../../../shared/components/partials';
+import Image from '../../../../assets/images';
 
 const ArticleDetail = ({ likes }: any) => {
   const [liked, setLiked] = useState<number>(likes.length);
@@ -17,6 +17,7 @@ const ArticleDetail = ({ likes }: any) => {
   const { id } = useParams();
   const { data } = useSelector((state: RootState) => state.articles);
   const dataLike = useSelector((state: RootState) => state.likes);
+  const comments = useSelector((state: RootState) => state.comments.data);
 
   useEffect(() => {
     if (data.isLiked) {
@@ -76,16 +77,10 @@ const ArticleDetail = ({ likes }: any) => {
         />
         <div className="article-text">{convertHtml(data.content)}</div>
         <div className="article-interact">
-          <Button
-            text={<i className="fa-solid fa-heart"></i>}
-            classBtn={color? "btn btn-liked" : "btn btn-primary"}
-            onClick={handleLike}
-          />
-          <span className="article-like">{liked}</span>
-          <Button
-            text={<i className="fa-regular fa-comment"></i>}
-            classBtn="btn btn-primary"
-          />
+          <span className="interact-like">{liked}</span>
+          <i className={color ? "fa-solid fa-heart fa-liked" : "fa-regular fa-heart"} onClick={handleLike}></i>
+          <span className="interact-comment">{comments.length}</span>
+          <i className="fa-regular fa-comment"></i>
         </div>
       </div>
       <InteractComment />

@@ -32,9 +32,14 @@
   &-comment {
     @include pxRem(margin-top, 8);
   }
+}
 
+.fa {
   &-liked {
-    color: map-get($color, red-1);
-    background-color: map-get($color, pink-1);
+    color: map-get($color, red-2);
+  }
+
+  &-comment {
+    @include pxRem(margin-left, 4);
   }
 }
