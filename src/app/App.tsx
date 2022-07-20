@@ -11,7 +11,6 @@ import appRoutes from './app.routes';
 import appMiddleware from './app.middlewares';
 import rootReducer from './app.reducers';
 
-import { Header } from './shared/components/layout';
 import '../stylesheet/styles.scss';
 
 function App() {
