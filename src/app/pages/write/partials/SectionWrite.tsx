@@ -6,7 +6,6 @@ const SectionWrite = () => {
     <section className="section section-write">
       <div className="container">
         <div className="write-inner">
-          <h2 className="write-title">Create New Blog</h2>
           <FormPost />
         </div>
       </div>

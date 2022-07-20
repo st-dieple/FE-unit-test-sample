@@ -35,12 +35,9 @@ export const Post = ({ post }: IPostProps) => {
             <div className="post-control">
               <i className="fa-solid fa-ellipsis"></i>
               <ul className="post-control-list">
-                <li className="post-control-item">
-                  <i className="fa-solid fa-pen"></i>
-                  <Link
-                    to={`/posts/edit/${post.id}`}
-                    className="post-control-link"
-                  >
+                <li>
+                  <Link to={`/posts/edit/${post.id}`} className="post-control-item">
+                    <i className="fa-solid fa-pen"></i>
                     Edit
                   </Link>
                 </li>

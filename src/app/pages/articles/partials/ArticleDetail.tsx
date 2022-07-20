@@ -42,18 +42,15 @@ const ArticleDetail = () => {
           <div className="post-control">
             <i className="fa-solid fa-ellipsis"></i>
             <ul className="post-control-list">
-              <li className="post-control-item">
-                <i className="fa-solid fa-pen"></i>
-                <Link
-                  to={`/posts/edit/${data.id}`}
-                  className="post-control-link"
-                >
+              <li>
+                <Link to={`/posts/edit/${data.id}`} className="post-control-item">
+                  <i className="fa-solid fa-pen"></i>
                   Edit
                 </Link>
               </li>
               <li className="post-control-item">
                 <i className="fa-solid fa-trash-can"></i>
-                <p>Delete</p>
+                Delete
               </li>
             </ul>
           </div>

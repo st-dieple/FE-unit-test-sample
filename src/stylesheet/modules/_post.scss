@@ -142,13 +142,11 @@
       @include pxRem(padding, 4 12);
       @include pxRem(font-size, 14);
       align-items: center;
-      border-bottom: 1px solid map-get($color, gray-6);
+      color: map-get($color, text);
       font-weight: 400;
+      border-bottom: 1px solid map-get($color, gray-6);
       &:hover {
         color: map-get($color, primary);
-        a {
-          color: map-get($color, primary);
-        }
       }
       i {
         @include pxRem(font-size, 14);
