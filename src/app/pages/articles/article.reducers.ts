@@ -25,12 +25,6 @@ const initialStateComments = {
   error: ''
 };
 
-const initialStateSignatures = {
-  data: {},
-  isLoading: true,
-  error: ''
-};
-
 export const articlesReducer = (state: IStateData = initialStatePosts, action: IAction) => {
   switch(action.type) {
     case TYPES.GET_POST_BY_ID:
@@ -96,31 +90,6 @@ export const postsRecommendReducer = (state: IStateData = initialStatePostsRecom
         error: ''
       }
     case TYPES.GET_POSTS_RECOMMEND_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload
-      }
-    default:
-      return state;
-  }
-};
-
-export const signaturesReducer = (state: IStateData = initialStateSignatures, action: IAction) => {
-  switch(action.type) {
-    case TYPES.GET_IMAGE_URL:
-      return {
-        ...state,
-        isLoading: true
-      }
-    case TYPES.GET_IMAGE_URL_SUCCESS:
-      return {
-        ...state,
-        data: action.payload,
-        isLoading: false,
-        error: ''
-      }
-    case TYPES.GET_IMAGE_URL_ERROR:
       return {
         ...state,
         isLoading: false,

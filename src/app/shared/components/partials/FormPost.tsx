@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { Editor } from '@tinymce/tinymce-react';
-import { getImageURL } from '../../../pages/articles/article.actions';
-import { RootState } from '../../../app.reducers';
+import React, { useState, useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { Editor } from "@tinymce/tinymce-react";
+import { SignaturesService } from "./../../../core/serivces/signatures.service";
 
+const signaturesService = new SignaturesService();
 const FormPost = () => {
-  const dispatch = useDispatch();
-  const signatures = useSelector((state: RootState) => state.signatures);
-  const [selectedImage, setSelectedImage] = useState<string>('https://www.w3schools.com/css/img_5terre.jpg');
+  const [selectedImage, setSelectedImage] = useState<string>(
+    'https://www.w3schools.com/css/img_5terre.jpg'
+  );
   const {
     register,
     handleSubmit,
@@ -23,24 +22,30 @@ const FormPost = () => {
       description: '',
       content: '',
     },
-  }); 
+  });
 
-  useEffect(() => {
-    setValue('cover', signatures.data.url);
-  }, [signatures.data]);
-  
-  const onSubmitForm = (data: any) => {};
+  const onSubmitForm = (data: any) => {
+    console.log(data);
+  };
 
-  const handleChangeFile = (e: any) => {
+  const handleChangeFile = async (e: any) => {
     const file = e.target.files[0];
     const payload = {
       type_upload: 'cover-post',
       file_name: file.name,
-      file_type: `image/${file.name.split('.')[1]}`
+      file_type: file.type,
     };
-    dispatch(getImageURL(payload));    
-    setSelectedImage(URL.createObjectURL(file));    
+    try {
+      signaturesService.getSignatures(payload).then(async (data: any) => {
+        setValue('cover', data.url);
+        await signaturesService.uploadImage(data, file);
+      });
+    } catch (err) {
+      alert('error image');
+    }
+    setSelectedImage(URL.createObjectURL(file));
   };
+  
 
   return (
     <form className="form-post" onSubmit={handleSubmit(onSubmitForm)}>
