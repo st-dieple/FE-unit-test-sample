@@ -22,11 +22,12 @@ const ArticleDetail = ({ likes }: any) => {
     if (data.isLiked) {
       setColor(true);
     }
-  }, [dataLike.data]);
+  }, [data.isLiked]);
 
   useEffect(() => {
     if (dataLike.data.liked) {
       setLiked(liked + 1);
+      setColor(true);
     } else if (dataLike.data.liked !== undefined && liked > 0) {
       setLiked(liked - 1);
       setColor(false);
@@ -77,7 +78,7 @@ const ArticleDetail = ({ likes }: any) => {
         <div className="article-interact">
           <Button
             text={<i className="fa-solid fa-heart"></i>}
-            classBtn={color ? "btn btn-liked" : "btn btn-primary"}
+            classBtn={color? "btn btn-liked" : "btn btn-primary"}
             onClick={handleLike}
           />
           <span className="article-like">{liked}</span>
