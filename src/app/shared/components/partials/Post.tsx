@@ -46,7 +46,7 @@ export const Post = ({ post }: IPostProps) => {
                 <li className="post-control-item">
                   <i className="fa-solid fa-pen"></i>
                   <Link
-                    to={`/post/edit/${post.id}`}
+                    to={`/posts/edit/${post.id}`}
                     className="post-control-link"
                   >
                     Edit
