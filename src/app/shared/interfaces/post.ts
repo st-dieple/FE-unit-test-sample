@@ -6,7 +6,7 @@ export interface IPost{
   status: string,
   tags: String[],
   userId: string,
-  like: string,
+  likes: string,
   comments: string,
   cover: string,
   recommend: boolean,
