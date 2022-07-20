@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { Editor } from '@tinymce/tinymce-react';
 import { SignaturesService } from './../../../core/serivces/signatures.service';
+import { createPost } from '../../../pages/home/home.actions';
+import { RootState } from '../../../app.reducers';
+import { COVER_POST_IMAGE } from '../../constants/constant';
 
 const signaturesService = new SignaturesService();
 const FormPost = () => {
-  const [selectedImage, setSelectedImage] = useState<string>(
-    'https://www.w3schools.com/css/img_5terre.jpg'
-  );
+  const [ checkSuccess, setCheckSuccess ] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const posts = useSelector((state: RootState) => state.posts);
+  const [selectedImage, setSelectedImage] = useState<string>(COVER_POST_IMAGE);
   const {
     register,
     handleSubmit,
@@ -16,7 +23,7 @@ const FormPost = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      cover: 'https://www.w3schools.com/css/img_5terre.jpg',
+      cover: COVER_POST_IMAGE,
       status: false,
       title: '',
       description: '',
@@ -24,8 +31,18 @@ const FormPost = () => {
     },
   });
 
+  useEffect(() => {
+    if(posts.createData && checkSuccess) {
+      alert('Create post successfully.');
+      navigate('/');
+    }
+  }, [posts.createData]); 
+
   const onSubmitForm = (data: any) => {
-    console.log(data);
+    const dataPost = {...data};
+    dataPost.status = data.status ? 'private' : 'public';    
+    dispatch(createPost(dataPost));
+    setCheckSuccess(true);
   };
 
   const handleChangeFile = async (e: any) => {
@@ -45,7 +62,6 @@ const FormPost = () => {
     }
     setSelectedImage(URL.createObjectURL(file));
   };
-  
 
   return (
     <form className="form-post" onSubmit={handleSubmit(onSubmitForm)}>
