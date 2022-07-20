@@ -1,27 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../app.reducers";
-import { formatDate } from "../../../shared/common/formatDate";
-import { convertHtml } from "./../../../shared/common/convertHtml";
-import { Tag, Button } from "../../../shared/components/partials";
-import Image from "../../../../assets/images";
-import InteractComment from "./InteractComment";
-import { useDispatch } from "react-redux";
-import { putLike } from "../article.actions";
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../app.reducers';
+import { formatDate } from '../../../shared/common/formatDate';
+import { convertHtml } from './../../../shared/common/convertHtml';
+import { Tag, Button } from '../../../shared/components/partials';
+import Image from '../../../../assets/images';
+import InteractComment from './InteractComment';
+import { useDispatch } from 'react-redux';
+import { putLike } from '../article.actions';
 
 const ArticleDetail = ({ likes }: any) => {
   const [liked, setLiked] = useState<number>(likes.length);
+  const [color, setColor] = useState(false);
   const dispatch = useDispatch();
   const { id } = useParams();
   const { data } = useSelector((state: RootState) => state.articles);
   const dataLike = useSelector((state: RootState) => state.likes);
 
   useEffect(() => {
+    if (data.isLiked) {
+      setColor(true);
+    }
+  }, [dataLike.data]);
+
+  useEffect(() => {
     if (dataLike.data.liked) {
       setLiked(liked + 1);
-    } else if (dataLike.data.liked!==undefined && liked > 0) {
+    } else if (dataLike.data.liked !== undefined && liked > 0) {
       setLiked(liked - 1);
+      setColor(false);
     }
   }, [dataLike.data]);
 
@@ -68,8 +76,8 @@ const ArticleDetail = ({ likes }: any) => {
         <div className="article-text">{convertHtml(data.content)}</div>
         <div className="article-interact">
           <Button
-            text={<i className="fa-regular fa-heart"></i>}
-            classBtn="btn btn-primary"
+            text={<i className="fa-solid fa-heart"></i>}
+            classBtn={color ? "btn btn-liked" : "btn btn-primary"}
             onClick={handleLike}
           />
           <span className="article-like">{liked}</span>
