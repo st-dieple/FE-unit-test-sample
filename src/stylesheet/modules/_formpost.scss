@@ -62,7 +62,7 @@
     &:checked {
       & ~ .check::after {
         background-color: map-get($color, primary);
-        transform: translateX(-30px);
+        transform: translateX(30px);
       }
       & ~ .check {
         background-color: map-get($color, gray-6);
