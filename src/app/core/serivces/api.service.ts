@@ -44,7 +44,7 @@ export class ApiService {
       const request = this.axiosInstance.get(this.createURL(uri), { params, ...moreConfigs });
       this._handleRespond(request, resolve, reject);
     });
-  }
+  };
 
   post(uri: (string | object)[], data = {}, moreConfigs = {}) {
     return new Promise((resolve, reject) => {
@@ -58,7 +58,7 @@ export class ApiService {
       const request = this.axiosInstance.put(this.createURL(uri), data, moreConfigs);
       this._handleRespond(request, resolve, reject);
     });
-  }
+  };
 
   delete(uri: (string | object)[], moreConfigs = {}) {
     return new Promise((resolve, reject) => {
