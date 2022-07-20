@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { Editor } from '@tinymce/tinymce-react';
 import { SignaturesService } from './../../../core/serivces/signatures.service';
+import { ArticleService } from '../../../core/serivces/article.service';
 
 const signaturesService = new SignaturesService();
+const articleService = new ArticleService();
 const FormPost = () => {
+  const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState<string>(
     'https://www.w3schools.com/css/img_5terre.jpg'
   );
@@ -25,7 +29,16 @@ const FormPost = () => {
   });
 
   const onSubmitForm = (data: any) => {
-    console.log(data);
+    const dataPost = {...data};
+    dataPost.status = data.status ? 'public' : 'private';    
+    try {
+      articleService.createArticle(dataPost).then(async (data: any) => {
+        alert('Create post successfully.');
+        navigate(`/posts/${data.id}`);
+      })
+    } catch(err) {
+      alert('Create post error.');
+    }
   };
 
   const handleChangeFile = async (e: any) => {
