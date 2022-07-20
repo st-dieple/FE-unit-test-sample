@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Image from "../../../../assets/images";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Image from '../../../../assets/images';
 
 const UserList = ({ postList }: any) => {
   return (
@@ -16,9 +16,7 @@ const UserList = ({ postList }: any) => {
                       {item.title}
                     </Link>
                   </h3>
-                  <p className="post-desc">
-                    {item.description}
-                  </p>
+                  <p className="post-desc">{item.description}</p>
                 </div>
                 <div className="post-image">
                   <Link to="/" className="post-image-link">
@@ -26,8 +24,8 @@ const UserList = ({ postList }: any) => {
                       src={item.cover || Image.Empty}
                       alt={item.title}
                       onError={(e: any) => {
-                        e.target['onerror'] = null;
-                        e.target['src'] = Image.Empty;
+                        e.target["onerror"] = null;
+                        e.target["src"] = Image.Empty;
                       }}
                     />
                   </Link>

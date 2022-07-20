@@ -1,21 +1,20 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import UserList from "./partials/UserList";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import UserList from './partials/UserList';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { RootState } from "../../app.reducers";
-import { getUserPosts } from "./user.actions";
-import Image from "../../../assets/images";
+import { RootState } from '../../app.reducers';
+import { getUserPosts } from './user.actions';
+import Image from '../../../assets/images';
 
 const User = () => {
   const dispatch = useDispatch();
-  const {id} =useParams();
+  const { id } = useParams();
   const userPost = useSelector((state: RootState) => state.usersPosts);
   useEffect(() => {
-    dispatch(getUserPosts({id}))
+    dispatch(getUserPosts({ id }));
   }, [id]);
-
 
   return (
     <div className="container">
@@ -29,13 +28,19 @@ const User = () => {
           <div className="author-info">
             <h2 className="author-name">{userPost.data.displayName}</h2>
             <ul className="author-list">
-              <li className="author-item">{userPost?.data.Posts?.length || 0} Posts</li>
-              <li className="author-item">{userPost.data.followers} Followers</li>
-              <li className="author-item">{userPost.data.followings} Following</li>
+              <li className="author-item">
+                {userPost?.data.Posts?.length || 0} Posts
+              </li>
+              <li className="author-item">
+                {userPost.data.followers} Followers
+              </li>
+              <li className="author-item">
+                {userPost.data.followings} Following
+              </li>
             </ul>
           </div>
         </div>
-        <UserList postList = {userPost?.data}/>
+        <UserList postList={userPost?.data} />
       </section>
     </div>
   );
