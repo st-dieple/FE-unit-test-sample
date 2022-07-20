@@ -8,7 +8,6 @@ import { Button } from '../../shared/components/partials';
 import Image from '../../../assets/images';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app.reducers';
-import Loading from '../../shared/components/partials/Loading';
 
 const Login = () => {
   const dispatch = useDispatch();

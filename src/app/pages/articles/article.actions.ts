@@ -44,3 +44,18 @@ export const getCommentError = (error: any) => ({
   type: TYPES.GET_COMMENT_ERROR,
   payload: error,
 });
+
+export const postComment = (payload : any) => ({
+  type: TYPES.POST_COMMENT,
+  payload
+});
+
+export const postCommentSuccess = (posts: any) => ({
+  type: TYPES.POST_COMMENT_SUCCESS,
+  payload: posts,
+});
+
+export const postCommentError = (error: any) => ({
+  type: TYPES.POST_COMMENT_ERROR,
+  payload: error,
+});
