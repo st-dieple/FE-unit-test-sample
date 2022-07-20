@@ -6,7 +6,7 @@ import {
   getPostsRecommendSuccess,
   getPostsRecommendError,
   getCommentSuccess, 
-  getCommentError
+  getCommentError,
 } from './article.actions';
 import { environment, ENDPOINT } from '../../../config';
 import * as TYPES from '../../shared/constants/types';
@@ -48,6 +48,6 @@ export function* watchArticles() {
   yield all([
     takeLatest(TYPES.GET_POST_BY_ID, getPostById),
     takeLatest(TYPES.GET_POSTS_RECOMMEND, getPostsRecommend),
-    takeLatest(TYPES.GET_COMMENT, getComment),  
+    takeLatest(TYPES.GET_COMMENT, getComment)
   ]);
 };

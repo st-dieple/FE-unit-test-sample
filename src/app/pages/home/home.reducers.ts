@@ -5,13 +5,15 @@ import { IAction } from './../../shared/interfaces/reducer';
 interface IStateData<D> {
   data: D,
   isLoading: boolean,
-  error: string
+  error: string,
+  createData: any
 };
 
 const initialStatePosts = {
   data: [],
-  isLoading: true,
-  error: ''
+  isLoading: false,
+  error: '',
+  createData: {}
 };
 
 export const postsReducer = (state: IStateData<IPost[]> = initialStatePosts, action: IAction) => {
@@ -33,6 +35,24 @@ export const postsReducer = (state: IStateData<IPost[]> = initialStatePosts, act
         ...state,
         isLoading: false,
         error: action.payload
+      }
+    case TYPES.CREATE_POST:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case TYPES.CREATE_POST_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        error: '',
+        createData: action.payload
+      }
+    case TYPES.CREATE_POST_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
       }
     default:
       return state;

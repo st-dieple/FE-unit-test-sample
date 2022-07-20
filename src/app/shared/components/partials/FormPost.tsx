@@ -1,33 +1,66 @@
-import React, { useState } from 'react';
-import { Editor } from '@tinymce/tinymce-react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
-import Image from '../../../../assets/images';
+import { Editor } from '@tinymce/tinymce-react';
+import { SignaturesService } from './../../../core/serivces/signatures.service';
+import { createPost } from '../../../pages/home/home.actions';
+import { RootState } from '../../../app.reducers';
+import { COVER_POST_IMAGE } from '../../constants/constant';
 
+const signaturesService = new SignaturesService();
 const FormPost = () => {
-  const [selectedImage, setSelectedImage] = useState<string>(Image.Empty);
+  const [ checkSuccess, setCheckSuccess ] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const posts = useSelector((state: RootState) => state.posts);
+  const [selectedImage, setSelectedImage] = useState<string>(COVER_POST_IMAGE);
   const {
     register,
     handleSubmit,
     control,
     setValue,
-    getValues,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      cover: "",
+      cover: COVER_POST_IMAGE,
       status: false,
-      title: "",
-      description: "",
-      content: "",
+      title: '',
+      description: '',
+      content: '',
     },
   });
 
-  const onSubmitForm = (data: any) => {};
+  useEffect(() => {
+    if(posts.createData && checkSuccess) {
+      alert('Create post successfully.');
+      navigate('/');
+    }
+  }, [posts.createData]); 
 
-  const handleChangeFile = (e: any) => {
-    const file = e.target.files[0];    
-    setValue('cover', file);
-    setSelectedImage(URL.createObjectURL(file));    
+  const onSubmitForm = (data: any) => {
+    const dataPost = {...data};
+    dataPost.status = data.status ? 'private' : 'public';    
+    dispatch(createPost(dataPost));
+    setCheckSuccess(true);
+  };
+
+  const handleChangeFile = async (e: any) => {
+    const file = e.target.files[0];
+    const payload = {
+      type_upload: 'cover-post',
+      file_name: file.name,
+      file_type: file.type,
+    };
+    try {
+      signaturesService.getSignatures(payload).then(async (data: any) => {
+        setValue('cover', data.url);
+        await signaturesService.uploadImage(data, file);
+      });
+    } catch (err) {
+      alert('error image');
+    }
+    setSelectedImage(URL.createObjectURL(file));
   };
 
   return (

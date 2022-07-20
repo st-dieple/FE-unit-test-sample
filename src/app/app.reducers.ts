@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   users: usersReducer,
   articles: articlesReducer,
   postsRecommend: postsRecommendReducer,
-  comments: commentsReducer
+  comments: commentsReducer,
 });
 
 export default rootReducer;

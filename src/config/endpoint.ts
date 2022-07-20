@@ -1,6 +1,7 @@
 const RESOURCES = {
   users: 'users',
-  posts: 'posts'
+  posts: 'posts',
+  signatures:  'signatures'
 };
 
 export const ENDPOINT = {
@@ -13,5 +14,8 @@ export const ENDPOINT = {
     index: `${RESOURCES.posts}`,
     public: `${RESOURCES.posts}/public`,
     recommend: `${RESOURCES.posts}/recommend`
+  },
+  signatures: {
+    index: `${RESOURCES.signatures}`
   }
 };
