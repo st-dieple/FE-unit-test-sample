@@ -6,14 +6,14 @@ interface IStateData<D> {
   data: D,
   isLoading: boolean,
   error: string,
-  createSuccess: boolean
+  createData: any
 };
 
 const initialStatePosts = {
   data: [],
   isLoading: false,
   error: '',
-  createSuccess: false,
+  createData: {}
 };
 
 export const postsReducer = (state: IStateData<IPost[]> = initialStatePosts, action: IAction) => {
@@ -41,19 +41,18 @@ export const postsReducer = (state: IStateData<IPost[]> = initialStatePosts, act
         ...state,
         isLoading: true
       }
-    case TYPES.CREATE_POST_SUCCESS:    
+    case TYPES.CREATE_POST_SUCCESS:
       return {
         ...state,
         isLoading: false,
         error: '',
-        createSuccess: true
+        createData: action.payload
       }
     case TYPES.CREATE_POST_ERROR:
       return {
         ...state,
         isLoading: false,
         error: action.payload,
-        createSuccess: false
       }
     default:
       return state;

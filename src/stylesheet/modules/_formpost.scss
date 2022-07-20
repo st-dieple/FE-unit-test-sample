@@ -61,11 +61,11 @@
     -webkit-appearance: none;
     &:checked {
       & ~ .check::after {
-        background-color: map-get($color, gray-6);
+        background-color: map-get($color, primary);
         transform: translateX(-30px);
       }
       & ~ .check {
-        background-color: map-get($color, primary);
+        background-color: map-get($color, gray-6);
       }
     }
   }
@@ -80,7 +80,7 @@
     @include transition(ease-in 0.3s);
     position: relative;
     display: block;
-    background-color: map-get($color, gray-6);
+    background-color: map-get($color, primary);
     cursor: pointer;
     &::after {
       @include pxRem(width, 26);
@@ -90,8 +90,8 @@
       content: '';
       position: absolute;
       top: 2px;
-      right: 2px;
-      background-color: map-get($color, primary);
+      left: 2px;
+      background-color: map-get($color, gray-6);
     }
   }
   &-footer {
