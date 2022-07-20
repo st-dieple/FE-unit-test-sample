@@ -1,0 +1,11 @@
+  .section-post {
+    padding: 50px;
+  }
+
+  .post {
+    &-user-list {
+      max-width: 65%;
+      @include pxRem(margin, 0 auto);
+    }
+
+  }

@@ -28,4 +28,10 @@
     font-weight: 600;
     font-family: $font-primary;
   }
+
+  &-follow {
+    background-color: map-get($color, secondary);
+    color: map-get($color, white);
+    @include pxRem(margin-right, 14);
+  }
 }
