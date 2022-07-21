@@ -4,9 +4,16 @@ import { Link } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
 import { getData } from '../../../core/helpers/localstorage';
 import Image from '../../../../assets/images';
+import { parseJwt } from '../../../core/helpers/parseJwt';
 
 export const Header = () => {
   const user = useSelector((state: RootState) => state.users.data);
+  const token = getData('token', '');
+  let id: any;
+    if(token) {
+      id = parseJwt(token).userId
+    }
+
   const [sticky, setSticky] = useState<string>('');
   const [open, setOpen] = useState(false);
   const container = useRef<HTMLDivElement>(null);
@@ -62,7 +69,7 @@ export const Header = () => {
                 {open && (
                   <ul className="dropdown-menu">
                     <li className="dropdown-item">
-                      <Link to="/">
+                      <Link to={`/users/${id}`}>
                         Profile
                         <i className="fa-solid fa-user"></i>
                       </Link>
