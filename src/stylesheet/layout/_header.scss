@@ -42,6 +42,7 @@
   &-item {
     margin-right: 32px;
     &:last-child {
+      position: relative;
       margin-right: 0;
     }
   }
@@ -77,9 +78,9 @@
 .dropdown {
   &-menu {
     position: absolute;
-    @include pxRem(right, 160);
-    @include pxRem(top, 60);
-    @include pxRem(max-width, 200);
+    @include pxRem(right, 5);
+    @include pxRem(top, 45);
+    @include pxRem(width, 200);
     @include pxRem(border-radius, 5);
     background-color: map-get($color, white);
     border: 1px solid map-get($color, text);
