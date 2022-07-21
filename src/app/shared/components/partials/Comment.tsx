@@ -26,17 +26,6 @@ const Comment = ({ comment }: ICommentProps) => {
       <div className="comment-content">
         <p className="comment-desc">{comment.comment}</p>
       </div>
-      <div className="comment-footer">
-        <div className="comment-footer-item">
-          <i className="fa-regular fa-heart"></i>
-          <span>0</span>
-        </div>
-        <div className="comment-footer-item">
-          <i className="fa-regular fa-comment"></i>
-          <span>0</span>
-        </div>
-        <p className="comment-reply">Reply</p>
-      </div>
     </li>
   )
 };
