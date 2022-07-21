@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Icon from "../../../../assets/icons";
+import React from 'react';
+import Icon from '../../../../assets/icons';
 import { Button }  from './Button';
 
 interface IToastProp {
