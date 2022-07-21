@@ -1,6 +1,6 @@
 import { PageRoute } from '../../core/modules/custom-router-dom/router.interface';
-import Edit from '../post/edit/Edit';
-import Write from '../post/write/Write';
+import Write from './partials/Write';
+import Edit from './partials/Edit';
 import Articles from './Articles';
 
 const postRoutes: PageRoute[] = [

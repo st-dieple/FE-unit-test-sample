@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { Editor } from '@tinymce/tinymce-react';
+import { TagsInput } from 'react-tag-input-component'; 
 import { SignaturesService } from './../../../core/serivces/signatures.service';
 import { createPost, updatePost } from '../../../pages/home/home.actions';
 import { getPostById } from './../../../pages/articles/article.actions';
@@ -13,14 +14,15 @@ import Toast from './Toast';
 
 const signaturesService = new SignaturesService();
 const FormPost = () => {
+  const [ selectedImage, setSelectedImage ] = useState<string>(COVER_POST_IMAGE);
   const [ checkSuccess, setCheckSuccess ] = useState<boolean>(false);
+  const [ tags, setTags ] = useState<string[]>([]);
   const [ toast, setToast ] = useState<any>({ hasLoading: false, type: '', title: '' });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
   const posts = useSelector((state: RootState) => state.posts);
   const { data, isLoading } = useSelector((state: RootState) => state.articles);
-  const [ selectedImage, setSelectedImage ] = useState<string>(COVER_POST_IMAGE);
   const {
     register,
     handleSubmit,
@@ -64,18 +66,22 @@ const FormPost = () => {
       } else {
         setToast({ hasLoading: true, type: 'success', title: 'Create post successfully.' });
       }
-      myTimeout = setTimeout(() => { navigate('/'); }, 500);
+      myTimeout = setTimeout(() => { 
+        navigate('/'); 
+      }, 500);
     };
     return () => {
       clearTimeout(myTimeout);
     }
     // eslint-disable-next-line
-  }, [posts.createData, posts.updateData]); 
+  }, [posts.createData, posts.updateData]);
 
   const onSubmitForm = (data: any) => {
     const dataPost = {...data};
     dataPost.status = data.status ? 'private' : 'public';
-    
+    if(tags.length) {
+      dataPost.tags = tags;
+    }
     if(id) {
       dispatch(updatePost({ id: id, data: dataPost }));
     } else {
@@ -97,7 +103,7 @@ const FormPost = () => {
         await signaturesService.uploadImage(data, file);
       });
     } catch (err) {
-      alert('error image');
+      setToast({ hasLoading: true, type: 'error', title: 'Error! Upload image.' });
     }
     setSelectedImage(URL.createObjectURL(file));
   };
@@ -205,6 +211,10 @@ const FormPost = () => {
             />
             {errors.content && <span>Content of post min 100 characters.</span>}
           </div>
+          <div className="form-post-item">
+            <label htmlFor="tags">Tags</label>
+            <TagsInput value={data.tags || []} onChange={setTags} name='tags' placeHolder='Enter tags'/>
+          </div>      
           <div className="form-post-footer">
             <input
               type="submit"
