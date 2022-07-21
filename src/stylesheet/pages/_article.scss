@@ -148,27 +148,3 @@
     }
   }
 }
-
-// .author {
-//   &-info {
-//     @include flexbox;
-//     align-items: center;
-//     justify-content: space-evenly;
-//     @include pxRem(margin, 20 auto);
-//     max-width: 65%;
-//   }
-  
-//   &-image {
-//     @include pxRem(max-width, 100);
-//     img {
-//       width: 100%;
-//     }
-//   }
-
-//   &-name {
-//     a {
-//       color: map-get($color, text);
-//       @include pxRem(font-size, 24);
-//     }
-//   }
-// }
