@@ -1,20 +1,50 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { putLike } from '../article.actions';
 import { RootState } from '../../../app.reducers';
 import { formatDate } from '../../../shared/common/formatDate';
 import { convertHtml } from './../../../shared/common/convertHtml';
-import { Tag, Button } from '../../../shared/components/partials';
+import InteractComment from './InteractComment';
+import { Tag } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
 
-const ArticleDetail = () => {
+const ArticleDetail = ({ likes }: any) => {
+  const [liked, setLiked] = useState<number>(likes.length);
+  const [color, setColor] = useState(false);
+  const dispatch = useDispatch();
+  const { id } = useParams();
   const { data } = useSelector((state: RootState) => state.articles);
+  const dataLike = useSelector((state: RootState) => state.likes);
+  const comments = useSelector((state: RootState) => state.comments.data);
+
+  useEffect(() => {
+    if (data.isLiked) {
+      setColor(true);
+    }
+  }, [data.isLiked]);
+
+  useEffect(() => {
+    if (dataLike.data.liked) {
+      setLiked(liked + 1);
+      setColor(true);
+    } else if (dataLike.data.liked !== undefined && liked > 0) {
+      setLiked(liked - 1);
+      setColor(false);
+    }
+        // eslint-disable-next-line
+  }, [dataLike.data]);
+
+  const handleLike = () => {
+    dispatch(putLike({ id }));
+  };
 
   return (
     <div className="articles-item">
       <div className="article-header">
         <div className="author-image">
-          <Link to="/">
+          <Link to={`/users/${data.user.id}`}>
             <img
               src={Image.Avatar || data.user.picture}
               alt={data.user.displayName}
@@ -23,7 +53,7 @@ const ArticleDetail = () => {
         </div>
         <div className="article-author">
           <div className="author-name">
-            <Link to="/">{data.user.displayName}</Link>
+            <Link to={`/users/${data.user.id}`}>{data.user.displayName}</Link>
           </div>
           <div className="author-time">
             <span className="author-date">{formatDate(data.createdAt)}</span>
@@ -48,16 +78,13 @@ const ArticleDetail = () => {
         />
         <div className="article-text">{convertHtml(data.content)}</div>
         <div className="article-interact">
-          <Button
-            text={<i className="fa-regular fa-heart"></i>}
-            classBtn="btn btn-primary"
-          />
-          <Button
-            text={<i className="fa-regular fa-comment"></i>}
-            classBtn="btn btn-primary"
-          />
+          <span className="interact-like">{liked}</span>
+          <i className={color ? "fa-solid fa-heart fa-liked" : "fa-regular fa-heart"} onClick={handleLike}></i>
+          <span className="interact-comment">{comments.length}</span>
+          <i className="fa-regular fa-comment"></i>
         </div>
       </div>
+      <InteractComment />
     </div>
   );
 };

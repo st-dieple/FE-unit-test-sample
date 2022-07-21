@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../app.reducers';
+import ArticleList from './ArticleList';
 import { Button } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
-import ArticleList from './ArticleList';
 
 const ArticleSidebar = () => {
   const articles = useSelector((state: RootState) => state.articles);
@@ -15,7 +15,7 @@ const ArticleSidebar = () => {
   return (
     <div className="article-sidebar">
       <div className="author-sidebar">
-        <Link to="/" className="author-info">
+        <Link to={`/users/${articles.data.user.id}`} className="author-info">
           <img
             className="author-sidebar-image"
             src={Image.Avatar || articles.data.user.picture}
