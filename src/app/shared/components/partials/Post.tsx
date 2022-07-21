@@ -7,8 +7,6 @@ import { checkUserId } from '../../common/checkUserId';
 import Image from '../../../../assets/images';
 import { useDispatch } from 'react-redux';
 import { deletePost } from '../../../pages/home/home.actions';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../app.reducers';
 
 interface IPostProps {
   post: IPost;

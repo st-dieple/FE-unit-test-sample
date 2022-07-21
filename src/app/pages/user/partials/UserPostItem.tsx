@@ -1,9 +1,9 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { deletePost } from "../../home/home.actions";
-import { checkUserId } from "../../../shared/common/checkUserId";
-import { Link } from "react-router-dom";
-import Image from "../../../../assets/images";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { deletePost } from '../../home/home.actions';
+import { checkUserId } from '../../../shared/common/checkUserId';
+import { Link } from 'react-router-dom';
+import Image from '../../../../assets/images';
 
 const UserPostItem = ({ post }: any) => {
   const dispatch = useDispatch();
@@ -60,7 +60,6 @@ const UserPostItem = ({ post }: any) => {
               </ul>
             </div>
           )}
-
         </div>
       </article>
     </li>
