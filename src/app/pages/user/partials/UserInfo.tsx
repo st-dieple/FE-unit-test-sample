@@ -14,7 +14,7 @@ const UserInfo = ({infoUser}: IUserProps) => {
         <div className="author-info-content">
           <div className="author-avatar">
             <Link to="/">
-              <img src={infoUser.picture || Image.Avatar} alt="image" />
+              <img src={infoUser.picture || Image.Avatar} alt={infoUser.displayName} />
             </Link>
           </div>
           <div className="author-info">

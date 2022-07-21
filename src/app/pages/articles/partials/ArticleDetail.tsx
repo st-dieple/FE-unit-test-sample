@@ -33,6 +33,7 @@ const ArticleDetail = ({ likes }: any) => {
       setLiked(liked - 1);
       setColor(false);
     }
+        // eslint-disable-next-line
   }, [dataLike.data]);
 
   const handleLike = () => {

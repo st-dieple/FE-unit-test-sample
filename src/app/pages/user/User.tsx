@@ -14,6 +14,7 @@ const User = () => {
   
   useEffect(() => {
     dispatch(getUserPosts({ id }));
+    // eslint-disable-next-line
   }, [id]);
   return userPost.isLoading ? (
     <Loading />
