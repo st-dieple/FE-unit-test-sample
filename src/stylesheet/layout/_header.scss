@@ -73,3 +73,30 @@
     transform: translateY(0);
   }
 }
+
+.dropdown {
+  &-menu {
+    position: absolute;
+    @include pxRem(max-width, 200);
+    @include pxRem(border-radius, 5);
+    background-color: map-get($color, stroke);
+    border: 2px solid map-get($color, gray-3);
+  }
+  
+  &-item {
+    border-bottom: 2px solid map-get($color, gray-3);
+    @include pxRem(padding, 8);
+    text-align: center;
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    a {
+      color: map-get($color, text);
+    }
+
+    i {
+      @include pxRem(margin-left, 12);
+    }
+  }
+}
