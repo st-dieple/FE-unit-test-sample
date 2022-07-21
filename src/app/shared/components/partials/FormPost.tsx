@@ -53,7 +53,6 @@ const FormPost = () => {
       setValue('description', data.description);
       setValue('content', data.content);
       setValue('status', data.status === 'public' ? false: true);
-      setTags(data.tags);
       setSelectedImage(data.cover);
     };
     // eslint-disable-next-line
@@ -67,7 +66,9 @@ const FormPost = () => {
       } else {
         setToast({ hasLoading: true, type: 'success', title: 'Create post successfully.' });
       }
-      myTimeout = setTimeout(() => { navigate('/'); }, 500);
+      myTimeout = setTimeout(() => { 
+        navigate('/'); 
+      }, 500);
     };
     return () => {
       clearTimeout(myTimeout);
@@ -102,7 +103,7 @@ const FormPost = () => {
         await signaturesService.uploadImage(data, file);
       });
     } catch (err) {
-      alert('error image');
+      setToast({ hasLoading: true, type: 'error', title: 'Error! Upload image.' });
     }
     setSelectedImage(URL.createObjectURL(file));
   };
@@ -212,7 +213,7 @@ const FormPost = () => {
           </div>
           <div className="form-post-item">
             <label htmlFor="tags">Tags</label>
-            <TagsInput value={tags} onChange={setTags} name='tags' placeHolder='Enter tags'/>
+            <TagsInput value={data.tags || []} onChange={setTags} name='tags' placeHolder='Enter tags'/>
           </div>      
           <div className="form-post-footer">
             <input

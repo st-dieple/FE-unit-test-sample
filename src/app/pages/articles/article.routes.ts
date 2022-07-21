@@ -1,6 +1,6 @@
 import { PageRoute } from '../../core/modules/custom-router-dom/router.interface';
-import Edit from '../post/edit/Edit';
-import Write from '../post/write/Write';
+import New from './partials/New';
+import Edit from './partials/Edit';
 import Articles from './Articles';
 
 const postRoutes: PageRoute[] = [
@@ -10,11 +10,11 @@ const postRoutes: PageRoute[] = [
   },
   {
     path: 'posts/write',
-    element: Write
+    element: Edit
   },
   {
     path: 'posts/edit/:id',
-    element: Edit
+    element: New
   }
 ];
 
