@@ -4,8 +4,6 @@ import { Tag } from './Tag';
 import { IPost } from './../../interfaces/post';
 import { formatDate } from './../../common/formatDate';
 import Image from '../../../../assets/images';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../app.reducers';
 
 interface IPostProps {
   post: IPost;

@@ -11,7 +11,6 @@ const User = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const userPost = useSelector((state: RootState) => state.usersPosts);
-  console.log(userPost.data);
   
   useEffect(() => {
     dispatch(getUserPosts({ id }));

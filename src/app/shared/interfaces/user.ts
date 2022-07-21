@@ -10,5 +10,5 @@ export interface IUser {
   picture?: string,
   followers: number,
   followings: number,
-  Posts: any
+  Posts?: any
 };
