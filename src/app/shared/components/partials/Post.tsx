@@ -10,7 +10,7 @@ interface IPostProps {
   post: IPost;
 }
 
-export const Post = ({ post }: IPostProps) => {
+export const Post = ({ post }: IPostProps) => {  
   return (
     <li className="post-item">
       <article className="post">
@@ -72,7 +72,7 @@ export const Post = ({ post }: IPostProps) => {
               </div>
               {post.tags && (
                 <ul className="post-tags">
-                  {post.tags.slice(1, 4).map((tag: any) => {
+                  {post.tags.slice(-3).map((tag: any) => {
                     return <Tag key={tag} name={tag} path="/" />;
                   })}
                 </ul>

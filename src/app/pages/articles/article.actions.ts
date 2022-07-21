@@ -15,6 +15,10 @@ export const getPostByIdError = (error: any) => ({
   payload: error,
 });
 
+export const clearPostById = () => ({
+  type: TYPES.CLEAR_POST_BY_ID
+});
+
 export const getPostsRecommend= (payload : any) => ({
   type: TYPES.GET_POSTS_RECOMMEND,
   payload

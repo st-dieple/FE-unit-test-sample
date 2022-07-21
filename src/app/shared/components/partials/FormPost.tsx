@@ -5,20 +5,22 @@ import { Controller, useForm } from 'react-hook-form';
 import { Editor } from '@tinymce/tinymce-react';
 import { SignaturesService } from './../../../core/serivces/signatures.service';
 import { createPost, updatePost } from '../../../pages/home/home.actions';
-import { getPostById } from './../../../pages/articles/article.actions';
+import { clearPostById, getPostById } from './../../../pages/articles/article.actions';
 import { RootState } from '../../../app.reducers';
 import { COVER_POST_IMAGE } from '../../constants/constant';
+import { TagsInput } from "react-tag-input-component"; 
 import Loading from './Loading';
 
 const signaturesService = new SignaturesService();
 const FormPost = () => {
+  const [ selectedImage, setSelectedImage ] = useState<string>(COVER_POST_IMAGE);
   const [ checkSuccess, setCheckSuccess ] = useState<boolean>(false);
+  const [ tags, setTags ] = useState<string[]>([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
   const posts = useSelector((state: RootState) => state.posts);
   const { data, isLoading } = useSelector((state: RootState) => state.articles);
-  const [ selectedImage, setSelectedImage ] = useState<string>(COVER_POST_IMAGE);
   const {
     register,
     handleSubmit,
@@ -49,13 +51,14 @@ const FormPost = () => {
       setValue('description', data.description);
       setValue('content', data.content);
       setValue('status', data.status === 'public' ? false: true);
+      setTags(data.tags);
       setSelectedImage(data.cover);
     };
     // eslint-disable-next-line
   }, [data]);
 
   useEffect(() => {
-    if(posts.createData && checkSuccess || posts.updateData && checkSuccess) {
+    if((posts.createData && checkSuccess || (posts.updateData && checkSuccess))) {
       if(id) {
         alert('Update post successfully.');
       } else {
@@ -63,15 +66,20 @@ const FormPost = () => {
       }
       navigate('/');
     };
+    // return () => {
+    //   dispatch(clearPostById());
+    // }
     // eslint-disable-next-line
   }, [posts.createData, posts.updateData]); 
 
   const onSubmitForm = (data: any) => {
     const dataPost = {...data};
     dataPost.status = data.status ? 'private' : 'public';
-    
+    if(tags.length) {
+      dataPost.tags = tags;
+    }
     if(id) {
-      dispatch(updatePost({ id: id,data: dataPost }));
+      dispatch(updatePost({ id: id, data: dataPost }));
     } else {
       dispatch(createPost(dataPost));
     } 
@@ -198,6 +206,10 @@ const FormPost = () => {
             />
             {errors.content && <span>Content of post min 100 characters.</span>}
           </div>
+          <div className="form-post-item">
+            <label htmlFor="tags">Tags</label>
+            <TagsInput value={tags} onChange={setTags} name='tags' placeHolder='Enter tags'/>
+          </div>      
           <div className="form-post-footer">
             <input
               type="submit"

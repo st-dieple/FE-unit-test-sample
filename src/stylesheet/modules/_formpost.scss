@@ -130,3 +130,17 @@
   border-radius: 4px!important;
   border: 1px solid map-get($color, gray-7)!important;
 }
+
+.rti--container {
+  --rti-main: #FFC017;
+  --rti-border: #9EA0A8;
+}
+
+.rti--container {
+  padding: 4px 16px!important;
+}
+
+.rti--input {
+  border: none!important;
+}
+
