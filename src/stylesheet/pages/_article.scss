@@ -84,10 +84,22 @@
 
     &-interact {
       @include pxRem(margin, 16 0);
-      button {
-        @include pxRem(margin-right, 8);
-      }
+      font-size: map-get($font-size, xl);
     }
+  }
+
+  .interact {
+    &-like {
+      @include pxRem (margin-right, 6);
+      font-weight: 600;
+    }
+
+    &-comment {
+      @include pxRem (margin-left, 6);
+      font-weight: 600;
+    }
+
+
   }
 
   .author {

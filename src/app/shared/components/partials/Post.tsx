@@ -15,6 +15,7 @@ interface IPostProps {
 }
 
 export const Post = ({ post }: IPostProps) => {
+<<<<<<< HEAD
   const dispatch = useDispatch();
 
   const handleDelete = (id: string) => {
@@ -56,6 +57,19 @@ export const Post = ({ post }: IPostProps) => {
                   Delete
                 </li>
               </ul>
+=======
+return (
+    <li className="post-item">
+      <article className="post">
+        <div className="post-header">
+          <Link to={`/users/${post.userId}`} className="post-user">
+            <div className="post-user-image">
+              <img
+                src={post.user.picture || Image.Avatar}
+                alt={post.user.displayName}
+                // eslint-disable-next-line
+              />
+>>>>>>> 841b2aeb3b0f70459e91b534a236c0aa1653283d
             </div>
           )}
         </div>
@@ -71,7 +85,7 @@ export const Post = ({ post }: IPostProps) => {
               <div className="post-meta">
                 <div className="post-meta-info post-like">
                   <i className="fa-regular fa-thumbs-up"></i>
-                  <span className="post-like-number">{post.like || 0}</span>
+                  <span className="post-like-number">{post.likes || 0}</span>
                 </div>
                 <div className="post-meta-info post-comment">
                   <i className="fa-regular fa-comment"></i>

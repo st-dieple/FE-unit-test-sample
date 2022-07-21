@@ -40,8 +40,8 @@ const Register = () => {
   }, [data]);
 
   const validateDob = (time: string) => {
+    // eslint-disable-next-line
     const regex = new RegExp(/^([0-9]{4})\-([0-9]{2})\-([0-9]{2})$/);
-
     if (regex.test(time)) {
       const parts = time.split('-');
       const date = new Date();

@@ -4,13 +4,24 @@ import { getPostsSuccess, getPostsError, createPostSuccess, createPostErorr, upd
 import { environment, ENDPOINT } from '../../../config';
 import * as TYPES from '../../shared/constants/types';
 import { ArticleService } from '../../core/serivces/article.service';
+import { getData } from '../../core/helpers/localstorage';
 
 const articleService = new ArticleService();
 export function* getPosts({ payload }: any ) {
+  const token = getData('token', '');
+  let endPoint = '';
+  if (token) {
+    endPoint = ENDPOINT.posts.index;
+  }else {
+    endPoint = ENDPOINT.posts.public;
+  }
   try {
-    const res: AxiosResponse<any> = yield axios.get(
-      `${environment.apiBaseUrl}${ENDPOINT.posts.public}?page=${payload.page}&size=${payload.size}`
-    );
+    const res: AxiosResponse<any> = yield axios.get(`${environment.apiBaseUrl}${endPoint}?page=${payload.page}&size=${payload.size}`,
+    {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
     yield put(getPostsSuccess(res.data.data));
   } catch (error) {
     yield put(getPostsError(error));
