@@ -14,13 +14,13 @@
   background: map-get($color, white);
   @include pxRem(font-size, 14);
   color: map-get($color, white);
-	animation: toast-opacity;
+  animation: toast-opacity;
   &::after {
+    @include pxRem(height, 3);
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 3px;
     animation: toast-line 0.5s ease-in;
   }
   &-image {
@@ -34,13 +34,13 @@
     }
   }
   &-success {
-    background-color: map-get($color, green-2);
+    background-color: map-get($color, success);
     &::after {
       background-color: map-get($color, white);
     }
   }
   &-error {
-    background-color: map-get($color, red-3);
+    background-color: map-get($color, erorr);
     &::after {
       background-color: map-get($color, white);
       opacity: 0.9;
@@ -63,19 +63,19 @@
 }
 
 @keyframes toast-opacity {
-	from {
+  from {
     opacity: 0;
-	}
-	to {
+  }
+  to {
     opacity: 1;
-	}
+  }
 }
 
 @keyframes toast-line {
-	from {
+  from {
     width: 0;
-	}
-	to {
+  }
+  to {
     width: 100%;
-	}
+  }
 }
