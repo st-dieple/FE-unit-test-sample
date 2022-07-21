@@ -77,14 +77,16 @@
 .dropdown {
   &-menu {
     position: absolute;
+    @include pxRem(right, 160);
+    @include pxRem(top, 60);
     @include pxRem(max-width, 200);
     @include pxRem(border-radius, 5);
-    background-color: map-get($color, stroke);
-    border: 2px solid map-get($color, gray-3);
+    background-color: map-get($color, white);
+    border: 1px solid map-get($color, text);
   }
-  
+
   &-item {
-    border-bottom: 2px solid map-get($color, gray-3);
+    border-bottom: 1px solid map-get($color, text);
     @include pxRem(padding, 8);
     text-align: center;
     &:last-child {
