@@ -5,10 +5,6 @@ import {
   getPostByIdError,
   getPostsRecommendSuccess,
   getPostsRecommendError,
-<<<<<<< HEAD
-  getCommentSuccess, 
-  getCommentError,
-=======
   getCommentSuccess,
   getCommentError,
   postCommentSuccess,
@@ -17,7 +13,6 @@ import {
   getLikeError,
   putLikeSuccess,
   putLikeError,
->>>>>>> 841b2aeb3b0f70459e91b534a236c0aa1653283d
 } from './article.actions';
 import { environment, ENDPOINT } from '../../../config';
 import * as TYPES from '../../shared/constants/types';
@@ -124,13 +119,9 @@ export function* watchArticles() {
   yield all([
     takeLatest(TYPES.GET_POST_BY_ID, getPostById),
     takeLatest(TYPES.GET_POSTS_RECOMMEND, getPostsRecommend),
-<<<<<<< HEAD
-    takeLatest(TYPES.GET_COMMENT, getComment)
-=======
     takeLatest(TYPES.GET_COMMENT, getComment),
     takeLatest(TYPES.POST_COMMENT, postComment),
     takeLatest(TYPES.GET_LIKE, getLike),
     takeLatest(TYPES.PUT_LIKE, putLike),
->>>>>>> 841b2aeb3b0f70459e91b534a236c0aa1653283d
   ]);
 };

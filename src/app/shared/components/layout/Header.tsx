@@ -54,11 +54,7 @@ export const Header = () => {
           </h1>
           <ul className="nav-list">
             <li className="nav-item">
-<<<<<<< HEAD
               <Link to="/posts/write" className="nav-link">
-=======
-              <Link to="/" className="nav-link">
->>>>>>> 841b2aeb3b0f70459e91b534a236c0aa1653283d
                 Write
               </Link>
             </li>
@@ -73,7 +69,7 @@ export const Header = () => {
                 {open && (
                   <ul className="dropdown-menu">
                     <li className="dropdown-item">
-                      <Link to={`/users/${id}`}>
+                      <Link to={`/users/me`}>
                         Profile
                         <i className="fa-solid fa-user"></i>
                       </Link>

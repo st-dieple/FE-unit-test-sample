@@ -164,6 +164,10 @@
         visibility: visible;
       }
     }
+    &-wall-user {
+      position: absolute;
+      @include pxRem(top, 20);
+    }
   }
   &-footer {
     @include flexbox;

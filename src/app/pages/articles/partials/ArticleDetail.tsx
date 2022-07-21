@@ -17,7 +17,7 @@ const ArticleDetail = ({ likes }: any) => {
   const [color, setColor] = useState(false);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { data } = useSelector((state: RootState) => state.articles);
+  const { data } = useSelector((state: RootState) => state.articles);  
   const navigate = useNavigate();
   const dataLike = useSelector((state: RootState) => state.likes);
   const comments = useSelector((state: RootState) => state.comments.data);
@@ -36,7 +36,7 @@ const ArticleDetail = ({ likes }: any) => {
       setLiked(liked - 1);
       setColor(false);
     }
-        // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [dataLike.data]);
 
   const handleLike = () => {
