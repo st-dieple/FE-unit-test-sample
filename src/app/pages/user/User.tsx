@@ -21,7 +21,7 @@ const User = () => {
     <div className="container">
       <section className="section section-post">
         <UserInfo infoUser={userPost.data}/>
-        <UserPosts postList={userPost.data} />
+        <UserPosts postList={userPost.data.Posts} />
       </section>
     </div>
   );

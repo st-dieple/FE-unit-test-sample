@@ -4,7 +4,7 @@ import Image from '../../../../assets/images';
 
 const UserPostItem = ({ post }: any) => {
   return (
-    <li key={post.id} className="post-item">
+    <li className="post-item">
       <article className="post">
         <div className="post-body">
           <div className="post-content">
