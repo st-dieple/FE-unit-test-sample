@@ -13,4 +13,8 @@ export class ArticleService {
   updateArticle(id: string, data: any) {
     return this.http.put([`${ENDPOINT.posts.index}/${id}`], data);
   }
+
+  deleteArticle(id: string) {
+    return this.http.put([`${ENDPOINT.posts.index}/${id}`]);
+  }
 };
