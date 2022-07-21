@@ -10,6 +10,7 @@ interface IPostProps {
 };
 
 export const Post = ({ post }: IPostProps) => {
+
   return (
     <li className="post-item">
       <article className="post">

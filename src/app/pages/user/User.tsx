@@ -7,11 +7,14 @@ import { useParams } from 'react-router-dom';
 import { RootState } from '../../app.reducers';
 import { getUserPosts } from './user.actions';
 import Image from '../../../assets/images';
+import Loading from '../../shared/components/partials/Loading';
 
 const User = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const userPost = useSelector((state: RootState) => state.usersPosts);
+  console.log(userPost)
+  console.log(id)
   useEffect(() => {
     dispatch(getUserPosts({ id }));
   }, [id]);
@@ -41,6 +44,7 @@ const User = () => {
           </div>
         </div>
         <UserList postList={userPost?.data} />
+        {userPost.isLoading && <Loading />}
       </section>
     </div>
   );
