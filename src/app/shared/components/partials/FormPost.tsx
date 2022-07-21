@@ -5,7 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Editor } from '@tinymce/tinymce-react';
 import { SignaturesService } from './../../../core/serivces/signatures.service';
 import { createPost, updatePost } from '../../../pages/home/home.actions';
-import { clearPostById, getPostById } from './../../../pages/articles/article.actions';
+import { getPostById } from './../../../pages/articles/article.actions';
 import { RootState } from '../../../app.reducers';
 import { COVER_POST_IMAGE } from '../../constants/constant';
 import { TagsInput } from "react-tag-input-component"; 
@@ -66,9 +66,6 @@ const FormPost = () => {
       }
       navigate('/');
     };
-    // return () => {
-    //   dispatch(clearPostById());
-    // }
     // eslint-disable-next-line
   }, [posts.createData, posts.updateData]); 
 

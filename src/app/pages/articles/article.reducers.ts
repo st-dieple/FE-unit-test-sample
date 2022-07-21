@@ -45,12 +45,6 @@ export const articlesReducer = (state: IStateData = initialStatePosts, action: I
         isLoading: false,
         error: action.payload
       }
-      case TYPES.CLEAR_POST_BY_ID:
-        return {
-          data: {},
-          isLoading: true,
-          error: ''
-        }
     default:
       return state;
   }
