@@ -16,8 +16,8 @@ interface IPostProps {
 
 export const Post = ({ post }: IPostProps) => {
   const dispatch = useDispatch();
-  
-  const handleDelete = (id: number) => {
+
+  const handleDelete = (id: string) => {
     dispatch(deletePost({ id: id }));
   }
   

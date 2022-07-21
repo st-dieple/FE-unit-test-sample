@@ -37,8 +37,8 @@ export function* updatePost({ payload }: any ) {
 
 export function* deletePost({ payload }: any ) {
   try {
-    const res: AxiosResponse<any> = yield articleService.deleteArticle(payload.id);
-    yield put(deletePostSuccess(res));
+    yield articleService.deleteArticle(payload.id);
+    yield put(deletePostSuccess(payload));
   } catch (error) {
     yield put(deletePostErorr(error));
   }

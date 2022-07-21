@@ -2,9 +2,9 @@ import { ApiService } from './api.service';
 import { ENDPOINT } from './../../../config/endpoint';
 
 export class ArticleService {
-  http = new ApiService();  
+  http = new ApiService();
 
-  constructor () {}
+  constructor() {}
 
   createArticle(data: any) {
     return this.http.post([ENDPOINT.posts.index], data);
@@ -15,6 +15,6 @@ export class ArticleService {
   }
 
   deleteArticle(id: string) {
-    return this.http.put([`${ENDPOINT.posts.index}/${id}`]);
+    return this.http.delete([`${ENDPOINT.posts.index}/${id}`]);
   }
-};
+}

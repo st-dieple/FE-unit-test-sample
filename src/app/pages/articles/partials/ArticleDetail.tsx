@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../app.reducers';
 import { formatDate } from '../../../shared/common/formatDate';
@@ -7,10 +7,19 @@ import { convertHtml } from './../../../shared/common/convertHtml';
 import { Tag, Button } from '../../../shared/components/partials';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import Image from '../../../../assets/images';
+import { useDispatch } from 'react-redux';
+import { deletePost } from '../../home/home.actions';
 
 const ArticleDetail = () => {
   const { data } = useSelector((state: RootState) => state.articles);
-    
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleDelete = (id: string) => {
+    dispatch(deletePost({ id: id }));
+    navigate('/');
+  }
+  
   return (
     <div className="articles-item">
       <div className="article-header">
@@ -48,7 +57,7 @@ const ArticleDetail = () => {
                   Edit
                 </Link>
               </li>
-              <li className="post-control-item">
+              <li className="post-control-item" onClick={() => {handleDelete(data.id)}}>
                 <i className="fa-solid fa-trash-can"></i>
                 Delete
               </li>
