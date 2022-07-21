@@ -18,7 +18,6 @@ export function* getUserInfo({ payload }: any) {
 };
 
 export function* getUserPosts({ payload }: any) {
-  console.log(payload)
   const token = getData('token', '');
   let config: any;
   if(token) {

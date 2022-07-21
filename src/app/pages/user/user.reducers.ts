@@ -50,7 +50,6 @@ export const usersReducer = (state: IStateData = IInitUserProps, action: IAction
 };
 
 export const userPostsReducer = (state: IStateData = IInitUserPostsProps, action: IAction) => {
-  console.log(state)
   switch (action.type) {
     case TYPES.GET_USER_POST:
       return {

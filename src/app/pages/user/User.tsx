@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import UserList from './partials/UserList';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../app.reducers';
 import { getUserPosts } from './user.actions';
+import UserPosts from './partials/UserPost';
 import Image from '../../../assets/images';
 import Loading from '../../shared/components/partials/Loading';
 
@@ -13,13 +11,13 @@ const User = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const userPost = useSelector((state: RootState) => state.usersPosts);
-  console.log(userPost)
-  console.log(id)
+
   useEffect(() => {
     dispatch(getUserPosts({ id }));
   }, [id]);
-
-  return (
+  return userPost.isLoading ? (
+    <Loading />
+  ) : (
     <div className="container">
       <section className="section section-post">
         <div className="author-info-content">
@@ -32,7 +30,7 @@ const User = () => {
             <h2 className="author-name">{userPost.data.displayName}</h2>
             <ul className="author-list">
               <li className="author-item">
-                {userPost?.data.Posts?.length || 0} Posts
+                {userPost.data.Posts.length || 0} Posts
               </li>
               <li className="author-item">
                 {userPost.data.followers} Followers
@@ -43,8 +41,7 @@ const User = () => {
             </ul>
           </div>
         </div>
-        <UserList postList={userPost?.data} />
-        {userPost.isLoading && <Loading />}
+        <UserPosts postList={userPost.data} />
       </section>
     </div>
   );
