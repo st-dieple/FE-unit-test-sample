@@ -1,7 +1,7 @@
 import React from 'react';
 import FormPost from '../../../shared/components/partials/FormPost';
 
-const New = () => {
+const Write = () => {
   return (
     <section className="section section-write">
       <div className="container">
@@ -13,4 +13,4 @@ const New = () => {
   );
 };
 
-export default New;
+export default Write;

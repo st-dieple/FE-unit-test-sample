@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { Editor } from '@tinymce/tinymce-react';
+import { TagsInput } from 'react-tag-input-component'; 
 import { SignaturesService } from './../../../core/serivces/signatures.service';
 import { createPost, updatePost } from '../../../pages/home/home.actions';
 import { getPostById } from './../../../pages/articles/article.actions';
 import { RootState } from '../../../app.reducers';
 import { COVER_POST_IMAGE } from '../../constants/constant';
-import { TagsInput } from "react-tag-input-component"; 
 import Loading from './Loading';
 import Toast from './Toast';
 
