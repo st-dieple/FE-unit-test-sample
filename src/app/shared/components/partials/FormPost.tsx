@@ -9,10 +9,12 @@ import { getPostById } from './../../../pages/articles/article.actions';
 import { RootState } from '../../../app.reducers';
 import { COVER_POST_IMAGE } from '../../constants/constant';
 import Loading from './Loading';
+import Toast from './Toast';
 
 const signaturesService = new SignaturesService();
 const FormPost = () => {
   const [ checkSuccess, setCheckSuccess ] = useState<boolean>(false);
+  const [ toast, setToast ] = useState<any>({ hasLoading: false, type: '', title: '' });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -55,14 +57,18 @@ const FormPost = () => {
   }, [data]);
 
   useEffect(() => {
-    if(posts.createData && checkSuccess || posts.updateData && checkSuccess) {
+    let myTimeout: any;
+    if((posts.createData && checkSuccess) || (posts.updateData && checkSuccess)) {
       if(id) {
-        alert('Update post successfully.');
+        setToast({ hasLoading: true, type: 'success', title: 'Update post successfully.' });
       } else {
-        alert('Create post successfully.');
+        setToast({ hasLoading: true, type: 'success', title: 'Create post successfully.' });
       }
-      navigate('/');
+      myTimeout = setTimeout(() => { navigate('/'); }, 500);
     };
+    return () => {
+      clearTimeout(myTimeout);
+    }
     // eslint-disable-next-line
   }, [posts.createData, posts.updateData]); 
 
@@ -71,7 +77,7 @@ const FormPost = () => {
     dataPost.status = data.status ? 'private' : 'public';
     
     if(id) {
-      dispatch(updatePost({ id: id,data: dataPost }));
+      dispatch(updatePost({ id: id, data: dataPost }));
     } else {
       dispatch(createPost(dataPost));
     } 
@@ -99,6 +105,7 @@ const FormPost = () => {
   if(id && isLoading) return <Loading/>;
   return (
     <>
+      {toast.hasLoading && <Toast type={toast.type} title={toast.title}/>}
       <h2 className="write-title txt-center">{id ? "Edit Blog" : "Create New Blog"}</h2>
       <form className="form-post" onSubmit={handleSubmit(onSubmitForm)}>
         <div className="form-post-group">
