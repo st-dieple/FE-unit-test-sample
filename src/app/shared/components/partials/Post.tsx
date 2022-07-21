@@ -10,11 +10,11 @@ interface IPostProps {
 };
 
 export const Post = ({ post }: IPostProps) => {
-  return (
+return (
     <li className="post-item">
       <article className="post">
         <div className="post-header">
-          <Link to="/" className="post-user">
+          <Link to={`/users/${post.userId}`} className="post-user">
             <div className="post-user-image">
               <img
                 src={post.user.picture || Image.Avatar}

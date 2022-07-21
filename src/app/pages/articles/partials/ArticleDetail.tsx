@@ -9,12 +9,11 @@ import Image from '../../../../assets/images';
 
 const ArticleDetail = () => {
   const { data } = useSelector((state: RootState) => state.articles);
-
   return (
     <div className="articles-item">
       <div className="article-header">
         <div className="author-image">
-          <Link to="/">
+          <Link to={`/users/${data.user.id}`}>
             <img
               src={Image.Avatar || data.user.picture}
               alt={data.user.displayName}
@@ -23,7 +22,7 @@ const ArticleDetail = () => {
         </div>
         <div className="article-author">
           <div className="author-name">
-            <Link to="/">{data.user.displayName}</Link>
+            <Link to={`/users/${data.user.id}`}>{data.user.displayName}</Link>
           </div>
           <div className="author-time">
             <span className="author-date">{formatDate(data.createdAt)}</span>
