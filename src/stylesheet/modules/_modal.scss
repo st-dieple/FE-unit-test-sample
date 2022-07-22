@@ -19,9 +19,9 @@
   }
   &-close {
     @include pxRem(font-size, 20);
+    @include pxRem(top, 20);
+    @include pxRem(right, 30);
     position: absolute;
-    top: 20px;
-    right: 30px;
     background: transparent;
     cursor: pointer;
   }
