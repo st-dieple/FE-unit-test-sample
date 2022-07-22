@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -43,7 +44,6 @@ const FormPost = () => {
     if(id) {
       dispatch(getPostById({ id }));
     };
-    // eslint-disable-next-line
   }, [id]);
 
   useEffect(() => {
