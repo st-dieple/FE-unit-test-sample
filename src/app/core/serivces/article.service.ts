@@ -9,4 +9,8 @@ export class ArticleService {
   createArticle(data: any) {
     return this.http.post([ENDPOINT.posts.index], data);
   }
+
+  updateArticle(id: string, data: any) {
+    return this.http.put([`${ENDPOINT.posts.index}/${id}`], data);
+  }
 };
