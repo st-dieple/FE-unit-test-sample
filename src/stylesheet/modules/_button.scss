@@ -37,6 +37,7 @@
 .fa {
   &-heart {
     @include pxRem(margin-left, 4);
+    cursor: pointer;
   }
   &-liked {
     color: map-get($color, red-2);

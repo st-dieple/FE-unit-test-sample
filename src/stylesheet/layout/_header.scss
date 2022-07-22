@@ -89,6 +89,7 @@
   &-item {
     border-bottom: 1px solid map-get($color, text);
     @include pxRem(padding, 10 12);
+    text-align: center;
     &:last-child {
       border-bottom: 0;
     }

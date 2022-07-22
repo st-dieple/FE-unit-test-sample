@@ -20,6 +20,10 @@ const ArticleSidebar = () => {
             className="author-sidebar-image"
             src={articles.data.user.picture || Image.Avatar}
             alt={articles.data.user.displayName}
+            onError={(e: any) => {
+              e.target["onerror"] = null;
+              e.target["src"] = Image.Avatar;
+            }}
           />
           <h4 className="author-info-name">{articles.data.user.displayName}</h4>
         </Link>

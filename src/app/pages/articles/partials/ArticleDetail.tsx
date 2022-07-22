@@ -6,9 +6,9 @@ import { putLike } from '../article.actions';
 import { RootState } from '../../../app.reducers';
 import { formatDate } from '../../../shared/common/formatDate';
 import { convertHtml } from './../../../shared/common/convertHtml';
-import { Tag, Button } from '../../../shared/components/partials';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import InteractComment from './InteractComment';
+import { Tag } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
 import { deletePost } from '../../home/home.actions';
 

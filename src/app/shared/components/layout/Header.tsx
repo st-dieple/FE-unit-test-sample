@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
+import { useDialog } from '../../contexts/dialog.contexts';
 import { getData } from '../../../core/helpers/localstorage';
 import Image from '../../../../assets/images';
+import PopUpLogin from '../partials/PopupLogin';
 import { parseJwt } from '../../../core/helpers/parseJwt';
 
 export const Header = () => {
+  const navigate = useNavigate();
+  const dialog = useDialog();
   const user = useSelector((state: RootState) => state.users.data);
   const token = getData('token', '');
   let id: any;
@@ -31,6 +35,15 @@ export const Header = () => {
     setSticky(stickyClass);
   };
 
+  const handleWrite = (e: any) => {
+    e.preventDefault();
+    if(getData('token', '')) {
+      navigate('/posts/write');
+    } else {
+      dialog?.addDialog({content: <PopUpLogin />});
+    }
+  }  
+
   useEffect(() => {
     document.addEventListener("click", handleClick);
     return () => {
@@ -54,7 +67,7 @@ export const Header = () => {
           </h1>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link to="/posts/write" className="nav-link">
+              <Link to="/posts/write" className="nav-link" onClick={handleWrite}> 
                 Write
               </Link>
             </li>
@@ -64,6 +77,10 @@ export const Header = () => {
                   <img
                     src={user.picture || Image.Avatar}
                     alt={user.displayName}
+                    onError={(e: any) => {
+                      e.target['onerror'] = null;
+                      e.target['src'] = Image.Avatar;
+                    }}
                   />
                 </div>
                 {open && (
