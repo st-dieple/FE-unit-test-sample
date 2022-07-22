@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { putLike } from '../article.actions';
@@ -10,6 +10,7 @@ import { checkUserId } from '../../../shared/common/checkUserId';
 import InteractComment from './InteractComment';
 import { Tag } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
+import { deletePost } from '../../home/home.actions';
 
 const ArticleDetail = ({ likes }: any) => {
   const [liked, setLiked] = useState<number>(likes.length);
@@ -17,6 +18,7 @@ const ArticleDetail = ({ likes }: any) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { data } = useSelector((state: RootState) => state.articles);
+  const navigate = useNavigate();
   const dataLike = useSelector((state: RootState) => state.likes);
   const comments = useSelector((state: RootState) => state.comments.data);
 
@@ -40,12 +42,18 @@ const ArticleDetail = ({ likes }: any) => {
   const handleLike = () => {
     dispatch(putLike({ id }));
   };
+
+  const handleDelete = (id: string) => {
+    dispatch(deletePost({ id: id }));
+    navigate("/");
+  };
+
   return (
     <div className="articles-item">
       <div className="article-header">
         <div className="article-header-left">
           <div className="author-image">
-            <Link to={`/users/${data.user.id}`}>
+            <Link to={checkUserId(data.user.id) ? `/users/me` : `/users/${data.user.id}`}>
               <img
                 src={data.user.picture || Image.Avatar}
                 alt={data.user.displayName}
@@ -58,7 +66,7 @@ const ArticleDetail = ({ likes }: any) => {
           </div>
           <div className="article-author">
             <div className="author-name">
-              <Link to={`/users/${data.user.id}`}>{data.user.displayName}</Link>
+              <Link to={checkUserId(data.user.id) ? `/users/me` : `/users/${data.user.id}`}>{data.user.displayName}</Link>
             </div>
             <div className="author-time">
               <span className="author-date">{formatDate(data.createdAt)}</span>
@@ -80,7 +88,12 @@ const ArticleDetail = ({ likes }: any) => {
                   Edit
                 </Link>
               </li>
-              <li className="post-control-item">
+              <li
+                className="post-control-item"
+                onClick={() => {
+                  handleDelete(data.id);
+                }}
+              >
                 <i className="fa-solid fa-trash-can"></i>
                 Delete
               </li>
@@ -104,15 +117,19 @@ const ArticleDetail = ({ likes }: any) => {
         />
         <div className="article-text">{convertHtml(data.content)}</div>
         <div className="article-interact">
-          <span className="interact-like">{liked}</span>
-          <i
-            className={
-              color ? "fa-solid fa-heart fa-liked" : "fa-regular fa-heart"
-            }
-            onClick={handleLike}
-          ></i>
-          <span className="interact-comment">{comments.length}</span>
-          <i className="fa-regular fa-comment"></i>
+          <div className="interact-like">
+            {liked}
+            <i
+              className={
+                color ? "fa-solid fa-heart fa-liked" : "fa-regular fa-heart"
+              }
+              onClick={handleLike}
+            ></i>
+          </div>
+          <div className="interact-comment">
+            {comments.length}
+            <i className="fa-regular fa-comment"></i>
+          </div>
         </div>
       </div>
       <InteractComment />

@@ -33,8 +33,8 @@
     justify-content: space-between;
   }
   &-content {
-    @include pxRem(max-width, 450);
-    width: 100%;
+    @include pxRem(margin-right, 32);
+    max-width: 100%;
   }
   &-title {
     @include ellipsis-special(2);
@@ -164,12 +164,28 @@
         visibility: visible;
       }
     }
+    &-wall-user {
+      position: absolute;
+      @include pxRem(top, 20);
+    }
   }
   &-footer {
     @include flexbox;
     justify-content: space-between;
   }
 
+  &-status {
+    @include pxRem(margin-right, 6);
+    font-weight: 400
+  }
+
+  &-info {
+    .post {
+      &-tags {
+        justify-content: flex-start;
+      }
+    }
+  }
 }
 
 .article {
@@ -206,3 +222,4 @@
   @include pxRem(font-size, 14);
   @include pxRem(margin-top, 10);
 }
+

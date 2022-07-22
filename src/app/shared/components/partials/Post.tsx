@@ -5,18 +5,26 @@ import { IPost } from './../../interfaces/post';
 import { formatDate } from './../../common/formatDate';
 import { checkUserId } from '../../common/checkUserId';
 import Image from '../../../../assets/images';
+import { useDispatch } from 'react-redux';
+import { deletePost } from '../../../pages/home/home.actions';
 
 interface IPostProps {
   post: IPost;
 }
 
-export const Post = ({ post }: IPostProps) => {  
+export const Post = ({ post }: IPostProps) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = (id: string) => {
+    dispatch(deletePost({ id: id }));
+  }
+  
   return (
-    <li className="post-item">
+    <li key={post.id} className="post-item">
       <article className="post">
         <div className="post-header">
           <div className="post-user">
-            <Link to="/" className="post-user-info">
+            <Link to={`/users/${post.userId}`} className="post-user-info">
               <div className="post-user-image">
                 <img
                   src={post.user.picture || Image.Avatar}
@@ -41,7 +49,7 @@ export const Post = ({ post }: IPostProps) => {
                     Edit
                   </Link>
                 </li>
-                <li className="post-control-item">
+                <li className="post-control-item" onClick={() => {handleDelete(post.id)}}>
                   <i className="fa-solid fa-trash-can"></i>
                   Delete
                 </li>

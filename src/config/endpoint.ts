@@ -9,6 +9,7 @@ export const ENDPOINT = {
     index: `${RESOURCES.users}`,
     register: `${RESOURCES.users}/register`,
     login: `${RESOURCES.users}/login`,
+    logout: `${RESOURCES.users}/logout`
   },
   posts: {
     index: `${RESOURCES.posts}`,

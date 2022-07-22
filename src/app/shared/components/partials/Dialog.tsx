@@ -39,11 +39,13 @@ export const DialogProvider = (props: any) => {
     setDialog({});
   };
 
+  const checkDialog = Object.keys(dialog).length || '';
+
   return (
     <DialogContext.Provider value={{dialog, addDialog, closeDialog}} { ...props }>
       {props.children}
       {
-        Object.keys(dialog).length && <Dialog dialog={dialog} closeDialog={closeDialog}/>
+       checkDialog && <Dialog dialog={dialog} closeDialog={closeDialog}/>
       }
     </DialogContext.Provider>
   )

@@ -44,3 +44,18 @@ export const updatePostErorr = (error: any) => ({
   type: TYPES.UPDATE_POST_ERROR,
   payload: error
 });
+
+export const deletePost = (payload: any) => ({
+  type: TYPES.DELETE_POST,
+  payload
+});
+
+export const deletePostSuccess = (data: any) => ({
+  type: TYPES.DELETE_POST_SUCCESS,
+  payload: data
+});
+
+export const deletePostErorr = (error: any) => ({
+  type: TYPES.DELETE_POST_ERROR,
+  payload: error
+});

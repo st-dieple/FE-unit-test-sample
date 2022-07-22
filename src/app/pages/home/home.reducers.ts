@@ -74,6 +74,24 @@ export const postsReducer = (state: IStateData<IPost[]> = initialStatePosts, act
         isLoading: false,
         error: action.payload,
       }
+    case TYPES.DELETE_POST:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case TYPES.DELETE_POST_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        error: '',
+        data: state.data.filter(item => item.id !== action.payload.id)
+      }
+    case TYPES.DELETE_POST_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      }
     default:
       return state;
   }

@@ -2,7 +2,7 @@ import { ApiService } from './api.service';
 import { ENDPOINT } from './../../../config/endpoint';
 
 export class ArticleService {
-  http = new ApiService();  
+  http = new ApiService();
 
   // eslint-disable-next-line
   constructor () {}
@@ -14,4 +14,8 @@ export class ArticleService {
   updateArticle(id: string, data: any) {
     return this.http.put([`${ENDPOINT.posts.index}/${id}`], data);
   }
-};
+
+  deleteArticle(id: string) {
+    return this.http.delete([`${ENDPOINT.posts.index}/${id}`]);
+  }
+}

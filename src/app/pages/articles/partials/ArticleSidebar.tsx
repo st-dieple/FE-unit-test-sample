@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../app.reducers';
 import ArticleList from './ArticleList';
+import { checkUserId } from '../../../shared/common/checkUserId';
 import { Button } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
 
@@ -15,11 +16,15 @@ const ArticleSidebar = () => {
   return (
     <div className="article-sidebar">
       <div className="author-sidebar">
-        <Link to={`/users/${articles.data.user.id}`} className="author-info">
+        <Link to={checkUserId(articles.data.user.id) ? `/users/me` : `/users/${articles.data.user.id}`} className="author-info">
           <img
             className="author-sidebar-image"
             src={articles.data.user.picture || Image.Avatar}
             alt={articles.data.user.displayName}
+            onError={(e: any) => {
+              e.target["onerror"] = null;
+              e.target["src"] = Image.Avatar;
+            }}
           />
           <h4 className="author-info-name">{articles.data.user.displayName}</h4>
         </Link>
