@@ -1,11 +1,11 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { deletePost } from "../../home/home.actions";
-import { checkUserId } from "../../../shared/common/checkUserId";
-import { Link } from "react-router-dom";
-import Image from "../../../../assets/images";
-import { formatDate } from "../../../shared/common/formatDate";
-import { Tag } from "../../../shared/components/partials";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { deletePost } from '../../home/home.actions';
+import { checkUserId } from '../../../shared/common/checkUserId';
+import { Link } from 'react-router-dom';
+import Image from '../../../../assets/images';
+import { formatDate } from '../../../shared/common/formatDate';
+import { Tag } from '../../../shared/components/partials';
 
 const UserPostItem = ({ post }: any) => {
   const dispatch = useDispatch();
@@ -66,12 +66,12 @@ const UserPostItem = ({ post }: any) => {
             </h3>
             <p className="post-desc">{post.description}</p>
             {post.tags && (
-                <ul className="post-tags">
-                  {post.tags.map((tag: any) => {
-                    return <Tag key={tag} name={tag} path="/" />;
-                  })}
-                </ul>
-              )}
+              <ul className="post-tags">
+                {post.tags.map((tag: any) => {
+                  return <Tag key={tag} name={tag} path="/" />;
+                })}
+              </ul>
+            )}
           </div>
           <div className="post-image">
             <Link to="/" className="post-image-link">

@@ -1,7 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Image from "../../../../assets/images";
-import { IUser } from "../../../shared/interfaces/user";
+import React from 'react';
+import Image from '../../../../assets/images';
+import { IUser } from '../../../shared/interfaces/user';
 
 interface IUserProps {
   infoUser: IUser;

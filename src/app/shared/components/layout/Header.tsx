@@ -6,7 +6,6 @@ import { useDialog } from '../../contexts/dialog.contexts';
 import { getData } from '../../../core/helpers/localstorage';
 import Image from '../../../../assets/images';
 import PopUpLogin from '../partials/PopupLogin';
-import { parseJwt } from '../../../core/helpers/parseJwt';
 import { useDispatch } from 'react-redux';
 import { signOut } from '../../../auth/auth.actions';
 
@@ -15,11 +14,6 @@ export const Header = () => {
   const dispatch = useDispatch();
   const dialog = useDialog();
   const user = useSelector((state: RootState) => state.users.data);
-  const token = getData('token', '');
-  let id: any;
-  if(token) {
-      id = parseJwt(token).userId
-    }
 
   const [sticky, setSticky] = useState<string>('');
   const [open, setOpen] = useState(false);

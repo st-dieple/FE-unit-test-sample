@@ -29,6 +29,7 @@ const Login = () => {
     if (Object.keys(data).length) {
       navigate('/');
     }
+    // eslint-disable-next-line
   }, [data]);
 
   return (
