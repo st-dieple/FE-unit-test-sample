@@ -9,7 +9,7 @@ const UserPostItem = ({ post }: any) => {
         <div className="post-body">
           <div className="post-content">
             <h3 className="post-title">
-              <Link to="/" className="post-title-link">
+              <Link to={`/posts/${post.id}`} className="post-title-link">
                 {post.title}
               </Link>
             </h3>
