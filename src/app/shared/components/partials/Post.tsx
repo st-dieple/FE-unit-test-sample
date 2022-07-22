@@ -61,7 +61,7 @@ export const Post = ({ post }: IPostProps) => {
               <div className="post-meta">
                 <div className="post-meta-info post-like">
                   <i className="fa-regular fa-thumbs-up"></i>
-                  <span className="post-like-number">{post.like || 0}</span>
+                  <span className="post-like-number">{post.likes || 0}</span>
                 </div>
                 <div className="post-meta-info post-comment">
                   <i className="fa-regular fa-comment"></i>

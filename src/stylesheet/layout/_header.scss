@@ -42,6 +42,7 @@
   &-item {
     margin-right: 32px;
     &:last-child {
+      position: relative;
       margin-right: 0;
     }
   }
@@ -71,5 +72,34 @@
   }
   to {
     transform: translateY(0);
+  }
+}
+
+.dropdown {
+  &-menu {
+    position: absolute;
+    @include pxRem(right, 5);
+    @include pxRem(top, 45);
+    @include pxRem(width, 200);
+    @include pxRem(border-radius, 5);
+    background-color: map-get($color, white);
+    border: 1px solid map-get($color, text);
+  }
+
+  &-item {
+    border-bottom: 1px solid map-get($color, text);
+    @include pxRem(padding, 8);
+    text-align: center;
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    a {
+      color: map-get($color, text);
+    }
+
+    i {
+      @include pxRem(margin-left, 12);
+    }
   }
 }

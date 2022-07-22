@@ -33,7 +33,6 @@ const PopUpLogin = () => {
       dialog?.closeDialog();
       navigate('/');
     }
-    //eslint-disable-next-line
   }, [data]);
 
   return (

@@ -5,14 +5,14 @@ $breakpoints: (
   wide: 960px,
   large: 1024px,
   largest: 1280px,
-  super-largest: 1441px
+  super-largest: 1441px,
 );
 
 $color: (
-  primary:  #FFC017,
-  secondary: #1A8917,
+  primary: #ffc017,
+  secondary: #1a8917,
   black: #000000,
-  white: #FFFFFF,
+  white: #ffffff,
   gray: #596172,
   gray-2: #757575,
   gray-3: #485963,
@@ -25,21 +25,21 @@ $color: (
   red-3: #d9534f,
   pink-1:#FFDBDC,
   green-1: #00cc00,
-  stroke: #D8DFEE,
-  disable: #9EA0A8,
+  stroke: #d8dfee,
+  disable: #9ea0a8,
   text: #333333,
   success: #27AE60,
   erorr: #EB5757
 );
 
 $font-size: (
-  xs:     11px,
-  sm:     13px,
+  xs: 11px,
+  sm: 13px,
   normal: 16px,
-  lg:     18px,
-  xl:     20px,
-  xxl:    24px,
-  xxxl:   30px
+  lg: 18px,
+  xl: 20px,
+  xxl: 24px,
+  xxxl: 30px,
 );
 
-$font-primary: 'Poppins', sans-serif;
+$font-primary: "Poppins", sans-serif;

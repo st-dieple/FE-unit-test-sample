@@ -1,7 +1,7 @@
 export interface IComment {
   id: number,
   userId: number,
-  postId: 1,
+  postId: number,
   comment: string,
   createdAt: any,
   updateAt: any,

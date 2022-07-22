@@ -5,6 +5,7 @@ import { ENDPOINT } from './../../../config/endpoint';
 export class SignaturesService {
   http = new ApiService();  
 
+  // eslint-disable-next-line
   constructor () {}
 
   getSignatures(data: any) {
