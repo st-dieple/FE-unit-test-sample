@@ -18,7 +18,7 @@ const ArticleSidebar = () => {
         <Link to={`/users/${articles.data.user.id}`} className="author-info">
           <img
             className="author-sidebar-image"
-            src={Image.Avatar || articles.data.user.picture}
+            src={articles.data.user.picture || Image.Avatar}
             alt={articles.data.user.displayName}
           />
           <h4 className="author-info-name">{articles.data.user.displayName}</h4>

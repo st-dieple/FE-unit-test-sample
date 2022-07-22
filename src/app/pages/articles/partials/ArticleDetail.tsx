@@ -47,7 +47,7 @@ const ArticleDetail = ({ likes }: any) => {
           <div className="author-image">
             <Link to={`/users/${data.user.id}`}>
               <img
-                src={Image.Avatar || data.user.picture}
+                src={data.user.picture || Image.Avatar}
                 alt={data.user.displayName}
                 onError={(e: any) => {
                   e.target["onerror"] = null;
