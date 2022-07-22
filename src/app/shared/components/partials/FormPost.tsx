@@ -213,7 +213,7 @@ const FormPost = () => {
           </div>
           <div className="form-post-item">
             <label htmlFor="tags">Tags</label>
-            <TagsInput value={data.tags || []} onChange={setTags} name='tags' placeHolder='Enter tags'/>
+            <TagsInput value={data.tags || [] } onChange={setTags} name='tags' placeHolder='Enter tags'/>
           </div>      
           <div className="form-post-footer">
             <input

@@ -10,7 +10,8 @@ const postRoutes: PageRoute[] = [
   },
   {
     path: 'posts/write',
-    element: Write
+    element: Write,
+    isProtected: true
   },
   {
     path: 'posts/edit/:id',
