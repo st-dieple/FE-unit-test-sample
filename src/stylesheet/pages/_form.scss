@@ -75,15 +75,24 @@
   }
 }
 
-.error-box {
+.error{
+  &-box {
   @include flexbox;
+  @include pxRem(max-width, 400);
+  @include pxRem(padding, 10 0);
+  @include pxRem(margin, 0 auto 30);
+  @include border-radius(5px);
   align-items: center;
   justify-content: center;
-  @include pxRem(max-width, 400);
   width: 100%;
-  @include pxRem(padding, 20);
-  @include pxRem(margin, 30 auto);
   background-color: map-get($color, pink-1);
   color: map-get($color, red-1);
-  @include border-radius(5px);
+  span {
+    @include pxRem(font-size, 13);
+  }
+}
+  &-comment {
+    @include pxRem(margin, 8 0);
+    @include pxRem(max-width, 300px)  
+  }
 }

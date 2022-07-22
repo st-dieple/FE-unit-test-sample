@@ -1,36 +1,32 @@
-  .section-post {
-    @include pxRem(padding, 30);
+.author {
+  &-info-content {
+    @include flexbox;
+    align-items: center;
+    max-width: 65%;
+    @include pxRem(margin, 30 auto);
   }
 
-  .author {
-    &-info-content {
-      @include flexbox;
-      align-items: center;
-      max-width: 65%;
-      @include pxRem(margin, 30 auto);
-    }
-
-    &-avatar {
-      @include pxRem(max-width, 100);
-      @include pxRem(margin-right, 30);
-      img {
-        width: 100%;
-      }
-    }
-
-    &-list {
-      @include flexbox;
-    }
-
-    &-item {
-      @include pxRem(margin-right, 30);
-      @include pxRem(font-size, 20);
+  &-avatar {
+    @include pxRem(max-width, 100);
+    @include pxRem(margin-right, 30);
+    img {
+      width: 100%;
     }
   }
 
-  .post {
-    &-user-list {
-      max-width: 65%;
-      @include pxRem(margin, 0 auto);
-    }
+  &-list {
+    @include flexbox;
   }
+
+  &-item {
+    @include pxRem(margin-right, 30);
+    @include pxRem(font-size, 20);
+  }
+}
+
+.post {
+  &-user-list {
+    max-width: 65%;
+    @include pxRem(margin, 0 auto);
+  }
+}

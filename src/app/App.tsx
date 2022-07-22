@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { RouterOutlet } from './core/modules/custom-router-dom';
 
 import { applyMiddleware, legacy_createStore as createStore } from 'redux';
@@ -12,6 +11,7 @@ import appMiddleware from './app.middlewares';
 import rootReducer from './app.reducers';
 
 import '../stylesheet/styles.scss';
+import { DialogProvider } from './shared/components/partials/Dialog';
 
 function App() {
   const middlewares = createSagaMiddleware();
@@ -21,9 +21,9 @@ function App() {
 
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <DialogProvider>
         <RouterOutlet routes={appRoutes} />
-      </BrowserRouter>
+      </DialogProvider>
     </Provider>
   );
 };

@@ -3,7 +3,7 @@ import Loading from '../partials/Loading';
 
 interface IWithLoadingComponentProps {
   isLoading: boolean,
-  props: any
+  props?: any
 };
 
 export function WithLoading<P>(Component: React.ComponentType<P>) {

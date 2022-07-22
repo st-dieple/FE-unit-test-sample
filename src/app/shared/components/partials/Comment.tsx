@@ -14,10 +14,15 @@ const Comment = ({ comment }: ICommentProps) => {
       <div className="comment-header">
         <Link to="/" className="comment-user">
           <div className="user-avatar">
-            <img src={comment.user.picture || Image.Avatar} alt="avatar" />
-            {comment.user.isActive && (
-              <span className="user-active"></span>
-            )}
+            <img
+              src={comment.user.picture || Image.Avatar}
+              alt="avatar"
+              onError={(e: any) => {
+                e.target["onerror"] = null;
+                e.target["src"] = Image.Avatar;
+              }}
+            />
+            {comment.user.isActive && <span className="user-active"></span>}
           </div>
           <h4 className="user-name">{comment.user.displayName}</h4>
           <p className="user-created">· {formatDate(comment.createdAt)}</p>
@@ -27,7 +32,7 @@ const Comment = ({ comment }: ICommentProps) => {
         <p className="comment-desc">{comment.comment}</p>
       </div>
     </li>
-  )
+  );
 };
 
 export default Comment;

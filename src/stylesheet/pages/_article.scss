@@ -11,6 +11,11 @@
       @include flexbox;
       @include pxRem(margin-bottom, 24);
       align-items: center;
+      justify-content: space-between;
+      &-left {
+        @include flexbox;
+        align-items: center;
+      }
     }
 
     &-title {
@@ -93,8 +98,6 @@
       @include pxRem (margin-left, 6);
       font-weight: 600;
     }
-
-
   }
 
   .author {
