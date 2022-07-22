@@ -33,8 +33,8 @@
     justify-content: space-between;
   }
   &-content {
-    @include pxRem(max-width, 450);
-    width: 100%;
+    @include pxRem(margin-right, 32);
+    max-width: 100%;
   }
   &-title {
     @include ellipsis-special(2);
@@ -179,6 +179,13 @@
     font-weight: 400
   }
 
+  &-info {
+    .post {
+      &-tags {
+        justify-content: flex-start;
+      }
+    }
+  }
 }
 
 .article {
@@ -215,3 +222,4 @@
   @include pxRem(font-size, 14);
   @include pxRem(margin-top, 10);
 }
+

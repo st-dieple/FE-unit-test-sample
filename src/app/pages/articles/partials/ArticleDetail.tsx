@@ -53,7 +53,7 @@ const ArticleDetail = ({ likes }: any) => {
       <div className="article-header">
         <div className="article-header-left">
           <div className="author-image">
-            <Link to={`/users/${data.user.id}`}>
+            <Link to={checkUserId(data.user.id) ? `/users/me` : `/users/${data.user.id}`}>
               <img
                 src={data.user.picture || Image.Avatar}
                 alt={data.user.displayName}
@@ -66,7 +66,7 @@ const ArticleDetail = ({ likes }: any) => {
           </div>
           <div className="article-author">
             <div className="author-name">
-              <Link to={`/users/${data.user.id}`}>{data.user.displayName}</Link>
+              <Link to={checkUserId(data.user.id) ? `/users/me` : `/users/${data.user.id}`}>{data.user.displayName}</Link>
             </div>
             <div className="author-time">
               <span className="author-date">{formatDate(data.createdAt)}</span>

@@ -7,14 +7,17 @@ import { getData } from '../../../core/helpers/localstorage';
 import Image from '../../../../assets/images';
 import PopUpLogin from '../partials/PopupLogin';
 import { parseJwt } from '../../../core/helpers/parseJwt';
+import { useDispatch } from 'react-redux';
+import { signOut } from '../../../auth/auth.actions';
 
 export const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const dialog = useDialog();
   const user = useSelector((state: RootState) => state.users.data);
   const token = getData('token', '');
   let id: any;
-    if(token) {
+  if(token) {
       id = parseJwt(token).userId
     }
 
@@ -56,6 +59,11 @@ export const Header = () => {
       setOpen(false);
     }
   };
+
+  const handleSignOut = () => {
+    dispatch(signOut());
+  }
+
   return (
     <header className={`header ${sticky}`}>
       <div className="container">
@@ -97,7 +105,7 @@ export const Header = () => {
                         <i className="fa-solid fa-file-pen"></i>
                       </Link>
                     </li>
-                    <li className="dropdown-item">
+                    <li className="dropdown-item" onClick={handleSignOut}>
                       <Link to="/">
                         Sign Out
                         <i className="fa-solid fa-arrow-right-from-bracket"></i>

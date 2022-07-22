@@ -1,10 +1,10 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { deletePost } from '../../home/home.actions';
-import { checkUserId } from '../../../shared/common/checkUserId';
-import { Link } from 'react-router-dom';
-import Image from '../../../../assets/images';
-import { formatDate } from '../../../shared/common/formatDate';
+import React from "react";
+import { useDispatch } from "react-redux";
+import { deletePost } from "../../home/home.actions";
+import { checkUserId } from "../../../shared/common/checkUserId";
+import { Link } from "react-router-dom";
+import Image from "../../../../assets/images";
+import { formatDate } from "../../../shared/common/formatDate";
 
 const UserPostItem = ({ post }: any) => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const UserPostItem = ({ post }: any) => {
 
   return (
     <li className="post-item">
-      <article className="post">
+      <article className="post post-info">
         <div className="post-header">
           <div className="post-user">
             {post.status === "public" ? (
@@ -67,12 +67,7 @@ const UserPostItem = ({ post }: any) => {
             <ul className="post-tags user-tags">
               <li className="tag">
                 <a className="tag-link" href="/">
-                  JS
-                </a>
-              </li>
-              <li className="tag">
-                <a className="tag-link" href="/">
-                  TypeScript
+                  {post.tags}
                 </a>
               </li>
             </ul>

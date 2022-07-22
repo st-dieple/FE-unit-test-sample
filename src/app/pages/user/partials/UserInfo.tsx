@@ -11,12 +11,10 @@ const UserInfo = ({ infoUser }: IUserProps) => {
   return (
     <div className="author-info-content">
       <div className="author-avatar">
-        <Link to={`/users/${infoUser.id}`}>
-          <img
-            src={infoUser.picture || Image.Avatar}
-            alt={infoUser.displayName}
-          />
-        </Link>
+        <img
+          src={infoUser.picture || Image.Avatar}
+          alt={infoUser.displayName}
+        />
       </div>
       <div className="author-info">
         <h2 className="author-name">{infoUser.displayName}</h2>
