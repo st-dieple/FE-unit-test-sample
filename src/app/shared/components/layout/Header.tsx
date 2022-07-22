@@ -31,7 +31,7 @@ export const Header = () => {
     if(getData('token', '')) {
       navigate('/posts/write');
     } else {
-      dialog?.addDialog({title: 'hihi', content: <PopUpLogin />});
+      dialog?.addDialog({content: <PopUpLogin />});
     }
   }  
 
