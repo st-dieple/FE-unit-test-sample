@@ -5,6 +5,7 @@ import { checkUserId } from "../../../shared/common/checkUserId";
 import { Link } from "react-router-dom";
 import Image from "../../../../assets/images";
 import { formatDate } from "../../../shared/common/formatDate";
+import { Tag } from "../../../shared/components/partials";
 
 const UserPostItem = ({ post }: any) => {
   const dispatch = useDispatch();
@@ -64,13 +65,13 @@ const UserPostItem = ({ post }: any) => {
               </Link>
             </h3>
             <p className="post-desc">{post.description}</p>
-            <ul className="post-tags user-tags">
-              <li className="tag">
-                <a className="tag-link" href="/">
-                  {post.tags}
-                </a>
-              </li>
-            </ul>
+            {post.tags && (
+                <ul className="post-tags">
+                  {post.tags.map((tag: any) => {
+                    return <Tag key={tag} name={tag} path="/" />;
+                  })}
+                </ul>
+              )}
           </div>
           <div className="post-image">
             <Link to="/" className="post-image-link">
