@@ -1,16 +1,13 @@
 .popup-login {
   @include flexbox;
+  @include pxRem(padding, 40 28);
+  @include border-radius(10px);
+  @include pxRem(max-width, 450);
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 999;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  visibility: hidden;
+  width: 100%;
+  background-color: map-get($color, white);
+  animation: float-in-right .3s ease-in-out;
   &-header {
     @include pxRem(margin-bottom, 50);
     @include flexbox;
@@ -25,16 +22,6 @@
     img {
       transform: scale(1.5);
     }
-  }
-  &-form {
-    @include flexbox;
-    @include pxRem(padding, 40 28);
-    @include border-radius(10px);
-    @include pxRem(max-width, 450);
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    background-color: map-get($color, white);
   }
   .form {
     &-group {
@@ -60,5 +47,14 @@
   &-active {
     opacity: 0;
     visibility: visible;
+  }
+}
+
+@keyframes float-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
   }
 }

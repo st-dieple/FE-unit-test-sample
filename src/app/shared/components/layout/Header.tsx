@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
+import { useDialog } from '../../contexts/dialog.contexts';
 import { getData } from '../../../core/helpers/localstorage';
 import Image from '../../../../assets/images';
+import PopUpLogin from '../partials/PopupLogin';
 
 export const Header = () => {
+  const navigate = useNavigate();
+  const dialog = useDialog();
   const user = useSelector((state: RootState) => state.users.data);
   const [sticky, setSticky] = useState<string>('');
 
@@ -22,6 +26,15 @@ export const Header = () => {
     setSticky(stickyClass);
   };
 
+  const handleWrite = (e: any) => {
+    e.preventDefault();
+    if(getData('token', '')) {
+      navigate('/posts/write');
+    } else {
+      dialog?.addDialog({title: 'hihi', content: <PopUpLogin />});
+    }
+  }  
+
   return (
     <header className={`header ${sticky}`}>
       <div className="container">
@@ -33,7 +46,7 @@ export const Header = () => {
           </h1>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link to="/posts/write" className="nav-link">
+              <Link to="/posts/write" className="nav-link" onClick={handleWrite}> 
                 Write
               </Link>
             </li>

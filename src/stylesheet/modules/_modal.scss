@@ -1,0 +1,37 @@
+.modal {
+  @include flexbox;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background-color: rgba(255, 255, 255, 0.9);
+  &-inner {
+    @include pxRem(padding, 40 28);
+    @include border-radius(4px);
+    @include box-shadow(rgba(99, 99, 99, 0.2) 0px 2px 8px 0px);
+    position: relative;
+    background-color: map-get($color, white);
+    animation: float-in-right .3s ease-in-out;
+  }
+  &-close {
+    @include pxRem(font-size, 20);
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background: transparent;
+    cursor: pointer;
+  }
+}
+
+@keyframes float-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
