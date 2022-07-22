@@ -4,6 +4,7 @@ import { deletePost } from '../../home/home.actions';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import { Link } from 'react-router-dom';
 import Image from '../../../../assets/images';
+import { formatDate } from '../../../shared/common/formatDate';
 
 const UserPostItem = ({ post }: any) => {
   const dispatch = useDispatch();
@@ -14,26 +15,20 @@ const UserPostItem = ({ post }: any) => {
   return (
     <li className="post-item">
       <article className="post">
-        <div className="post-body">
-          <div className="post-content">
-            <h3 className="post-title">
-              <Link to="/" className="post-title-link">
-                {post.title}
-              </Link>
-            </h3>
-            <p className="post-desc">{post.description}</p>
-          </div>
-          <div className="post-image">
-            <Link to="/" className="post-image-link">
-              <img
-                src={post.cover || Image.Empty}
-                alt={post.title}
-                onError={(e: any) => {
-                  e.target["onerror"] = null;
-                  e.target["src"] = Image.Empty;
-                }}
-              />
-            </Link>
+        <div className="post-header">
+          <div className="post-user">
+            {post.status === "public" ? (
+              <div className="post-status">
+                <i className="fa-solid fa-unlock"></i>
+                Public
+              </div>
+            ) : (
+              <div className="post-status">
+                <i className="fa-solid fa-lock"></i>
+                Private
+              </div>
+            )}
+            <p className="post-date">{formatDate(post.createdAt)}</p>
           </div>
           {checkUserId(post.userId) && (
             <div className="post-control">
@@ -60,6 +55,40 @@ const UserPostItem = ({ post }: any) => {
               </ul>
             </div>
           )}
+        </div>
+        <div className="post-body">
+          <div className="post-content">
+            <h3 className="post-title">
+              <Link to={`/posts/${post.id}`} className="post-title-link">
+                {post.title}
+              </Link>
+            </h3>
+            <p className="post-desc">{post.description}</p>
+            <ul className="post-tags user-tags">
+              <li className="tag">
+                <a className="tag-link" href="/">
+                  JS
+                </a>
+              </li>
+              <li className="tag">
+                <a className="tag-link" href="/">
+                  TypeScript
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="post-image">
+            <Link to="/" className="post-image-link">
+              <img
+                src={post.cover || Image.Empty}
+                alt={post.title}
+                onError={(e: any) => {
+                  e.target["onerror"] = null;
+                  e.target["src"] = Image.Empty;
+                }}
+              />
+            </Link>
+          </div>
         </div>
       </article>
     </li>

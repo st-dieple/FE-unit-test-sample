@@ -1,13 +1,12 @@
-  .section-post {
-    @include pxRem(padding, 30);
+  .section-user-post {
+    max-width: 50%;
+    @include pxRem(margin, 40 auto);
   }
 
   .author {
     &-info-content {
       @include flexbox;
       align-items: center;
-      max-width: 65%;
-      @include pxRem(margin, 30 auto);
     }
 
     &-avatar {
@@ -30,7 +29,10 @@
 
   .post {
     &-user-list {
-      max-width: 65%;
       @include pxRem(margin, 0 auto);
     }
+  }
+
+  .user-tags {
+    justify-content: flex-start;
   }

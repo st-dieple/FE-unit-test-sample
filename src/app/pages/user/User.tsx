@@ -17,13 +17,11 @@ const User = () => {
     // eslint-disable-next-line
   }, [id]);
   return userPost.isLoading ? (
-    <Loading />
+    <Loading classType="loading-user"/>
   ) : (
-    <div className="container">
-      <section className="section section-post">
-        <UserInfo infoUser={userPost.data}/>
-        <UserPosts postList={userPost.data.Posts} />
-      </section>
+    <div className="section-user-post">
+      <UserInfo infoUser={userPost.data}/>
+      <UserPosts postList={userPost.data.Posts} />
     </div>
   );
 };

@@ -83,6 +83,7 @@
     }
 
     &-interact {
+      @include flexbox;
       @include pxRem(margin, 16 0);
       font-size: map-get($font-size, xl);
     }
@@ -90,16 +91,13 @@
 
   .interact {
     &-like {
-      @include pxRem (margin-right, 6);
+      @include pxRem(margin-right, 6);
       font-weight: 600;
     }
 
     &-comment {
-      @include pxRem (margin-left, 6);
       font-weight: 600;
     }
-
-
   }
 
   .author {

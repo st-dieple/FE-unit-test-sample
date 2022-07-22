@@ -35,11 +35,25 @@
 }
 
 .fa {
+  &-heart {
+    @include pxRem(margin-left, 4);
+  }
   &-liked {
     color: map-get($color, red-2);
+    @include pxRem(margin-left, 4);
   }
 
   &-comment {
     @include pxRem(margin-left, 4);
+  }
+
+  &-lock {
+    color: map-get($color, text);
+    @include pxRem(margin-right, 6);
+  }
+
+  &-unlock {
+    color: map-get($color, primary);
+    @include pxRem(margin-right, 6);
   }
 }

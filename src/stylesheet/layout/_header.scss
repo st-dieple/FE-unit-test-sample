@@ -42,7 +42,6 @@
   &-item {
     margin-right: 32px;
     &:last-child {
-      position: relative;
       margin-right: 0;
     }
   }
@@ -78,24 +77,29 @@
 .dropdown {
   &-menu {
     position: absolute;
-    @include pxRem(right, 5);
-    @include pxRem(top, 45);
-    @include pxRem(width, 200);
+    z-index: 100;
+    @include pxRem(right, 154);
+    @include pxRem(top, 62);
+    @include pxRem(width, 180);
     @include pxRem(border-radius, 5);
+    @include box-shadow(rgba(99, 99, 99, 0.2) 0px 2px 8px 0px);
     background-color: map-get($color, white);
-    border: 1px solid map-get($color, text);
   }
 
   &-item {
     border-bottom: 1px solid map-get($color, text);
-    @include pxRem(padding, 8);
-    text-align: center;
+    @include pxRem(padding, 10 12);
     &:last-child {
       border-bottom: 0;
     }
 
     a {
       color: map-get($color, text);
+      @include pxRem(font-size, 14);
+      font-weight: 500;
+      &:hover {
+      color: map-get($color, primary);
+      }
     }
 
     i {

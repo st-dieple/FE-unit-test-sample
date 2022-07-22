@@ -17,7 +17,7 @@ const ArticleDetail = ({ likes }: any) => {
   const [color, setColor] = useState(false);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { data } = useSelector((state: RootState) => state.articles);  
+  const { data } = useSelector((state: RootState) => state.articles);
   const navigate = useNavigate();
   const dataLike = useSelector((state: RootState) => state.likes);
   const comments = useSelector((state: RootState) => state.comments.data);
@@ -45,9 +45,9 @@ const ArticleDetail = ({ likes }: any) => {
 
   const handleDelete = (id: string) => {
     dispatch(deletePost({ id: id }));
-    navigate('/');
-  }
-  
+    navigate("/");
+  };
+
   return (
     <div className="articles-item">
       <div className="article-header">
@@ -55,18 +55,18 @@ const ArticleDetail = ({ likes }: any) => {
           <div className="author-image">
             <Link to={`/users/${data.user.id}`}>
               <img
-                src={Image.Avatar || data.user.picture}
+                src={data.user.picture || Image.Avatar}
                 alt={data.user.displayName}
                 onError={(e: any) => {
-                  e.target['onerror'] = null;
-                  e.target['src'] = Image.Avatar;
+                  e.target["onerror"] = null;
+                  e.target["src"] = Image.Avatar;
                 }}
               />
             </Link>
           </div>
           <div className="article-author">
             <div className="author-name">
-              <Link to="/">{data.user.displayName}</Link>
+              <Link to={`/users/${data.user.id}`}>{data.user.displayName}</Link>
             </div>
             <div className="author-time">
               <span className="author-date">{formatDate(data.createdAt)}</span>
@@ -80,12 +80,20 @@ const ArticleDetail = ({ likes }: any) => {
             <i className="fa-solid fa-ellipsis"></i>
             <ul className="post-control-list">
               <li>
-                <Link to={`/posts/edit/${data.id}`} className="post-control-item">
+                <Link
+                  to={`/posts/edit/${data.id}`}
+                  className="post-control-item"
+                >
                   <i className="fa-solid fa-pen"></i>
                   Edit
                 </Link>
               </li>
-              <li className="post-control-item" onClick={() => {handleDelete(data.id)}}>
+              <li
+                className="post-control-item"
+                onClick={() => {
+                  handleDelete(data.id);
+                }}
+              >
                 <i className="fa-solid fa-trash-can"></i>
                 Delete
               </li>
@@ -109,10 +117,19 @@ const ArticleDetail = ({ likes }: any) => {
         />
         <div className="article-text">{convertHtml(data.content)}</div>
         <div className="article-interact">
-          <span className="interact-like">{liked}</span>
-          <i className={color ? "fa-solid fa-heart fa-liked" : "fa-regular fa-heart"} onClick={handleLike}></i>
-          <span className="interact-comment">{comments.length}</span>
-          <i className="fa-regular fa-comment"></i>
+          <div className="interact-like">
+            {liked}
+            <i
+              className={
+                color ? "fa-solid fa-heart fa-liked" : "fa-regular fa-heart"
+              }
+              onClick={handleLike}
+            ></i>
+          </div>
+          <div className="interact-comment">
+            {comments.length}
+            <i className="fa-regular fa-comment"></i>
+          </div>
         </div>
       </div>
       <InteractComment />
