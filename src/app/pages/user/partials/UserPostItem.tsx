@@ -37,7 +37,7 @@ const UserPostItem = ({ post }: any) => {
               <ul className="post-control-list post-control-wall-user">
                 <li>
                   <Link
-                    to={`/posts/edit/${post.id}`}
+                    to={`/posts/${post.id}/edit`}
                     className="post-control-item"
                   >
                     <i className="fa-solid fa-pen"></i>
