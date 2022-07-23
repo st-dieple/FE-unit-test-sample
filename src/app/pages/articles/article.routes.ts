@@ -1,5 +1,5 @@
 import { PageRoute } from '../../core/modules/custom-router-dom/router.interface';
-import Write from './partials/Write';
+import New from './partials/New';
 import Edit from './partials/Edit';
 import Articles from './Articles';
 
@@ -9,8 +9,8 @@ const postRoutes: PageRoute[] = [
     element: Articles
   },
   {
-    path: 'posts/write',
-    element: Write,
+    path: 'posts/new',
+    element: New,
     isProtected: true
   },
   {
