@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
+import { signOut } from '../../../auth/auth.actions';
 import { useDialog } from '../../contexts/dialog.contexts';
 import { getData } from '../../../core/helpers/localstorage';
-import Image from '../../../../assets/images';
 import PopUpLogin from '../partials/PopupLogin';
-import { useDispatch } from 'react-redux';
-import { signOut } from '../../../auth/auth.actions';
+import Image from '../../../../assets/images';
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -37,14 +36,14 @@ export const Header = () => {
     if(getData('token', '')) {
       navigate('/posts/new');
     } else {
-      dialog?.addDialog({content: <PopUpLogin />});
+      dialog?.addDialog({ content: <PopUpLogin /> });
     }
-  }  
+  };
 
   useEffect(() => {
-    document.addEventListener("click", handleClick);
+    document.addEventListener('click', handleClick);
     return () => {
-      document.removeEventListener("click", handleClick);
+      document.removeEventListener('click', handleClick);
     };
   });
 
@@ -56,7 +55,7 @@ export const Header = () => {
 
   const handleSignOut = () => {
     dispatch(signOut());
-  }
+  };
 
   return (
     <header className={`header ${sticky}`}>
@@ -75,7 +74,11 @@ export const Header = () => {
             </li>
             {getData('token', '') ? (
               <li className="nav-item">
-                <div className="nav-image" ref={container} onClick={() => setOpen(!open)}>
+                <div
+                  className="nav-image"
+                  ref={container}
+                  onClick={() => setOpen(!open)}
+                >
                   <img
                     src={user.picture || Image.Avatar}
                     alt={user.displayName}
@@ -88,7 +91,7 @@ export const Header = () => {
                 {open && (
                   <ul className="dropdown-menu">
                     <li className="dropdown-item">
-                      <Link to={`/users/me`}>
+                      <Link to={`/profile/me`}>
                         Profile
                         <i className="fa-solid fa-user"></i>
                       </Link>

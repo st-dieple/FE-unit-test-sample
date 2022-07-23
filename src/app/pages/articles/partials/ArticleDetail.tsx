@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { putLike } from '../article.actions';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../app.reducers';
+import { putLike } from '../article.actions';
+import { deletePost } from '../../home/home.actions';
+import InteractComment from './InteractComment';
 import { formatDate } from '../../../shared/common/formatDate';
 import { convertHtml } from './../../../shared/common/convertHtml';
 import { checkUserId } from '../../../shared/common/checkUserId';
-import InteractComment from './InteractComment';
 import { Tag } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
-import { deletePost } from '../../home/home.actions';
 
 const ArticleDetail = ({ likes }: any) => {
   const [liked, setLiked] = useState<number>(likes.length);
@@ -53,7 +52,13 @@ const ArticleDetail = ({ likes }: any) => {
       <div className="article-header">
         <div className="article-header-left">
           <div className="author-image">
-            <Link to={checkUserId(data.user.id) ? `/users/me` : `/users/${data.user.id}`}>
+            <Link
+              to={
+                checkUserId(data.user.id)
+                  ? `/profile/me`
+                  : `/profile/${data.user.id}`
+              }
+            >
               <img
                 src={data.user.picture || Image.Avatar}
                 alt={data.user.displayName}
@@ -66,7 +71,15 @@ const ArticleDetail = ({ likes }: any) => {
           </div>
           <div className="article-author">
             <div className="author-name">
-              <Link to={checkUserId(data.user.id) ? `/users/me` : `/users/${data.user.id}`}>{data.user.displayName}</Link>
+              <Link
+                to={
+                  checkUserId(data.user.id)
+                    ? `/profile/me`
+                    : `/profile/${data.user.id}`
+                }
+              >
+                {data.user.displayName}
+              </Link>
             </div>
             <div className="author-time">
               <span className="author-date">{formatDate(data.createdAt)}</span>

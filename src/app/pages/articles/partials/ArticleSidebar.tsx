@@ -16,7 +16,14 @@ const ArticleSidebar = () => {
   return (
     <div className="article-sidebar">
       <div className="author-sidebar">
-        <Link to={checkUserId(articles.data.user.id) ? `/users/me` : `/users/${articles.data.user.id}`} className="author-info">
+        <Link
+          to={
+            checkUserId(articles.data.user.id)
+              ? `/profile/me`
+              : `/profile/${articles.data.user.id}`
+          }
+          className="author-info"
+        >
           <img
             className="author-sidebar-image"
             src={articles.data.user.picture || Image.Avatar}

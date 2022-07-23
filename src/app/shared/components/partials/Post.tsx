@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Tag } from './Tag';
-import { IPost } from './../../interfaces/post';
-import { formatDate } from './../../common/formatDate';
-import { checkUserId } from '../../common/checkUserId';
-import Image from '../../../../assets/images';
 import { useDispatch } from 'react-redux';
 import { deletePost } from '../../../pages/home/home.actions';
+import { Tag } from './Tag';
+import { formatDate } from './../../common/formatDate';
+import { checkUserId } from '../../common/checkUserId';
+import { IPost } from './../../interfaces/post';
+import Image from '../../../../assets/images';
 
 interface IPostProps {
   post: IPost;
@@ -17,14 +17,14 @@ export const Post = ({ post }: IPostProps) => {
 
   const handleDelete = (id: string) => {
     dispatch(deletePost({ id: id }));
-  }
-  
+  };
+
   return (
     <li key={post.id} className="post-item">
       <article className="post">
         <div className="post-header">
           <div className="post-user">
-            <Link to={`/users/${post.userId}`} className="post-user-info">
+            <Link to={`/profile/${post.userId}`} className="post-user-info">
               <div className="post-user-image">
                 <img
                   src={post.user.picture || Image.Avatar}
@@ -49,7 +49,12 @@ export const Post = ({ post }: IPostProps) => {
                     Edit
                   </Link>
                 </li>
-                <li className="post-control-item" onClick={() => {handleDelete(post.id)}}>
+                <li
+                  className="post-control-item"
+                  onClick={() => {
+                    handleDelete(post.id);
+                  }}
+                >
                   <i className="fa-solid fa-trash-can"></i>
                   Delete
                 </li>
