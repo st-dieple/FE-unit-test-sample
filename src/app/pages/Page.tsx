@@ -20,9 +20,7 @@ const Page = () => {
   return (
     <>
       <Header />
-      <main className="pages-container">
         <Outlet />
-      </main>
     </>
   );
 };
