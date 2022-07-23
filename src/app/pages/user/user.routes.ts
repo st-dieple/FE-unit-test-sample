@@ -3,7 +3,7 @@ import User from './User';
 
 const userRoutes: PageRoute[] = [
   {
-    path: "/profile/:id",
+    path: '/profile/:id',
     element: User
   },
 ];

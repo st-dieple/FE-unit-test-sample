@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../app.reducers";
-import { putLike } from "../article.actions";
-import { deletePost } from "../../home/home.actions";
-import InteractComment from "./InteractComment";
-import { formatDate } from "../../../shared/common/formatDate";
-import { convertHtml } from "./../../../shared/common/convertHtml";
-import { checkUserId } from "../../../shared/common/checkUserId";
-import { Tag } from "../../../shared/components/partials";
-import Image from "../../../../assets/images";
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../app.reducers';
+import { putLike } from '../article.actions';
+import { deletePost } from '../../home/home.actions';
+import InteractComment from './InteractComment';
+import { formatDate } from '../../../shared/common/formatDate';
+import { convertHtml } from './../../../shared/common/convertHtml';
+import { checkUserId } from '../../../shared/common/checkUserId';
+import { Tag } from '../../../shared/components/partials';
+import Image from '../../../../assets/images';
 
 const ArticleDetail = ({ likes }: any) => {
   const [liked, setLiked] = useState<number>(likes.length);

@@ -14,36 +14,36 @@ export const Header = () => {
   const dialog = useDialog();
   const user = useSelector((state: RootState) => state.users.data);
 
-  const [sticky, setSticky] = useState<string>("");
+  const [sticky, setSticky] = useState<string>('');
   const [open, setOpen] = useState(false);
   const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    window.addEventListener("scroll", isSticky);
+    window.addEventListener('scroll', isSticky);
     return () => {
-      window.removeEventListener("scroll", isSticky);
+      window.removeEventListener('scroll', isSticky);
     };
   }, []);
 
   const isSticky = () => {
     const scrollTop = window.scrollY;
-    const stickyClass = scrollTop >= 100 ? "header-sticky" : "";
+    const stickyClass = scrollTop >= 100 ? 'header-sticky' : '';
     setSticky(stickyClass);
   };
 
   const handleWrite = (e: any) => {
     e.preventDefault();
-    if (getData("token", "")) {
-      navigate("/posts/write");
+    if (getData('token', '')) {
+      navigate('/posts/write');
     } else {
       dialog?.addDialog({ content: <PopUpLogin /> });
     }
   };
 
   useEffect(() => {
-    document.addEventListener("click", handleClick);
+    document.addEventListener('click', handleClick);
     return () => {
-      document.removeEventListener("click", handleClick);
+      document.removeEventListener('click', handleClick);
     };
   });
 
@@ -76,7 +76,7 @@ export const Header = () => {
                 Write
               </Link>
             </li>
-            {getData("token", "") ? (
+            {getData('token', '') ? (
               <li className="nav-item">
                 <div
                   className="nav-image"
@@ -87,8 +87,8 @@ export const Header = () => {
                     src={user.picture || Image.Avatar}
                     alt={user.displayName}
                     onError={(e: any) => {
-                      e.target["onerror"] = null;
-                      e.target["src"] = Image.Avatar;
+                      e.target['onerror'] = null;
+                      e.target['src'] = Image.Avatar;
                     }}
                   />
                 </div>
