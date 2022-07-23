@@ -7,7 +7,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import { TagsInput } from 'react-tag-input-component'; 
 import { SignaturesService } from './../../../core/serivces/signatures.service';
 import { createPost, updatePost } from '../../../pages/home/home.actions';
-import { getPostById, resetPostId } from './../../../pages/articles/article.actions';
+import { getPostById } from './../../../pages/articles/article.actions';
 import { RootState } from '../../../app.reducers';
 import { COVER_POST_IMAGE } from '../../constants/constant';
 import Loading from './Loading';
