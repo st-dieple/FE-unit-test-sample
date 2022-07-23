@@ -60,14 +60,17 @@ const FormPost = () => {
 
   useEffect(() => {
     let myTimeout: any;
+    let path: any;
     if((posts.createData && checkSuccess) || (posts.updateData && checkSuccess)) {
       if(id) {
         setToast({ hasLoading: true, type: 'success', title: 'Update post successfully.' });
+        path = `/posts/${posts.updateData.id}`;
       } else {
         setToast({ hasLoading: true, type: 'success', title: 'Create post successfully.' });
+        path = `/posts/${posts.createData.id}`;
       }
       myTimeout = setTimeout(() => { 
-        navigate('/'); 
+        navigate(path); 
       }, 500);
     };
     return () => {
