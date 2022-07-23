@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Tag } from './Tag';
-import { IPost } from './../../interfaces/post';
-import { formatDate } from './../../common/formatDate';
-import { checkUserId } from '../../common/checkUserId';
-import Image from '../../../../assets/images';
 import { useDispatch } from 'react-redux';
 import { deletePost } from '../../../pages/home/home.actions';
+import { Tag } from './Tag';
+import { formatDate } from './../../common/formatDate';
+import { checkUserId } from '../../common/checkUserId';
+import { IPost } from './../../interfaces/post';
+import Image from '../../../../assets/images';
 
 interface IPostProps {
   post: IPost;
@@ -17,21 +17,21 @@ export const Post = ({ post }: IPostProps) => {
 
   const handleDelete = (id: string) => {
     dispatch(deletePost({ id: id }));
-  }
-  
+  };
+
   return (
     <li key={post.id} className="post-item">
       <article className="post">
         <div className="post-header">
           <div className="post-user">
-            <Link to={`/users/${post.userId}`} className="post-user-info">
+            <Link to={`/profile/${post.userId}`} className="post-user-info">
               <div className="post-user-image">
                 <img
                   src={post.user.picture || Image.Avatar}
                   alt={post.user.displayName}
                   onError={(e: any) => {
-                    e.target['onerror'] = null;
-                    e.target['src'] = Image.Avatar;
+                    e.target["onerror"] = null;
+                    e.target["src"] = Image.Avatar;
                   }}
                 />
               </div>
@@ -44,12 +44,20 @@ export const Post = ({ post }: IPostProps) => {
               <i className="fa-solid fa-ellipsis"></i>
               <ul className="post-control-list">
                 <li>
-                  <Link to={`/posts/edit/${post.id}`} className="post-control-item">
+                  <Link
+                    to={`/posts/edit/${post.id}`}
+                    className="post-control-item"
+                  >
                     <i className="fa-solid fa-pen"></i>
                     Edit
                   </Link>
                 </li>
-                <li className="post-control-item" onClick={() => {handleDelete(post.id)}}>
+                <li
+                  className="post-control-item"
+                  onClick={() => {
+                    handleDelete(post.id);
+                  }}
+                >
                   <i className="fa-solid fa-trash-can"></i>
                   Delete
                 </li>

@@ -3,9 +3,9 @@ import User from './User';
 
 const userRoutes: PageRoute[] = [
   {
-    path: '/users/:id',
+    path: "/profile/:id",
     element: User
-  }
+  },
 ];
 
 export default userRoutes;
