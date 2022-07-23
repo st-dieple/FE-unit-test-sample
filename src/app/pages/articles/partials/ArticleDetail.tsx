@@ -94,7 +94,7 @@ const ArticleDetail = ({ likes }: any) => {
             <ul className="post-control-list">
               <li>
                 <Link
-                  to={`/posts/edit/${data.id}`}
+                  to={`/posts/${data.id}/edit`}
                   className="post-control-item"
                 >
                   <i className="fa-solid fa-pen"></i>

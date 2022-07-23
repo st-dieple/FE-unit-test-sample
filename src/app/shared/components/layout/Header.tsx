@@ -33,8 +33,8 @@ export const Header = () => {
 
   const handleWrite = (e: any) => {
     e.preventDefault();
-    if (getData('token', '')) {
-      navigate('/posts/write');
+    if(getData('token', '')) {
+      navigate('/posts/new');
     } else {
       dialog?.addDialog({ content: <PopUpLogin /> });
     }
@@ -68,11 +68,7 @@ export const Header = () => {
           </h1>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link
-                to="/posts/write"
-                className="nav-link"
-                onClick={handleWrite}
-              >
+              <Link to="/posts/new" className="nav-link" onClick={handleWrite}> 
                 Write
               </Link>
             </li>
