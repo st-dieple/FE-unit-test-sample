@@ -30,8 +30,8 @@ export const Post = ({ post }: IPostProps) => {
                   src={post.user.picture || Image.Avatar}
                   alt={post.user.displayName}
                   onError={(e: any) => {
-                    e.target["onerror"] = null;
-                    e.target["src"] = Image.Avatar;
+                    e.target['onerror'] = null;
+                    e.target['src'] = Image.Avatar;
                   }}
                 />
               </div>
