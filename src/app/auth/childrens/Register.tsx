@@ -149,7 +149,7 @@ const Register = () => {
             isError={errors.dob ? true : false}
             errorsMsg={`Date of birth is ${errors.dob && errors.dob.message}.`}
           />
-          <div className="form-group">
+          <div className="form-group input-group">
             <select
               className="form-control form-gender"
               {...register("gender", { required: true })}
