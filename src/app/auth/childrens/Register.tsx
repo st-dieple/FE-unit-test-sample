@@ -66,13 +66,11 @@ const Register = () => {
   }; 
 
   return (
-    <div className="form-auth row">
-      <div className="col-5">
-        <Link to="/" className="form-image">
-          <img className="form-image-logo" src={Image.Logo} alt="Lotus" />
-          <img src={Image.LogoAuth} alt="Sign In Lotus" />
-        </Link>
-      </div>
+    <div className="page-content row">
+      <Link to="/" className="page-link page-link-signup col-5">
+        <img src={Image.Logo} alt="Lotus" />
+        <img src={Image.LogoAuth} alt="Sign In Lotus" />
+      </Link>
       <form className="form col-7" onSubmit={handleSubmit(onSubmit)}>
         <h1 className="form-title">Sign Up Your Account</h1>
         <div className="form-wrapper">
