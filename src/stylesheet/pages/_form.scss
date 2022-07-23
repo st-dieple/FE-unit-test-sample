@@ -24,7 +24,7 @@
     justify-content: space-between;
     align-items: center;
     &-signup {
-      @include pxRem(min-height, 540);
+      @include pxRem(min-height, 510);
     }
   }
 }
