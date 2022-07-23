@@ -35,16 +35,14 @@ export const Header = () => {
       navigate('/posts/new');
     } else {
       dialog?.addDialog({ content: <PopUpLogin /> });
+      setShowHeaderSignIn(!showHeaderSignIn);
     }
   };
 
   const handleSignOut = () => {
     dispatch(signOut());
-  };
-
-  const handleShowHeaderSignIn = () => {
     setShowHeaderSignIn(!showHeaderSignIn);
-  }
+  };
 
   return (
     <header className={`header ${sticky}`}>
@@ -87,7 +85,7 @@ export const Header = () => {
                       </Link>
                     </li>
                     <li className="dropdown-item" onClick={handleSignOut}>
-                      <Link to="" onClick={handleShowHeaderSignIn}>
+                      <Link to="">
                         <i className="fa-solid fa-arrow-right-from-bracket"></i>
                         Sign Out
                       </Link>
