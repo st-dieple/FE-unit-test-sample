@@ -7,7 +7,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import { TagsInput } from 'react-tag-input-component'; 
 import { SignaturesService } from './../../../core/serivces/signatures.service';
 import { createPost, updatePost } from '../../../pages/home/home.actions';
-import { getPostById } from './../../../pages/articles/article.actions';
+import { getPostById, resetPostId } from './../../../pages/articles/article.actions';
 import { RootState } from '../../../app.reducers';
 import { COVER_POST_IMAGE } from '../../constants/constant';
 import Loading from './Loading';
@@ -17,7 +17,7 @@ const signaturesService = new SignaturesService();
 const FormPost = () => {
   const [ selectedImage, setSelectedImage ] = useState<string>(COVER_POST_IMAGE);
   const [ checkSuccess, setCheckSuccess ] = useState<boolean>(false);
-  const [ tags, setTags ] = useState<string[]>([]);
+  const [ tags, setTags ] = useState<string[]>(['React']);
   const [ toast, setToast ] = useState<any>({ hasLoading: false, type: '', title: '' });
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -43,8 +43,9 @@ const FormPost = () => {
   useEffect(() => {
     if(id) {
       dispatch(getPostById({ id }));
-    };
+    }
   }, [id]);
+  
 
   useEffect(() => {
     if(id) {
@@ -213,7 +214,7 @@ const FormPost = () => {
           </div>
           <div className="form-post-item">
             <label htmlFor="tags">Tags</label>
-            <TagsInput value={data.tags || [] } onChange={setTags} name='tags' placeHolder='Enter tags'/>
+            <TagsInput value={data?.tags || tags} onChange={setTags} name='tags' placeHolder='Enter tags'/>
           </div>      
           <div className="form-post-footer">
             <input
