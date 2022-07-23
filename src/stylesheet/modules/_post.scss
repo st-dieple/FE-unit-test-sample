@@ -33,8 +33,9 @@
     justify-content: space-between;
   }
   &-content {
-    @include pxRem(max-width, 430);
+    @include pxRem(margin-right, 32);
     width: 100%;
+    overflow-x: hidden;
   }
   &-title {
     @include ellipsis-special(2);
