@@ -54,6 +54,12 @@ export const articlesReducer = (
         isLoading: false,
         error: action.payload
       };
+    case TYPES.RESET_POST_ID:      
+      return {
+        data: {},
+        isLoading: false,
+        error: ''
+      }
     default:
       return state;
   }
