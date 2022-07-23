@@ -5,6 +5,7 @@ import { IAction } from './../../shared/interfaces/reducer';
 interface IStateData<D> {
   data: D,
   isLoading: boolean,
+  loadMore: boolean,
   error: string,
   createData: any,
   updateData: any
@@ -13,6 +14,7 @@ interface IStateData<D> {
 const initialStatePosts = {
   data: [],
   isLoading: false,
+  loadMore: true,
   error: '',
   createData: {},
   updateData: {}
@@ -23,13 +25,15 @@ export const postsReducer = (state: IStateData<IPost[]> = initialStatePosts, act
     case TYPES.GET_POSTS:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        loadMore: true
       }
     case TYPES.GET_POSTS_SUCCESS:
       return {
         ...state,
-        data: [...state.data, ...action.payload],
+        data: [...state.data, ...action.payload.data],
         isLoading: false,
+        loadMore: action.payload.loadMore,
         error: ''
       }
     case TYPES.GET_POSTS_ERROR:

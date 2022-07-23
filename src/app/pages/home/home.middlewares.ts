@@ -8,6 +8,7 @@ import { getData } from '../../core/helpers/localstorage';
 
 const articleService = new ArticleService();
 export function* getPosts({ payload }: any ) {
+  
   const token = getData('token', '');
   let endPoint = '';
   if (token) {
@@ -22,7 +23,7 @@ export function* getPosts({ payload }: any ) {
         'Authorization': `Bearer ${token}`
       }
     });
-    yield put(getPostsSuccess(res.data.data));
+    yield put(getPostsSuccess(res.data));
   } catch (error) {
     yield put(getPostsError(error));
   }

@@ -15,21 +15,21 @@ const SectionPost = () => {
     // eslint-disable-next-line
   }, [page]);
 
+  useEffect(() => {
+    if(!posts.isLoading && posts.loadMore) {
+      window.addEventListener('scroll', handleScroll);
+    }
+  }, [posts.isLoading, posts.loadMore])
+
   const handleScroll = (e: any) => {
     if (
       window.innerHeight + e.target.documentElement.scrollTop >=
       e.target.documentElement.scrollHeight
     ) {
+      window.removeEventListener('scroll', handleScroll);
       setPage((prevPage) => prevPage + 1);
     }
   };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
     <section className="section section-post">
