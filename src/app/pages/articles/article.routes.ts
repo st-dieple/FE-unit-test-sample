@@ -14,7 +14,7 @@ const postRoutes: PageRoute[] = [
     isProtected: true
   },
   {
-    path: 'posts/edit/:id',
+    path: 'posts/:id/edit',
     element: Edit
   }
 ];
