@@ -13,10 +13,8 @@ export const Header = () => {
   const dispatch = useDispatch();
   const dialog = useDialog();
   const user = useSelector((state: RootState) => state.users.data);
-
+  const [showHeaderSignIn, setShowHeaderSignIn] = useState<boolean>(false);
   const [sticky, setSticky] = useState<string>('');
-  const [open, setOpen] = useState(false);
-  const container = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     window.addEventListener('scroll', isSticky);
@@ -40,22 +38,13 @@ export const Header = () => {
     }
   };
 
-  useEffect(() => {
-    document.addEventListener('click', handleClick);
-    return () => {
-      document.removeEventListener('click', handleClick);
-    };
-  });
-
-  const handleClick = (e: any) => {
-    if (container.current && !container.current.contains(e.target)) {
-      setOpen(false);
-    }
-  };
-
   const handleSignOut = () => {
     dispatch(signOut());
   };
+
+  const handleShowHeaderSignIn = () => {
+    setShowHeaderSignIn(!showHeaderSignIn);
+  }
 
   return (
     <header className={`header ${sticky}`}>
@@ -72,13 +61,9 @@ export const Header = () => {
                 Write
               </Link>
             </li>
-            {getData('token', '') ? (
+            {getData('token', '') && !showHeaderSignIn ? (
               <li className="nav-item">
-                <div
-                  className="nav-image"
-                  ref={container}
-                  onClick={() => setOpen(!open)}
-                >
+                <div className="nav-image">
                   <img
                     src={user.picture || Image.Avatar}
                     alt={user.displayName}
@@ -88,28 +73,26 @@ export const Header = () => {
                     }}
                   />
                 </div>
-                {open && (
                   <ul className="dropdown-menu">
                     <li className="dropdown-item">
                       <Link to={`/profile/me`}>
-                        Profile
                         <i className="fa-solid fa-user"></i>
+                        Profile
                       </Link>
                     </li>
                     <li className="dropdown-item">
                       <Link to="/">
-                        Update Profile
                         <i className="fa-solid fa-file-pen"></i>
+                        Update Profile
                       </Link>
                     </li>
                     <li className="dropdown-item" onClick={handleSignOut}>
-                      <Link to="/">
-                        Sign Out
+                      <Link to="" onClick={handleShowHeaderSignIn}>
                         <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                        Sign Out
                       </Link>
                     </li>
                   </ul>
-                )}
               </li>
             ) : (
               <>
