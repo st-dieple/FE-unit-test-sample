@@ -40,7 +40,8 @@ export const postsReducer = (state: IStateData<IPost[]> = initialStatePosts, act
       return {
         ...state,
         isLoading: false,
-        error: action.payload
+        error: action.payload,
+        loadMore: false
       }
     case TYPES.CREATE_POST:
       return {
