@@ -51,7 +51,7 @@ const Register = () => {
       });
       myTimeout = setTimeout(() => {
         navigate('/auth/sign-in');
-      }, 2500);
+      }, 500);
     }
     return () => {
       clearTimeout(myTimeout);
