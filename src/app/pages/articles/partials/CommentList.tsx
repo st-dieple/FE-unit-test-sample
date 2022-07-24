@@ -6,13 +6,13 @@ import Comment from '../../../shared/components/partials/Comment';
 
 const CommentList = () => {
   const data = useSelector((state: RootState) => state.comments.data);
-  return (
+  return (data.length) ? (
     <ul className="comment-list">
       {data.map((comment: IComment) => (
         <Comment key={comment.id} comment={comment} />
       ))}
     </ul>
-  );
+  ) : (<div className="comment-empty">There are no comments yet</div>);
 };
 
 export default CommentList;
