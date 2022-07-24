@@ -90,9 +90,9 @@ const Register = () => {
     <>
       {toast.hasLoading && <Toast type={toast.type} title={toast.title} />}
       <div className="page-content row">
-        <Link to="/" className="page-link col-5">
+        <Link to="/" className="page-link page-link-signup col-5">
           <img src={Image.Logo} alt="Lotus" />
-          <img src={Image.LogoAuth} alt="Sign In Lotus" />
+          <img src={Image.LogoAuth} alt="Sign Up Lotus" />
         </Link>
         <form className="form col-7" onSubmit={handleSubmit(onSubmit)}>
           <h1 className="form-title">Sign Up Your Account</h1>
