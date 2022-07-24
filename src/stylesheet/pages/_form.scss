@@ -33,9 +33,6 @@
     .btn-auth {
       margin: 0;
     }
-    .tip-link {
-      @include pxRem(margin-top, 12);
-    }
   }
 
   &-title {
