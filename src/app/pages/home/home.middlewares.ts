@@ -1,9 +1,8 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { put, takeLatest, all } from 'redux-saga/effects';
 import { getPostsSuccess, getPostsError, createPostSuccess, createPostErorr, updatePostSuccess, updatePostErorr, deletePostSuccess, deletePostErorr } from './home.actions';
 import * as TYPES from '../../shared/constants/types';
 import { ArticleService } from '../../core/serivces/article.service';
-import { getData } from '../../core/helpers/localstorage';
 
 const articleService = new ArticleService();
 export function* getPublicPosts({ payload }: any ) {
