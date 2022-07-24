@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../app.reducers';
-import { getPosts } from './../home.actions';
+import { getPosts, getPublicPosts } from './../home.actions';
 import PostList from './PostList';
 import Loading from '../../../shared/components/partials/Loading';
 
@@ -9,9 +9,13 @@ const SectionPost = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const posts = useSelector((state: RootState) => state.posts);
-
+  const userCurrent = useSelector((state: RootState) => state.users);
   useEffect(() => {
-    dispatch(getPosts({ page, size: 5 }));
+    if(userCurrent) {
+      dispatch(getPublicPosts({ page, size: 5 }));
+    }else {
+      dispatch(getPosts({ page, size: 5 }))
+    }
     // eslint-disable-next-line
   }, [page]);
 
@@ -27,7 +31,7 @@ const SectionPost = () => {
       e.target.documentElement.scrollHeight
     ) {
       window.removeEventListener('scroll', handleScroll);
-      setPage((prevPage) => prevPage + 1);
+      setPage(page + 1);
     }
   };
 

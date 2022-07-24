@@ -6,6 +6,14 @@ export class ArticleService {
 
   // eslint-disable-next-line
   constructor () {}
+
+  getPublicPosts(data: any) {
+    return this.http.get([`${ENDPOINT.posts.public}?page=${data.page}&size=${data.size}`]);
+  }
+
+  getPosts(data: any) {
+    return this.http.get([`${ENDPOINT.posts.index}?page=${data.page}&size=${data.size}`]);
+  }
   
   createArticle(data: any) {
     return this.http.post([ENDPOINT.posts.index], data);
