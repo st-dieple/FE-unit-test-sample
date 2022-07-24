@@ -33,13 +33,11 @@ const Login = () => {
   }, [data]);
 
   return (
-    <div className="form-auth row">
-      <div className="col-5">
-        <Link to="/" className="form-image ">
-          <img className="form-image-logo" src={Image.Logo} alt="Lotus" />
-          <img src={Image.LogoAuth} alt="Sign In Lotus" />
-        </Link>
-      </div>
+    <div className="page-content row">
+      <Link to="/" className="page-link col-5">
+        <img src={Image.Logo} alt="Lotus" />
+        <img src={Image.LogoAuth} alt="Sign In Lotus" />
+      </Link>
       <form
         className="form form-signin col-7"
         onSubmit={handleSubmit(onSubmit)}
