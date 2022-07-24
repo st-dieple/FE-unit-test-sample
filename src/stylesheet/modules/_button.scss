@@ -35,19 +35,6 @@
 }
 
 .fa {
-  &-thumbs-up {
-    @include pxRem(margin-left, 8);
-    cursor: pointer;
-  }
-  &-liked {
-    color: map-get($color, primary);
-    @include pxRem(margin-left, 8);
-  }
-
-  &-comment {
-    @include pxRem(margin-left, 8);
-  }
-
   &-lock {
     color: map-get($color, text);
     @include pxRem(margin-right, 6);
