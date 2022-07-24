@@ -12,7 +12,7 @@
     border-bottom: 1px solid map-get($color, gray-5);
   }
   &-header {
-    margin-bottom: 8px;
+    @include pxRem(margin-bottom, 8);
   }
   &-user {
     @include flexbox;
@@ -20,7 +20,7 @@
     color: map-get($color, text);
   }
   &-desc {
-    margin-bottom: 12px;
+    @include pxRem(margin-bottom, 12);
     color: map-get($color, gray-3);
     font-weight: 400;
     letter-spacing: 0;
@@ -32,23 +32,23 @@
     &-item {
       @include flexbox;
       align-items: center;
-      margin-right: 8px;
+      @include pxRem(margin-right, 8);
       i {
         @include pxRem(font-size, 16);
-        margin-right: 2px;
+        @include pxRem(margin-right, 8);
         color: map-get($color, primary);
       }
     }
   }
   &-reply {
-    margin-left: 8px;
+    @include pxRem(margin-left, 8);
     font-weight: 600;
   }
 
   &-empty {
-    font-size: 18px;
+    font-size: map-get($font-size, lg);
     font-weight: 600;
-    margin-top: 12px;
+    @include pxRem(margin-top, 12);
   }
 }
 

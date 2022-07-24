@@ -12,7 +12,7 @@ const CommentList = () => {
         <Comment key={comment.id} comment={comment} />
       ))}
     </ul>
-  ) : (<div className="comment-empty">There are no comments yet</div>);
+  ) : (<p className="comment-empty">There are no comments yet</p>);
 };
 
 export default CommentList;
