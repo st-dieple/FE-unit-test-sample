@@ -1,12 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { deletePost } from "../../../pages/home/home.actions";
-import { Tag } from "./Tag";
-import { formatDate } from "./../../common/formatDate";
-import { checkUserId } from "../../common/checkUserId";
-import { IPost } from "./../../interfaces/post";
-import Image from "../../../../assets/images";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { deletePost } from '../../../pages/home/home.actions';
+import { Tag } from './Tag';
+import { formatDate } from './../../common/formatDate';
+import { checkUserId } from '../../common/checkUserId';
+import { IPost } from './../../interfaces/post';
+import Image from '../../../../assets/images';
 
 interface IPostProps {
   post: IPost;
@@ -30,8 +30,8 @@ export const Post = ({ post }: IPostProps) => {
                   src={post.user.picture || Image.Avatar}
                   alt={post.user.displayName}
                   onError={(e: any) => {
-                    e.target["onerror"] = null;
-                    e.target["src"] = Image.Avatar;
+                    e.target['onerror'] = null;
+                    e.target['src'] = Image.Avatar;
                   }}
                 />
               </div>
