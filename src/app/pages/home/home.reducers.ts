@@ -43,6 +43,27 @@ export const postsReducer = (state: IStateData<IPost[]> = initialStatePosts, act
         error: action.payload,
         loadMore: false
       }
+    case TYPES.GET_PUBLIC_POSTS:
+      return {
+        ...state,
+        isLoading: true,
+        loadMore: true
+      }
+    case TYPES.GET_PUBLIC_POSTS_SUCCESS:
+      return {
+        ...state,
+        data: [...state.data, ...action.payload.data],
+        isLoading: false,
+        loadMore: action.payload.loadMore,
+        error: ''
+      }
+    case TYPES.GET_PUBLIC_POSTS_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+        loadMore: false
+      }
     case TYPES.CREATE_POST:
       return {
         ...state,
