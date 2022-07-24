@@ -134,7 +134,7 @@ const ArticleDetail = ({ likes }: any) => {
             {liked}
             <i
               className={
-                color ? "fa-solid fa-heart fa-liked" : "fa-regular fa-heart"
+                color ? "fa-solid fa-thumbs-up fa-liked" : "fa-regular fa-thumbs-up"
               }
               onClick={handleLike}
             ></i>

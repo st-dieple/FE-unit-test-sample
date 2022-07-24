@@ -91,7 +91,7 @@
 
   .interact {
     &-like {
-      @include pxRem(margin-right, 6);
+      @include pxRem(margin-right, 12);
       font-weight: 600;
     }
 

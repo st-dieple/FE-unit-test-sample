@@ -35,17 +35,17 @@
 }
 
 .fa {
-  &-heart {
-    @include pxRem(margin-left, 4);
+  &-thumbs-up {
+    @include pxRem(margin-left, 8);
     cursor: pointer;
   }
   &-liked {
-    color: map-get($color, red-2);
-    @include pxRem(margin-left, 4);
+    color: map-get($color, primary);
+    @include pxRem(margin-left, 8);
   }
 
   &-comment {
-    @include pxRem(margin-left, 4);
+    @include pxRem(margin-left, 8);
   }
 
   &-lock {
