@@ -1,11 +1,12 @@
-.auth-page {
-  @include flexbox;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
-.form {
+.page {
   &-auth {
+    @include flexbox;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+ 
+  &-content {
     @include flexbox;
     align-items: center;
     justify-content: center;
@@ -16,7 +17,19 @@
     @include box-shadow(0px 10px 10px rgba(0, 0, 0, 0.25));
     @include border-radius(20px);
   }
+ 
+  &-link {
+    @include flexbox;
+    @include flex-direction(column);
+    justify-content: space-between;
+    align-items: center;
+    &-signup {
+      @include pxRem(min-height, 510);
+    }
+  }
+}
 
+.form {
   &-signin {
     @include pxRem(max-width, 400);
     width: 100%;
@@ -58,7 +71,7 @@
 
 .tip {
   &-text {
-    font-size: map-get($font-size, sm);
+    @include pxRem(font-size, 14);
     font-weight: 400;
     text-align: center;
     @include pxRem(margin-bottom, 36);
@@ -66,6 +79,7 @@
   
   &-link {
     color: map-get($color, primary);
+    @include pxRem(font-size, 14);
     text-align: center;
   }
 
@@ -75,15 +89,24 @@
   }
 }
 
-.error-box {
+.error{
+  &-box {
   @include flexbox;
+  @include pxRem(max-width, 400);
+  @include pxRem(padding, 10 0);
+  @include pxRem(margin, 0 auto 30);
+  @include border-radius(5px);
   align-items: center;
   justify-content: center;
-  @include pxRem(max-width, 400);
   width: 100%;
-  @include pxRem(padding, 20);
-  @include pxRem(margin, 30 auto);
   background-color: map-get($color, pink-1);
   color: map-get($color, red-1);
-  @include border-radius(5px);
+  span {
+    @include pxRem(font-size, 13);
+  }
+}
+  &-comment {
+    @include pxRem(margin, 8 0);
+    @include pxRem(max-width, 300px)  
+  }
 }

@@ -8,7 +8,6 @@ import { Button } from '../../shared/components/partials';
 import Image from '../../../assets/images';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app.reducers';
-import Loading from '../../shared/components/partials/Loading';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -30,17 +29,15 @@ const Login = () => {
     if (Object.keys(data).length) {
       navigate('/');
     }
-    //eslint-disable-next-line
+    // eslint-disable-next-line
   }, [data]);
 
   return (
-    <div className="form-auth row">
-      <div className="col-5">
-        <Link to="/" className="form-image ">
-          <img className="form-image-logo" src={Image.Logo} alt="Lotus" />
-          <img src={Image.LogoAuth} alt="Sign In Lotus" />
-        </Link>
-      </div>
+    <div className="page-content row">
+      <Link to="/" className="page-link col-5">
+        <img src={Image.Logo} alt="Lotus" />
+        <img src={Image.LogoAuth} alt="Sign In Lotus" />
+      </Link>
       <form
         className="form form-signin col-7"
         onSubmit={handleSubmit(onSubmit)}

@@ -2,7 +2,7 @@
   @include flexbox;
   @include border-radius(20px);
   background-color: map-get($color, gray-6);
-  @include transition(.2s linear);
+  @include transition(0.2s linear);
   &-link {
     padding: 4px 8px;
     @include pxRem(font-size, 12);
@@ -13,6 +13,14 @@
     background-color: map-get($color, primary);
     .tag-link {
       color: map-get($color, white);
+    }
+  }
+
+  &-article {
+    @include flexbox;
+    @include pxRem(margin-bottom, 48);
+    .tag {
+      @include pxRem(margin-right, 7);
     }
   }
 }

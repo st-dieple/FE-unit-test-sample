@@ -29,3 +29,17 @@ export const signInError = (error: any) => ({
   type: TYPES.SIGN_IN_ERROR,
   payload: error
 });
+
+export const signOut = () => ({
+  type: TYPES.SIGN_OUT
+});
+
+export const signOutSuccess = (data: any) => ({
+  type: TYPES.SIGN_OUT_SUCCESS,
+  payload: data
+});
+
+export const signOutError = (error: any) => ({
+  type: TYPES.SIGN_OUT_ERROR,
+  payload: error
+});

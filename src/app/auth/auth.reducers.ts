@@ -71,6 +71,13 @@ export const loginReducer = (state: IStateData = IInitLoginProps, action: IActio
         hasError: true,
         error: action.payload
       };
+
+    case TYPES.SIGN_OUT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        data: '',
+      };
     default:
       return state;
   };

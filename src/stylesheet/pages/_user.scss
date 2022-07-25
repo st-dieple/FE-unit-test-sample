@@ -1,0 +1,30 @@
+.section-user-post {
+  max-width: 50%;
+  @include pxRem(margin, 40 auto);
+}
+
+.author {
+  &-info-content {
+    @include flexbox;
+    align-items: center;
+    @include pxRem(margin-bottom, 32);
+  }
+
+  &-avatar {
+    @include pxRem(max-width, 100);
+    @include pxRem(margin-right, 30);
+    img {
+      width: 100%;
+      border-radius: 100%;
+    }
+  }
+
+  &-list {
+    @include flexbox;
+  }
+
+  &-item {
+    @include pxRem(margin-right, 30);
+    @include pxRem(font-size, 20);
+  }
+}

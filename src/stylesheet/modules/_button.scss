@@ -6,6 +6,7 @@
   display: inline-block;
   font-weight: 500;
   cursor: pointer;
+  font-family: $font-primary;
   &-secondary {
     color: map-get($color, white);
     background-color: map-get($color, text);
@@ -26,5 +27,34 @@
     font-size: map-get($font-size, normal);
     font-weight: 600;
     font-family: $font-primary;
+  }
+
+  &-comment {
+    @include pxRem(margin-top, 8);
+  }
+}
+
+.fa {
+  &-heart {
+    @include pxRem(margin-left, 4);
+    cursor: pointer;
+  }
+  &-liked {
+    color: map-get($color, red-2);
+    @include pxRem(margin-left, 4);
+  }
+
+  &-comment {
+    @include pxRem(margin-left, 4);
+  }
+
+  &-lock {
+    color: map-get($color, text);
+    @include pxRem(margin-right, 6);
+  }
+
+  &-unlock {
+    color: map-get($color, primary);
+    @include pxRem(margin-right, 6);
   }
 }

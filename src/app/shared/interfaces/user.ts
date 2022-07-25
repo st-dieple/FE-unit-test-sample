@@ -1,4 +1,5 @@
 export interface IUser {
+  id: string,
   email: string,
   password: string,
   firstName: string,
@@ -7,5 +8,8 @@ export interface IUser {
   dob: string,
   phone?: string,
   displayName: string,
-  picture?: string
+  picture?: string,
+  followers: number,
+  followings: number,
+  Posts?: any
 };

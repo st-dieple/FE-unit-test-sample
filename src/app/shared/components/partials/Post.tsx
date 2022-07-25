@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { deletePost } from '../../../pages/home/home.actions';
 import { Tag } from './Tag';
-import { IPost } from './../../interfaces/post';
 import { formatDate } from './../../common/formatDate';
+import { checkUserId } from '../../common/checkUserId';
+import { IPost } from './../../interfaces/post';
 import Image from '../../../../assets/images';
 
 interface IPostProps {
@@ -10,26 +13,59 @@ interface IPostProps {
 }
 
 export const Post = ({ post }: IPostProps) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = (id: string) => {
+    dispatch(deletePost({ id: id }));
+  };
+
   return (
-    <li className="post-item">
+    <li key={post.id} className="post-item">
       <article className="post">
         <div className="post-header">
-          <Link to="/" className="post-user">
-            <div className="post-user-image">
-              <img
-                src={post.user.picture || Image.Avatar}
-                alt={post.user.displayName}
-                // eslint-disable-next-line
-              />
+          <div className="post-user">
+            <Link to={`/profile/${post.userId}`} className="post-user-info">
+              <div className="post-user-image">
+                <img
+                  src={post.user.picture || Image.Avatar}
+                  alt={post.user.displayName}
+                  onError={(e: any) => {
+                    e.target['onerror'] = null;
+                    e.target['src'] = Image.Avatar;
+                  }}
+                />
+              </div>
+              <h4 className="post-user-name">{post.user.displayName}</h4>
+            </Link>
+            <p className="post-date">{formatDate(post.createdAt)}</p>
+          </div>
+          {checkUserId(post.user.id) && (
+            <div className="post-control">
+              <i className="fa-solid fa-ellipsis"></i>
+              <ul className="post-control-list">
+                <li>
+                  <Link to={`/posts/${post.id}/edit`} className="post-control-item">
+                    <i className="fa-solid fa-pen"></i>
+                    Edit
+                  </Link>
+                </li>
+                <li
+                  className="post-control-item"
+                  onClick={() => {
+                    handleDelete(post.id);
+                  }}
+                >
+                  <i className="fa-solid fa-trash-can"></i>
+                  Delete
+                </li>
+              </ul>
             </div>
-            <h4 className="post-user-name">{post.user.displayName}</h4>
-          </Link>
-          <p className="post-date">{formatDate(post.createdAt)}</p>
+          )}
         </div>
         <div className="post-body">
           <div className="post-content">
             <h3 className="post-title">
-              <Link to="/" className="post-title-link">
+              <Link to={`/posts/${post.id}`} className="post-title-link">
                 {post.title}
               </Link>
             </h3>
@@ -38,7 +74,7 @@ export const Post = ({ post }: IPostProps) => {
               <div className="post-meta">
                 <div className="post-meta-info post-like">
                   <i className="fa-regular fa-thumbs-up"></i>
-                  <span className="post-like-number">{post.like || 0}</span>
+                  <span className="post-like-number">{post.likes || 0}</span>
                 </div>
                 <div className="post-meta-info post-comment">
                   <i className="fa-regular fa-comment"></i>
@@ -49,7 +85,7 @@ export const Post = ({ post }: IPostProps) => {
               </div>
               {post.tags && (
                 <ul className="post-tags">
-                  {post.tags.slice(1, 4).map((tag: any) => {
+                  {post.tags.slice(-3).map((tag: any) => {
                     return <Tag key={tag} name={tag} path="/" />;
                   })}
                 </ul>
@@ -57,7 +93,7 @@ export const Post = ({ post }: IPostProps) => {
             </div>
           </div>
           <div className="post-image">
-            <Link to="/" className="post-image-link">
+            <Link to={`/posts/${post.id}`} className="post-image-link">
               <img src={post.cover || Image.Empty} alt={post.title} />
             </Link>
           </div>

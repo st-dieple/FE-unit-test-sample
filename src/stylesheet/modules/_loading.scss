@@ -35,6 +35,10 @@
       right: -40px;
     }
   }
+
+  &-user {
+    @include pxRem(margin-top, 36);
+  }
 }
 
 /* Bouncing balls */
