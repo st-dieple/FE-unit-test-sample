@@ -17,7 +17,7 @@ const UserUpdateProfile = () => {
   const navigate = useNavigate();
   const [ toast, setToast ] = useState<any>({ hasLoading: false, type: '', title: '' });
   const [ checkSuccess, setCheckSuccess ] = useState<boolean>(false);
-  const [avatar, setAvatar] = useState<string>(Image.Avatar);
+  const [ avatar, setAvatar ] = useState<string>(Image.Avatar);
   const {
     register,
     handleSubmit,
@@ -25,7 +25,7 @@ const UserUpdateProfile = () => {
     formState: { errors },
   } = useForm();
 
-  const { data: dataUser, isLoading } = useSelector(
+  const { data: dataUser, isLoading, hasError, error } = useSelector(
     (state: RootState) => state.users
   );
 
@@ -81,7 +81,12 @@ const UserUpdateProfile = () => {
         await signaturesService.uploadImage(data, file);
       });
     } catch (err) {
-      alert('upload image error.');
+      const myTimeout = setTimeout(() => {
+        setToast({ hasLoading: true, type: 'error', title: 'Update profile successfully.' })
+      }, 500);
+      return () => {
+        clearTimeout(myTimeout);
+      }
     }
     setAvatar(URL.createObjectURL(file));
   };
@@ -205,6 +210,13 @@ const UserUpdateProfile = () => {
             </label>
           </div>
         </div>
+        {hasError && (
+          <div className="error-box">
+            <span className="txt-center txt-error">
+              {error.response.data.errors}
+            </span>
+          </div>
+        )}
         <Button classBtn="btn btn-primary update-btn" text="Update" />
       </form>
     </div>
