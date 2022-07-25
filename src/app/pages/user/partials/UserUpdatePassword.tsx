@@ -35,11 +35,8 @@ const UserUpdatePassword = () => {
           placeholder="Confirm Password"
           textLabel="Confirm Password"
           register={register("confirmPassword", {
-            required: true,
-            minLength: 8,
-            maxLength: 20,
             validate: (value) =>
-                value === checkPass || "The password do not match"
+                value === checkPass || "The password is invalid"
           })}
           isError={errors.confirmPassword ? true : false}
           errorsMsg={`${errors.confirmPassword && errors.confirmPassword.message}`}
