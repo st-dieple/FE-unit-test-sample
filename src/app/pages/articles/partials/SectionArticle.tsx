@@ -24,6 +24,8 @@ const SectionArticle = () => {
   const comments = useSelector((state: RootState) => state.comments);
   const likes = useSelector((state: RootState) => state.likes.data);
   const userId = useSelector((state: RootState) => state.articles.data.user?.id);
+  const authorsInfo = useSelector((state: RootState) => state.authors);
+
   useEffect(() => {
     if (id) {
       dispatch(getPostById({ id: id }));
@@ -42,7 +44,7 @@ const SectionArticle = () => {
 
   return articles.isLoading ||
     postsRecommend.isLoading ||
-    comments.isLoading ? (
+    comments.isLoading || authorsInfo.isLoading ? (
     <Loading />
   ) : (
     <section className="section section-article">

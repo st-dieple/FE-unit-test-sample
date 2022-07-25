@@ -12,6 +12,7 @@ const User = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const userPost = useSelector((state: RootState) => state.usersPosts);
+  const authorsInfo = useSelector((state: RootState) => state.authors);
   const userId = userPost.data.id;
   useEffect(() => {
     dispatch(getUserPosts({ id }));
@@ -24,7 +25,7 @@ const User = () => {
     }
   }, [userId]);
 
-  return userPost.isLoading ? (
+  return userPost.isLoading || authorsInfo.isLoading ? (
     <Loading classType="loading-user"/>
   ) : (
     <div className="section-user-post">
