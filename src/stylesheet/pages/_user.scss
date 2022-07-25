@@ -28,3 +28,7 @@
     @include pxRem(font-size, 20);
   }
 }
+
+.page-update {
+  @include pxRem(padding, 40 0);
+}
