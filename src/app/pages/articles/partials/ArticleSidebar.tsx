@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../app.reducers';
@@ -6,12 +6,26 @@ import ArticleList from './ArticleList';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import { Button } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
+import { UserService } from '../../../core/serivces/user.service';
 
+
+const userService = new UserService();
 const ArticleSidebar = () => {
+  const [isFollowing, setIsFollowing] = useState();
   const articles = useSelector((state: RootState) => state.articles);
   const postsRecommend = useSelector(
     (state: RootState) => state.postsRecommend
   );
+  
+  const handleFollow = (id: any) => {
+    userService.handleUserFollow({ followingId: id })
+    .then((res: any) => {
+      setIsFollowing(res.followed);
+    })
+    .catch((error) => {
+      //
+    });
+  }
 
   return (
     <div className="article-sidebar">
@@ -38,7 +52,7 @@ const ArticleSidebar = () => {
         <span className="author-follower">
           {articles.data.user.followers || 0} Followers
         </span>
-        <Button classBtn="btn btn-primary btn-follow" text="Follow" />
+          <Button classBtn="btn btn-primary btn-follow" text={isFollowing? "Following" : "Follow"} onClick={() => handleFollow(articles.data.user.id)}/>
       </div>
       <div className="article-recommend">
         <h3 className="recommend-title">Recommend Posts</h3>

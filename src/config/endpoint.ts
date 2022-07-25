@@ -1,7 +1,8 @@
 const RESOURCES = {
   users: 'users',
   posts: 'posts',
-  signatures:  'signatures'
+  signatures:  'signatures',
+  friends: 'friends'
 };
 
 export const ENDPOINT = {
@@ -18,5 +19,9 @@ export const ENDPOINT = {
   },
   signatures: {
     index: `${RESOURCES.signatures}`
+  },
+  friends: {
+    index: `${RESOURCES.friends}`,
+    follow: `${RESOURCES.friends}/follow` 
   }
 };
