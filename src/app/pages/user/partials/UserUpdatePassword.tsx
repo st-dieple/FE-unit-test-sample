@@ -13,7 +13,7 @@ const UserUpdatePassword = () => {
     formState: { errors },
     watch,
   } = useForm();
-  const checkPass = watch('newPassword');
+  const checkPass = watch("newPassword");
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const [toast, setToast] = useState<any>({
     hasLoading: false,
@@ -21,10 +21,8 @@ const UserUpdatePassword = () => {
     title: '',
   });
   const navigate = useNavigate();
-
   const onSubmit = (data: any) => {
     if (!isRequestingAPI) {
-      let myTimeout: any;
       setIsRequestingAPI(true);
       userService
         .handleChangePassword({
@@ -34,8 +32,8 @@ const UserUpdatePassword = () => {
         .then((res: any) => {
           setIsRequestingAPI(false);
           setToast({ hasLoading: true, type: 'success', title: res });
-          myTimeout = setTimeout(() => {
-            navigate('/');
+          const myTimeout = setTimeout(() => {
+            navigate('/profile/me');
           }, 500);
           return () => {
             clearTimeout(myTimeout);
@@ -43,11 +41,16 @@ const UserUpdatePassword = () => {
         })
         .catch((error) => {
           setIsRequestingAPI(false);
-          setToast({
-            hasLoading: true,
-            type: 'error',
-            title: error.response.data.errors,
-          });
+          const myTimeout = setTimeout(() => {
+            setToast({
+              hasLoading: true,
+              type: 'error',
+              title: error.response.data.errors,
+            });
+          }, 500);
+          return () => {
+            clearTimeout(myTimeout);
+          };
         });
     }
   };
