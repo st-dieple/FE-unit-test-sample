@@ -75,7 +75,9 @@
     }
   }
   &-gender {
+    @include flexbox;
     @include pxRem(margin-bottom, 24);
+    align-items: center;
     &-label {
       @include pxRem(padding-left, 36);
       @include pxRem(margin-right, 12);
@@ -116,14 +118,8 @@
       }
     }
   }
-  &-form {
-    .form-group {
-      width: 70%;
-    }
-  }
   &-btn {
     @include pxRem(max-width, 200);
-    @include pxRem(margin-top, 12);
     width: 100%;
   }
 }
