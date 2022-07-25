@@ -38,12 +38,12 @@
   &-user {
     &-title {
       @include pxRem(font-size, 32);
-      @include pxRem(margin-bottom, 32);
+      @include pxRem(margin-bottom, 24);
     }
   }
   &-avatar {
-    @include pxRem(width, 160);
-    @include pxRem(height, 160);
+    @include pxRem(width, 128);
+    @include pxRem(height, 128);
     @include pxRem(margin-bottom, 24);
     position: relative;
     &-image {
@@ -61,8 +61,8 @@
     display: none;
     &-label {
       @include flexbox;
-      @include pxRem(right, 26);
-      @include pxRem(bottom, 12);
+      @include pxRem(right, 12);
+      @include pxRem(bottom, 0);
       @include pxRem(padding, 4);
       @include pxRem(width, 24);
       @include pxRem(height, 24);
