@@ -21,7 +21,7 @@
     }
   }
   &-active {
-    background-color: map-get($color, gray-6);
+    background-color: map-get($color, primary);
     i {
       color: map-get($color, text);
     }
