@@ -97,7 +97,7 @@ const UserUpdatePassword = () => {
               errors.confirmPassword && errors.confirmPassword.message
             }`}
           />
-          <Button classBtn="btn btn-primary" text="Change" />
+          <Button classBtn="btn btn-primary update-btn" text="Change" />
         </form>
       </div>
     </>
