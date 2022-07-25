@@ -5,7 +5,7 @@ export const validateDob = (time: string) => {
     const parts = time.split('-');
     const date = new Date();
     
-    if (date.getFullYear() < +parts[0]) {
+    if (date.getFullYear() < +parts[0] || +parts[0] < 1900) {
       return 'invalid';
     }
     if(date.getFullYear() === +parts[0]){
