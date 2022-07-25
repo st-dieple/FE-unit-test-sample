@@ -26,6 +26,7 @@
 
   &-list {
     @include flexbox;
+    @include pxRem(margin-bottom, 12);
   }
 
   &-item {
