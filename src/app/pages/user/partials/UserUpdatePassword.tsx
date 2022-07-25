@@ -42,7 +42,6 @@ const UserUpdatePassword = () => {
           };
         })
         .catch((error) => {
-          console.log(error);
           setIsRequestingAPI(false);
           setToast({
             hasLoading: true,
