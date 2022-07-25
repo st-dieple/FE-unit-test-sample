@@ -11,7 +11,7 @@ import { UserService } from '../../../core/serivces/user.service';
 
 const userService = new UserService();
 const ArticleSidebar = () => {
-  const [isFollowing, setIsFollowing] = useState();
+  const [isFollowing, setIsFollowing] = useState(false);
   const articles = useSelector((state: RootState) => state.articles);
   const postsRecommend = useSelector(
     (state: RootState) => state.postsRecommend
