@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import TabContent from '../../../shared/components/partials/TabContent';
 import TabNav from './../../../shared/components/partials/TabNav';
-import UserEditProfile from './UserEditProfile';
-import UserEditPassword from './UserEditPassword';
+import UserUpdateProfile from './UserUpdateProfile';
+import UserUpdatePassword from './UserUpdatePassword';
 
 const UserUpdate = () => {
   const [activeTab, setActiveTab] = useState<string>('edit-profile');
@@ -43,10 +43,10 @@ const UserUpdate = () => {
           </div>
           <div className="col-9">
             <TabContent id="edit-profile" activeTab={activeTab}>
-              <UserEditProfile/>
+              <UserUpdateProfile/>
             </TabContent>
             <TabContent id="change-password" activeTab={activeTab}>
-              <UserEditPassword/>
+              <UserUpdatePassword/>
             </TabContent>
           </div>
         </div>
