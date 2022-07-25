@@ -28,3 +28,16 @@
     @include pxRem(font-size, 20);
   }
 }
+
+.update {
+  &-pass {
+    max-width: 100%;
+    text-align: center;
+    @include pxRem(margin, 60 0);
+  }
+  &-form {
+    .form-group {
+      @include pxRem(margin, 32px auto);
+    }
+  }
+}
