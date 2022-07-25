@@ -1,24 +1,51 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Button, Input } from '../../../shared/components/partials';
-import Image from '../../../../assets/images';
-import { validateDob } from '../../../shared/common/validateDob';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { Button, Input } from "../../../shared/components/partials";
+import Image from "../../../../assets/images";
+import { validateDob } from "../../../shared/common/validateDob";
+import { RootState } from "../../../app.reducers";
+import Loading from "../../../shared/components/partials/Loading";
 
 const UserUpdateProfile = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [avatar, setAvatar] = useState<string>(Image.Avatar);
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => {};
+  const { data: dataUser, isLoading } = useSelector(
+    (state: RootState) => state.users
+  ); 
+
+  useEffect(() => {
+    if(Object.keys(dataUser).length) {
+      const dobFormat = dataUser?.dob.split('/').reverse().join('-');
+      setValue('picture', dataUser?.picture);
+      setValue('firstName', dataUser?.firstName);
+      setValue('lastName', dataUser?.lastName);
+      setValue('displayName', dataUser?.displayName);
+      setValue('phone', dataUser?.phone);
+      setValue('dob', dobFormat);
+      setValue('gender', dataUser?.gender);
+    }
+  }, [dataUser]);
+
+  const onSubmit = (data: any) => {
+    
+  };
 
   const handleChangeAvatar = (e: any) => {
     const file = e.target.files[0];
     setAvatar(URL.createObjectURL(file));
   };
 
+  if (isLoading) return <Loading />;
   return (
     <div className="update-user">
       <h2 className="update-user-title">Update profile</h2>

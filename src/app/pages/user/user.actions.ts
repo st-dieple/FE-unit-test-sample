@@ -29,3 +29,18 @@ export const getUserPostsError = (error: any) => ({
   type: TYPES.GET_USER_POST_ERROR,
   payload: error
 });
+
+export const updateUserProfile  = (payload: any) => ({
+  type: TYPES.UPDATE_PROFILE_USER,
+  payload
+});
+
+export const updateUserProfileSuccess  = (data: any) => ({
+  type: TYPES.UPDATE_PROFILE_USER_SUCCESS,
+  payload: data
+});
+
+export const updateUserProfileError  = (error: any) => ({
+  type: TYPES.UPDATE_PROFILE_USER_ERROR,
+  payload: error
+});
