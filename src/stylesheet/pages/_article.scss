@@ -95,12 +95,12 @@
       font-weight: 600;
       .fa {
         &-thumbs-up {
-          @include pxRem(margin-left, 8);
+          @include pxRem(margin-right, 8);
           cursor: pointer;
         }
         &-liked {
           color: map-get($color, primary);
-          @include pxRem(margin-left, 8);
+          @include pxRem(margin-right, 8);
         }
       }
     }
@@ -109,7 +109,7 @@
       font-weight: 600;
       .fa {
         &-comment {
-          @include pxRem(margin-left, 8);
+          @include pxRem(margin-right, 8);
         }
       }
     }
