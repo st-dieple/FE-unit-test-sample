@@ -9,7 +9,7 @@ const UserUpdatePassword = () => {
     formState: { errors },
     watch
   } = useForm();
-  const checkPass = watch('Password');
+  const checkPass = watch('password');
 
   const onSubmit = (data: any) => {}
   return (
@@ -35,7 +35,7 @@ const UserUpdatePassword = () => {
           placeholder="Confirm Password"
           textLabel="Confirm Password"
           register={register("confirmPassword", {
-            required: "Please enter at least 8 characters.",
+            required: true,
             minLength: 8,
             maxLength: 20,
             validate: (value) =>
