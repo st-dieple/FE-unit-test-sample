@@ -56,9 +56,15 @@ const UserUpdateProfile = () => {
   };
   
   useEffect(() => {
+    let myTimeout;
     if(checkSuccess) {
       setToast({ hasLoading: true, type: 'success', title: 'Update profile successfully.' });
-      navigate('/profile/me');
+      myTimeout = setTimeout(() => { 
+        navigate('/profile/me'); 
+      }, 1000);
+    }
+    return () => {
+      clearTimeout(myTimeout);
     }
   }, [checkSuccess]);
 

@@ -12,9 +12,7 @@ export const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const dialog = useDialog();
-  const user = useSelector((state: RootState) => state.users.data);
-  console.log(user);
-  
+  const user = useSelector((state: RootState) => state.users.data);  
 
   const [sticky, setSticky] = useState<string>('');
   const [open, setOpen] = useState(false);
