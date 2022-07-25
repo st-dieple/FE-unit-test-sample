@@ -1,6 +1,11 @@
-.section-user-post {
-  max-width: 50%;
-  @include pxRem(margin, 40 auto);
+.section {
+  &-user-post {
+    max-width: 50%;
+    @include pxRem(margin, 40 auto);
+  }
+  &-update {
+    @include pxRem(padding, 40 0);
+  }
 }
 
 .author {
@@ -27,8 +32,4 @@
     @include pxRem(margin-right, 30);
     @include pxRem(font-size, 20);
   }
-}
-
-.page-update {
-  @include pxRem(padding, 40 0);
 }

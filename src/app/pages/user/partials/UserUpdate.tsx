@@ -8,7 +8,7 @@ const UserUpdate = () => {
   const [activeTab, setActiveTab] = useState<string>('edit-profile');
 
   return (
-    <div className="page-update">
+    <section className="section-update">
       <div className="container">
         <div className="row">
           <div className="col-3">
@@ -51,7 +51,7 @@ const UserUpdate = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
