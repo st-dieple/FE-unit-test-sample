@@ -7,10 +7,13 @@ import { checkUserId } from '../../../shared/common/checkUserId';
 import { Button } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
 import { UserService } from '../../../core/serivces/user.service';
+import { useDispatch } from 'react-redux';
+import { getPostByIdSuccess } from '../article.actions';
 
 
 const userService = new UserService();
 const ArticleSidebar = () => {
+  const dispatch = useDispatch();
   const [isFollowing, setIsFollowing] = useState(false);
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const articles = useSelector((state: RootState) => state.articles);
@@ -25,6 +28,12 @@ const ArticleSidebar = () => {
       .then((res: any) => {
         setIsFollowing(res.followed);
         setIsRequestingAPI(false);
+        if (res.followed) {
+          articles.data.user.followers = articles.data.user.followers + 1;
+        } else {
+          articles.data.user.followers = articles.data.user.followers - 1;
+        }
+        dispatch(getPostByIdSuccess(articles.data))
       })
       .catch((error) => {
         setIsRequestingAPI(false);
@@ -55,7 +64,7 @@ const ArticleSidebar = () => {
           <h4 className="author-info-name">{articles.data.user.displayName}</h4>
         </Link>
         <span className="author-follower">
-          {articles.data.user.followers || 0} Followers
+          {articles.data.user.followers} Followers
         </span>
           <Button classBtn="btn btn-primary btn-follow" text={isFollowing? "Following" : "Follow"} onClick={() => handleFollow(articles.data.user.id)}/>
       </div>

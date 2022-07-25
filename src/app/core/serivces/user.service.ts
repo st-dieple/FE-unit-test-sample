@@ -8,7 +8,6 @@ export class UserService {
   constructor () {}
 
   handleUserFollow(data: any) {
-    console.log(data)
     return this.http.post([ENDPOINT.friends.follow], data)
   }
 
