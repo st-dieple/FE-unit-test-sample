@@ -12,19 +12,24 @@ import { UserService } from '../../../core/serivces/user.service';
 const userService = new UserService();
 const ArticleSidebar = () => {
   const [isFollowing, setIsFollowing] = useState(false);
+  const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const articles = useSelector((state: RootState) => state.articles);
   const postsRecommend = useSelector(
     (state: RootState) => state.postsRecommend
   );
   
-  const handleFollow = (id: any) => {
-    userService.handleUserFollow({ followingId: id })
-    .then((res: any) => {
-      setIsFollowing(res.followed);
-    })
-    .catch((error) => {
-      //
-    });
+  const handleFollow = (id: number | string) => {
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      userService.handleUserFollow({ followingId: id })
+      .then((res: any) => {
+        setIsFollowing(res.followed);
+        setIsRequestingAPI(false);
+      })
+      .catch((error) => {
+        setIsRequestingAPI(false);
+      });
+    }
   }
 
   return (
