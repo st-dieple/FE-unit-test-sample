@@ -6,7 +6,7 @@ import { RootState } from '../../../app.reducers';
 import { UserService } from '../../../core/serivces/user.service';
 import { Button } from '../../../shared/components/partials';
 import { IUser } from '../../../shared/interfaces/user';
-import { getAuthorsInfoSuccess } from '../../articles/article.actions';
+import { getAuthorsInfo } from '../../articles/article.actions';
 
 interface IUserProps {
   userInfo: IUser;
@@ -30,7 +30,7 @@ const UserInfo = ({ userInfo }: IUserProps) => {
           } else {
             authorsInfo.followers = authorsInfo.followers - 1;
           }
-          dispatch(getAuthorsInfoSuccess(authorsInfo));
+          dispatch(getAuthorsInfo(authorsInfo));
         })
         .catch((error) => {
           setIsRequestingAPI(false);
