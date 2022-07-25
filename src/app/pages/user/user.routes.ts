@@ -1,5 +1,5 @@
 import { PageRoute } from '../../core/modules/custom-router-dom/router.interface';
-import UpdatePassword from './partials/UpdatePassword';
+import UserUpdate from './partials/UserUpdate';
 import User from './User';
 
 const userRoutes: PageRoute[] = [
@@ -8,9 +8,9 @@ const userRoutes: PageRoute[] = [
     element: User
   },
   {
-    path: '/profile/change-password',
-    element: UpdatePassword
-  },
+    path: '/profile/update',
+    element: UserUpdate
+  }
 ];
 
 export default userRoutes;

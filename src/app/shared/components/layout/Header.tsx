@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
 import { signOut } from '../../../auth/auth.actions';
 import { useDialog } from '../../contexts/dialog.contexts';
-import { getData } from '../../../core/helpers/localstorage';
 import PopUpLogin from '../partials/PopupLogin';
+import { getData } from '../../../core/helpers/localstorage';
 import Image from '../../../../assets/images';
 
 export const Header = () => {
@@ -97,7 +97,7 @@ export const Header = () => {
                       </Link>
                     </li>
                     <li className="dropdown-item">
-                      <Link to="/">
+                      <Link to="/profile/update">
                         Update Profile
                         <i className="fa-solid fa-file-pen"></i>
                       </Link>
