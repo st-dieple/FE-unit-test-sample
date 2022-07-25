@@ -5,7 +5,7 @@ import UserUpdateProfile from './UserUpdateProfile';
 import UserUpdatePassword from './UserUpdatePassword';
 
 const UserUpdate = () => {
-  const [activeTab, setActiveTab] = useState<string>('edit-profile');
+  const [activeTab, setActiveTab] = useState<string>('update-profile');
 
   return (
     <section className="section-update">
@@ -19,10 +19,10 @@ const UserUpdate = () => {
                     <div className="tab-user-icon">
                       <i className="fa-solid fa-pen"></i>
                     </div>
-                    <span className="tab-user-title">Edit profile</span>
+                    <span className="tab-user-title">Update profile</span>
                   </div>
                 }
-                id="edit-profile"
+                id="update-profile"
                 activeTab={activeTab}
                 setActiveTab={setActiveTab}
               />
@@ -42,7 +42,7 @@ const UserUpdate = () => {
             </ul>
           </div>
           <div className="col-9">
-            <TabContent id="edit-profile" activeTab={activeTab}>
+            <TabContent id="update-profile" activeTab={activeTab}>
               <UserUpdateProfile/>
             </TabContent>
             <TabContent id="change-password" activeTab={activeTab}>
