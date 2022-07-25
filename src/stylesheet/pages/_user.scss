@@ -42,6 +42,12 @@
       @include pxRem(margin-bottom, 24);
     }
   }
+  &-pass {
+    &-title {
+      @include pxRem(font-size, 32);
+      @include pxRem(margin-bottom, 24);
+    }
+  }
   &-avatar {
     @include pxRem(width, 128);
     @include pxRem(height, 128);
