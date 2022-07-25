@@ -8,6 +8,7 @@ import {
   getPostsRecommend,
   getComment,
   getLike,
+  getAuthorsInfo,
 } from './../article.actions';
 import ArticleDetail from './ArticleDetail';
 import ArticleSidebar from './ArticleSidebar';
@@ -22,14 +23,22 @@ const SectionArticle = () => {
   );
   const comments = useSelector((state: RootState) => state.comments);
   const likes = useSelector((state: RootState) => state.likes.data);
-
+  const userId = useSelector((state: RootState) => state.articles.data.user?.id);
   useEffect(() => {
-    dispatch(getPostById({ id: id }));
-    dispatch(getPostsRecommend({ page: 1, size: 5 }));
-    dispatch(getComment({ id: id }));
-    dispatch(getLike({ id: id }));
+    if (id) {
+      dispatch(getPostById({ id: id }));
+      dispatch(getPostsRecommend({ page: 1, size: 5 }));
+      dispatch(getComment({ id: id }));
+      dispatch(getLike({ id: id }));
+    }
     // eslint-disable-next-line
   }, [id]);
+
+  useEffect(() => {
+    if (userId) {
+      dispatch(getAuthorsInfo({id: userId}));
+    }
+  }, [userId]);
 
   return articles.isLoading ||
     postsRecommend.isLoading ||

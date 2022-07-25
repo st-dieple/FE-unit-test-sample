@@ -5,9 +5,7 @@ import { getUserInfoError, getUserInfoSuccess, getUserPostsError, getUserPostsSu
 import * as TYPES from '../../shared/constants/types';
 import { getData } from '../../core/helpers/localstorage';
 import { checkUserId } from '../../shared/common/checkUserId';
-import { UserService } from '../../core/serivces/user.service';
 
-const userService = new UserService();
 export function* getUserInfo({ payload }: any) { 
   try {
     const res: AxiosResponse<any> = yield axios.get(

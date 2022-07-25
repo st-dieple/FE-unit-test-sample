@@ -93,3 +93,18 @@ export const putLikeError = (error: any) => ({
   type: TYPES.PUT_LIKE_ERROR,
   payload: error,
 });
+
+export const getAuthorsInfo = (payload : any) => ({
+  type: TYPES.GET_AUTHOR_INFO,
+  payload
+});
+
+export const getAuthorsInfoSuccess = (authors: any) => ({
+  type: TYPES.GET_AUTHOR_INFO_SUCCESS,
+  payload: authors,
+});
+
+export const getAuthorsInfoError = (error: any) => ({
+  type: TYPES.GET_AUTHOR_INFO_ERROR,
+  payload: error,
+});
