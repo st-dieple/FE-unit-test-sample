@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app.reducers';
-import { getAuthorsInfo } from '../article.actions';
+import { getAuthorsInfo, getAuthorsInfoSuccess } from '../posts.actions';
 import { UserService } from '../../../core/serivces/user.service';
-import ArticleList from './ArticleList';
+import RecommendList from './RecommendList';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import { Button } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
 
 const userService = new UserService();
-const ArticleSidebar = () => {
+const PostSideBar = () => {
   const dispatch = useDispatch();
   const authorsInfo = useSelector((state: RootState) => state.authors.data);
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
-  const articles = useSelector((state: RootState) => state.articles);
+  const post = useSelector((state: RootState) => state.postDetail);
   const postsRecommend = useSelector(
     (state: RootState) => state.postsRecommend
   );
@@ -32,7 +32,7 @@ const ArticleSidebar = () => {
           } else {
             authorsInfo.followers = authorsInfo.followers - 1;
           }
-          dispatch(getAuthorsInfo(authorsInfo));
+          dispatch(getAuthorsInfoSuccess(authorsInfo));
         })
         .catch((error) => {
           setIsRequestingAPI(false);
@@ -45,38 +45,38 @@ const ArticleSidebar = () => {
       <div className="author-sidebar">
         <Link
           to={
-            checkUserId(articles.data.user.id)
+            checkUserId(post.data.user?.id)
               ? `/profile/me`
-              : `/profile/${articles.data.user.id}`
+              : `/profile/${post.data.user?.id}`
           }
           className="author-info"
         >
           <img
             className="author-sidebar-image"
-            src={articles.data.user.picture || Image.Avatar}
-            alt={articles.data.user.displayName}
+            src={post.data.user?.picture || Image.Avatar}
+            alt={post.data.user?.displayName}
             onError={(e: any) => {
-              e.target["onerror"] = null;
-              e.target["src"] = Image.Avatar;
+              e.target['onerror'] = null;
+              e.target['src'] = Image.Avatar;
             }}
           />
-          <h4 className="author-info-name">{articles.data.user.displayName}</h4>
+          <h4 className="author-info-name">{post.data.user?.displayName}</h4>
         </Link>
         <span className="author-follower">
           {authorsInfo.followers} Followers
         </span>
         <Button
           classBtn="btn btn-primary btn-follow"
-          text={authorsInfo.isFollowed ? "Following" : "Follow"}
-          onClick={() => handleFollow(articles.data.user.id)}
+          text={authorsInfo.isFollowed ? 'Following' : 'Follow'}
+          onClick={() => handleFollow(post.data.user?.id)}
         />
       </div>
       <div className="article-recommend">
         <h3 className="recommend-title">Recommend Posts</h3>
-        <ArticleList data={postsRecommend.data} />
+        <RecommendList data={postsRecommend.data} />
       </div>
     </div>
   );
 };
 
-export default ArticleSidebar;
+export default PostSideBar;

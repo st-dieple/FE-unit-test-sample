@@ -1,6 +1,6 @@
 import React from 'react';
+import { Sidebar } from '../../posts/partials/Sidebar';
 import SectionPost from './SectionPost';
-import { Sidebar } from '../../../shared/components/layout';
 
 const SectionContent = () => {
   return (

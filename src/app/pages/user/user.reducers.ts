@@ -16,7 +16,7 @@ const IInitUserProps = {
 };
 
 const IInitUserPostsProps = {
-  data: {},
+  data: [],
   isLoading: false,
   hasError: false,
   error: '',

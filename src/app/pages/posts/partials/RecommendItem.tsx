@@ -8,7 +8,7 @@ interface IArticleItemProps {
   item: IPost;
 }
 
-const ArticleItem = ({ item }: IArticleItemProps) => { 
+const RecommendItem = ({ item }: IArticleItemProps) => {
   return (
     <li className="article-item">
       <div className="article-item-content">
@@ -18,13 +18,10 @@ const ArticleItem = ({ item }: IArticleItemProps) => {
         <span>{formatDate(item.createdAt)}</span>
       </div>
       <Link to={`/posts/${item.id}`} className="article-item-image">
-        <img
-          src={item.cover || Image.Empty}
-          alt={item.title}
-        />
+        <img src={item.cover || Image.Empty} alt={item.title} />
       </Link>
     </li>
   );
 };
 
-export default ArticleItem;
+export default RecommendItem;

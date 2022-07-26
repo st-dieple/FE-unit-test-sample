@@ -56,3 +56,4 @@ export const PUT_LIKE = 'PUT_LIKE';
 export const PUT_LIKE_SUCCESS = 'PUT_LIKE_SUCCESS';
 export const PUT_LIKE_ERROR = 'PUT_LIKE_ERROR';
 export const RESET_POST_ID = 'RESET_POST_ID';
+export const RESET_POST_DETAIL_DATA = 'RESET_POST_DETAIL_DATA';

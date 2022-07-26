@@ -1,3 +1,3 @@
-import Home from './home/Home';
+import Home from './posts/childrens/Home';
 
 export { Home };
