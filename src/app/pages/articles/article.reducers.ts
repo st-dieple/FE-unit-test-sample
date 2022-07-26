@@ -31,6 +31,12 @@ const initialStateLikes = {
   error: ''
 };
 
+const initialStateAuthorInfo = {
+  data: {},
+  isLoading: true,
+  error: ''
+};
+
 export const articlesReducer = (
   state: IStateData = initialStatePosts,
   action: IAction
@@ -54,6 +60,12 @@ export const articlesReducer = (
         isLoading: false,
         error: action.payload
       };
+    case TYPES.RESET_POST_ID:      
+      return {
+        data: {},
+        isLoading: false,
+        error: ''
+      }
     default:
       return state;
   }
@@ -177,3 +189,28 @@ export const likesReducer = (
       return state;
   }
 };
+
+export const authorsReducer = (state: IStateData = initialStateAuthorInfo, action: any) => {
+  switch (action.type) {
+    case TYPES.GET_AUTHOR_INFO:
+      return {
+        ...state,
+        isLoading: true
+      };
+    case TYPES.GET_AUTHOR_INFO_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        isLoading: false,
+        error: ''
+      };
+    case TYPES.GET_AUTHOR_INFO_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+    default:
+      return state;
+  }
+}

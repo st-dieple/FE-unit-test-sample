@@ -15,6 +15,10 @@ export const getPostByIdError = (error: any) => ({
   payload: error,
 });
 
+export const resetPostId = () => ({
+  type: TYPES.RESET_POST_ID
+});
+
 export const getPostsRecommend= (payload : any) => ({
   type: TYPES.GET_POSTS_RECOMMEND,
   payload
@@ -87,5 +91,20 @@ export const putLikeSuccess = (posts: any) => ({
 
 export const putLikeError = (error: any) => ({
   type: TYPES.PUT_LIKE_ERROR,
+  payload: error,
+});
+
+export const getAuthorsInfo = (payload : any) => ({
+  type: TYPES.GET_AUTHOR_INFO,
+  payload
+});
+
+export const getAuthorsInfoSuccess = (authors: any) => ({
+  type: TYPES.GET_AUTHOR_INFO_SUCCESS,
+  payload: authors,
+});
+
+export const getAuthorsInfoError = (error: any) => ({
+  type: TYPES.GET_AUTHOR_INFO_ERROR,
   payload: error,
 });

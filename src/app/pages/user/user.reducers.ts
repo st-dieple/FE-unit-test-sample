@@ -10,14 +10,14 @@ interface IStateData {
 
 const IInitUserProps = {
   data: {},
-  isLoading: true,
+  isLoading: false,
   hasError: false,
   error: '',
 };
 
 const IInitUserPostsProps = {
   data: {},
-  isLoading: true,
+  isLoading: false,
   hasError: false,
   error: '',
 };
@@ -47,6 +47,26 @@ export const usersReducer = (
         hasError: true,
         error: action.payload,
       };
+      case TYPES.UPDATE_PROFILE_USER:
+        return {
+          ...state,
+          isLoading: true,
+        };
+  
+      case TYPES.UPDATE_PROFILE_USER_SUCCESS:
+        return {
+          ...state,
+          isLoading: false,
+          data: action.payload,
+        };
+  
+      case TYPES.UPDATE_PROFILE_USER_ERROR:
+        return {
+          ...state,
+          isLoading: false,
+          hasError: true,
+          error: action.payload,
+        };
     default:
       return state;
   }

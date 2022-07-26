@@ -65,13 +65,15 @@ const UserPostItem = ({ post }: any) => {
               </Link>
             </h3>
             <p className="post-desc">{post.description}</p>
-            {post.tags && (
-              <ul className="post-tags">
-                {post.tags.map((tag: any) => {
-                  return <Tag key={tag} name={tag} path="/" />;
-                })}
-              </ul>
-            )}
+            <div className="post-footer">
+              {post.tags && (
+                <ul className="post-tags">
+                  {post.tags.map((tag: any) => {
+                    return <Tag key={tag} name={tag} path="/" />;
+                  })}
+                </ul>
+              )}
+            </div>
           </div>
           <div className="post-image">
             <Link to="/" className="post-image-link">

@@ -1,17 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app.reducers';
+import { getAuthorsInfo } from '../article.actions';
+import { UserService } from '../../../core/serivces/user.service';
 import ArticleList from './ArticleList';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import { Button } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
 
+const userService = new UserService();
 const ArticleSidebar = () => {
+  const dispatch = useDispatch();
+  const authorsInfo = useSelector((state: RootState) => state.authors.data);
+  const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const articles = useSelector((state: RootState) => state.articles);
   const postsRecommend = useSelector(
     (state: RootState) => state.postsRecommend
   );
+
+  const handleFollow = (id: number | string) => {
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      userService
+        .handleUserFollow({ followingId: id })
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          authorsInfo.isFollowed = res.followed;
+          if (res.followed) {
+            authorsInfo.followers = authorsInfo.followers + 1;
+          } else {
+            authorsInfo.followers = authorsInfo.followers - 1;
+          }
+          dispatch(getAuthorsInfo(authorsInfo));
+        })
+        .catch((error) => {
+          setIsRequestingAPI(false);
+        });
+    }
+  };
 
   return (
     <div className="article-sidebar">
@@ -36,9 +63,13 @@ const ArticleSidebar = () => {
           <h4 className="author-info-name">{articles.data.user.displayName}</h4>
         </Link>
         <span className="author-follower">
-          {articles.data.user.followers || 0} Followers
+          {authorsInfo.followers} Followers
         </span>
-        <Button classBtn="btn btn-primary btn-follow" text="Follow" />
+        <Button
+          classBtn="btn btn-primary btn-follow"
+          text={authorsInfo.isFollowed ? "Following" : "Follow"}
+          onClick={() => handleFollow(articles.data.user.id)}
+        />
       </div>
       <div className="article-recommend">
         <h3 className="recommend-title">Recommend Posts</h3>
