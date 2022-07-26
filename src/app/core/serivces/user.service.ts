@@ -9,6 +9,10 @@ export class UserService {
 
   handleUserFollow(data: any) {
     return this.http.post([ENDPOINT.friends.follow], data);
+  }
+  
+  getListFollow(data: any) {
+    return this.http.get([`${ENDPOINT.friends.index}/${data.id}/${data.type}`]);
   };
 
   handleChangePassword(data: any) {
