@@ -13,5 +13,9 @@ export class UserService {
 
   handleChangePassword(data: any) {
     return this.http.put([`${ENDPOINT.users.index}/change-password`], data);
+  };  
+
+  updateProfileUser(data: any) {
+    return this.http.put([`${ENDPOINT.users.index}/me`], data)
   };
 };

@@ -9,7 +9,8 @@ const userRoutes: PageRoute[] = [
   },
   {
     path: '/profile/update',
-    element: UserUpdate
+    element: UserUpdate,
+    isProtected: true
   }
 ];
 

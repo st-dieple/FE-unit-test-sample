@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import TabContent from '../../../shared/components/partials/TabContent';
 import TabNav from './../../../shared/components/partials/TabNav';
-import UserUpdateProfile from './UserUpdateProfile';
+import { getData } from '../../../core/helpers/localstorage';
+import { parseJwt } from '../../../core/helpers/parseJwt';
+import { getUserInfo } from '../user.actions';
 import UserUpdatePassword from './UserUpdatePassword';
+import UserUpdateProfile from './UserUpdateProfile';
 
 const UserUpdate = () => {
+  const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState<string>('update-profile');
+
+  useEffect(() => {
+    if(getData('token', '')) {
+      const userId = parseJwt(getData('token', '')).userId;     
+      dispatch(getUserInfo({id: userId}));
+    }
+  }, []);
 
   return (
     <section className="section-update">
