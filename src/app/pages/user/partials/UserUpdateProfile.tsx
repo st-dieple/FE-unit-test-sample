@@ -1,31 +1,106 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { SignaturesService } from './../../../core/serivces/signatures.service';
+import { RootState } from '../../../app.reducers';
+import { updateProfileUser } from '../user.actions';
 import { Button, Input } from '../../../shared/components/partials';
-import Image from '../../../../assets/images';
 import { validateDob } from '../../../shared/common/validateDob';
+import Image from '../../../../assets/images';
+import Loading from '../../../shared/components/partials/Loading';
+import Toast from '../../../shared/components/partials/Toast';
 
+const signaturesService = new SignaturesService();
 const UserUpdateProfile = () => {
-  const [avatar, setAvatar] = useState<string>(Image.Avatar);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [ toast, setToast ] = useState<any>({ hasLoading: false, type: '', title: '' });
+  const [ checkSuccess, setCheckSuccess ] = useState<boolean>(false);
+  const [ avatar, setAvatar ] = useState<string>(Image.Avatar);
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => {};
+  const { data: dataUser, isLoading, hasError, error } = useSelector(
+    (state: RootState) => state.users
+  );
+
+  useEffect(() => {
+    if (Object.keys(dataUser).length) {
+      const dobFormat = dataUser?.dob.split('/').reverse().join('-');
+      setValue('picture', dataUser?.picture);
+      setValue('firstName', dataUser?.firstName);
+      setValue('lastName', dataUser?.lastName);
+      setValue('displayName', dataUser?.displayName);
+      setValue('phone', dataUser?.phone);
+      setValue('dob', dobFormat);
+      setValue('gender', dataUser?.gender);
+      setAvatar(dataUser?.picture);
+    }
+  }, [dataUser]);
+
+  const onSubmit = (data: any) => {
+    dispatch(
+      updateProfileUser({
+        data: {
+          ...data,
+          dob: data.dob.split('-').reverse().join('/'),
+        },
+      })
+    );
+    setCheckSuccess(!checkSuccess);
+  };
+  
+  useEffect(() => {
+    let myTimeout;
+    if(checkSuccess) {
+      setToast({ hasLoading: true, type: 'success', title: 'Update profile successfully.' });
+      myTimeout = setTimeout(() => { 
+        navigate('/profile/me'); 
+      }, 1000);
+    }
+    return () => {
+      clearTimeout(myTimeout);
+    }
+  }, [checkSuccess]);
 
   const handleChangeAvatar = (e: any) => {
     const file = e.target.files[0];
+    const payload = {
+      type_upload: 'avatar',
+      file_name: file.name,
+      file_type: file.type,
+    };
+    try {
+      signaturesService.getSignatures(payload).then(async (data: any) => {
+        setValue('picture', data.url);
+        await signaturesService.uploadImage(data, file);
+      });
+    } catch (err) {
+      const myTimeout = setTimeout(() => {
+        setToast({ hasLoading: true, type: 'error', title: 'Update profile successfully.' })
+      }, 500);
+      return () => {
+        clearTimeout(myTimeout);
+      }
+    }
     setAvatar(URL.createObjectURL(file));
   };
 
+  if (isLoading) return <Loading />;
   return (
+    <>
+    {toast.hasLoading && <Toast type={toast.type} title={toast.title}/>}
     <div className="update-user">
       <h2 className="update-user-title">Update profile</h2>
       <form className="update-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="update-avatar">
           <div className="update-avatar-image">
-            <img src={avatar} alt="" />
+            <img src={avatar} alt="avatar user" />
           </div>
           <input
             type="file"
@@ -81,7 +156,11 @@ const UserUpdateProfile = () => {
             name="phone"
             placeholder="Phone"
             textLabel="Phone"
-            register={register("phone")}
+            register={register("phone", {
+              pattern: /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/,
+            })}
+            isError={errors.phone ? true : false}
+            errorsMsg="Phone is invalid."
           />
           <Input
             type="date"
@@ -131,9 +210,17 @@ const UserUpdateProfile = () => {
             </label>
           </div>
         </div>
+        {hasError && (
+          <div className="error-box">
+            <span className="txt-center txt-error">
+              {error.response.data.errors}
+            </span>
+          </div>
+        )}
         <Button classBtn="btn btn-primary update-btn" text="Update" />
       </form>
     </div>
+    </>
   );
 };
 

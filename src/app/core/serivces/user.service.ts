@@ -9,6 +9,9 @@ export class UserService {
 
   handleUserFollow(data: any) {
     return this.http.post([ENDPOINT.friends.follow], data)
-  }
+  };  
 
+  updateProfileUser(data: any) {
+    return this.http.put([`${ENDPOINT.users.index}/me`], data)
+  };
 };
