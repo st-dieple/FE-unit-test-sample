@@ -24,7 +24,14 @@ export const Post = ({ post }: IPostProps) => {
       <article className="post">
         <div className="post-header">
           <div className="post-user">
-            <Link to={`/profile/${post.userId}`} className="post-user-info">
+            <Link
+              to={
+                checkUserId(post.user?.id)
+                  ? `/profile/me`
+                  : `/profile/${post.user?.id}`
+              }
+              className="post-user-info"
+            >
               <div className="post-user-image">
                 <img
                   src={post.user.picture || Image.Avatar}

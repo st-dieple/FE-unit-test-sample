@@ -19,6 +19,10 @@ const postRoutes: PageRoute[] = [
         element: PostDetail,
       },
       {
+        path: 'me',
+        element: PostDetail,
+      },
+      {
         path: 'new',
         element: New,
         isProtected: true,
