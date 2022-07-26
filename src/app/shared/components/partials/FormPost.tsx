@@ -17,7 +17,7 @@ const signaturesService = new SignaturesService();
 const FormPost = () => {
   const [ selectedImage, setSelectedImage ] = useState<string>(COVER_POST_IMAGE);
   const [ checkSuccess, setCheckSuccess ] = useState<boolean>(false);
-  const [ tags, setTags ] = useState<string[]>([]);
+  const [ tags, setTags ] = useState<string[]>(['React']);
   const [ toast, setToast ] = useState<any>({ hasLoading: false, type: '', title: '' });
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -43,8 +43,9 @@ const FormPost = () => {
   useEffect(() => {
     if(id) {
       dispatch(getPostById({ id }));
-    };
+    }
   }, [id]);
+  
 
   useEffect(() => {
     if(id) {
@@ -60,14 +61,17 @@ const FormPost = () => {
 
   useEffect(() => {
     let myTimeout: any;
+    let path: any;
     if((posts.createData && checkSuccess) || (posts.updateData && checkSuccess)) {
       if(id) {
         setToast({ hasLoading: true, type: 'success', title: 'Update post successfully.' });
+        path = `/posts/${posts.updateData.id}`;
       } else {
         setToast({ hasLoading: true, type: 'success', title: 'Create post successfully.' });
+        path = `/posts/${posts.createData.id}`;
       }
       myTimeout = setTimeout(() => { 
-        navigate('/'); 
+        navigate(path); 
       }, 500);
     };
     return () => {
@@ -159,7 +163,7 @@ const FormPost = () => {
               id="title"
               className="form-post-input"
             />
-            {errors.title && <span>Title of post min 20 characters.</span>}
+            {errors.title && <span>Title should be at least 20 characters.</span>}
           </div>
           <div
             className={
@@ -175,7 +179,7 @@ const FormPost = () => {
               className="form-post-input"
               rows={3}
             />
-            {errors.title && <span>Description of post min 50 characters.</span>}
+            {errors.title && <span>Description should be at least 50 characters.</span>}
           </div>
           <div
             className={
@@ -209,11 +213,11 @@ const FormPost = () => {
                 />
               )}
             />
-            {errors.content && <span>Content of post min 100 characters.</span>}
+            {errors.content && <span>Content should be at least 100 characters.</span>}
           </div>
           <div className="form-post-item">
             <label htmlFor="tags">Tags</label>
-            <TagsInput value={data.tags || [] } onChange={setTags} name='tags' placeHolder='Enter tags'/>
+            <TagsInput value={data?.tags || tags} onChange={setTags} name='tags' placeHolder='Enter tags'/>
           </div>      
           <div className="form-post-footer">
             <input
