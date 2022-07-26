@@ -68,7 +68,7 @@ const UserPostItem = ({ post }: any) => {
             {post.tags && (
               <ul className="post-tags">
                 {post.tags.map((tag: any) => {
-                  return <Tag key={tag} name={tag} path={`/posts?tags=${tag}`} />;
+                  return <Tag key={tag} name={tag} />;
                 })}
               </ul>
             )}

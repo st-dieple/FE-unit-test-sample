@@ -86,7 +86,7 @@ export const Post = ({ post }: IPostProps) => {
               {post.tags && (
                 <ul className="post-tags">
                   {post.tags.slice(-3).map((tag: any) => {
-                    return <Tag key={tag} name={tag} path={`/posts?tags=${tag}`} />;
+                    return <Tag key={tag} name={tag} />;
                   })}
                 </ul>
               )}
