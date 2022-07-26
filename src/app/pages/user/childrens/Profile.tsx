@@ -6,7 +6,6 @@ import { getUserPosts } from '../user.actions';
 import { getAuthorsInfo } from '../../posts/posts.actions';
 import UserPosts from '../partials/UserPosts';
 import UserInfo from '../partials/UserInfo';
-import Loading from '../../../shared/components/partials/Loading';
 import SekeletonPost from '../../../shared/components/partials/SekeletonPost';
 import SekeletonUserInfo from '../../../shared/components/partials/SekeletonUserInfo';
 

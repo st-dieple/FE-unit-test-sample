@@ -6,7 +6,7 @@ const SekeletonPostContent = () => {
       <div className="article-header">
         <div className="article-header-left">
           <div className="author-image">
-            <img className="sekeleton sekeleton-detail-image"></img>
+            <img className="sekeleton sekeleton-detail-image" alt=""></img>
           </div>
           <div className="article-author">
             <div className="sekeleton sekeleton-detail-name"></div>
@@ -15,8 +15,8 @@ const SekeletonPostContent = () => {
         </div>
       </div>
       <div className="article-content">
-        <h2 className="sekeleton sekeleton-detail-title"></h2>
-        <img className="sekeleton sekeleton-detail-content-image" />
+        <div className="sekeleton sekeleton-detail-title"></div>
+        <div className="sekeleton sekeleton-detail-content-image"></div>
         <div className="sekeleton sekeleton-detail-text"></div>
         <div className="sekeleton sekeleton-detail-text"></div>
         <div className="sekeleton sekeleton-detail-text"></div>

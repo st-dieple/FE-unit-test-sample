@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
-import { getPostById, resetPostDetailData } from '../posts.actions';
+import { getPostById } from '../posts.actions';
 import PostContent from '../partials/PostContent';
 import PostComment from '../partials/PostComment';
 import PostSideBar from '../partials/PostSideBar';

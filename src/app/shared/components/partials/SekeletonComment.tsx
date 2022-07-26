@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const SekeletonComment = () => {
-  const [sekeletonComment, setSekeletonComment] = useState(
+  const [sekeletonComment] = useState(
     Array.from({ length: 5 })
   );
   return (

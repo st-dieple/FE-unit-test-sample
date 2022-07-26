@@ -5,8 +5,7 @@ import { RootState } from '../../../app.reducers';
 import {
   getAuthorsInfo,
   getAuthorsInfoSuccess,
-  getPostsRecommend,
-  resetPostDetailData,
+  getPostsRecommend
 } from '../posts.actions';
 import { UserService } from '../../../core/serivces/user.service';
 import RecommendList from './RecommendList';

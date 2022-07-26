@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const SekeletonPost = () => {
-  const [sekeletonPost, setSekeletonPost] = useState(Array.from({ length: 5 }));
+  const [sekeletonPost] = useState(Array.from({ length: 5 }));
   return (
     <>
       {sekeletonPost.map((item, index) => (
@@ -13,7 +13,7 @@ const SekeletonPost = () => {
             <div className="post-body">
               <div className="post-body-left">
                 <div className="post-content">
-                  <h3 className="sekeleton sekeleton-title"></h3>
+                  <div className="sekeleton sekeleton-title"></div>
                   <p className="sekeleton sekeleton-desc"></p>
                 </div>
                 <div className="post-footer">

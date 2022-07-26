@@ -4,7 +4,6 @@ import { useSearchParams } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
 import { getPosts, getPublicPosts } from './../posts.actions';
 import PostList from './PostList';
-import Loading from '../../../shared/components/partials/Loading';
 import SekeletonPost from '../../../shared/components/partials/SekeletonPost';
 
 const SectionPost = () => {
