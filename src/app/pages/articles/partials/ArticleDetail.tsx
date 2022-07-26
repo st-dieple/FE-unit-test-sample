@@ -131,17 +131,17 @@ const ArticleDetail = ({ likes }: any) => {
         <div className="article-text">{convertHtml(data.content)}</div>
         <div className="article-interact">
           <div className="interact-like">
-            {liked}
             <i
               className={
-                color ? "fa-solid fa-heart fa-liked" : "fa-regular fa-heart"
+                color ? "fa-solid fa-thumbs-up fa-liked" : "fa-regular fa-thumbs-up"
               }
               onClick={handleLike}
-            ></i>
+              ></i>
+              {liked}
           </div>
           <div className="interact-comment">
-            {comments.length}
             <i className="fa-regular fa-comment"></i>
+            {comments.length}
           </div>
         </div>
       </div>

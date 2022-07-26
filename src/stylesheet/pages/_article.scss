@@ -91,12 +91,27 @@
 
   .interact {
     &-like {
-      @include pxRem(margin-right, 6);
+      @include pxRem(margin-right, 12);
       font-weight: 600;
+      .fa {
+        &-thumbs-up {
+          @include pxRem(margin-right, 8);
+          cursor: pointer;
+        }
+        &-liked {
+          color: map-get($color, primary);
+          @include pxRem(margin-right, 8);
+        }
+      }
     }
 
     &-comment {
       font-weight: 600;
+      .fa {
+        &-comment {
+          @include pxRem(margin-right, 8);
+        }
+      }
     }
   }
 
