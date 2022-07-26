@@ -6,6 +6,7 @@ import { signUp } from './../auth.actions';
 import { RootState } from '../../app.reducers';
 import { Button, Input } from '../../shared/components/partials';
 import Image from '../../../assets/images';
+import { validateDob } from '../../shared/common/validateDob';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -39,40 +40,12 @@ const Register = () => {
     // eslint-disable-next-line
   }, [data]);
 
-  const validateDob = (time: string) => {
-    // eslint-disable-next-line
-    const regex = new RegExp(/^([0-9]{4})\-([0-9]{2})\-([0-9]{2})$/);
-    if (regex.test(time)) {
-      const parts = time.split('-');
-      const date = new Date();
-      
-      if (date.getFullYear() < +parts[0]) {
-        return 'invalid';
-      }
-      if(date.getFullYear() === +parts[0]){
-        if (date.getMonth() + 1 < +parts[1]) {
-          return 'invalid';
-        }
-        if(date.getMonth() + 1 === +parts[1]) {
-          if (date.getDate() < +parts[2]) {
-            return 'invalid';
-          }
-        }
-      }
-    } else {
-      return 'invalid';
-    }
-    return true;
-  }; 
-
   return (
-    <div className="form-auth row">
-      <div className="col-5">
-        <Link to="/" className="form-image">
-          <img className="form-image-logo" src={Image.Logo} alt="Lotus" />
-          <img src={Image.LogoAuth} alt="Sign In Lotus" />
-        </Link>
-      </div>
+    <div className="page-content row">
+      <Link to="/" className="page-link page-link-signup col-5">
+        <img src={Image.Logo} alt="Lotus" />
+        <img src={Image.LogoAuth} alt="Sign In Lotus" />
+      </Link>
       <form className="form col-7" onSubmit={handleSubmit(onSubmit)}>
         <h1 className="form-title">Sign Up Your Account</h1>
         <div className="form-wrapper">
@@ -151,7 +124,7 @@ const Register = () => {
             isError={errors.dob ? true : false}
             errorsMsg={`Date of birth is ${errors.dob && errors.dob.message}.`}
           />
-          <div className="form-group">
+          <div className="form-group input-group">
             <select
               className="form-control form-gender"
               {...register("gender", { required: true })}

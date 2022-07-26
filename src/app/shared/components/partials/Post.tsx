@@ -66,13 +66,36 @@ export const Post = ({ post }: IPostProps) => {
           )}
         </div>
         <div className="post-body">
-          <div className="post-content">
-            <h3 className="post-title">
-              <Link to={`/posts/${post.id}`} className="post-title-link">
-                {post.title}
-              </Link>
-            </h3>
-            <p className="post-desc">{post.description}</p>
+          <div className="post-body-left">
+            <div className="post-content">
+              <h3 className="post-title">
+                <Link to={`/posts/${post.id}`} className="post-title-link">
+                  {post.title}
+                </Link>
+              </h3>
+              <p className="post-desc">{post.description}</p>
+            </div>
+            <div className="post-footer">
+              <div className="post-meta">
+                <div className="post-meta-info post-like">
+                  <i className="fa-regular fa-thumbs-up"></i>
+                  <span className="post-like-number">{post.likes || 0}</span>
+                </div>
+                <div className="post-meta-info post-comment">
+                  <i className="fa-regular fa-comment"></i>
+                  <span className="post-comment-number">
+                    {post.comments || 0}
+                  </span>
+                </div>
+              </div>
+              {post.tags && (
+                <ul className="post-tags">
+                  {post.tags.slice(-3).map((tag: any) => {
+                    return <Tag key={tag} name={tag} path="/" />;
+                  })}
+                </ul>
+              )}
+            </div>
           </div>
           <div className="post-image">
             <Link to={`/posts/${post.id}`} className="post-image-link">

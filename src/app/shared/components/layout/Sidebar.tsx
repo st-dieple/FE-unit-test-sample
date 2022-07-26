@@ -14,7 +14,7 @@ export const Sidebar = () => {
   const postsRecommend = useSelector((state: RootState) => state.postsRecommend);
 
   useEffect(() => {
-    dispatch(getPostsRecommend({page: 2, size: 3}));
+    dispatch(getPostsRecommend({page: 1, size: 3}));
     // eslint-disable-next-line 
   }, []);
   
