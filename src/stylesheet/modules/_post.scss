@@ -79,7 +79,6 @@
   }
   &-desc {
     @include ellipsis-special(3);
-    @include pxRem(margin-top, 16);
     @include pxRem(line-height, 20);
     @include pxRem(min-height, 60);
     font-weight: 400;
