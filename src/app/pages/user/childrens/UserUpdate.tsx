@@ -5,8 +5,8 @@ import TabNav from '../../../shared/components/partials/TabNav';
 import { getData } from '../../../core/helpers/localstorage';
 import { parseJwt } from '../../../core/helpers/parseJwt';
 import { getUserInfo } from '../user.actions';
-import UserUpdatePassword from './UserUpdatePassword';
-import UserUpdateProfile from './UserUpdateProfile';
+import UserUpdatePassword from '../partials/UserUpdatePassword';
+import UserUpdateProfile from '../partials/UserUpdateProfile';
 
 const UserUpdate = () => {
   const dispatch = useDispatch();
