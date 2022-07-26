@@ -146,6 +146,7 @@ const UserUpdateProfile = () => {
             textLabel="User Name"
             register={register("displayName", {
               required: true,
+              pattern: /[A-Za-z0-9_'-]/,
               maxLength: 20,
             })}
             isError={errors.displayName ? true : false}
