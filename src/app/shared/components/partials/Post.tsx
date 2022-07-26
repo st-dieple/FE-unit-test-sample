@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { deletePost } from '../../../pages/home/home.actions';
+import { deletePost } from '../../../pages/posts/posts.actions';
 import { Tag } from './Tag';
 import { formatDate } from './../../common/formatDate';
 import { checkUserId } from '../../common/checkUserId';
@@ -24,7 +24,14 @@ export const Post = ({ post }: IPostProps) => {
       <article className="post">
         <div className="post-header">
           <div className="post-user">
-            <Link to={`/profile/${post.userId}`} className="post-user-info">
+            <Link
+              to={
+                checkUserId(post.user?.id)
+                  ? `/profile/me`
+                  : `/profile/${post.user?.id}`
+              }
+              className="post-user-info"
+            >
               <div className="post-user-image">
                 <img
                   src={post.user.picture || Image.Avatar}

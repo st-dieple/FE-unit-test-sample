@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { UserService } from '../../../core/serivces/user.service';
 import { RootState } from '../../../app.reducers';
 import { useDialog } from '../../../shared/contexts/dialog.contexts';
-import { getAuthorsInfo } from '../../articles/article.actions';
+import {
+  getAuthorsInfoSuccess,
+} from '../../posts/posts.actions';
+import UserListFollow from './UserListFollow';
 import { Button } from '../../../shared/components/partials';
 import { IUser } from '../../../shared/interfaces/user';
-import UserListFollow from './UserListFollow';
 import Image from '../../../../assets/images';
 
 interface IUserProps {
@@ -32,7 +34,7 @@ const UserInfo = ({ userInfo }: IUserProps) => {
           } else {
             authorsInfo.followers = authorsInfo.followers - 1;
           }
-          dispatch(getAuthorsInfo(authorsInfo));
+          dispatch(getAuthorsInfoSuccess(authorsInfo));
         })
         .catch((error) => {
           setIsRequestingAPI(false);
@@ -59,15 +61,15 @@ const UserInfo = ({ userInfo }: IUserProps) => {
           src={userInfo.picture || Image.Avatar}
           alt={userInfo.displayName}
           onError={(e: any) => {
-            e.target["onerror"] = null;
-            e.target["src"] = Image.Avatar;
+            e.target['onerror'] = null;
+            e.target['src'] = Image.Avatar;
           }}
         />
       </div>
       <div className="author-info">
         <h2 className="author-name">{userInfo.displayName}</h2>
         <ul className="author-list">
-          <li className="author-item">{userInfo.Posts.length || 0} Posts</li>
+          <li className="author-item">{userInfo.Posts?.length || 0} Posts</li>
           <li className="author-item" onClick={handleListFollowers}>
             {authorsInfo.followers} Followers
           </li>
@@ -77,7 +79,7 @@ const UserInfo = ({ userInfo }: IUserProps) => {
         </ul>
         <Button
           classBtn="btn btn-primary btn-follow"
-          text={authorsInfo.isFollowed ? "Following" : "Follow"}
+          text={authorsInfo.isFollowed ? 'Following' : 'Follow'}
           onClick={() => handleFollow(userInfo.id)}
         />
       </div>

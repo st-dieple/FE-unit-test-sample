@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { checkUserId } from '../../common/checkUserId';
 import Image from '../../../../assets/images';
 
 interface IFollowerProps {
@@ -11,19 +12,33 @@ const Follower = ({ follower }: IFollowerProps) => {
     <li className="follower">
       <div className="follower-item">
         <div className="follower-image">
-          <Link to={`/profile/${follower?.id}`} className="follower-image-link">
+          <Link
+            to={
+              checkUserId(follower?.id)
+                ? `/profile/me`
+                : `/profile/${follower?.id}`
+            }
+            className="follower-image-link"
+          >
             <img
               src={follower?.picture || Image.Avatar}
               alt={follower?.displayName}
               onError={(e: any) => {
-                e.target["onerror"] = null;
-                e.target["src"] = Image.Avatar;
+                e.target['onerror'] = null;
+                e.target['src'] = Image.Avatar;
               }}
             />
           </Link>
         </div>
         <div className="follower-info">
-          <Link to={`/profile/${follower?.id}`} className="follower-username">
+          <Link
+            to={
+              checkUserId(follower?.id)
+                ? `/profile/me`
+                : `/profile/${follower?.id}`
+            }
+            className="follower-username"
+          >
             <span>{follower?.displayName}</span>
           </Link>
           <p className="follower-name">

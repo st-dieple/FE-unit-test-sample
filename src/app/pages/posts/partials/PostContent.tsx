@@ -2,21 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../app.reducers';
-import { putLike } from '../article.actions';
-import { deletePost } from '../../home/home.actions';
-import InteractComment from './InteractComment';
+import { putLike } from '../../posts/posts.actions';
+import { deletePost } from '../../posts/posts.actions';
+import FormComment from './FormComment';
 import { formatDate } from '../../../shared/common/formatDate';
 import { convertHtml } from './../../../shared/common/convertHtml';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import { Tag } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
 
-const ArticleDetail = ({ likes }: any) => {
+const PostContent = ({ likes }: any) => {
   const [liked, setLiked] = useState<number>(likes.length);
   const [color, setColor] = useState(false);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { data } = useSelector((state: RootState) => state.articles);
+  const { data } = useSelector((state: RootState) => state.postDetail);
   const navigate = useNavigate();
   const dataLike = useSelector((state: RootState) => state.likes);
   const comments = useSelector((state: RootState) => state.comments.data);
@@ -44,7 +44,7 @@ const ArticleDetail = ({ likes }: any) => {
 
   const handleDelete = (id: string) => {
     dispatch(deletePost({ id: id }));
-    navigate("/");
+    navigate('/');
   };
 
   return (
@@ -54,17 +54,17 @@ const ArticleDetail = ({ likes }: any) => {
           <div className="author-image">
             <Link
               to={
-                checkUserId(data.user.id)
+                checkUserId(data.user?.id)
                   ? `/profile/me`
-                  : `/profile/${data.user.id}`
+                  : `/profile/${data.user?.id}`
               }
             >
               <img
-                src={data.user.picture || Image.Avatar}
-                alt={data.user.displayName}
+                src={data.user?.picture || Image.Avatar}
+                alt={data.user?.displayName}
                 onError={(e: any) => {
-                  e.target["onerror"] = null;
-                  e.target["src"] = Image.Avatar;
+                  e.target['onerror'] = null;
+                  e.target['src'] = Image.Avatar;
                 }}
               />
             </Link>
@@ -73,12 +73,12 @@ const ArticleDetail = ({ likes }: any) => {
             <div className="author-name">
               <Link
                 to={
-                  checkUserId(data.user.id)
+                  checkUserId(data.user?.id)
                     ? `/profile/me`
-                    : `/profile/${data.user.id}`
+                    : `/profile/${data.user?.id}`
                 }
               >
-                {data.user.displayName}
+                {data.user?.displayName}
               </Link>
             </div>
             <div className="author-time">
@@ -88,7 +88,7 @@ const ArticleDetail = ({ likes }: any) => {
             </div>
           </div>
         </div>
-        {checkUserId(data.user.id) && (
+        {checkUserId(data.user?.id) && (
           <div className="post-control">
             <i className="fa-solid fa-ellipsis"></i>
             <ul className="post-control-list">
@@ -116,7 +116,7 @@ const ArticleDetail = ({ likes }: any) => {
       </div>
       <div className="article-content">
         <h2 className="article-title">{data.title}</h2>
-        {data.tags.length ? (
+        {data.tags?.length ? (
           <ul className="tag-article">
             {data.tags.map((tag: any) => (
               <Tag key={tag} name={tag} />
@@ -133,11 +133,13 @@ const ArticleDetail = ({ likes }: any) => {
           <div className="interact-like">
             <i
               className={
-                color ? "fa-solid fa-thumbs-up fa-liked" : "fa-regular fa-thumbs-up"
+                color
+                  ? 'fa-solid fa-thumbs-up fa-liked'
+                  : 'fa-regular fa-thumbs-up'
               }
               onClick={handleLike}
-              ></i>
-              {liked}
+            ></i>
+            {liked}
           </div>
           <div className="interact-comment">
             <i className="fa-regular fa-comment"></i>
@@ -145,9 +147,9 @@ const ArticleDetail = ({ likes }: any) => {
           </div>
         </div>
       </div>
-      <InteractComment />
+      <FormComment />
     </div>
   );
 };
 
-export default ArticleDetail;
+export default PostContent;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deletePost } from '../../home/home.actions';
+import { deletePost } from '../../posts/posts.actions';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import { Link } from 'react-router-dom';
 import Image from '../../../../assets/images';
@@ -18,7 +18,7 @@ const UserPostItem = ({ post }: any) => {
       <article className="post post-info">
         <div className="post-header">
           <div className="post-user">
-            {post.status === "public" ? (
+            {post.status === 'public' ? (
               <div className="post-status">
                 <i className="fa-solid fa-unlock"></i>
                 Public
@@ -81,8 +81,8 @@ const UserPostItem = ({ post }: any) => {
                 src={post.cover || Image.Empty}
                 alt={post.title}
                 onError={(e: any) => {
-                  e.target["onerror"] = null;
-                  e.target["src"] = Image.Empty;
+                  e.target['onerror'] = null;
+                  e.target['src'] = Image.Empty;
                 }}
               />
             </Link>

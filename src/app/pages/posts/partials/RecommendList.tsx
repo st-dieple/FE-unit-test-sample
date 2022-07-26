@@ -1,19 +1,19 @@
 import React from 'react';
 import { IPost } from './../../../shared/interfaces/post';
-import ArticleItem from './ArticleItem';
+import RecommendItem from './RecommendItem';
 
 interface IArticleListProps {
   data: any;
 }
 
-const ArticleList = ({ data }: IArticleListProps) => {  
+const RecommendList = ({ data }: IArticleListProps) => {
   return (
     <ul className="article-list">
       {data.map((item: IPost) => (
-        <ArticleItem key={item.id} item={item} />
+        <RecommendItem key={item.id} item={item} />
       ))}
     </ul>
   );
 };
 
-export default ArticleList;
+export default RecommendList;

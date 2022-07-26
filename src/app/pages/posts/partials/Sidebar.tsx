@@ -3,27 +3,29 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
-import { getPostsRecommend } from '../../../pages/articles/article.actions';
-import ArticleList from '../../../pages/articles/partials/ArticleList';
-import { Tag } from '../partials';
-import Loading from '../partials/Loading';
-import Icon from './../../../../assets/icons/index';
+import { getPostsRecommend } from '../posts.actions';
+import RecommendList from './RecommendList';
+import { Tag } from '../../../shared/components/partials';
+import Loading from '../../../shared/components/partials/Loading';
+import Icon from '../../../../assets/icons/index';
 
 export const Sidebar = () => {
   const dispatch = useDispatch();
-  const postsRecommend = useSelector((state: RootState) => state.postsRecommend);
+  const postsRecommend = useSelector(
+    (state: RootState) => state.postsRecommend
+  );
 
   useEffect(() => {
-    dispatch(getPostsRecommend({page: 1, size: 3}));
-    // eslint-disable-next-line 
+    dispatch(getPostsRecommend({ page: 1, size: 3 }));
+    // eslint-disable-next-line
   }, []);
-  
-  return (postsRecommend.isLoading) ? <Loading/> :(
+
+  return postsRecommend.isLoading ? (
+    <Loading />
+  ) : (
     <aside className="sidebar">
       <div className="section-tag">
-        <h3 className="sidebar-title">
-          DISCOVER MORE OF WHAT MATTERS TO YOU
-        </h3>
+        <h3 className="sidebar-title">DISCOVER MORE OF WHAT MATTERS TO YOU</h3>
         <ul className="tag-list">
           <Tag name="React" />
           <Tag name="CSS" />
@@ -35,12 +37,10 @@ export const Sidebar = () => {
       </div>
       <div className="article-recommend sidebar-more">
         <h3 className="recommend-title">MORE FROM LOTUS</h3>
-        <ArticleList data={postsRecommend.data} />
+        <RecommendList data={postsRecommend.data} />
       </div>
       <div className="section-social">
-        <h3 className="sidebar-title">
-          SOCIAL MEDIA
-        </h3>
+        <h3 className="sidebar-title">SOCIAL MEDIA</h3>
         <ul className="social-list">
           <li className="social-item">
             <Link className="social-link" to="/">
