@@ -8,7 +8,10 @@ export class UserService {
   constructor () {}
 
   handleUserFollow(data: any) {
-    return this.http.post([ENDPOINT.friends.follow], data)
+    return this.http.post([ENDPOINT.friends.follow], data);
   }
-
+  
+  getListFollow(data: any) {
+    return this.http.get([`${ENDPOINT.friends.index}/${data.id}/${data.type}`]);
+  }
 };
