@@ -17,7 +17,7 @@ const signaturesService = new SignaturesService();
 const FormPost = () => {
   const [ selectedImage, setSelectedImage ] = useState<string>(COVER_POST_IMAGE);
   const [ checkSuccess, setCheckSuccess ] = useState<boolean>(false);
-  const [ tags, setTags ] = useState<string[]>(['React']);
+  const [ tags, setTags ] = useState<string[]>();
   const [ toast, setToast ] = useState<any>({ hasLoading: false, type: '', title: '' });
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -83,7 +83,7 @@ const FormPost = () => {
   const onSubmitForm = (data: any) => {
     const dataPost = {...data};
     dataPost.status = data.status ? 'private' : 'public';
-    if(tags.length) {
+    if(tags?.length) {
       dataPost.tags = tags;
     }
     if(id) {
@@ -217,7 +217,7 @@ const FormPost = () => {
           </div>
           <div className="form-post-item">
             <label htmlFor="tags">Tags</label>
-            <TagsInput value={data?.tags || tags} onChange={setTags} name='tags' placeHolder='Enter tags'/>
+            <TagsInput value={data.tags || []} onChange={setTags} name='tags' placeHolder='Enter tags'/>
           </div>      
           <div className="form-post-footer">
             <input
