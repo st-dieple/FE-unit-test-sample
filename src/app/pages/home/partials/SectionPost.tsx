@@ -11,6 +11,8 @@ const SectionPost = () => {
   const [page, setPage] = useState(1);
   const posts = useSelector((state: RootState) => state.posts);
   const userCurrent = useSelector((state: RootState) => state.users);
+  
+  // eslint-disable-next-line
   const [ searchParams, setSearchParams ] = useSearchParams({});
   const paramsTag = searchParams.get('tags');  
     
