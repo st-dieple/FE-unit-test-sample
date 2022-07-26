@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import TabContent from '../../../shared/components/partials/TabContent';
-import TabNav from '../../../shared/components/partials/TabNav';
+import { getUserInfo } from '../user.actions';
 import { getData } from '../../../core/helpers/localstorage';
 import { parseJwt } from '../../../core/helpers/parseJwt';
-import { getUserInfo } from '../user.actions';
 import UserUpdatePassword from '../partials/UserUpdatePassword';
 import UserUpdateProfile from '../partials/UserUpdateProfile';
+import TabNav from '../../../shared/components/partials/TabNav';
+import TabContent from '../../../shared/components/partials/TabContent';
 
-const UserUpdate = () => {
+const Update = () => {
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState<string>('update-profile');
 
@@ -67,4 +67,4 @@ const UserUpdate = () => {
   );
 };
 
-export default UserUpdate;
+export default Update;
