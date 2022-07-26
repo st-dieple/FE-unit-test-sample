@@ -77,6 +77,7 @@ export const loginReducer = (state: IStateData = IInitLoginProps, action: IActio
         ...state,
         isLoading: false,
         data: '',
+        error: ''
       };
     default:
       return state;

@@ -13,6 +13,8 @@ import {
   getLikeError,
   putLikeSuccess,
   putLikeError,
+  getAuthorsInfoSuccess,
+  getAuthorsInfoError,
 } from './article.actions';
 import { environment, ENDPOINT } from '../../../config';
 import * as TYPES from '../../shared/constants/types';
@@ -115,6 +117,24 @@ export function* getLike({ payload }: any) {
   }
 };
 
+export function* getAuthorsInfo ({payload}: any) {
+  const tokẹn = getData('token', '');
+  let config: any;
+  if (tokẹn) {
+    config = {
+      headers: {
+        Authorization: `Bearer ${tokẹn}`,
+      },
+    }
+  } 
+  try {
+    const res: AxiosResponse<any> = yield axios.get(`${environment.apiBaseUrl}${ENDPOINT.users.index}/${payload.id}`, config)
+    yield put(getAuthorsInfoSuccess(res.data));
+  } catch (error) {
+    yield put(getAuthorsInfoError(error));
+  }
+};
+
 export function* watchArticles() {
   yield all([
     takeLatest(TYPES.GET_POST_BY_ID, getPostById),
@@ -123,5 +143,6 @@ export function* watchArticles() {
     takeLatest(TYPES.POST_COMMENT, postComment),
     takeLatest(TYPES.GET_LIKE, getLike),
     takeLatest(TYPES.PUT_LIKE, putLike),
+    takeLatest(TYPES.GET_AUTHOR_INFO, getAuthorsInfo)
   ]);
 };
