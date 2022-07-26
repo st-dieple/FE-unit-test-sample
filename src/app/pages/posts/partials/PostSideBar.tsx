@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app.reducers';
-import { getAuthorsInfo, getAuthorsInfoSuccess } from '../posts.actions';
+import {getAuthorsInfoSuccess } from '../posts.actions';
 import { UserService } from '../../../core/serivces/user.service';
 import RecommendList from './RecommendList';
 import { checkUserId } from '../../../shared/common/checkUserId';

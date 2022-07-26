@@ -4,7 +4,6 @@ import { UserService } from '../../../core/serivces/user.service';
 import { RootState } from '../../../app.reducers';
 import { useDialog } from '../../../shared/contexts/dialog.contexts';
 import {
-  getAuthorsInfo,
   getAuthorsInfoSuccess,
 } from '../../posts/posts.actions';
 import UserListFollow from './UserListFollow';
