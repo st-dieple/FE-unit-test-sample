@@ -44,6 +44,12 @@
     margin-right: 32px;
     &:last-child {
       margin-right: 0;
+      .dropdown-menu {
+        display: none;
+      }
+      &:hover .dropdown-menu{
+        display: block;
+      }
     }
   }
 
@@ -84,12 +90,12 @@
     @include pxRem(border-radius, 5);
     @include box-shadow(rgba(99, 99, 99, 0.2) 0px 2px 8px 0px);
     background-color: map-get($color, white);
+    border: 1px solid map-get($color, text) ;
   }
 
   &-item {
     border-bottom: 1px solid map-get($color, text);
-    @include pxRem(padding, 10 12);
-    text-align: center;
+    @include pxRem(padding, 10 22);
     &:last-child {
       border-bottom: 0;
     }
@@ -104,7 +110,7 @@
     }
 
     i {
-      @include pxRem(margin-left, 12);
+      @include pxRem(margin-right, 12);
     }
   }
 }
