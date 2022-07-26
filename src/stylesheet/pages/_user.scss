@@ -16,11 +16,12 @@
   }
 
   &-avatar {
-    @include pxRem(max-width, 100);
     @include pxRem(margin-right, 30);
     img {
-      width: 100%;
+      @include pxRem(width, 100);
+      @include pxRem(height, 100);
       border-radius: 100%;
+      object-fit: cover;
     }
   }
 
@@ -37,6 +38,12 @@
 
 .update {
   &-user {
+    &-title {
+      @include pxRem(font-size, 32);
+      @include pxRem(margin-bottom, 24);
+    }
+  }
+  &-pass {
     &-title {
       @include pxRem(font-size, 32);
       @include pxRem(margin-bottom, 24);
