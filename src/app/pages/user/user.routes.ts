@@ -1,16 +1,23 @@
 import { PageRoute } from '../../core/modules/custom-router-dom/router.interface';
-import UserUpdate from './partials/UserUpdate';
+import Profile from './childrens/Profile';
+import Update from './childrens/Update';
 import User from './User';
 
 const userRoutes: PageRoute[] = [
   {
-    path: '/profile/:id',
-    element: User
-  },
-  {
-    path: '/profile/update',
-    element: UserUpdate,
-    isProtected: true
+    path: '/profile',
+    element: User,
+    children: [
+      {
+        path: ':id',
+        element: Profile
+      },
+      {
+        path: 'update',
+        element: Update,
+        isProtected: true
+      }
+    ]
   }
 ];
 
