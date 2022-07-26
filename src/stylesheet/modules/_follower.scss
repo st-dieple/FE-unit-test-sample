@@ -5,6 +5,7 @@
   }
   &-title {
     @include pxRem(margin-bottom, 12);
+    text-transform: capitalize;
   }
   &-list {
     @include flexbox;
@@ -12,7 +13,6 @@
     @include pxRem(width, 400);
     @include pxRem(padding-top, 20);
     @include pxRem(max-height, 300);
-    overflow-y: hidden;
     overflow-y: scroll;
   }
   &-item {

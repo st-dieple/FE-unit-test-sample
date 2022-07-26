@@ -6,9 +6,8 @@ import { useDialog } from '../../../shared/contexts/dialog.contexts';
 import { getAuthorsInfo } from '../../articles/article.actions';
 import { Button } from '../../../shared/components/partials';
 import { IUser } from '../../../shared/interfaces/user';
+import UserListFollow from './UserListFollow';
 import Image from '../../../../assets/images';
-import UserListFollowers from './UserListFollowers';
-import UserListFollowing from './UserListFollowing';
 
 interface IUserProps {
   userInfo: IUser;
@@ -42,12 +41,16 @@ const UserInfo = ({ userInfo }: IUserProps) => {
   };
 
   const handleListFollowers = () => {
-    dialog?.addDialog({ content: <UserListFollowers /> });
-  }
+    dialog?.addDialog({
+      content: <UserListFollow id={userInfo.id} type="followers" />,
+    });
+  };
 
   const handleListFollowing = () => {
-    dialog?.addDialog({ content: <UserListFollowing /> });
-  }
+    dialog?.addDialog({
+      content: <UserListFollow id={userInfo.id} type="followings" />,
+    });
+  };
 
   return (
     <div className="author-info-content">
@@ -55,14 +58,22 @@ const UserInfo = ({ userInfo }: IUserProps) => {
         <img
           src={userInfo.picture || Image.Avatar}
           alt={userInfo.displayName}
+          onError={(e: any) => {
+            e.target["onerror"] = null;
+            e.target["src"] = Image.Avatar;
+          }}
         />
       </div>
       <div className="author-info">
         <h2 className="author-name">{userInfo.displayName}</h2>
         <ul className="author-list">
           <li className="author-item">{userInfo.Posts.length || 0} Posts</li>
-          <li className="author-item" onClick={handleListFollowers}>{authorsInfo.followers} Followers</li>
-          <li className="author-item" onClick={handleListFollowing}>{userInfo.followings} Following</li>
+          <li className="author-item" onClick={handleListFollowers}>
+            {authorsInfo.followers} Followers
+          </li>
+          <li className="author-item" onClick={handleListFollowing}>
+            {userInfo.followings} Following
+          </li>
         </ul>
         <Button
           classBtn="btn btn-primary btn-follow"
