@@ -44,7 +44,10 @@ export const Post = ({ post }: IPostProps) => {
               <i className="fa-solid fa-ellipsis"></i>
               <ul className="post-control-list">
                 <li>
-                  <Link to={`/posts/${post.id}/edit`} className="post-control-item">
+                  <Link
+                    to={`/posts/${post.id}/edit`}
+                    className="post-control-item"
+                  >
                     <i className="fa-solid fa-pen"></i>
                     Edit
                   </Link>
@@ -63,13 +66,15 @@ export const Post = ({ post }: IPostProps) => {
           )}
         </div>
         <div className="post-body">
-          <div className="post-content">
-            <h3 className="post-title">
-              <Link to={`/posts/${post.id}`} className="post-title-link">
-                {post.title}
-              </Link>
-            </h3>
-            <p className="post-desc">{post.description}</p>
+          <div className="post-body-left">
+            <div className="post-content">
+              <h3 className="post-title">
+                <Link to={`/posts/${post.id}`} className="post-title-link">
+                  {post.title}
+                </Link>
+              </h3>
+              <p className="post-desc">{post.description}</p>
+            </div>
             <div className="post-footer">
               <div className="post-meta">
                 <div className="post-meta-info post-like">
@@ -86,7 +91,7 @@ export const Post = ({ post }: IPostProps) => {
               {post.tags && (
                 <ul className="post-tags">
                   {post.tags.slice(-3).map((tag: any) => {
-                    return <Tag key={tag} name={tag} path="/" />;
+                    return <Tag key={tag} name={tag} />;
                   })}
                 </ul>
               )}

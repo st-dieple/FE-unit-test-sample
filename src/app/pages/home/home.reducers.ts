@@ -31,7 +31,7 @@ export const postsReducer = (state: IStateData<IPost[]> = initialStatePosts, act
     case TYPES.GET_POSTS_SUCCESS:
       return {
         ...state,
-        data: [...state.data, ...action.payload.data],
+        data: action.payload.currentPage === 1 ? [...action.payload.data] : [...state.data, ...action.payload.data],
         isLoading: false,
         loadMore: action.payload.loadMore,
         error: ''
@@ -52,7 +52,7 @@ export const postsReducer = (state: IStateData<IPost[]> = initialStatePosts, act
     case TYPES.GET_PUBLIC_POSTS_SUCCESS:
       return {
         ...state,
-        data: [...state.data, ...action.payload.data],
+        data: action.payload.currentPage === 1 ? [...action.payload.data] : [...state.data, ...action.payload.data],
         isLoading: false,
         loadMore: action.payload.loadMore,
         error: ''

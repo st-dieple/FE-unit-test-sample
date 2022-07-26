@@ -5,16 +5,24 @@ export class ArticleService {
   http = new ApiService();
 
   // eslint-disable-next-line
-  constructor () {}
+  constructor() {}
 
   getPublicPosts(data: any) {
-    return this.http.get([`${ENDPOINT.posts.public}?page=${data.page}&size=${data.size}`]);
+    return this.http.get([
+      `${ENDPOINT.posts.public}?${
+        data.tags ? `tags=${data.tags}` : null
+      }&page=${data.page}&size=${data.size}`,
+    ]);
   };
 
   getPosts(data: any) {
-    return this.http.get([`${ENDPOINT.posts.index}?page=${data.page}&size=${data.size}`]);
+    return this.http.get([
+      `${ENDPOINT.posts.index}?${data.tags ? `tags=${data.tags}` : null}&page=${
+        data.page
+      }&size=${data.size}`,
+    ]);
   };
-  
+
   createArticle(data: any) {
     return this.http.post([ENDPOINT.posts.index], data);
   };
@@ -26,4 +34,4 @@ export class ArticleService {
   deleteArticle(id: string) {
     return this.http.delete([`${ENDPOINT.posts.index}/${id}`]);
   };
-};
+}
