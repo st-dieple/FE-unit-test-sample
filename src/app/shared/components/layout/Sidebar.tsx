@@ -25,12 +25,12 @@ export const Sidebar = () => {
           DISCOVER MORE OF WHAT MATTERS TO YOU
         </h3>
         <ul className="tag-list">
-          <Tag name="React" path="/" />
-          <Tag name="CSS" path="/" />
-          <Tag name="Framework" path="/" />
-          <Tag name="Entertainment" path="/" />
-          <Tag name="Travel" path="/" />
-          <Tag name="Video" path="/" />
+          <Tag name="React" />
+          <Tag name="CSS" />
+          <Tag name="Javascript" />
+          <Tag name="Entertainment" />
+          <Tag name="Travel" />
+          <Tag name="onChange" />
         </ul>
       </div>
       <div className="article-recommend sidebar-more">

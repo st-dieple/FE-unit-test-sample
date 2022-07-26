@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSearchParams } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
 import { getPosts, getPublicPosts } from './../home.actions';
 import PostList from './PostList';
@@ -10,14 +11,23 @@ const SectionPost = () => {
   const [page, setPage] = useState(1);
   const posts = useSelector((state: RootState) => state.posts);
   const userCurrent = useSelector((state: RootState) => state.users);
+  
+  // eslint-disable-next-line
+  const [ searchParams, setSearchParams ] = useSearchParams({});
+  const paramsTag = searchParams.get('tags');  
+    
+  useEffect(() => {
+    setPage(1);
+  }, [paramsTag]);
+
   useEffect(() => {
     if(userCurrent) {
-      dispatch(getPublicPosts({ page, size: 5 }));
-    }else {
-      dispatch(getPosts({ page, size: 5 }))
+      dispatch(getPublicPosts({ tags: paramsTag, page, size: 5 }));
+    } else {
+      dispatch(getPosts({ tags: paramsTag, page, size: 5 }));
     }
     // eslint-disable-next-line
-  }, [page]);
+  }, [page, paramsTag]);
 
   useEffect(() => {
     if(!posts.isLoading && posts.loadMore) {
