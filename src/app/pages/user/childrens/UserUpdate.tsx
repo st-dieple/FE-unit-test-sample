@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import TabContent from '../../../shared/components/partials/TabContent';
-import TabNav from './../../../shared/components/partials/TabNav';
+import TabNav from '../../../shared/components/partials/TabNav';
 import { getData } from '../../../core/helpers/localstorage';
 import { parseJwt } from '../../../core/helpers/parseJwt';
 import { getUserInfo } from '../user.actions';

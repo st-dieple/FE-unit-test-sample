@@ -1,5 +1,5 @@
 import { PageRoute } from '../../core/modules/custom-router-dom/router.interface';
-import UserUpdate from './partials/UserUpdate';
+import UserUpdate from './childrens/UserUpdate';
 import User from './User';
 
 const userRoutes: PageRoute[] = [
