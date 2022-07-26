@@ -11,9 +11,9 @@
     @include flex-direction(column);  
     @include pxRem(width, 400);
     @include pxRem(padding-top, 20);
-    max-height: 300px;
+    @include pxRem(max-height, 300);
     overflow-y: hidden;
-    overflow-y:scroll;
+    overflow-y: scroll;
   }
   &-item {
     @include flexbox;
