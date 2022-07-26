@@ -185,12 +185,8 @@ export const postsDetailReducer = (
         isLoading: false,
         error: action.payload,
       };
-    case TYPES.RESET_POST_ID:
-      return {
-        data: {},
-        isLoading: false,
-        error: '',
-      };
+      case TYPES.RESET_POST_DETAIL_DATA:
+        return initialStatePostDetail;
     default:
       return state;
   }

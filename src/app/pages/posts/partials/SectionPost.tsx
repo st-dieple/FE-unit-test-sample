@@ -5,6 +5,7 @@ import { RootState } from '../../../app.reducers';
 import { getPosts, getPublicPosts } from './../posts.actions';
 import PostList from './PostList';
 import Loading from '../../../shared/components/partials/Loading';
+import SekeletonPost from '../../../shared/components/partials/SekeletonPost';
 
 const SectionPost = () => {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const SectionPost = () => {
   return (
     <section className="section section-post">
       <PostList posts={posts.data} />
-      {posts.isLoading && <Loading />}
+      {posts.isLoading && <SekeletonPost />}
     </section>
   );
 };
