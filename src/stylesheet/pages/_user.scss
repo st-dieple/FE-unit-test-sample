@@ -32,6 +32,10 @@
   &-item {
     @include pxRem(margin-right, 30);
     @include pxRem(font-size, 20);
+    &:nth-child(2),
+    &:nth-child(3) {
+      cursor: pointer;
+    }
   }
 }
 
