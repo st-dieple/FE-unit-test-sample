@@ -10,7 +10,6 @@ import {
 import { AuthService } from '../core/serivces/auth.service';
 import * as TYPES from '.././shared/constants/types';
 import { storeData } from '../core/helpers/localstorage';
-import { parseJwt } from './../core/helpers/parseJwt';
 import { getUserInfo } from './../pages/user/user.actions';
 
 const authService = new AuthService();
