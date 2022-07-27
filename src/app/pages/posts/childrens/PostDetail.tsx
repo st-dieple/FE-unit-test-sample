@@ -8,6 +8,7 @@ import PostComment from '../partials/PostComment';
 import PostSideBar from '../partials/PostSideBar';
 import SekeletonPostContent from '../../../shared/components/partials/SekeletonPostContent';
 import SekeletonComment from '../../../shared/components/partials/SekeletonComment';
+import WithAuth from '../../../shared/components/hoc/WithAuth';
 
 const PostDetail = () => {
   const dispatch = useDispatch();

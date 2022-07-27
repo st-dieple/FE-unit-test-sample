@@ -5,7 +5,7 @@ import { RootState } from '../../../app.reducers';
 import {
   getAuthorsInfo,
   getAuthorsInfoSuccess,
-  getPostsRecommend
+  getPostsRecommend,
 } from '../posts.actions';
 import { UserService } from '../../../core/serivces/user.service';
 import RecommendList from './RecommendList';
@@ -14,8 +14,50 @@ import { Button } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
 import SekeletonRecommendPost from '../../../shared/components/partials/SekeletonRecommendPost';
 import SekeletonUserSidebar from '../../../shared/components/partials/SekeletonUserSidebar';
+import WithAuth from '../../../shared/components/hoc/WithAuth';
 
 const userService = new UserService();
+const FollowButtonTemplate = ({ authorsInfo, post, checkAuthen }: any) => {
+  const dispatch = useDispatch();
+  const [isRequestingAPI, setIsRequestingAPI] = useState(false);
+  const handleFollow = () => {
+    const id = post.data.user?.id;
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      userService
+        .handleUserFollow({ followingId: id })
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          authorsInfo.data.isFollowed = res.followed;
+          if (res.followed) {
+            authorsInfo.data.followers = authorsInfo.data.followers + 1;
+          } else {
+            authorsInfo.data.followers = authorsInfo.data.followers - 1;
+          }
+          dispatch(getAuthorsInfoSuccess(authorsInfo.data));
+        })
+        .catch((error) => {
+          setIsRequestingAPI(false);
+        });
+    }
+  };
+
+  const doFollow = () => {
+    console.log('do follow');
+    
+    checkAuthen(handleFollow);
+  };
+
+  return (
+    <Button
+      classBtn="btn btn-primary btn-follow"
+      text={authorsInfo.data.isFollowed ? 'Following' : 'Follow'}
+      onClick={doFollow}
+    />
+  );
+};
+
+const ButtonFollow = WithAuth(FollowButtonTemplate);
 const PostSideBar = () => {
   const dispatch = useDispatch();
   const authorsInfo = useSelector((state: RootState) => state.authors);
@@ -85,11 +127,7 @@ const PostSideBar = () => {
           <span className="author-follower">
             {authorsInfo.data.followers} Followers
           </span>
-          <Button
-            classBtn="btn btn-primary btn-follow"
-            text={authorsInfo.data.isFollowed ? 'Following' : 'Follow'}
-            onClick={() => handleFollow(post.data.user?.id)}
-          />
+          <ButtonFollow authorsInfo={authorsInfo} post={post} />
         </div>
       )}
       <div className="article-recommend">

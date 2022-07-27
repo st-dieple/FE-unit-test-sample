@@ -59,6 +59,7 @@ const PostContent = ({ post }: any) => {
 
   const handleLike = () => {
     dispatch(putLike({ id }));
+    
   };
 
   const handleDelete = (id: string) => {
