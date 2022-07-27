@@ -8,6 +8,7 @@ import UserPosts from '../partials/UserPosts';
 import UserInfo from '../partials/UserInfo';
 import SekeletonPost from '../../../shared/components/partials/SekeletonPost';
 import SekeletonUserInfo from '../../../shared/components/partials/SekeletonUserInfo';
+import { checkUserId } from '../../../shared/common/checkUserId';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -21,22 +22,24 @@ const Profile = () => {
   }, [id]);
 
   useEffect(() => {
-    if (userId) {
-      dispatch(getAuthorsInfo({ id: userId }));
+    if (id) {
+      dispatch(getAuthorsInfo({ id: id }));
     }
-  }, [userId]);
+  }, [id]);
 
   return (
     <div className="section-user-post">
       {authorsInfo.isLoading ? (
         <SekeletonUserInfo />
       ) : (
-        <UserInfo userInfo={userPost.data} />
+        <UserInfo userInfo={authorsInfo.data} />
       )}
       {userPost.isLoading ? (
         <SekeletonPost />
       ) : (
-        <UserPosts postList={userPost.data.Posts} />
+        (checkUserId(id) ?
+        <UserPosts postList={userPost.data.Posts} />: 
+        <p className="message-post">Please sign in to Lotus to view {authorsInfo.data.displayName} posts!</p>)
       )}
     </div>
   );

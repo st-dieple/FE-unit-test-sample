@@ -135,3 +135,7 @@
     width: 100%;
   }
 }
+
+.message-post {
+  @include pxRem(font-size, 20);
+}
