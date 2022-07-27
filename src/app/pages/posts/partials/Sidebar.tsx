@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,7 @@ import RecommendList from './RecommendList';
 import { Tag } from '../../../shared/components/partials';
 import Icon from '../../../../assets/icons/index';
 import SekeletonRecommendPost from '../../../shared/components/partials/SekeletonRecommendPost';
+import SekeletonTag from '../../../shared/components/partials/SekeletonTag';
 
 export const Sidebar = () => {
   const dispatch = useDispatch();
@@ -25,12 +26,20 @@ export const Sidebar = () => {
       <div className="section-tag">
         <h3 className="sidebar-title">DISCOVER MORE OF WHAT MATTERS TO YOU</h3>
         <ul className="tag-list">
-          <Tag name="React" />
-          <Tag name="CSS" />
-          <Tag name="Javascript" />
-          <Tag name="Entertainment" />
-          <Tag name="Travel" />
-          <Tag name="onChange" />
+          {/* Because there is no api for tag list
+              so I use loading state of recommend list to make UI attractively */}
+          {postsRecommend.isLoading ? (
+            <SekeletonTag />
+          ) : (
+            <>
+              <Tag name="React" />
+              <Tag name="CSS" />
+              <Tag name="Javascript" />
+              <Tag name="Entertainment" />
+              <Tag name="Travel" />
+              <Tag name="onChange" />
+            </>
+          )}
         </ul>
       </div>
       <div className="article-recommend sidebar-more">

@@ -5,7 +5,7 @@ import { RootState } from '../../../app.reducers';
 import {
   getAuthorsInfo,
   getAuthorsInfoSuccess,
-  getPostsRecommend
+  getPostsRecommend,
 } from '../posts.actions';
 import { UserService } from '../../../core/serivces/user.service';
 import RecommendList from './RecommendList';
@@ -18,6 +18,7 @@ import SekeletonUserSidebar from '../../../shared/components/partials/SekeletonU
 const userService = new UserService();
 const PostSideBar = () => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const authorsInfo = useSelector((state: RootState) => state.authors);
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const post = useSelector((state: RootState) => state.postDetail);
@@ -39,10 +40,12 @@ const PostSideBar = () => {
   const handleFollow = (id: number | string) => {
     if (!isRequestingAPI) {
       setIsRequestingAPI(true);
+      setLoading(true);
       userService
         .handleUserFollow({ followingId: id })
         .then((res: any) => {
           setIsRequestingAPI(false);
+          setLoading(false);
           authorsInfo.data.isFollowed = res.followed;
           if (res.followed) {
             authorsInfo.data.followers = authorsInfo.data.followers + 1;
@@ -53,6 +56,7 @@ const PostSideBar = () => {
         })
         .catch((error) => {
           setIsRequestingAPI(false);
+          setLoading(false);
         });
     }
   };
@@ -89,6 +93,7 @@ const PostSideBar = () => {
             classBtn="btn btn-primary btn-follow"
             text={authorsInfo.data.isFollowed ? 'Following' : 'Follow'}
             onClick={() => handleFollow(post.data.user?.id)}
+            isLoading={loading}
           />
         </div>
       )}

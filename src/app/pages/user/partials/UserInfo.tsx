@@ -18,16 +18,19 @@ const userService = new UserService();
 const UserInfo = ({ userInfo }: IUserProps) => {
   const dispatch = useDispatch();
   const dialog = useDialog();
+  const [loading, setLoading] = useState(false);
   const authorsInfo = useSelector((state: RootState) => state.authors.data);
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
 
   const handleFollow = (id: number | string) => {
     if (!isRequestingAPI) {
       setIsRequestingAPI(true);
+      setLoading(true);
       userService
         .handleUserFollow({ followingId: id })
         .then((res: any) => {
           setIsRequestingAPI(false);
+          setLoading(false);
           authorsInfo.isFollowed = res.followed;
           if (res.followed) {
             authorsInfo.followers = authorsInfo.followers + 1;
@@ -38,6 +41,7 @@ const UserInfo = ({ userInfo }: IUserProps) => {
         })
         .catch((error) => {
           setIsRequestingAPI(false);
+          setLoading(false);
         });
     }
   };
@@ -81,6 +85,7 @@ const UserInfo = ({ userInfo }: IUserProps) => {
           classBtn="btn btn-primary btn-follow"
           text={authorsInfo.isFollowed ? 'Following' : 'Follow'}
           onClick={() => handleFollow(userInfo.id)}
+          isLoading={loading}
         />
       </div>
     </div>

@@ -28,9 +28,11 @@
     font-weight: 600;
     font-family: $font-primary;
   }
-
   &-comment {
     @include pxRem(margin-top, 8);
+  }
+  &-follow {
+    @include flexbox;
   }
 }
 
