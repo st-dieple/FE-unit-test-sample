@@ -10,6 +10,7 @@ import { createPost, updatePost } from '../../../pages/posts/posts.actions';
 import { getPostById } from './../../../pages/posts/posts.actions';
 import { RootState } from '../../../app.reducers';
 import { COVER_POST_IMAGE } from '../../constants/constant';
+import { checkUserId } from '../../common/checkUserId';
 import Loading from './Loading';
 import Toast from './Toast';
 
@@ -48,21 +49,22 @@ const FormPost = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(getPostById({ id }));
+      dispatch(getPostById({ id, checkPostById: checkPostById }));
     }
   }, [id]);
 
-  useEffect(() => {
-    if (id) {
-      setValue('cover', data.cover);
-      setValue('title', data.title);
-      setValue('description', data.description);
-      setValue('content', data.content);
-      setValue('status', data.status === 'public' ? false : true);
-      setSelectedImage(data.cover);
+  const checkPostById = (data: any) => {
+    if (checkUserId(data.user?.id)) {
+      setValue('cover', data?.cover);
+      setValue('title', data?.title);
+      setValue('description', data?.description);
+      setValue('content', data?.content);
+      setValue('status', data?.status === 'public' ? false : true);
+      setSelectedImage(data?.cover);
+    } else {
+      navigate('/');
     }
-    // eslint-disable-next-line
-  }, [data]);
+  }
 
   useEffect(() => {
     let myTimeout: any;
@@ -131,7 +133,7 @@ const FormPost = () => {
     }
     setSelectedImage(URL.createObjectURL(file));
   };
-
+  
   if (id && isLoading) return <Loading />;
   return (
     <>
