@@ -4,7 +4,6 @@ import { UserService } from '../../../core/serivces/user.service';
 import { getAuthorsInfoSuccess } from '../posts.actions';
 import withAuthChecking from '../../../shared/components/hoc/withAuthChecking';
 import { Button } from '../../../shared/components/partials';
-import { checkUserId } from '../../../shared/common/checkUserId';
 
 const userService = new UserService();
 const ButtonFollow = ({ authorsInfo, id, checkAuthBeforeAction }: any) => {
@@ -37,13 +36,11 @@ const ButtonFollow = ({ authorsInfo, id, checkAuthBeforeAction }: any) => {
   };
 
   return (
-    !checkUserId(id) && (
-      <Button
-        classBtn="btn btn-primary btn-follow"
-        text={authorsInfo.isFollowed ? 'Following' : 'Follow'}
-        onClick={doFollow}
-      />
-    )
+    <Button
+      classBtn="btn btn-primary btn-follow"
+      text={authorsInfo.isFollowed ? 'Following' : 'Follow'}
+      onClick={doFollow}
+    />
   );
 };
 
