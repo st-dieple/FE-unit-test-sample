@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app.reducers';
 import { getAuthorsInfo, getPostsRecommend } from '../posts.actions';
-import { UserService } from '../../../core/serivces/user.service';
 import RecommendList from './RecommendList';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import Image from '../../../../assets/images';
 import SekeletonRecommendPost from '../../../shared/components/partials/SekeletonRecommendPost';
 import SekeletonUserSidebar from '../../../shared/components/partials/SekeletonUserSidebar';
 import ButtonFollow from './ButtonFollow';
-
-const userService = new UserService();
 
 const PostSideBar = () => {
   const dispatch = useDispatch();
