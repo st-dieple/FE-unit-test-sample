@@ -2,12 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../app.reducers';
-import {
-  getAuthorsInfo,
-  getComment,
-  getLike,
-  putLike,
-} from '../../posts/posts.actions';
+import { getAuthorsInfo, putLike } from '../../posts/posts.actions';
 import { deletePost } from '../../posts/posts.actions';
 import FormComment from './FormComment';
 import { formatDate } from '../../../shared/common/formatDate';
