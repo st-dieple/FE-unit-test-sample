@@ -49,7 +49,7 @@ const UserInfo = ({ userInfo }: IUserProps) => {
       <div className="author-info">
         <h2 className="author-name">{userInfo.displayName}</h2>
         <ul className="author-list">
-          <li className="author-item">{userInfo.Posts.length || 0} Posts</li>
+          <li className="author-item">{userInfo.Posts?.length || 0} Posts</li>
           <li className="author-item">{authorsInfo.followers} Followers</li>
           <li className="author-item">{userInfo.followings} Following</li>
         </ul>

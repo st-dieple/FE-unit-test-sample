@@ -22,31 +22,31 @@ const initialStatePosts = {
 
 const initialStatePostDetail = {
   data: {},
-  isLoading: true,
+  isLoading: false,
   error: '',
 };
 
 const initialStatePostsRecommend = {
   data: [],
-  isLoading: true,
+  isLoading: false,
   error: '',
 };
 
 const initialStateComments = {
   data: [],
-  isLoading: true,
+  isLoading: false,
   error: '',
 };
 
 const initialStateLikes = {
   data: [],
-  isLoading: true,
+  isLoading: false,
   error: '',
 };
 
 const initialStateAuthorInfo = {
   data: {},
-  isLoading: true,
+  isLoading: false,
   error: '',
 };
 

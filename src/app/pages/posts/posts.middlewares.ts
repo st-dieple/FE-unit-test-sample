@@ -96,6 +96,7 @@ export function* getPostById({ payload }: any) {
       config
     );
     yield put(getPostByIdSuccess(res.data));
+    payload.checkPostById(res.data);
   } catch (error) {
     yield put(getPostByIdError(error));
   }
