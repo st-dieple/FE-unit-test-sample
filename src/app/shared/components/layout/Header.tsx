@@ -77,7 +77,7 @@ export const Header = () => {
                     </Link>
                   </li>
                   <li className="dropdown-item">
-                    <Link to="/">
+                    <Link to="/profile/update">
                       <i className="fa-solid fa-file-pen"></i>
                       Update Profile
                     </Link>
