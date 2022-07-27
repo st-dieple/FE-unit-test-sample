@@ -95,6 +95,7 @@
       font-weight: 600;
       .fa {
         &-thumbs-up {
+          color: map-get($color, primary);
           @include pxRem(margin-right, 8);
           cursor: pointer;
         }
@@ -109,6 +110,7 @@
       font-weight: 600;
       .fa {
         &-comment {
+          color: map-get($color, primary);
           @include pxRem(margin-right, 8);
         }
       }

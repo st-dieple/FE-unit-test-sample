@@ -1,62 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app.reducers';
-import {
-  getAuthorsInfo,
-  getAuthorsInfoSuccess,
-  getPostsRecommend,
-} from '../posts.actions';
-import { UserService } from '../../../core/serivces/user.service';
+import { getAuthorsInfo, getPostsRecommend } from '../posts.actions';
 import RecommendList from './RecommendList';
 import { checkUserId } from '../../../shared/common/checkUserId';
-import { Button } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
 import SekeletonRecommendPost from '../../../shared/components/partials/SekeletonRecommendPost';
 import SekeletonUserSidebar from '../../../shared/components/partials/SekeletonUserSidebar';
-import withAuthChecking from './../../../shared/components/hoc/withAuthChecking';
-
-const userService = new UserService();
-const ButtonFollowTemplate = ({ authorsInfo, post, checkAuthBeforeAction }: any) => {
-  const dispatch = useDispatch();
-  const [isRequestingAPI, setIsRequestingAPI] = useState(false);
-  
-  const handleFollow = () => {
-    const id = post.data.user?.id;
-    if (!isRequestingAPI) {
-      setIsRequestingAPI(true);
-      userService
-        .handleUserFollow({ followingId: id })
-        .then((res: any) => {
-          setIsRequestingAPI(false);
-          authorsInfo.data.isFollowed = res.followed;
-          if (res.followed) {
-            authorsInfo.data.followers = authorsInfo.data.followers + 1;
-          } else {
-            authorsInfo.data.followers = authorsInfo.data.followers - 1;
-          }
-          dispatch(getAuthorsInfoSuccess(authorsInfo.data));
-        })
-        .catch((error) => {
-          setIsRequestingAPI(false);
-        });
-    }
-  };
-
-  const doFollow = () => {
-    checkAuthBeforeAction(handleFollow);
-  };
-
-  return (
-    <Button
-      classBtn="btn btn-primary btn-follow"
-      text={authorsInfo.data.isFollowed ? 'Following' : 'Follow'}
-      onClick={doFollow}
-    />
-  );
-};
-
-const ButtonFollow = withAuthChecking(ButtonFollowTemplate);
+import ButtonFollow from './ButtonFollow';
 
 const PostSideBar = () => {
   const dispatch = useDispatch();
@@ -105,7 +57,10 @@ const PostSideBar = () => {
           <span className="author-follower">
             {authorsInfo.data.followers} Followers
           </span>
-          <ButtonFollow authorsInfo={authorsInfo} post={post} />
+          <ButtonFollow
+            authorsInfo={authorsInfo.data}
+            id={post.data.user?.id}
+          />
         </div>
       )}
       <div className="article-recommend">
