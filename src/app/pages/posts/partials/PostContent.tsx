@@ -15,6 +15,34 @@ import { convertHtml } from './../../../shared/common/convertHtml';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import { Tag } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
+import withAuthChecking from './../../../shared/components/hoc/withAuthChecking';
+
+const ButtonLikeTemplate = ({
+  liked,
+  id,
+  color,
+  dispatch,
+  checkAuthBeforeAction,
+}: any) => {
+  const handleLike = () => {
+    checkAuthBeforeAction(dispatch(putLike({ id })));
+  };
+
+  return (
+    <div className="interact-like">
+      <i
+        className={
+          color ? 'fa-solid fa-thumbs-up fa-liked' : 'fa-regular fa-thumbs-up'
+        }
+        onClick={handleLike}
+      ></i>
+      {liked}
+    </div>
+  );
+};
+
+const ButtonLike = withAuthChecking(ButtonLikeTemplate);
+const FormCommentTemplate = withAuthChecking(FormComment);
 
 const PostContent = ({ post }: any) => {
   const dispatch = useDispatch();
@@ -56,10 +84,6 @@ const PostContent = ({ post }: any) => {
       dispatch(getAuthorsInfo({ id: userId }));
     }
   }, [userId]);
-
-  const handleLike = () => {
-    dispatch(putLike({ id }));
-  };
 
   const handleDelete = (id: string) => {
     dispatch(deletePost({ id: id }));
@@ -149,24 +173,14 @@ const PostContent = ({ post }: any) => {
         />
         <div className="article-text">{convertHtml(post.content)}</div>
         <div className="article-interact">
-          <div className="interact-like">
-            <i
-              className={
-                color
-                  ? 'fa-solid fa-thumbs-up fa-liked'
-                  : 'fa-regular fa-thumbs-up'
-              }
-              onClick={handleLike}
-            ></i>
-            {liked}
-          </div>
+          <ButtonLike liked={liked} id={id} color={color} dispatch={dispatch} />
           <div className="interact-comment">
             <i className="fa-regular fa-comment"></i>
             {comments.length}
           </div>
         </div>
       </div>
-      <FormComment />
+      <FormCommentTemplate />
     </div>
   );
 };

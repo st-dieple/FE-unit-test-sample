@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { signIn } from '../../../auth/auth.actions';
@@ -17,7 +17,6 @@ const PopUpLogin = () => {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const dialog = useDialog();
 
   const { data, hasError, isLoading, error } = useSelector(
@@ -31,7 +30,6 @@ const PopUpLogin = () => {
   useEffect(() => {
     if (Object.keys(data).length) {
       dialog?.closeDialog();
-      navigate('/');
     }
   }, [data]);
 
