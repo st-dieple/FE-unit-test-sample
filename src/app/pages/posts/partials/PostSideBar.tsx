@@ -14,30 +14,16 @@ import { Button } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
 import SekeletonRecommendPost from '../../../shared/components/partials/SekeletonRecommendPost';
 import SekeletonUserSidebar from '../../../shared/components/partials/SekeletonUserSidebar';
+import withAuthChecking from './../../../shared/components/hoc/withAuthChecking';
 
 const userService = new UserService();
-const PostSideBar = () => {
+const ButtonFollowTemplate = ({ authorsInfo, post, checkAuthBeforeAction }: any) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const authorsInfo = useSelector((state: RootState) => state.authors);
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
-  const post = useSelector((state: RootState) => state.postDetail);
-  const postsRecommend = useSelector(
-    (state: RootState) => state.postsRecommend
-  );
-
-  useEffect(() => {
-    if (authorsInfo.data.id) {
-      dispatch(getAuthorsInfo({ id: authorsInfo.data.id }));
-    }
-    // eslint-disable-next-line
-  }, [authorsInfo.data.id]);
-
-  useEffect(() => {
-    dispatch(getPostsRecommend({ page: 1, size: 5 }));
-  }, []);
-
-  const handleFollow = (id: number | string) => {
+  
+  const handleFollow = () => {
+    const id = post.data.user?.id;
     if (!isRequestingAPI) {
       setIsRequestingAPI(true);
       setLoading(true);
@@ -60,6 +46,41 @@ const PostSideBar = () => {
         });
     }
   };
+
+  const doFollow = () => {
+    checkAuthBeforeAction(handleFollow);
+  };
+
+  return (
+    <Button
+      classBtn="btn btn-primary btn-follow"
+      text={authorsInfo.data.isFollowed ? 'Following' : 'Follow'}
+      onClick={doFollow}
+      isLoading={loading}
+    />
+  );
+};
+
+const ButtonFollow = withAuthChecking(ButtonFollowTemplate);
+
+const PostSideBar = () => {
+  const dispatch = useDispatch();
+  const authorsInfo = useSelector((state: RootState) => state.authors);
+  const post = useSelector((state: RootState) => state.postDetail);
+  const postsRecommend = useSelector(
+    (state: RootState) => state.postsRecommend
+  );
+
+  useEffect(() => {
+    if (authorsInfo.data.id) {
+      dispatch(getAuthorsInfo({ id: authorsInfo.data.id }));
+    }
+    // eslint-disable-next-line
+  }, [authorsInfo.data.id]);
+
+  useEffect(() => {
+    dispatch(getPostsRecommend({ page: 1, size: 5 }));
+  }, []);
 
   return (
     <div className="article-sidebar">
@@ -89,12 +110,7 @@ const PostSideBar = () => {
           <span className="author-follower">
             {authorsInfo.data.followers} Followers
           </span>
-          <Button
-            classBtn="btn btn-primary btn-follow"
-            text={authorsInfo.data.isFollowed ? 'Following' : 'Follow'}
-            onClick={() => handleFollow(post.data.user?.id)}
-            isLoading={loading}
-          />
+          <ButtonFollow authorsInfo={authorsInfo} post={post} />
         </div>
       )}
       <div className="article-recommend">

@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { UserService } from '../../../core/serivces/user.service';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import Image from '../../../../assets/images';
 import { RootState } from '../../../app.reducers';
-import { useDialog } from '../../../shared/contexts/dialog.contexts';
-import {
-  getAuthorsInfoSuccess,
-} from '../../posts/posts.actions';
-import UserListFollow from './UserListFollow';
+import { UserService } from '../../../core/serivces/user.service';
 import { Button } from '../../../shared/components/partials';
 import { IUser } from '../../../shared/interfaces/user';
-import Image from '../../../../assets/images';
+import { getAuthorsInfoSuccess } from './../../posts/posts.actions';
 
 interface IUserProps {
   userInfo: IUser;
 }
+
 const userService = new UserService();
 const UserInfo = ({ userInfo }: IUserProps) => {
   const dispatch = useDispatch();
-  const dialog = useDialog();
   const [loading, setLoading] = useState(false);
-  const authorsInfo = useSelector((state: RootState) => state.authors.data);
+  const authorsInfo = useSelector((state: RootState) => state.authors);
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
 
   const handleFollow = (id: number | string) => {
@@ -31,13 +28,13 @@ const UserInfo = ({ userInfo }: IUserProps) => {
         .then((res: any) => {
           setIsRequestingAPI(false);
           setLoading(false);
-          authorsInfo.isFollowed = res.followed;
+          authorsInfo.data.isFollowed = res.followed;
           if (res.followed) {
-            authorsInfo.followers = authorsInfo.followers + 1;
+            authorsInfo.data.followers = authorsInfo.data.followers + 1;
           } else {
-            authorsInfo.followers = authorsInfo.followers - 1;
+            authorsInfo.data.followers = authorsInfo.data.followers - 1;
           }
-          dispatch(getAuthorsInfoSuccess(authorsInfo));
+          dispatch(getAuthorsInfoSuccess(authorsInfo.data));
         })
         .catch((error) => {
           setIsRequestingAPI(false);
@@ -45,45 +42,24 @@ const UserInfo = ({ userInfo }: IUserProps) => {
         });
     }
   };
-
-  const handleListFollowers = () => {
-    dialog?.addDialog({
-      content: <UserListFollow id={userInfo.id} type="followers" />,
-    });
-  };
-
-  const handleListFollowing = () => {
-    dialog?.addDialog({
-      content: <UserListFollow id={userInfo.id} type="followings" />,
-    });
-  };
-
   return (
     <div className="author-info-content">
       <div className="author-avatar">
         <img
           src={userInfo.picture || Image.Avatar}
           alt={userInfo.displayName}
-          onError={(e: any) => {
-            e.target['onerror'] = null;
-            e.target['src'] = Image.Avatar;
-          }}
         />
       </div>
       <div className="author-info">
         <h2 className="author-name">{userInfo.displayName}</h2>
         <ul className="author-list">
-          <li className="author-item">{userInfo.Posts?.length || 0} Posts</li>
-          <li className="author-item" onClick={handleListFollowers}>
-            {authorsInfo.followers} Followers
-          </li>
-          <li className="author-item" onClick={handleListFollowing}>
-            {userInfo.followings} Following
-          </li>
+          <li className="author-item">{userInfo.Posts.length || 0} Posts</li>
+          <li className="author-item">{authorsInfo.data.followers} Followers</li>
+          <li className="author-item">{userInfo.followings} Following</li>
         </ul>
         <Button
           classBtn="btn btn-primary btn-follow"
-          text={authorsInfo.isFollowed ? 'Following' : 'Follow'}
+          text={authorsInfo.data.isFollowed ? 'Following' : 'Follow'}
           onClick={() => handleFollow(userInfo.id)}
           isLoading={loading}
         />
