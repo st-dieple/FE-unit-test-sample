@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import Image from '../../../../assets/images';
 import { RootState } from '../../../app.reducers';
 import { UserService } from '../../../core/serivces/user.service';
+import { checkUserId } from '../../../shared/common/checkUserId';
 import { Button } from '../../../shared/components/partials';
 import { IUser } from '../../../shared/interfaces/user';
 import { getAuthorsInfo } from './../../posts/posts.actions';
@@ -53,11 +54,13 @@ const UserInfo = ({ userInfo }: IUserProps) => {
           <li className="author-item">{authorsInfo.followers} Followers</li>
           <li className="author-item">{userInfo.followings} Following</li>
         </ul>
-        <Button
-          classBtn="btn btn-primary btn-follow"
-          text={authorsInfo.isFollowed ? 'Following' : 'Follow'}
-          onClick={() => handleFollow(userInfo.id)}
-        />
+        {!checkUserId(userInfo.id) && (
+          <Button
+            classBtn="btn btn-primary btn-follow"
+            text={authorsInfo.isFollowed ? 'Following' : 'Follow'}
+            onClick={() => handleFollow(userInfo.id)}
+          />
+        )}
       </div>
     </div>
   );

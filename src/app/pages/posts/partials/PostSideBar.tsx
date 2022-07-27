@@ -17,10 +17,14 @@ import SekeletonUserSidebar from '../../../shared/components/partials/SekeletonU
 import withAuthChecking from './../../../shared/components/hoc/withAuthChecking';
 
 const userService = new UserService();
-const ButtonFollowTemplate = ({ authorsInfo, post, checkAuthBeforeAction }: any) => {
+const ButtonFollowTemplate = ({
+  authorsInfo,
+  post,
+  checkAuthBeforeAction,
+}: any) => {
   const dispatch = useDispatch();
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
-  
+
   const handleFollow = () => {
     const id = post.data.user?.id;
     if (!isRequestingAPI) {
@@ -48,11 +52,13 @@ const ButtonFollowTemplate = ({ authorsInfo, post, checkAuthBeforeAction }: any)
   };
 
   return (
-    <Button
-      classBtn="btn btn-primary btn-follow"
-      text={authorsInfo.data.isFollowed ? 'Following' : 'Follow'}
-      onClick={doFollow}
-    />
+    !checkUserId(post.data.user?.id) && (
+      <Button
+        classBtn="btn btn-primary btn-follow"
+        text={authorsInfo.data.isFollowed ? 'Following' : 'Follow'}
+        onClick={doFollow}
+      />
+    )
   );
 };
 
