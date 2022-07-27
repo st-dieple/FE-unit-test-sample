@@ -35,8 +35,8 @@ export const registerReducer = (state: IStateData = IInitRegisterProps, action: 
         ...state,
         isLoading: false,
         data: action.payload,
+        hasError: false
       };
-
     case TYPES.SIGN_UP_ERROR:
       return {
         ...state,
@@ -62,6 +62,7 @@ export const loginReducer = (state: IStateData = IInitLoginProps, action: IActio
         ...state,
         isLoading: false,
         data: action.payload,
+        hasError: false
       };
 
     case TYPES.SIGN_IN_ERROR:

@@ -30,6 +30,7 @@ export function* updateProfileUser({ payload }: any) {
   try {
     const res: AxiosResponse<any> = yield userService.updateProfileUser(payload.data);
     yield put(updateProfileUserSuccess(res));
+    payload.resolve();
   } catch (error) {
     yield put(updateProfileUserError(error));
   }

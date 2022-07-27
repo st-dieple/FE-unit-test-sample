@@ -131,7 +131,10 @@
     }
   }
   &-btn {
+    @include flexbox;
     @include pxRem(max-width, 200);
+    align-items: center;
+    justify-content: center;
     width: 100%;
   }
 }
