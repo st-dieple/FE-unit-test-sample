@@ -25,10 +25,9 @@ export function* signUp({ payload }: any) {
 
 export function* signIn({ payload }: any) {
   try {
-    const res = yield authService.signIn(payload.dataLogin);   
+    const res = yield authService.signIn(payload.dataLogin);               
     storeData('token', res.accessToken);
-    const userId = parseJwt(res.accessToken).userId;
-    yield put(getUserInfo({ id: userId }));
+    yield put(getUserInfo({ id: res.userInfo.id }));
     yield put(signInSuccess(res));
   } catch (error) {
     yield put(signInError(error));

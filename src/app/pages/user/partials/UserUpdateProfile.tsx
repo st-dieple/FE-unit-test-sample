@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { SignaturesService } from './../../../core/serivces/signatures.service';
 import { RootState } from '../../../app.reducers';
@@ -14,13 +13,11 @@ import Toast from '../../../shared/components/partials/Toast';
 const signaturesService = new SignaturesService();
 const UserUpdateProfile = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [toast, setToast] = useState<any>({
     hasLoading: false,
     type: '',
     title: '',
   });
-  const [checkSuccess, setCheckSuccess] = useState<boolean>(false);
   const [avatar, setAvatar] = useState<string>(Image.Avatar);
   const {
     register,
@@ -34,6 +31,7 @@ const UserUpdateProfile = () => {
     isLoading,
     hasError,
     error,
+    isLoadingUpdate
   } = useSelector((state: RootState) => state.users);
 
   useEffect(() => {
@@ -51,33 +49,26 @@ const UserUpdateProfile = () => {
   }, [dataUser]);
 
   const onSubmit = (data: any) => {
-    dispatch(
-      updateProfileUser({
-        data: {
-          ...data,
-          dob: data.dob.split('-').reverse().join('/'),
-        },
-      })
-    );
-    setCheckSuccess(!checkSuccess);
+    if(!isLoadingUpdate) {
+      dispatch(
+        updateProfileUser({
+          data: {
+            ...data,
+            dob: data.dob.split('-').reverse().join('/'),
+          },
+          resolve: setSuccessUpdate
+        })
+      );
+    }
   };
 
-  useEffect(() => {
-    let myTimeout;
-    if (checkSuccess) {
-      setToast({
-        hasLoading: true,
-        type: 'success',
-        title: 'Update profile successfully.',
-      });
-      myTimeout = setTimeout(() => {
-        navigate('/profile/me');
-      }, 1000);
-    }
-    return () => {
-      clearTimeout(myTimeout);
-    };
-  }, [checkSuccess]);
+  const setSuccessUpdate = () => {
+    setToast({
+      hasLoading: true,
+      type: 'success',
+      title: 'Update profile successfully.',
+    });
+  }
 
   const handleChangeAvatar = (e: any) => {
     const file = e.target.files[0];
@@ -242,7 +233,7 @@ const UserUpdateProfile = () => {
               </span>
             </div>
           )}
-          <Button classBtn="btn btn-primary update-btn" text="Update" />
+          <Button classBtn="btn btn-primary update-btn" text="Update" isLoading={isLoadingUpdate}/>
         </form>
       </div>
     </>
