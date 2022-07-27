@@ -126,6 +126,12 @@
       }
     }
   }
+  &-tag {
+    @include pxRem(width, 350px);
+    @include pxRem(margin-left, 10px);
+    @include pxRem(padding, 20px);
+    @include pxRem(border-radius, 5px);
+  }
 }
 
 @keyframes skeleton-loading {
