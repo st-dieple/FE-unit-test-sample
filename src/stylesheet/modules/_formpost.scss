@@ -133,15 +133,16 @@
 }
 
 .rti--container {
-  --rti-main: #FFC017;
-  --rti-border: #9EA0A8;
-}
-
-.rti--container {
+  --rti-main: #FFC017!important;
+  --rti-border: #9EA0A8!important;
   padding: 4px 16px!important;
 }
 
 .rti--input {
   border: none!important;
+}
+
+.go2761622576:focus-within {
+  box-shadow: var(--rti-main) 0px 0px 0px 0px!important;
 }
 
