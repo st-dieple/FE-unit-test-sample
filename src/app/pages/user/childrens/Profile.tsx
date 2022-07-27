@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app.reducers';
 import { getUserPosts } from '../user.actions';
@@ -8,7 +8,6 @@ import UserPosts from '../partials/UserPosts';
 import UserInfo from '../partials/UserInfo';
 import SekeletonPost from '../../../shared/components/partials/SekeletonPost';
 import SekeletonUserInfo from '../../../shared/components/partials/SekeletonUserInfo';
-import { checkUserId } from '../../../shared/common/checkUserId';
 import { getData } from '../../../core/helpers/localstorage';
 
 const Profile = () => {
@@ -18,12 +17,9 @@ const Profile = () => {
   const authorsInfo = useSelector((state: RootState) => state.authors);
 
   useEffect(() => {
-    if(getData('token', '')) {
+    if (getData('token', '')) {
       dispatch(getUserPosts({ id }));
     }
-  }, [id]);
-
-  useEffect(() => {
     if (id) {
       dispatch(getAuthorsInfo({ id: id }));
     }
@@ -39,9 +35,17 @@ const Profile = () => {
       {userPost.isLoading ? (
         <SekeletonPost />
       ) : (
-        (getData('token', '') ?
-          <UserPosts postList={userPost.data.Posts} />: 
-        <p className="message-post">Please sign in to Lotus to view {authorsInfo.data.displayName} posts!</p>)
+        <>
+          {getData('token', '') ? (
+            <UserPosts postList={userPost.data.Posts} />
+          ) : (
+            <div className="message-post">
+              Please
+              <Link to={'/auth/sign-in'} className="message-link">Sign In</Link>
+              to Lotus to view {authorsInfo.data.displayName}'s posts!
+            </div>
+          )}
+        </>
       )}
     </div>
   );
