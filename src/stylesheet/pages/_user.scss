@@ -135,3 +135,14 @@
     width: 100%;
   }
 }
+
+.message {
+  &-post {
+  @include pxRem(font-size, 20);
+  }
+  &-link {
+    @include pxRem(margin, 0 8);
+    color: map-get($color, text);
+    font-weight: 500;
+  }
+}

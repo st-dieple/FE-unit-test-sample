@@ -222,7 +222,7 @@ export const commentsReducer = (
     case TYPES.POST_COMMENT_SUCCESS:
       return {
         ...state,
-        data: [...state.data.unshift(action.payload)],
+        data: [action.payload,...state.data],
         isLoading: false,
         error: '',
       };
