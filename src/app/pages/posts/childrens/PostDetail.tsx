@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
-import { getPostById } from '../posts.actions';
+import { getComment, getLike, getPostById } from '../posts.actions';
 import PostContent from '../partials/PostContent';
 import PostComment from '../partials/PostComment';
 import PostSideBar from '../partials/PostSideBar';
@@ -17,6 +17,8 @@ const PostDetail = () => {
   useEffect(() => {
     if (id) {
       dispatch(getPostById({ id: id }));
+      dispatch(getLike({ id: id }));
+      dispatch(getComment({ id: id }));
     }
     // eslint-disable-next-line
   }, [id]);
@@ -30,7 +32,7 @@ const PostDetail = () => {
               {posts.isLoading ? (
                 <SekeletonPostContent />
               ) : (
-                <PostContent post={posts.data} />
+                <PostContent />
               )}
               {posts.isLoading ? <SekeletonComment /> : <PostComment />}
             </div>
