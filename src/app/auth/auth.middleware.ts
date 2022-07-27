@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { all, put, takeLatest } from 'redux-saga/effects';
 import {
   signInError,

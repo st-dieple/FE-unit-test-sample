@@ -6,7 +6,6 @@ import {
   getAuthorsInfo,
   getComment,
   getLike,
-  putLike,
 } from '../../posts/posts.actions';
 import { deletePost } from '../../posts/posts.actions';
 import FormComment from './FormComment';
