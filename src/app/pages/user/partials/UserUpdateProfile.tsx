@@ -87,7 +87,7 @@ const UserUpdateProfile = () => {
         setToast({
           hasLoading: true,
           type: 'error',
-          title: 'Update profile successfully.',
+          title: 'Update profile error.',
         });
       }, 500);
       return () => {
