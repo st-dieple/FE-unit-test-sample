@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../app.reducers';
-import { putLike } from '../../posts/posts.actions';
+import {
+  getAuthorsInfo,
+  getComment,
+  getLike,
+  putLike,
+} from '../../posts/posts.actions';
 import { deletePost } from '../../posts/posts.actions';
 import FormComment from './FormComment';
 import { formatDate } from '../../../shared/common/formatDate';
@@ -11,21 +16,29 @@ import { checkUserId } from '../../../shared/common/checkUserId';
 import { Tag } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
 
-const PostContent = ({ likes }: any) => {
-  const [liked, setLiked] = useState<number>(likes.length);
-  const [color, setColor] = useState(false);
+const PostContent = ({ post }: any) => {
   const dispatch = useDispatch();
-  const { id } = useParams();
-  const { data } = useSelector((state: RootState) => state.postDetail);
   const navigate = useNavigate();
+  const { id } = useParams();
   const dataLike = useSelector((state: RootState) => state.likes);
   const comments = useSelector((state: RootState) => state.comments.data);
+  const likes = useSelector((state: RootState) => state.likes.data);
+  const [liked, setLiked] = useState<number>(likes.length);
+  const [color, setColor] = useState(false);
+  const userId = post.user?.id;
 
   useEffect(() => {
-    if (data.isLiked) {
+    if (id) {
+      dispatch(getComment({ id: id }));
+      dispatch(getLike({ id: id }));
+    }
+    // eslint-disable-next-line
+  }, [id]);
+  useEffect(() => {
+    if (post.isLiked) {
       setColor(true);
     }
-  }, [data.isLiked]);
+  }, [post.isLiked]);
 
   useEffect(() => {
     if (dataLike.data.liked) {
@@ -37,6 +50,12 @@ const PostContent = ({ likes }: any) => {
     }
     // eslint-disable-next-line
   }, [dataLike.data]);
+
+  useEffect(() => {
+    if (userId) {
+      dispatch(getAuthorsInfo({ id: userId }));
+    }
+  }, [userId]);
 
   const handleLike = () => {
     dispatch(putLike({ id }));
@@ -54,14 +73,14 @@ const PostContent = ({ likes }: any) => {
           <div className="author-image">
             <Link
               to={
-                checkUserId(data.user?.id)
+                checkUserId(post.user?.id)
                   ? `/profile/me`
-                  : `/profile/${data.user?.id}`
+                  : `/profile/${post.user?.id}`
               }
             >
               <img
-                src={data.user?.picture || Image.Avatar}
-                alt={data.user?.displayName}
+                src={post.user?.picture || Image.Avatar}
+                alt={post.user?.displayName}
                 onError={(e: any) => {
                   e.target['onerror'] = null;
                   e.target['src'] = Image.Avatar;
@@ -73,28 +92,28 @@ const PostContent = ({ likes }: any) => {
             <div className="author-name">
               <Link
                 to={
-                  checkUserId(data.user?.id)
+                  checkUserId(post.user?.id)
                     ? `/profile/me`
-                    : `/profile/${data.user?.id}`
+                    : `/profile/${post.user?.id}`
                 }
               >
-                {data.user?.displayName}
+                {post.user?.displayName}
               </Link>
             </div>
             <div className="author-time">
-              <span className="author-date">{formatDate(data.createdAt)}</span>
+              <span className="author-date">{formatDate(post.createdAt)}</span>
               <span>·</span>
               <span className="readingTime">5 min read</span>
             </div>
           </div>
         </div>
-        {checkUserId(data.user?.id) && (
+        {checkUserId(post.user?.id) && (
           <div className="post-control">
             <i className="fa-solid fa-ellipsis"></i>
             <ul className="post-control-list">
               <li>
                 <Link
-                  to={`/posts/${data.id}/edit`}
+                  to={`/posts/${post.id}/edit`}
                   className="post-control-item"
                 >
                   <i className="fa-solid fa-pen"></i>
@@ -104,7 +123,7 @@ const PostContent = ({ likes }: any) => {
               <li
                 className="post-control-item"
                 onClick={() => {
-                  handleDelete(data.id);
+                  handleDelete(post.id);
                 }}
               >
                 <i className="fa-solid fa-trash-can"></i>
@@ -115,20 +134,20 @@ const PostContent = ({ likes }: any) => {
         )}
       </div>
       <div className="article-content">
-        <h2 className="article-title">{data.title}</h2>
-        {data.tags?.length ? (
+        <h2 className="article-title">{post.title}</h2>
+        {post.tags?.length ? (
           <ul className="tag-article">
-            {data.tags.map((tag: any) => (
+            {post.tags.map((tag: any) => (
               <Tag key={tag} name={tag} />
             ))}
           </ul>
         ) : null}
         <img
           className="article-image"
-          src={data.cover || Image.Empty}
-          alt={data.title}
+          src={post.cover || Image.Empty}
+          alt={post.title}
         />
-        <div className="article-text">{convertHtml(data.content)}</div>
+        <div className="article-text">{convertHtml(post.content)}</div>
         <div className="article-interact">
           <div className="interact-like">
             <i

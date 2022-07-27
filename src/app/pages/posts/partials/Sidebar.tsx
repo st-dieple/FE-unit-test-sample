@@ -6,8 +6,8 @@ import { RootState } from '../../../app.reducers';
 import { getPostsRecommend } from '../posts.actions';
 import RecommendList from './RecommendList';
 import { Tag } from '../../../shared/components/partials';
-import Loading from '../../../shared/components/partials/Loading';
 import Icon from '../../../../assets/icons/index';
+import SekeletonRecommendPost from '../../../shared/components/partials/SekeletonRecommendPost';
 
 export const Sidebar = () => {
   const dispatch = useDispatch();
@@ -20,9 +20,7 @@ export const Sidebar = () => {
     // eslint-disable-next-line
   }, []);
 
-  return postsRecommend.isLoading ? (
-    <Loading />
-  ) : (
+  return (
     <aside className="sidebar">
       <div className="section-tag">
         <h3 className="sidebar-title">DISCOVER MORE OF WHAT MATTERS TO YOU</h3>
@@ -37,7 +35,11 @@ export const Sidebar = () => {
       </div>
       <div className="article-recommend sidebar-more">
         <h3 className="recommend-title">MORE FROM LOTUS</h3>
-        <RecommendList data={postsRecommend.data} />
+        {postsRecommend.isLoading ? (
+          <SekeletonRecommendPost />
+        ) : (
+          <RecommendList data={postsRecommend.data} />
+        )}
       </div>
       <div className="section-social">
         <h3 className="sidebar-title">SOCIAL MEDIA</h3>
