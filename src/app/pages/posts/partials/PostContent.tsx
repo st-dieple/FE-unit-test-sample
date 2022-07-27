@@ -16,40 +16,33 @@ import { checkUserId } from '../../../shared/common/checkUserId';
 import { Tag } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
 
-const PostContent = ({ post }: any) => {
+const PostContent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  const dataLike = useSelector((state: RootState) => state.likes);
+  const post = useSelector((state: RootState) => state.postDetail);
   const comments = useSelector((state: RootState) => state.comments.data);
-  const likes = useSelector((state: RootState) => state.likes.data);
-  const [liked, setLiked] = useState<number>(likes.length);
+  const likes = useSelector((state: RootState) => state.likes);
+  const [liked, setLiked] = useState<number>(likes.data.length);
   const [color, setColor] = useState(false);
-  const userId = post.user?.id;
+  const userId = post.data.user?.id;
 
   useEffect(() => {
-    if (id) {
-      dispatch(getComment({ id: id }));
-      dispatch(getLike({ id: id }));
-    }
-    // eslint-disable-next-line
-  }, [id]);
-  useEffect(() => {
-    if (post.isLiked) {
+    if (post.data.isLiked) {
       setColor(true);
     }
-  }, [post.isLiked]);
+  }, [post.data.isLiked]);
 
   useEffect(() => {
-    if (dataLike.data.liked) {
+    if (likes.data.liked) {
       setLiked(liked + 1);
       setColor(true);
-    } else if (dataLike.data.liked !== undefined && liked > 0) {
+    } else if (likes.data.liked !== undefined && liked > 0) {
       setLiked(liked - 1);
       setColor(false);
     }
     // eslint-disable-next-line
-  }, [dataLike.data]);
+  }, [likes.data]);
 
   useEffect(() => {
     if (userId) {
@@ -73,14 +66,14 @@ const PostContent = ({ post }: any) => {
           <div className="author-image">
             <Link
               to={
-                checkUserId(post.user?.id)
+                checkUserId(post.data.user?.id)
                   ? `/profile/me`
-                  : `/profile/${post.user?.id}`
+                  : `/profile/${post.data.user?.id}`
               }
             >
               <img
-                src={post.user?.picture || Image.Avatar}
-                alt={post.user?.displayName}
+                src={post.data.user?.picture || Image.Avatar}
+                alt={post.data.user?.displayName}
                 onError={(e: any) => {
                   e.target['onerror'] = null;
                   e.target['src'] = Image.Avatar;
@@ -92,28 +85,30 @@ const PostContent = ({ post }: any) => {
             <div className="author-name">
               <Link
                 to={
-                  checkUserId(post.user?.id)
+                  checkUserId(post.data.user?.id)
                     ? `/profile/me`
-                    : `/profile/${post.user?.id}`
+                    : `/profile/${post.data.user?.id}`
                 }
               >
-                {post.user?.displayName}
+                {post.data.user?.displayName}
               </Link>
             </div>
             <div className="author-time">
-              <span className="author-date">{formatDate(post.createdAt)}</span>
+              <span className="author-date">
+                {formatDate(post.data.createdAt)}
+              </span>
               <span>·</span>
               <span className="readingTime">5 min read</span>
             </div>
           </div>
         </div>
-        {checkUserId(post.user?.id) && (
+        {checkUserId(post.data.user?.id) && (
           <div className="post-control">
             <i className="fa-solid fa-ellipsis"></i>
             <ul className="post-control-list">
               <li>
                 <Link
-                  to={`/posts/${post.id}/edit`}
+                  to={`/posts/${post.data.id}/edit`}
                   className="post-control-item"
                 >
                   <i className="fa-solid fa-pen"></i>
@@ -123,7 +118,7 @@ const PostContent = ({ post }: any) => {
               <li
                 className="post-control-item"
                 onClick={() => {
-                  handleDelete(post.id);
+                  handleDelete(post.data.id);
                 }}
               >
                 <i className="fa-solid fa-trash-can"></i>
@@ -134,20 +129,20 @@ const PostContent = ({ post }: any) => {
         )}
       </div>
       <div className="article-content">
-        <h2 className="article-title">{post.title}</h2>
-        {post.tags?.length ? (
+        <h2 className="article-title">{post.data.title}</h2>
+        {post.data.tags?.length ? (
           <ul className="tag-article">
-            {post.tags.map((tag: any) => (
+            {post.data.tags?.map((tag: any) => (
               <Tag key={tag} name={tag} />
             ))}
           </ul>
         ) : null}
         <img
           className="article-image"
-          src={post.cover || Image.Empty}
-          alt={post.title}
+          src={post.data.cover || Image.Empty}
+          alt={post.data.title}
         />
-        <div className="article-text">{convertHtml(post.content)}</div>
+        <div className="article-text">{convertHtml(post.data.content)}</div>
         <div className="article-interact">
           <div className="interact-like">
             <i
