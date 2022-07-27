@@ -6,7 +6,7 @@ import { RootState } from '../../../app.reducers';
 import { postComment } from '../../posts/posts.actions';
 import { Button } from '../../../shared/components/partials';
 
-const FormComment = () => {
+const FormComment = ({ checkAuthBeforeAction }: any) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const {
@@ -17,6 +17,10 @@ const FormComment = () => {
   } = useForm();
   const userInfo = useSelector((state: RootState) => state.users.data);
   const onSubmit = (data: any) => {
+    checkAuthBeforeAction(handleComment(data));
+  };
+
+  const handleComment = (data: any) => {
     dispatch(postComment({ id, data, userInfo }));
     setValue('content', '');
   };

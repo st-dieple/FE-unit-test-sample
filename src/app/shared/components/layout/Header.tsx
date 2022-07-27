@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
 import { signOut } from '../../../auth/auth.actions';
 import { useDialog } from '../../contexts/dialog.contexts';
-import PopUpLogin from '../partials/PopupLogin';
 import { getData } from '../../../core/helpers/localstorage';
+import PopUpLogin from '../partials/PopupLogin';
 import Image from '../../../../assets/images';
 
 export const Header = () => {
@@ -13,7 +13,6 @@ export const Header = () => {
   const dispatch = useDispatch();
   const dialog = useDialog();
   const user = useSelector((state: RootState) => state.users.data);
-  const [showHeaderSignIn, setShowHeaderSignIn] = useState<boolean>(false);
   const [sticky, setSticky] = useState<string>('');
 
   useEffect(() => {
@@ -31,17 +30,16 @@ export const Header = () => {
 
   const handleWrite = (e: any) => {
     e.preventDefault();
-    if(getData('token', '')) {
+    if (getData('token', '')) {
       navigate('/posts/new');
     } else {
       dialog?.addDialog({ content: <PopUpLogin /> });
-      setShowHeaderSignIn(!showHeaderSignIn);
     }
   };
 
   const handleSignOut = () => {
     dispatch(signOut());
-    setShowHeaderSignIn(!showHeaderSignIn);
+    localStorage.removeItem('token');
   };
 
   return (
@@ -55,11 +53,11 @@ export const Header = () => {
           </h1>
           <ul className="nav-list">
             <li className="nav-item">
-              <Link to="/posts/new" className="nav-link" onClick={handleWrite}> 
+              <Link to="/posts/new" className="nav-link" onClick={handleWrite}>
                 Write
               </Link>
             </li>
-            {getData('token', '') && !showHeaderSignIn ? (
+            {getData('token', '') ? (
               <li className="nav-item">
                 <div className="nav-image">
                   <img
@@ -71,26 +69,26 @@ export const Header = () => {
                     }}
                   />
                 </div>
-                  <ul className="dropdown-menu">
-                    <li className="dropdown-item">
-                      <Link to={`/profile/me`}>
-                        <i className="fa-solid fa-user"></i>
-                        Profile
-                      </Link>
-                    </li>
-                    <li className="dropdown-item">
-                      <Link to="/profile/update">
-                        <i className="fa-solid fa-file-pen"></i>
-                        Update Profile
-                      </Link>
-                    </li>
-                    <li className="dropdown-item" onClick={handleSignOut}>
-                      <Link to="">
-                        <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                        Sign Out
-                      </Link>
-                    </li>
-                  </ul>
+                <ul className="dropdown-menu">
+                  <li className="dropdown-item">
+                    <Link to={`/profile/me`}>
+                      <i className="fa-solid fa-user"></i>
+                      Profile
+                    </Link>
+                  </li>
+                  <li className="dropdown-item">
+                    <Link to="/">
+                      <i className="fa-solid fa-file-pen"></i>
+                      Update Profile
+                    </Link>
+                  </li>
+                  <li className="dropdown-item" onClick={handleSignOut}>
+                    <Link to="">
+                      <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                      Sign Out
+                    </Link>
+                  </li>
+                </ul>
               </li>
             ) : (
               <>

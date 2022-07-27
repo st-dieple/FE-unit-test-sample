@@ -14,10 +14,10 @@ import { Button } from '../../../shared/components/partials';
 import Image from '../../../../assets/images';
 import SekeletonRecommendPost from '../../../shared/components/partials/SekeletonRecommendPost';
 import SekeletonUserSidebar from '../../../shared/components/partials/SekeletonUserSidebar';
-import WithAuth from '../../../shared/components/hoc/WithAuth';
+import withAuthChecking from './../../../shared/components/hoc/withAuthChecking';
 
 const userService = new UserService();
-const FollowButtonTemplate = ({ authorsInfo, post, checkAuthen }: any) => {
+const ButtonFollowTemplate = ({ authorsInfo, post, checkAuthBeforeAction }: any) => {
   const dispatch = useDispatch();
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const handleFollow = () => {
@@ -43,9 +43,7 @@ const FollowButtonTemplate = ({ authorsInfo, post, checkAuthen }: any) => {
   };
 
   const doFollow = () => {
-    console.log('do follow');
-    
-    checkAuthen(handleFollow);
+    checkAuthBeforeAction(handleFollow);
   };
 
   return (
@@ -57,11 +55,11 @@ const FollowButtonTemplate = ({ authorsInfo, post, checkAuthen }: any) => {
   );
 };
 
-const ButtonFollow = WithAuth(FollowButtonTemplate);
+const ButtonFollow = withAuthChecking(ButtonFollowTemplate);
+
 const PostSideBar = () => {
   const dispatch = useDispatch();
   const authorsInfo = useSelector((state: RootState) => state.authors);
-  const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const post = useSelector((state: RootState) => state.postDetail);
   const postsRecommend = useSelector(
     (state: RootState) => state.postsRecommend
@@ -77,27 +75,6 @@ const PostSideBar = () => {
   useEffect(() => {
     dispatch(getPostsRecommend({ page: 1, size: 5 }));
   }, []);
-
-  const handleFollow = (id: number | string) => {
-    if (!isRequestingAPI) {
-      setIsRequestingAPI(true);
-      userService
-        .handleUserFollow({ followingId: id })
-        .then((res: any) => {
-          setIsRequestingAPI(false);
-          authorsInfo.data.isFollowed = res.followed;
-          if (res.followed) {
-            authorsInfo.data.followers = authorsInfo.data.followers + 1;
-          } else {
-            authorsInfo.data.followers = authorsInfo.data.followers - 1;
-          }
-          dispatch(getAuthorsInfoSuccess(authorsInfo.data));
-        })
-        .catch((error) => {
-          setIsRequestingAPI(false);
-        });
-    }
-  };
 
   return (
     <div className="article-sidebar">

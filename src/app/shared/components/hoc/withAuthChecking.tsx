@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import { getData } from '../../../core/helpers/localstorage';
 import { useDialog } from '../../contexts/dialog.contexts';
 import PopUpLogin from '../partials/PopupLogin';
 
-const WithAuth = (Wrapped: any) => {
+const withAuthChecking = (Wrapped: any) => {
   return (props: any) => {
     const dialog = useDialog();
-    const checkAuthen = (callback) => {
+    const checkAuthBeforeAction = (callback: any) => {
       if (getData('token', '')) callback();
       else {
-        dialog?.addDialog(<PopUpLogin />);
+        dialog?.addDialog({content: <PopUpLogin />});
       }
     };
 
     return (
       <>
-        <Wrapped {...props} checkAuthen={checkAuthen} />
+        <Wrapped {...props} checkAuthBeforeAction={checkAuthBeforeAction} />
       </>
     );
   };
 };
 
-export default WithAuth;
+export default withAuthChecking;
