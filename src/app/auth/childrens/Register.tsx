@@ -163,7 +163,7 @@ const Register = () => {
           {hasError && (
             <div className="error-box">
               <span className="txt-center txt-error">
-                {error.response.data.errors}
+                {error.response.data?.errors}
               </span>
             </div>
           )}

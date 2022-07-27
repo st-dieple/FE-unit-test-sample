@@ -19,7 +19,7 @@ const Login = () => {
     getValues,
   } = useForm();
 
-  const { data, hasError, isLoading, error } = useSelector((state: RootState) => state.login);
+  const { data, hasError, isLoading, error } = useSelector((state: RootState) => state.login);  
 
   const onSubmit = (data: any) => {
     dispatch(signIn({ dataLogin: { ...data } }));
@@ -75,7 +75,7 @@ const Login = () => {
           {hasError && (
             <div className="error-box">
               <span className="txt-center txt-error">
-                {error.response.data.errors}
+                {error.response.data?.errors}
               </span>
             </div>
           )}

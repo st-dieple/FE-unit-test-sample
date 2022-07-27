@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
 import { postComment } from '../../posts/posts.actions';
 import { Button } from '../../../shared/components/partials';
+import withAuthChecking from './../../../shared/components/hoc/withAuthChecking';
 
 const FormComment = ({ checkAuthBeforeAction }: any) => {
   const dispatch = useDispatch();
@@ -45,4 +46,4 @@ const FormComment = ({ checkAuthBeforeAction }: any) => {
   );
 };
 
-export default FormComment;
+export default withAuthChecking(FormComment);

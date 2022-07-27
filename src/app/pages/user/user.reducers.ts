@@ -67,6 +67,8 @@ export const usersReducer = (
           hasError: true,
           error: action.payload,
         };
+      case TYPES.CLEAR_USER_INFO:
+        return IInitUserProps;
     default:
       return state;
   }
