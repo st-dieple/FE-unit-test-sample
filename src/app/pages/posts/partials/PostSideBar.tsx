@@ -20,6 +20,7 @@ const userService = new UserService();
 const ButtonFollowTemplate = ({ authorsInfo, post, checkAuthBeforeAction }: any) => {
   const dispatch = useDispatch();
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
+  
   const handleFollow = () => {
     const id = post.data.user?.id;
     if (!isRequestingAPI) {

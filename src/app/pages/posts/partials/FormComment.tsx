@@ -17,7 +17,7 @@ const FormComment = ({ checkAuthBeforeAction }: any) => {
   } = useForm();
   const userInfo = useSelector((state: RootState) => state.users.data);
   const onSubmit = (data: any) => {
-    checkAuthBeforeAction(handleComment(data));
+    checkAuthBeforeAction(() => handleComment(data));
   };
 
   const handleComment = (data: any) => {
