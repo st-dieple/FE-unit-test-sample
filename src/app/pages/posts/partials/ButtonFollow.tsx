@@ -6,7 +6,7 @@ import withAuthChecking from '../../../shared/components/hoc/withAuthChecking';
 import { Button } from '../../../shared/components/partials';
 
 const userService = new UserService();
-const ButtonFollow = ({ authorsInfo, id, checkAuthBeforeAction }: any) => {
+const ButtonFollow = ({ userInfo, id, checkAuthBeforeAction }: any) => {
   const dispatch = useDispatch();
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
 
@@ -17,13 +17,13 @@ const ButtonFollow = ({ authorsInfo, id, checkAuthBeforeAction }: any) => {
         .handleUserFollow({ followingId: id })
         .then((res: any) => {
           setIsRequestingAPI(false);
-          authorsInfo.isFollowed = res.followed;
+          userInfo.isFollowed = res.followed;
           if (res.followed) {
-            authorsInfo.followers = authorsInfo.followers + 1;
+            userInfo.followers = userInfo.followers + 1;
           } else {
-            authorsInfo.followers = authorsInfo.followers - 1;
+            userInfo.followers = userInfo.followers - 1;
           }
-          dispatch(getAuthorsInfoSuccess(authorsInfo));
+          dispatch(getAuthorsInfoSuccess(userInfo));
         })
         .catch((error) => {
           setIsRequestingAPI(false);
@@ -38,7 +38,7 @@ const ButtonFollow = ({ authorsInfo, id, checkAuthBeforeAction }: any) => {
   return (
     <Button
       classBtn="btn btn-primary btn-follow"
-      text={authorsInfo.isFollowed ? 'Following' : 'Follow'}
+      text={userInfo.isFollowed ? 'Following' : 'Follow'}
       onClick={doFollow}
     />
   );
