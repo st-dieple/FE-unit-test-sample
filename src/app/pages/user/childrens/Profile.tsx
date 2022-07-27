@@ -41,8 +41,14 @@ const Profile = () => {
           ) : (
             <div className="message-post">
               Please
-              <Link to={'/auth/sign-in'} className="message-link">Sign In</Link>
-              to Lotus to view {authorsInfo.data.displayName}'s posts!
+              <Link to={'/auth/sign-in'} className="message-link">
+                Sign In
+              </Link>
+              to Lotus to view{' '}
+              <span className="message-name">
+                {authorsInfo.data.displayName}
+              </span>
+              's posts!
             </div>
           )}
         </>
