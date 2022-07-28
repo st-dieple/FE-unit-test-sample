@@ -32,7 +32,9 @@ const UserUpdateProfile = () => {
     formState: { errors },
   } = useForm();
 
-  const { data: dataUser, isLoading } = useSelector((state: RootState) => state.users);
+  const { data: dataUser, isLoading } = useSelector(
+    (state: RootState) => state.users
+  );
 
   useEffect(() => {
     if (Object.keys(dataUser).length) {
@@ -221,9 +223,7 @@ const UserUpdateProfile = () => {
           </div>
           {error && (
             <div className="error-box">
-              <span className="txt-center txt-error">
-                {error}
-              </span>
+              <span className="txt-center txt-error">{error}</span>
             </div>
           )}
           <Button

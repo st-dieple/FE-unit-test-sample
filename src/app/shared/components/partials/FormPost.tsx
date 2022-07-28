@@ -1,36 +1,31 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+// import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { Editor } from '@tinymce/tinymce-react';
-import { TagsInput } from 'react-tag-input-component';
+// import { TagsInput } from 'react-tag-input-component';
 import { SignaturesService } from './../../../core/serivces/signatures.service';
-import { createPost, updatePost } from '../../../pages/posts/posts.actions';
-import { getPostById } from './../../../pages/posts/posts.actions';
-import { RootState } from '../../../app.reducers';
+// import { createPost, updatePost } from '../../../pages/posts/posts.actions';
+// import { RootState } from '../../../app.reducers';
 import { COVER_POST_IMAGE } from '../../constants/constant';
-import { checkUserId } from '../../common/checkUserId';
-import Loading from './Loading';
+// import { checkUserId } from '../../common/checkUserId';
 import Toast from './Toast';
 
 const signaturesService = new SignaturesService();
 const FormPost = () => {
   const [selectedImage, setSelectedImage] = useState<string>(COVER_POST_IMAGE);
-  const [checkSuccess, setCheckSuccess] = useState<boolean>(false);
-  const [tags, setTags] = useState<string[]>();
+  // const [checkSuccess, setCheckSuccess] = useState<boolean>(false);
+  // const [tags, setTags] = useState<string[]>();
   const [toast, setToast] = useState<any>({
     hasLoading: false,
     type: '',
     title: '',
   });
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
   const { id } = useParams();
-  const posts = useSelector((state: RootState) => state.posts);
-  const { data, isLoading } = useSelector(
-    (state: RootState) => state.postDetail
-  );
+  // const posts = useSelector((state: RootState) => state.posts);
   const {
     register,
     handleSubmit,
@@ -47,69 +42,63 @@ const FormPost = () => {
     },
   });
 
-  useEffect(() => {
-    if (id) {
-      dispatch(getPostById({ id, checkPostById: checkPostById }));
-    }
-  }, [id]);
+  // const checkPostById = (data: any) => {
+  //   if (checkUserId(data.user?.id)) {
+  //     setValue('cover', data?.cover);
+  //     setValue('title', data?.title);
+  //     setValue('description', data?.description);
+  //     setValue('content', data?.content);
+  //     setValue('status', data?.status === 'public' ? false : true);
+  //     setSelectedImage(data?.cover);
+  //   } else {
+  //     navigate('/');
+  //   }
+  // };
 
-  const checkPostById = (data: any) => {
-    if (checkUserId(data.user?.id)) {
-      setValue('cover', data?.cover);
-      setValue('title', data?.title);
-      setValue('description', data?.description);
-      setValue('content', data?.content);
-      setValue('status', data?.status === 'public' ? false : true);
-      setSelectedImage(data?.cover);
-    } else {
-      navigate('/');
-    }
-  }
-
-  useEffect(() => {
-    let myTimeout: any;
-    let path: any;
-    if (
-      (posts.createData && checkSuccess) ||
-      (posts.updateData && checkSuccess)
-    ) {
-      if (id) {
-        setToast({
-          hasLoading: true,
-          type: 'success',
-          title: 'Update post successfully.',
-        });
-        path = `/posts/${posts.updateData.id}`;
-      } else {
-        setToast({
-          hasLoading: true,
-          type: 'success',
-          title: 'Create post successfully.',
-        });
-        path = `/posts/${posts.createData.id}`;
-      }
-      myTimeout = setTimeout(() => {
-        navigate(path);
-      }, 500);
-    }
-    return () => {
-      clearTimeout(myTimeout);
-    };
-    // eslint-disable-next-line
-  }, [posts.createData, posts.updateData]);
+  // useEffect(() => {
+  //   let myTimeout: any;
+  //   let path: any;
+  //   if (
+  //     (posts.createData && checkSuccess) ||
+  //     (posts.updateData && checkSuccess)
+  //   ) {
+  //     if (id) {
+  //       setToast({
+  //         hasLoading: true,
+  //         type: 'success',
+  //         title: 'Update post successfully.',
+  //       });
+  //       path = `/posts/${posts.updateData.id}`;
+  //     } else {
+  //       setToast({
+  //         hasLoading: true,
+  //         type: 'success',
+  //         title: 'Create post successfully.',
+  //       });
+  //       path = `/posts/${posts.createData.id}`;
+  //     }
+  //     myTimeout = setTimeout(() => {
+  //       navigate(path);
+  //     }, 500);
+  //   }
+  //   return () => {
+  //     clearTimeout(myTimeout);
+  //   };
+  //   // eslint-disable-next-line
+  // }, [posts.createData, posts.updateData]);
 
   const onSubmitForm = (data: any) => {
     const dataPost = { ...data };
     dataPost.status = data.status ? 'private' : 'public';
-    if (tags?.length) {
-      dataPost.tags = tags;
-    }
-    if (id) {
-      dispatch(updatePost({ id: id, data: dataPost }));
-    } else {
-      dispatch(createPost(dataPost));
-    }
-    setCheckSuccess(true);
+    // if (tags?.length) {
+    //   dataPost.tags = tags;
+    // }
+    // if (id) {
+    //   dispatch(updatePost({ id: id, data: dataPost }));
+    // } else {
+    //   dispatch(createPost(dataPost));
+    // }
+    // setCheckSuccess(true);
   };
 
   const handleChangeFile = async (e: any) => {
@@ -133,8 +122,7 @@ const FormPost = () => {
     }
     setSelectedImage(URL.createObjectURL(file));
   };
-  
-  if (id && isLoading) return <Loading />;
+
   return (
     <>
       {toast.hasLoading && <Toast type={toast.type} title={toast.title} />}
@@ -251,12 +239,12 @@ const FormPost = () => {
           </div>
           <div className="form-post-item">
             <label htmlFor="tags">Tags</label>
-            <TagsInput
+            {/* <TagsInput
               value={data.tags || []}
               onChange={setTags}
               name="tags"
               placeHolder="Enter tags"
-            />
+            /> */}
           </div>
           <div className="form-post-footer">
             <input
