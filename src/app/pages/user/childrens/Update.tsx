@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getUserInfo } from '../user.actions';
 import { getData } from '../../../core/helpers/localstorage';
-import { parseJwt } from '../../../core/helpers/parseJwt';
 import UserUpdatePassword from '../partials/UserUpdatePassword';
 import UserUpdateProfile from '../partials/UserUpdateProfile';
 import TabNav from '../../../shared/components/partials/TabNav';
@@ -14,8 +13,7 @@ const Update = () => {
 
   useEffect(() => {
     if(getData('token', '')) {
-      const userId = parseJwt(getData('token', '')).userId;     
-      dispatch(getUserInfo({id: userId}));
+      dispatch(getUserInfo({ id: 'me' }));
     }
   }, []);
 

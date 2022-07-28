@@ -11,28 +11,28 @@ interface ICommentProps {
 
 const Comment = ({ comment }: ICommentProps) => {
   return (
-    <li className="comment-item">
+    <li key={comment.id} className="comment-item">
       <div className="comment-header">
         <Link
           to={
-            checkUserId(comment.user.id)
+            checkUserId(comment.user?.id)
               ? `/profile/me`
-              : `/profile/${comment.user.id}`
+              : `/profile/${comment.user?.id}`
           }
           className="comment-user"
         >
           <div className="user-avatar">
             <img
-              src={comment.user.picture || Image.Avatar}
+              src={comment.user?.picture || Image.Avatar}
               alt="avatar"
               onError={(e: any) => {
-                e.target["onerror"] = null;
-                e.target["src"] = Image.Avatar;
+                e.target['onerror'] = null;
+                e.target['src'] = Image.Avatar;
               }}
             />
-            {comment.user.isActive && <span className="user-active"></span>}
+            {comment.user?.isActive && <span className="user-active"></span>}
           </div>
-          <h4 className="user-name">{comment.user.displayName}</h4>
+          <h4 className="user-name">{comment.user?.displayName}</h4>
           <p className="user-created">· {formatDate(comment.createdAt)}</p>
         </Link>
       </div>

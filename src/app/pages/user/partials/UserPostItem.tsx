@@ -1,16 +1,28 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { deletePost } from '../../posts/posts.actions';
+import React, { useState } from 'react';
 import { checkUserId } from '../../../shared/common/checkUserId';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Image from '../../../../assets/images';
 import { formatDate } from '../../../shared/common/formatDate';
 import { Tag } from '../../../shared/components/partials';
+import { PostService } from '../../../core/serivces/post.service';
 
+const postService = new PostService();
 const UserPostItem = ({ post }: any) => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isRequestingAPI, setIsRequestingAPI] = useState(false);
+
   const handleDelete = (id: string) => {
-    dispatch(deletePost({ id: id }));
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      postService
+        .deletePostService(id)
+        .then((res: any) => {
+          navigate('/posts');
+        })
+        .catch((error) => {
+          setIsRequestingAPI(false);
+        });
+    }
   };
 
   return (

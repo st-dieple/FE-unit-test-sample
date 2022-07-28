@@ -2,18 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
-import { signOut } from '../../../auth/auth.actions';
-import { useDialog } from '../../contexts/dialog.contexts';
-import { getData } from '../../../core/helpers/localstorage';
-import PopUpLogin from '../partials/PopupLogin';
+import { clearUserInfo } from '../../../pages/user/user.actions';
+import { AuthService } from '../../../core/serivces/auth.service';
+import withAuthChecking from '../hoc/withAuthChecking';
 import Image from '../../../../assets/images';
 
-export const Header = () => {
+const WriteTemplate = ({checkAuthBeforeAction}: any) => {
   const navigate = useNavigate();
+  const handleWrite = (e: any) => {
+    e.preventDefault();
+    checkAuthBeforeAction(() => navigate('/posts/new'));
+  };
+  return (
+    <li className="nav-item">
+      <Link to="/posts/new" className="nav-link" onClick={handleWrite}>
+        Write
+      </Link>
+    </li>
+  );
+};
+
+const Write = withAuthChecking(WriteTemplate);
+const authService = new AuthService();
+export const Header = () => {
   const dispatch = useDispatch();
-  const dialog = useDialog();
   const user = useSelector((state: RootState) => state.users.data);
   const [sticky, setSticky] = useState<string>('');
+  const [ isRequestingAPI, setIsRequestingAPI ] = useState<boolean>(false);
 
   useEffect(() => {
     window.addEventListener('scroll', isSticky);
@@ -28,18 +43,18 @@ export const Header = () => {
     setSticky(stickyClass);
   };
 
-  const handleWrite = (e: any) => {
-    e.preventDefault();
-    if (getData('token', '')) {
-      navigate('/posts/new');
-    } else {
-      dialog?.addDialog({ content: <PopUpLogin /> });
-    }
-  };
-
   const handleSignOut = () => {
-    dispatch(signOut());
-    localStorage.removeItem('token');
+    if(!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      authService.signOut().then((res: any) => {
+        setIsRequestingAPI(false);
+        localStorage.removeItem('token');
+        dispatch(clearUserInfo());
+      })
+      .catch((error: any) => {
+        setIsRequestingAPI(false);
+      })
+    }
   };
 
   return (
@@ -52,12 +67,8 @@ export const Header = () => {
             </Link>
           </h1>
           <ul className="nav-list">
-            <li className="nav-item">
-              <Link to="/posts/new" className="nav-link" onClick={handleWrite}>
-                Write
-              </Link>
-            </li>
-            {getData('token', '') ? (
+            <Write />
+            {Object.keys(user).length ? (
               <li className="nav-item">
                 <div className="nav-image">
                   <img
@@ -83,7 +94,7 @@ export const Header = () => {
                     </Link>
                   </li>
                   <li className="dropdown-item" onClick={handleSignOut}>
-                    <Link to="">
+                    <Link to="/">
                       <i className="fa-solid fa-arrow-right-from-bracket"></i>
                       Sign Out
                     </Link>

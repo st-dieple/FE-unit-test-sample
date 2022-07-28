@@ -1,26 +1,43 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { RootState } from '../../../app.reducers';
-import { getComment, getLike, getPostById } from '../posts.actions';
 import PostContent from '../partials/PostContent';
 import PostComment from '../partials/PostComment';
 import PostSideBar from '../partials/PostSideBar';
 import SekeletonPostContent from '../../../shared/components/partials/SekeletonPostContent';
 import SekeletonComment from '../../../shared/components/partials/SekeletonComment';
+import { PostService } from '../../../core/serivces/post.service';
+import SekeletonUserSidebar from '../../../shared/components/partials/SekeletonUserSidebar';
 
+const postService = new PostService();
 const PostDetail = () => {
-  const dispatch = useDispatch();
+  const [post, setPost] = useState<any>({});
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isRequestingAPI, setIsRequestingAPI] = useState(false);
+
   const { id } = useParams();
-  const posts = useSelector((state: RootState) => state.postDetail);
+
+  const getPostById = () => {
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      setLoading(true);
+      postService
+        .getPostsById({ id })
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          setPost({ ...post, ...res });
+          setLoading(false);
+        })
+        .catch((error) => {
+          setIsRequestingAPI(false);
+          setLoading(false);
+        });
+    }
+  };
 
   useEffect(() => {
     if (id) {
-      dispatch(getPostById({ id: id }));
-      dispatch(getLike({ id: id }));
-      dispatch(getComment({ id: id }));
+      getPostById();
     }
-    // eslint-disable-next-line
   }, [id]);
 
   return (
@@ -29,15 +46,11 @@ const PostDetail = () => {
         <div className="container">
           <div className="article row">
             <div className="col-8">
-              {posts.isLoading ? (
-                <SekeletonPostContent />
-              ) : (
-                <PostContent />
-              )}
-              {posts.isLoading ? <SekeletonComment /> : <PostComment />}
+              {loading ? <SekeletonPostContent /> : <PostContent post={post} />}
+              {loading ? <SekeletonComment /> : <PostComment />}
             </div>
             <div className="col-4">
-              <PostSideBar />
+              {loading ? <SekeletonUserSidebar /> : <PostSideBar post={post} />}
             </div>
           </div>
         </div>

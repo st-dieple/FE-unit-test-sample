@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { UserService } from '../../../core/serivces/user.service';
-import { getAuthorsInfoSuccess } from '../posts.actions';
 import withAuthChecking from '../../../shared/components/hoc/withAuthChecking';
 import { Button } from '../../../shared/components/partials';
-import { checkUserId } from '../../../shared/common/checkUserId';
 
 const userService = new UserService();
-const ButtonFollow = ({ authorsInfo, id, checkAuthBeforeAction }: any) => {
-  const dispatch = useDispatch();
+const ButtonFollow = ({
+  id,
+  authorInfo,
+  checkAuthBeforeAction,
+  setAuthorInfo,
+}: any) => {
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
-
+  console.log(id);
   const handleFollow = () => {
     if (!isRequestingAPI) {
       setIsRequestingAPI(true);
@@ -18,13 +19,18 @@ const ButtonFollow = ({ authorsInfo, id, checkAuthBeforeAction }: any) => {
         .handleUserFollow({ followingId: id })
         .then((res: any) => {
           setIsRequestingAPI(false);
-          authorsInfo.isFollowed = res.followed;
+          authorInfo.isFollowed = res.followed;
           if (res.followed) {
-            authorsInfo.followers = authorsInfo.followers + 1;
+            setAuthorInfo((authorInfo: any) => ({
+              ...authorInfo,
+              followers: authorInfo.followers + 1,
+            }));
           } else {
-            authorsInfo.followers = authorsInfo.followers - 1;
+            setAuthorInfo((authorInfo: any) => ({
+              ...authorInfo,
+              followers: authorInfo.followers - 1,
+            }));
           }
-          dispatch(getAuthorsInfoSuccess(authorsInfo));
         })
         .catch((error) => {
           setIsRequestingAPI(false);
@@ -37,13 +43,11 @@ const ButtonFollow = ({ authorsInfo, id, checkAuthBeforeAction }: any) => {
   };
 
   return (
-    !checkUserId(id) && (
-      <Button
-        classBtn="btn btn-primary btn-follow"
-        text={authorsInfo.isFollowed ? 'Following' : 'Follow'}
-        onClick={doFollow}
-      />
-    )
+    <Button
+      classBtn="btn btn-primary btn-follow"
+      text={authorInfo.isFollowed ? 'Following' : 'Follow'}
+      onClick={doFollow}
+    />
   );
 };
 
