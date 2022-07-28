@@ -7,15 +7,15 @@ import ButtonFollow from '../../posts/partials/ButtonFollow';
 import UserListFollow from './UserListFollow';
 
 interface IUserProps {
-  userInfo: IUser;
+  authorInfo: IUser;
 }
 
-const UserInfo = ({ userInfo }: IUserProps) => {
+const UserInfo = ({ authorInfo }: IUserProps) => {
   const dialog = useDialog();
   const [user, setUser] = useState<any>({});
   useEffect(() => {
-    setUser(userInfo);
-  }, [userInfo]);
+    setUser(authorInfo);
+  }, [authorInfo]);
 
   const handleListFollowers = () => {
     dialog?.addDialog({
@@ -46,7 +46,11 @@ const UserInfo = ({ userInfo }: IUserProps) => {
           </li>
         </ul>
         {!checkUserId(user.id) && (
-          <ButtonFollow userInfo={user} setUserInfo={setUser} />
+          <ButtonFollow
+            id={user.id}
+            authorInfo={user}
+            setAuthorInfo={setUser}
+          />
         )}
       </div>
     </div>

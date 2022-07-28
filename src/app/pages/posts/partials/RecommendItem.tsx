@@ -10,7 +10,7 @@ interface IArticleItemProps {
 
 const RecommendItem = ({ item }: IArticleItemProps) => {
   return (
-    <li className="article-item">
+    <li key={item.id} className="article-item">
       <div className="article-item-content">
         <h4 className="article-item-title">
           <Link to={`/posts/${item.id}`}>{item.title}</Link>
