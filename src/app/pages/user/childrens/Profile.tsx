@@ -14,29 +14,29 @@ const Profile = () => {
   const [isLoadingUser, setIsLoadingUser] = useState<boolean>(true);
 
   useEffect(() => {
-    if (getData('token', '') && id) {
-      setIsLoadingUser(true);
-      userService
-        .getUserPosts(id)
-        .then((res: any) => {
+    setIsLoadingUser(true);
+    userService
+      .getUserInfo(id!)
+      .then((userInfo: any) => {
+        if (!getData('token', '')) {
           setIsLoadingUser(false);
-          setAuthorInfo(res);
-        })
-        .catch((error: any) => {
-          setIsLoadingUser(false);
-        });
-    } else {
-      setIsLoadingUser(true);
-      userService
-        .getUserInfo(id!)
-        .then((res: any) => {
-          setIsLoadingUser(false);
-          setAuthorInfo(res);
-        })
-        .catch((error: any) => {
-          setIsLoadingUser(false);
-        });
-    }
+          setAuthorInfo(userInfo);
+        }
+        if (getData('token', '') && id) {
+          userService
+            .getUserPosts(id)
+            .then((res: any) => {
+              setIsLoadingUser(false);
+              setAuthorInfo({ ...res, isFollowed: userInfo.isFollowed });
+            })
+            .catch((error: any) => {
+              setIsLoadingUser(false);
+            });
+        }
+      })
+      .catch((error: any) => {
+        setIsLoadingUser(false);
+      });
   }, [id]);
 
   return (

@@ -87,7 +87,7 @@ const PostSideBar = (post: any) => {
             <ButtonFollow
               id={post.post?.user?.id}
               authorInfo={authorInfo}
-              setauthorInfo={setAuthorInfo}
+              setAuthorInfo={setAuthorInfo}
             />
           )}
         </div>

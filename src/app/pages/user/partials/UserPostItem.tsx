@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { deletePost } from '../../posts/posts.actions';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import { Link, useNavigate } from 'react-router-dom';
 import Image from '../../../../assets/images';

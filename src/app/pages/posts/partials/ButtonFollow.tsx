@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../app.reducers';
+import React, { useState } from 'react';
 import { UserService } from '../../../core/serivces/user.service';
 import withAuthChecking from '../../../shared/components/hoc/withAuthChecking';
 import { Button } from '../../../shared/components/partials';
