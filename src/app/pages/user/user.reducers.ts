@@ -15,13 +15,6 @@ const IInitUserProps = {
   error: '',
 };
 
-const IInitUserPostsProps = {
-  data: {},
-  isLoading: false,
-  hasError: false,
-  error: '',
-};
-
 export const usersReducer = (
   state: IStateData = IInitUserProps,
   action: IAction
@@ -49,46 +42,6 @@ export const usersReducer = (
       };
       case TYPES.CLEAR_USER_INFO:
         return IInitUserProps;
-    default:
-      return state;
-  }
-};
-
-export const userPostsReducer = (
-  state: IStateData = IInitUserPostsProps,
-  action: IAction
-) => {
-  switch (action.type) {
-    case TYPES.GET_USER_POST:
-      return {
-        ...state,
-        isLoading: true,
-      };
-
-    case TYPES.GET_USER_POST_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        data: action.payload,
-      };
-
-    case TYPES.GET_USER_POST_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        hasError: true,
-        error: action.payload,
-      };
-    case TYPES.DELETE_POST_SUCCESS:
-      const newPosts = [...state.data.Posts].filter(
-        (item) => item.id !== action.payload.id
-      );
-      return {
-        ...state,
-        isLoading: false,
-        error: '',
-        data: { ...state.data, Posts: newPosts },
-      };
     default:
       return state;
   }

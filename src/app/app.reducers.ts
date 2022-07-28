@@ -7,14 +7,13 @@ import {
   authorsReducer,
   postsDetailReducer,
 } from './pages/posts/posts.reducers';
-import { userPostsReducer, usersReducer } from './pages/user/user.reducers';
+import { usersReducer } from './pages/user/user.reducers';
 
 const rootReducer = combineReducers({
   posts: postsReducer,
   postDetail: postsDetailReducer,
   users: usersReducer,
   authors: authorsReducer,
-  usersPosts: userPostsReducer,
   postsRecommend: postsRecommendReducer,
   comments: commentsReducer,
   likes: likesReducer,

@@ -17,6 +17,8 @@ const PostSideBar = () => {
   const postsRecommend = useSelector(
     (state: RootState) => state.postsRecommend
   );
+  console.log(authorsInfo);
+  
 
   useEffect(() => {
     if (authorsInfo.data.id) {
@@ -58,7 +60,7 @@ const PostSideBar = () => {
             {authorsInfo.data.followers} Followers
           </span>
           <ButtonFollow
-            authorsInfo={authorsInfo.data}
+            userInfo={authorsInfo.data}
             id={post.data.user?.id}
           />
         </div>
