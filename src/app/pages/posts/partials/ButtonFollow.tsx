@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { UserService } from '../../../core/serivces/user.service';
 import withAuthChecking from '../../../shared/components/hoc/withAuthChecking';
 import { Button } from '../../../shared/components/partials';

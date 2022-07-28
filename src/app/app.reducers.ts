@@ -1,9 +1,5 @@
 import { combineReducers } from 'redux';
-import {
-  postsReducer,
-  commentsReducer,
-  authorsReducer,
-} from './pages/posts/posts.reducers';
+import { authorsReducer } from './pages/posts/posts.reducers';
 import { usersReducer } from './pages/user/user.reducers';
 
 const rootReducer = combineReducers({

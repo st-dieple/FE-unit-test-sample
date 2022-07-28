@@ -13,7 +13,7 @@ const SectionPost = () => {
   const [loadMore, setLoadMore] = useState<boolean>(false);
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const [page, setPage] = useState(1);
-  const [searchParams, setSearchParams] = useSearchParams({});
+  const [searchParams] = useSearchParams({});
   const paramsTag = searchParams.get('tags');
   const userCurrent = useSelector((state: RootState) => state.users);
 

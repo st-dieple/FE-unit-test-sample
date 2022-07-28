@@ -6,7 +6,6 @@ import { PostService } from '../../../core/serivces/post.service';
 const PostList = (props: any) => {
   const { posts } = props;
   const [postList, setPost] = useState<any>(props.posts);
-  const [loading, setLoading] = useState<boolean>(false);
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const postService = new PostService();
 
@@ -17,13 +16,11 @@ const PostList = (props: any) => {
   const handleDelete = (id: string) => {
     if (!isRequestingAPI) {
       setIsRequestingAPI(true);
-      setLoading(true);
       postService
         .deletePostService(id)
         .then((res: any) => {
           setPost([...postList].filter((item: any) => item.id !== id));
           setIsRequestingAPI(false);
-          setLoading(false);
         })
         .catch((error) => {
           setIsRequestingAPI(false);

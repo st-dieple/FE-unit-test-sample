@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+// import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { Editor } from '@tinymce/tinymce-react';
 // import { TagsInput } from 'react-tag-input-component';
 import { SignaturesService } from './../../../core/serivces/signatures.service';
-import { createPost, updatePost } from '../../../pages/posts/posts.actions';
-import { RootState } from '../../../app.reducers';
+// import { createPost, updatePost } from '../../../pages/posts/posts.actions';
+// import { RootState } from '../../../app.reducers';
 import { COVER_POST_IMAGE } from '../../constants/constant';
 // import { checkUserId } from '../../common/checkUserId';
 import Toast from './Toast';
@@ -15,15 +15,15 @@ import Toast from './Toast';
 const signaturesService = new SignaturesService();
 const FormPost = () => {
   const [selectedImage, setSelectedImage] = useState<string>(COVER_POST_IMAGE);
-  const [checkSuccess, setCheckSuccess] = useState<boolean>(false);
+  // const [checkSuccess, setCheckSuccess] = useState<boolean>(false);
   // const [tags, setTags] = useState<string[]>();
   const [toast, setToast] = useState<any>({
     hasLoading: false,
     type: '',
     title: '',
   });
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
   const { id } = useParams();
   // const posts = useSelector((state: RootState) => state.posts);
   const {
@@ -93,12 +93,12 @@ const FormPost = () => {
     // if (tags?.length) {
     //   dataPost.tags = tags;
     // }
-    if (id) {
-      dispatch(updatePost({ id: id, data: dataPost }));
-    } else {
-      dispatch(createPost(dataPost));
-    }
-    setCheckSuccess(true);
+    // if (id) {
+    //   dispatch(updatePost({ id: id, data: dataPost }));
+    // } else {
+    //   dispatch(createPost(dataPost));
+    // }
+    // setCheckSuccess(true);
   };
 
   const handleChangeFile = async (e: any) => {

@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { deletePost } from '../../../pages/posts/posts.actions';
 import { Tag } from './Tag';
 import { formatDate } from './../../common/formatDate';
 import { checkUserId } from '../../common/checkUserId';
-import { IPost } from './../../interfaces/post';
 import Image from '../../../../assets/images';
-import { PostService } from '../../../core/serivces/post.service';
 
 export const Post = ({ post, handleDelete }: any) => {
   return (
