@@ -21,7 +21,7 @@ const Profile = () => {
       dispatch(getUserPosts({ id }));
     }
     if (id) {
-      dispatch(getAuthorsInfo({ id: id }));
+      dispatch(getAuthorsInfo({ id }));
     }
   }, [id]);
 
@@ -30,7 +30,7 @@ const Profile = () => {
       {authorsInfo.isLoading ? (
         <SekeletonUserInfo />
       ) : (
-        <UserInfo userInfo={authorsInfo.data} />
+        <UserInfo userInfo={userPost.data} />
       )}
       {userPost.isLoading ? (
         <SekeletonPost />
@@ -44,7 +44,7 @@ const Profile = () => {
               <Link to={'/auth/sign-in'} className="message-link">
                 Sign In
               </Link>
-              to Lotus to view{' '}
+              to Lotus to view
               <span className="message-name">
                 {authorsInfo.data.displayName}
               </span>
