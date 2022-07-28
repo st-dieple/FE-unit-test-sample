@@ -6,6 +6,8 @@ import PostSideBar from '../partials/PostSideBar';
 import SekeletonPostContent from '../../../shared/components/partials/SekeletonPostContent';
 import SekeletonComment from '../../../shared/components/partials/SekeletonComment';
 import { PostService } from '../../../core/serivces/post.service';
+import SekeletonUserInfo from '../../../shared/components/partials/SekeletonUserInfo';
+import SekeletonUserSidebar from '../../../shared/components/partials/SekeletonUserSidebar';
 
 const postService = new PostService();
 const PostDetail = () => {
@@ -49,7 +51,7 @@ const PostDetail = () => {
               {loading ? <SekeletonComment /> : <PostComment />}
             </div>
             <div className="col-4">
-              <PostSideBar post={post} />
+              {loading ? <SekeletonUserSidebar /> : <PostSideBar post={post} />}
             </div>
           </div>
         </div>

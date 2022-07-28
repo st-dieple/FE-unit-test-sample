@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserService } from '../../../core/serivces/user.service';
 import { Button, Input } from '../../../shared/components/partials';
 import Toast from '../../../shared/components/partials/Toast';
+import { passwordValidator } from '../../../shared/validations/form.validation';
 
 const userService = new UserService();
 const UserUpdatePassword = () => {
@@ -65,26 +66,18 @@ const UserUpdatePassword = () => {
             type="password"
             placeholder="Old Password"
             textLabel="Old Password"
-            register={register("oldPassword", {
-              required: true,
-              minLength: 8,
-              maxLength: 20,
-            })}
+            register={register("oldPassword", passwordValidator())}
             isError={errors.oldPassword ? true : false}
-            errorsMsg="Please enter at least 8 characters."
+            errorsMsg={errors.oldPassword?.message}
           />
           <Input
             name="password"
             type="password"
             placeholder="New Password"
             textLabel="New Password"
-            register={register("newPassword", {
-              required: true,
-              minLength: 8,
-              maxLength: 20,
-            })}
+            register={register("newPassword", passwordValidator())}
             isError={errors.newPassword ? true : false}
-            errorsMsg="Please enter at least 8 characters."
+            errorsMsg={errors.newPassword?.message}
           />
           <Input
             name="password"
@@ -93,11 +86,11 @@ const UserUpdatePassword = () => {
             textLabel="Confirm Password"
             register={register("confirmPassword", {
               validate: (value) =>
-                value === checkPass || "The password is invalid",
+                value === checkPass || "The password is invalid.",
             })}
             isError={errors.confirmPassword ? true : false}
             errorsMsg={`${
-              errors.confirmPassword && errors.confirmPassword.message
+              errors.confirmPassword && errors.confirmPassword?.message
             }`}
           />
           <Button classBtn="btn btn-primary update-btn" text="Change" />

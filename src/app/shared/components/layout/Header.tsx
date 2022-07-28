@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
-import { signOut } from '../../../auth/auth.actions';
-import Image from '../../../../assets/images';
 import { clearUserInfo } from '../../../pages/user/user.actions';
+import { AuthService } from '../../../core/serivces/auth.service';
 import withAuthChecking from '../hoc/withAuthChecking';
+import Image from '../../../../assets/images';
 
 const WriteTemplate = ({checkAuthBeforeAction}: any) => {
   const navigate = useNavigate();
@@ -23,11 +23,12 @@ const WriteTemplate = ({checkAuthBeforeAction}: any) => {
 };
 
 const Write = withAuthChecking(WriteTemplate);
-
+const authService = new AuthService();
 export const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.users.data);
   const [sticky, setSticky] = useState<string>('');
+  const [ isRequestingAPI, setIsRequestingAPI ] = useState<boolean>(false);
 
   useEffect(() => {
     window.addEventListener('scroll', isSticky);
@@ -43,8 +44,17 @@ export const Header = () => {
   };
 
   const handleSignOut = () => {
-    dispatch(signOut());
-    dispatch(clearUserInfo());
+    if(!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      authService.signOut().then((res: any) => {
+        setIsRequestingAPI(false);
+        localStorage.removeItem('token');
+        dispatch(clearUserInfo());
+      })
+      .catch((error: any) => {
+        setIsRequestingAPI(false);
+      })
+    }
   };
 
   return (

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import { parseJwt } from '../core/helpers/parseJwt';
 import { getUserInfo } from './user/user.actions';
 import { getData } from '../core/helpers/localstorage';
 import { Header } from '../shared/components/layout';
@@ -11,8 +10,7 @@ const Page = () => {
 
   useEffect(() => {
     if (getData('token', '')) {
-      const getUserToken = parseJwt(getData('token', ''));
-      dispatch(getUserInfo({id: getUserToken.userId}));
+      dispatch(getUserInfo({id: 'me'}));
     }
     // eslint-disable-next-line
   }, []);

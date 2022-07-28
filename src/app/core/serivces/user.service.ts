@@ -7,6 +7,14 @@ export class UserService {
   // eslint-disable-next-line
   constructor() {}
 
+  getUserInfo(id: string | number) {
+    return this.http.get([`${ENDPOINT.users.index}/${id}`]);
+  }
+
+  getUserPosts(id: string | number) {
+    return this.http.get([`${ENDPOINT.users.index}/${id}/posts`]);
+  }
+
   handleUserFollow(data: any) {
     return this.http.post([ENDPOINT.friends.follow], data);
   }

@@ -25,7 +25,7 @@ const FormPost = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const posts = useSelector((state: RootState) => state.posts);
+  // const posts = useSelector((state: RootState) => state.posts);
   const {
     register,
     handleSubmit,
@@ -55,37 +55,37 @@ const FormPost = () => {
   //   }
   // };
 
-  useEffect(() => {
-    let myTimeout: any;
-    let path: any;
-    if (
-      (posts.createData && checkSuccess) ||
-      (posts.updateData && checkSuccess)
-    ) {
-      if (id) {
-        setToast({
-          hasLoading: true,
-          type: 'success',
-          title: 'Update post successfully.',
-        });
-        path = `/posts/${posts.updateData.id}`;
-      } else {
-        setToast({
-          hasLoading: true,
-          type: 'success',
-          title: 'Create post successfully.',
-        });
-        path = `/posts/${posts.createData.id}`;
-      }
-      myTimeout = setTimeout(() => {
-        navigate(path);
-      }, 500);
-    }
-    return () => {
-      clearTimeout(myTimeout);
-    };
-    // eslint-disable-next-line
-  }, [posts.createData, posts.updateData]);
+  // useEffect(() => {
+  //   let myTimeout: any;
+  //   let path: any;
+  //   if (
+  //     (posts.createData && checkSuccess) ||
+  //     (posts.updateData && checkSuccess)
+  //   ) {
+  //     if (id) {
+  //       setToast({
+  //         hasLoading: true,
+  //         type: 'success',
+  //         title: 'Update post successfully.',
+  //       });
+  //       path = `/posts/${posts.updateData.id}`;
+  //     } else {
+  //       setToast({
+  //         hasLoading: true,
+  //         type: 'success',
+  //         title: 'Create post successfully.',
+  //       });
+  //       path = `/posts/${posts.createData.id}`;
+  //     }
+  //     myTimeout = setTimeout(() => {
+  //       navigate(path);
+  //     }, 500);
+  //   }
+  //   return () => {
+  //     clearTimeout(myTimeout);
+  //   };
+  //   // eslint-disable-next-line
+  // }, [posts.createData, posts.updateData]);
 
   const onSubmitForm = (data: any) => {
     const dataPost = { ...data };
