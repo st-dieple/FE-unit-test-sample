@@ -14,8 +14,7 @@ const Update = () => {
 
   useEffect(() => {
     if(getData('token', '')) {
-      const userId = parseJwt(getData('token', '')).userId;     
-      dispatch(getUserInfo({id: userId}));
+      dispatch(getUserInfo({ id: 'me' }));
     }
   }, []);
 

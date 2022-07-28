@@ -6,10 +6,8 @@ import {
   getUserInfoSuccess,
   getUserPostsError,
   getUserPostsSuccess,
-  updateProfileUserError,
-  updateProfileUserSuccess
 } from './user.actions';
-import { UserService } from './../../core/serivces/user.service';
+import { UserService } from '../../core/serivces/user.service';
 import * as TYPES from '../../shared/constants/types';
 import { getData } from '../../core/helpers/localstorage';
 import { checkUserId } from '../../shared/common/checkUserId';
@@ -17,22 +15,10 @@ import { checkUserId } from '../../shared/common/checkUserId';
 const userService = new UserService();
 export function* getUserInfo({ payload }: any) {
   try {
-    const res: AxiosResponse<any> = yield axios.get(
-      `${environment.apiBaseUrl}${ENDPOINT.users.index}/${payload.id}`
-    );
-    yield put(getUserInfoSuccess(res.data));
+    const res: AxiosResponse<any> = yield userService.getUserInfo(payload.id);
+    yield put(getUserInfoSuccess(res));
   } catch (error) {
     yield put(getUserInfoError(error));
-  }
-}
-
-export function* updateProfileUser({ payload }: any) {
-  try {
-    const res: AxiosResponse<any> = yield userService.updateProfileUser(payload.data);
-    yield put(updateProfileUserSuccess(res));
-    payload.resolve();
-  } catch (error) {
-    yield put(updateProfileUserError(error));
   }
 }
 
@@ -63,6 +49,5 @@ export function* watchUser() {
   yield all([
     takeLatest(TYPES.GET_USER_INFO, getUserInfo),
     takeLatest(TYPES.GET_USER_POST, getUserPosts),
-    takeLatest(TYPES.UPDATE_PROFILE_USER, updateProfileUser)
   ]);
 }

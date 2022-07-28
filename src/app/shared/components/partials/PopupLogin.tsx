@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { useDialog } from './../../contexts/dialog.contexts';
 import { AuthService } from './../../../core/serivces/auth.service';
-import { getUserInfo } from '../../../pages/user/user.actions';
+import { getUserInfoSuccess } from '../../../pages/user/user.actions';
 import { storeData } from '../../../core/helpers/localstorage';
 import { Input } from './Input';
 import { Button } from './Button';
@@ -35,7 +35,7 @@ const PopUpLogin = () => {
         .then((res: any) => {
           setIsRequestingAPI(false);
           storeData('token', res.accessToken);
-          dispatch(getUserInfo({ id: res.userInfo.id }));
+          dispatch(getUserInfoSuccess(res.userInfo));
           dialog?.closeDialog();
         })
         .catch((error: any) => {

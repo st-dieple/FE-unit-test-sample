@@ -39,10 +39,7 @@ const Login = () => {
           setError(error.response.data?.errors);
         });
     }
-  };
-
-  console.log(errors.email?.message);
-  
+  };  
 
   return (
     <div className="page-content row">

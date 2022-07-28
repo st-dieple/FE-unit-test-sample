@@ -11,8 +11,7 @@ const Page = () => {
 
   useEffect(() => {
     if (getData('token', '')) {
-      const getUserToken = parseJwt(getData('token', ''));
-      dispatch(getUserInfo({id: getUserToken.userId}));
+      dispatch(getUserInfo({id: 'me'}));
     }
     // eslint-disable-next-line
   }, []);
