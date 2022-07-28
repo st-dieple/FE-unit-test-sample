@@ -26,8 +26,9 @@ export const nameValidator = () => {
   return {
     required: { value: true, message: 'is required.' },
     pattern: {
-      value: /^[a-zA-Z0-9_'-]+$/,
-      message: 'is valid.'
-    }
+      value:
+        /^[a-zA-Z0-9_ỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ'-]+$/,
+      message: 'is invalid.',
+    },
   };
-}
+};
