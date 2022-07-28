@@ -38,12 +38,6 @@ const initialStateComments = {
   error: '',
 };
 
-const initialStateLikes = {
-  data: [],
-  isLoading: false,
-  error: '',
-};
-
 const initialStateAuthorInfo = {
   data: {},
   isLoading: false,
@@ -55,54 +49,6 @@ export const postsReducer = (
   action: IAction
 ) => {
   switch (action.type) {
-    case TYPES.GET_POSTS:
-      return {
-        ...state,
-        isLoading: true,
-        loadMore: true,
-      };
-    case TYPES.GET_POSTS_SUCCESS:
-      return {
-        ...state,
-        data:
-          action.payload.currentPage === 1
-            ? [...action.payload.data]
-            : [...state.data, ...action.payload.data],
-        isLoading: false,
-        loadMore: action.payload.loadMore,
-        error: '',
-      };
-    case TYPES.GET_POSTS_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload,
-        loadMore: false,
-      };
-    case TYPES.GET_PUBLIC_POSTS:
-      return {
-        ...state,
-        isLoading: true,
-        loadMore: true,
-      };
-    case TYPES.GET_PUBLIC_POSTS_SUCCESS:
-      return {
-        ...state,
-        data:
-          action.payload.currentPage === 1
-            ? [...action.payload.data]
-            : [...state.data, ...action.payload.data],
-        isLoading: false,
-        loadMore: action.payload.loadMore,
-        error: '',
-      };
-    case TYPES.GET_PUBLIC_POSTS_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload,
-        loadMore: false,
-      };
     case TYPES.CREATE_POST:
       return {
         ...state,
@@ -264,54 +210,6 @@ export const postsRecommendReducer = (
       };
     case TYPES.RESET_POST_DETAIL_DATA:
       return initialStatePostsRecommend;
-    default:
-      return state;
-  }
-};
-
-export const likesReducer = (
-  state: IStateCommon = initialStateLikes,
-  action: IAction
-) => {
-  switch (action.type) {
-    case TYPES.GET_LIKE:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case TYPES.GET_LIKE_SUCCESS:
-      return {
-        ...state,
-        data: action.payload,
-        isLoading: false,
-        error: '',
-      };
-    case TYPES.GET_LIKE_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload,
-      };
-    case TYPES.PUT_LIKE:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case TYPES.PUT_LIKE_SUCCESS:
-      return {
-        ...state,
-        data: action.payload,
-        isLoading: false,
-        error: '',
-      };
-    case TYPES.PUT_LIKE_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload,
-      };
-    case TYPES.RESET_POST_DETAIL_DATA:
-      return initialStateLikes;
     default:
       return state;
   }

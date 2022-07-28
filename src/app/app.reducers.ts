@@ -4,7 +4,6 @@ import {
   postsReducer,
   postsRecommendReducer,
   commentsReducer,
-  likesReducer,
   authorsReducer,
   postsDetailReducer,
 } from './pages/posts/posts.reducers';
@@ -20,7 +19,6 @@ const rootReducer = combineReducers({
   usersPosts: userPostsReducer,
   postsRecommend: postsRecommendReducer,
   comments: commentsReducer,
-  likes: likesReducer,
 });
 
 export default rootReducer;

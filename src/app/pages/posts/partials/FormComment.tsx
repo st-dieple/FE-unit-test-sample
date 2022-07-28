@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -6,24 +6,45 @@ import { RootState } from '../../../app.reducers';
 import { postComment } from '../../posts/posts.actions';
 import { Button } from '../../../shared/components/partials';
 import withAuthChecking from './../../../shared/components/hoc/withAuthChecking';
+import { PostService } from '../../../core/serivces/post.service';
 
-const FormComment = ({ checkAuthBeforeAction }: any) => {
-  const dispatch = useDispatch();
-  const { id } = useParams();
+const postService = new PostService();
+const FormComment = ({
+  postId,
+  setListComments,
+  checkAuthBeforeAction,
+}: any) => {
+  const userInfo = useSelector((state: RootState) => state.users);
+  const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
   } = useForm();
-  const userInfo = useSelector((state: RootState) => state.users.data);
+
   const onSubmit = (data: any) => {
-    checkAuthBeforeAction(() => handleComment(data));
+    postCommentPost(data);
   };
 
-  const handleComment = (data: any) => {
-    dispatch(postComment({ id, data, userInfo }));
-    setValue('content', '');
+  const postCommentPost = (data: any) => {
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      postService
+        .postCommentPostsDetail(postId, data)
+        .then((res: any) => {
+          const newComment = {
+            ...res,
+            user: { ...userInfo.data, ...{ isActive: true, isAdmin: true } },
+          };
+          setListComments((pre) => ([...[newComment], ...pre]));
+          setValue('content', '');
+          setIsRequestingAPI(false);
+        })
+        .catch((error) => {
+          setIsRequestingAPI(false);
+        });
+    }
   };
 
   return (

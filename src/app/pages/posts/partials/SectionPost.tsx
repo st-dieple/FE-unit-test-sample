@@ -1,39 +1,77 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
-import { getPosts, getPublicPosts } from './../posts.actions';
+import { PostService } from '../../../core/serivces/post.service';
 import PostList from './PostList';
 import SekeletonPost from '../../../shared/components/partials/SekeletonPost';
 
+const postService = new PostService();
 const SectionPost = () => {
-  const dispatch = useDispatch();
+  const [posts, setPosts] = useState<any>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [loadMore, setLoadMore] = useState<boolean>(false);
+  const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const [page, setPage] = useState(1);
-  const posts = useSelector((state: RootState) => state.posts);
-  const userCurrent = useSelector((state: RootState) => state.users);
-
-  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams({});
   const paramsTag = searchParams.get('tags');
+  const userCurrent = useSelector((state: RootState) => state.users);
 
   useEffect(() => {
     setPage(1);
   }, [paramsTag]);
 
+  const getPublicPosts = () => {
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      setLoading(true);
+      postService
+        .getPublicPosts({ tags: paramsTag, page, size: 5 })
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          setPosts([...posts, ...res.data]);
+          setLoading(false);
+          setLoadMore(res.loadMore);
+        })
+        .catch((error) => {
+          setIsRequestingAPI(false);
+          setLoading(false);
+        });
+    }
+  };
+
+  const getPosts = () => {
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      setLoading(true);
+      postService
+        .getPosts({ tags: paramsTag, page, size: 5 })
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          setPosts([...posts, ...res.data]);
+          setLoading(false);
+          setLoadMore(res.loadMore);
+        })
+        .catch((error) => {
+          setIsRequestingAPI(false);
+          setLoading(false);
+        });
+    }
+  };
+
   useEffect(() => {
     if (userCurrent) {
-      dispatch(getPublicPosts({ tags: paramsTag, page, size: 5 }));
+      getPublicPosts();
     } else {
-      dispatch(getPosts({ tags: paramsTag, page, size: 5 }));
+      getPosts();
     }
-    // eslint-disable-next-line
   }, [page, paramsTag]);
 
   useEffect(() => {
-    if (!posts.isLoading && posts.loadMore) {
+    if (!loading && loadMore) {
       window.addEventListener('scroll', handleScroll);
     }
-  }, [posts.isLoading, posts.loadMore]);
+  }, [loading, loadMore]);
 
   const handleScroll = (e: any) => {
     if (
@@ -47,8 +85,8 @@ const SectionPost = () => {
 
   return (
     <section className="section section-post">
-      <PostList posts={posts.data} />
-      {posts.isLoading && <SekeletonPost />}
+      <PostList posts={posts} />
+      {loading && <SekeletonPost />}
     </section>
   );
 };

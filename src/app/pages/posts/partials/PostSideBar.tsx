@@ -1,23 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../app.reducers';
-import { getAuthorsInfo, getPostsRecommend } from '../posts.actions';
+import { getAuthorsInfo } from '../posts.actions';
 import RecommendList from './RecommendList';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import Image from '../../../../assets/images';
 import SekeletonRecommendPost from '../../../shared/components/partials/SekeletonRecommendPost';
 import SekeletonUserSidebar from '../../../shared/components/partials/SekeletonUserSidebar';
 import ButtonFollow from './ButtonFollow';
+import { PostService } from '../../../core/serivces/post.service';
 
-const PostSideBar = () => {
+const postService = new PostService();
+const PostSideBar = (post: any) => {
+  const [postsRecommend, setPostsRecommend] = useState<any>([]);
+  const [loading, setLoading] = useState<any>([]);
+  const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const dispatch = useDispatch();
   const authorsInfo = useSelector((state: RootState) => state.authors);
-  const post = useSelector((state: RootState) => state.postDetail);
-  const postsRecommend = useSelector(
-    (state: RootState) => state.postsRecommend
-  );
-
+  // const post = useSelector((state: RootState) => state.postDetail);
   useEffect(() => {
     if (authorsInfo.data.id) {
       dispatch(getAuthorsInfo({ id: authorsInfo.data.id }));
@@ -25,8 +26,26 @@ const PostSideBar = () => {
     // eslint-disable-next-line
   }, [authorsInfo.data.id]);
 
+  const getPostsRecommend = () => {
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      setLoading(true);
+      postService
+        .getPostsRecommend({ page: 1, size: 5 })
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          setPostsRecommend([...postsRecommend, ...res.data]);
+          setLoading(false);
+        })
+        .catch((error) => {
+          setIsRequestingAPI(false);
+          setLoading(false);
+        });
+    }
+  };
+
   useEffect(() => {
-    dispatch(getPostsRecommend({ page: 1, size: 5 }));
+    getPostsRecommend();
   }, []);
 
   return (
@@ -37,38 +56,38 @@ const PostSideBar = () => {
         <div className="author-sidebar">
           <Link
             to={
-              checkUserId(post.data.user?.id)
+              checkUserId(post.post.user?.id)
                 ? `/profile/me`
-                : `/profile/${post.data.user?.id}`
+                : `/profile/${post.post.user?.id}`
             }
             className="author-info"
           >
             <img
               className="author-sidebar-image"
-              src={post.data.user?.picture || Image.Avatar}
-              alt={post.data.user?.displayName}
+              src={post.post.user?.picture || Image.Avatar}
+              alt={post.post.user?.displayName}
               onError={(e: any) => {
                 e.target['onerror'] = null;
                 e.target['src'] = Image.Avatar;
               }}
             />
-            <h4 className="author-info-name">{post.data.user?.displayName}</h4>
+            <h4 className="author-info-name">{post.post.user?.displayName}</h4>
           </Link>
           <span className="author-follower">
             {authorsInfo.data.followers} Followers
           </span>
           <ButtonFollow
             authorsInfo={authorsInfo.data}
-            id={post.data.user?.id}
+            id={post.post.user?.id}
           />
         </div>
       )}
       <div className="article-recommend">
         <h3 className="recommend-title">Recommend Posts</h3>
-        {postsRecommend.isLoading ? (
+        {loading ? (
           <SekeletonRecommendPost />
         ) : (
-          <RecommendList data={postsRecommend.data} />
+          <RecommendList data={postsRecommend} />
         )}
       </div>
     </div>

@@ -109,36 +109,6 @@ export const getAuthorsInfoError = (error: any) => ({
   payload: error,
 });
 
-export const getPosts = (payload: any) => ({
-  type: TYPES.GET_POSTS,
-  payload,
-});
-
-export const getPostsSuccess = (posts: any) => ({
-  type: TYPES.GET_POSTS_SUCCESS,
-  payload: posts,
-});
-
-export const getPostsError = (error: any) => ({
-  type: TYPES.GET_POSTS_ERROR,
-  payload: error,
-});
-
-export const getPublicPosts = (payload: any) => ({
-  type: TYPES.GET_PUBLIC_POSTS,
-  payload,
-});
-
-export const getPublicPostsSuccess = (posts: any) => ({
-  type: TYPES.GET_PUBLIC_POSTS_SUCCESS,
-  payload: posts,
-});
-
-export const getPublicPostsError = (error: any) => ({
-  type: TYPES.GET_PUBLIC_POSTS_ERROR,
-  payload: error,
-});
-
 export const createPost = (payload: any) => ({
   type: TYPES.CREATE_POST,
   payload,
