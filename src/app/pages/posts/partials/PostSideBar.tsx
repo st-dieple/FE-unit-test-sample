@@ -16,9 +16,7 @@ const PostSideBar = () => {
   const post = useSelector((state: RootState) => state.postDetail);
   const postsRecommend = useSelector(
     (state: RootState) => state.postsRecommend
-  );
-  console.log(authorsInfo);
-  
+  );  
 
   useEffect(() => {
     if (authorsInfo.data.id) {

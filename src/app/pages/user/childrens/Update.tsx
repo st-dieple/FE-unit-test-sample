@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getUserInfo } from '../user.actions';
 import { getData } from '../../../core/helpers/localstorage';
-import { parseJwt } from '../../../core/helpers/parseJwt';
 import UserUpdatePassword from '../partials/UserUpdatePassword';
 import UserUpdateProfile from '../partials/UserUpdateProfile';
 import TabNav from '../../../shared/components/partials/TabNav';
