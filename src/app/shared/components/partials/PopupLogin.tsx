@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useSelector, useDispatch } from 'react-redux';
-import { signIn } from '../../../auth/auth.actions';
-import { RootState } from '../../../app.reducers';
+import { useDispatch } from 'react-redux';
 import { useDialog } from './../../contexts/dialog.contexts';
+import { AuthService } from './../../../core/serivces/auth.service';
+import { getUserInfo } from '../../../pages/user/user.actions';
+import { storeData } from '../../../core/helpers/localstorage';
 import { Input } from './Input';
 import { Button } from './Button';
 import Image from '../../../../assets/images';
 
+const authService = new AuthService();
 const PopUpLogin = () => {
   const {
     register,
@@ -19,19 +21,26 @@ const PopUpLogin = () => {
   const dispatch = useDispatch();
   const dialog = useDialog();
 
-  const { data, hasError, isLoading, error } = useSelector(
-    (state: RootState) => state.login
-  );
+  const [ isRequestingAPI, setIsRequestingAPI ] = useState<boolean>(false);
+  const [ error, setError ] = useState('');
 
   const onSubmit = (data: any) => {
-    dispatch(signIn({ dataLogin: { ...data } }));
-  };
-
-  useEffect(() => {
-    if (Object.keys(data).length) {
-      dialog?.closeDialog();
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      authService
+        .signIn(data)
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          storeData('token', res.accessToken);
+          dispatch(getUserInfo({ id: res.userInfo.id }));
+          dialog?.closeDialog();
+        })
+        .catch((error: any) => {
+          setIsRequestingAPI(false);
+          setError(error.response.data?.errors);
+        });
     }
-  }, [data]);
+  };
 
   return (
     <form className="popup-login" onSubmit={handleSubmit(onSubmit)}>
@@ -69,10 +78,10 @@ const PopUpLogin = () => {
           isError={errors.password ? true : false}
           errorsMsg="Please enter at least 8 characters."
         />
-        {hasError && (
+        {error && (
           <div className="error-box">
             <span className="txt-center txt-error">
-              {error.response.data.errors}
+              {error}
             </span>
           </div>
         )}
@@ -81,7 +90,7 @@ const PopUpLogin = () => {
         <Button
           classBtn="btn btn-primary popup-login-btn"
           text="Sign in"
-          isLoading={isLoading}
+          isLoading={isRequestingAPI}
         />
       </div>
       <Link to="/" className="tip-link">

@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { signUp } from './../auth.actions';
-import { RootState } from '../../app.reducers';
+import { AuthService } from '../../core/serivces/auth.service';
 import { Button, Input } from '../../shared/components/partials';
 import Image from '../../../assets/images';
 import Toast from '../../shared/components/partials/Toast';
 import { validateDob } from '../../shared/common/validateDob';
 
+const authService = new AuthService();
 const Register = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [toast, setToast] = useState<any>({
     hasLoading: false,
     type: '',
     title: '',
   });
-  const [checkSuccess, setCheckSuccess] = useState<boolean>(false);
-
+  const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
+  const [ error, setError ] = useState('');
   const {
     register,
     handleSubmit,
@@ -26,41 +24,35 @@ const Register = () => {
     getValues,
   } = useForm();
 
-  const { data, hasError, isLoading, error } = useSelector(
-    (state: RootState) => state.register
-  );
-
   const onSubmit = (data: any) => {
-    dispatch(
-      signUp({
-        data: {
-          ...data,
-          dob: data.dob.split('-').reverse().join('/'),
-        },
-      })
-    );
-    setCheckSuccess(true);
-  };
-
-  useEffect(() => {
-    let myTimeout: any;
-    if (data && checkSuccess) {
-      setToast({
-        hasLoading: true,
-        type: 'success',
-        title: 'Create an account successfully.',
-      });
-      myTimeout = setTimeout(() => {
-        navigate('/auth/sign-in');
-      }, 500);
-    }
-    return () => {
-      clearTimeout(myTimeout);
+    const dataRegister = {
+      ...data,
+      dob: data.dob.split('-').reverse().join('/'),
     };
-
-    // eslint-disable-next-line
-  }, [data]);
-
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      authService
+        .signUp(dataRegister)
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          setToast({
+            hasLoading: true,
+            type: 'success',
+            title: 'Create an account successfully.',
+          });
+          const myTimeout = setTimeout(() => {
+            navigate('/auth/sign-in');
+          }, 500);
+          return () => {
+            clearTimeout(myTimeout);
+          };
+        })
+        .catch((error: any) => {
+          setIsRequestingAPI(false);
+          setError(error.response.data?.errors);
+        });
+    }
+  };
   return (
     <>
       {toast.hasLoading && <Toast type={toast.type} title={toast.title} />}
@@ -77,7 +69,7 @@ const Register = () => {
               name="firstName"
               placeholder="First Name"
               textLabel="First Name"
-              register={register("firstName", {
+              register={register('firstName', {
                 required: true,
                 pattern: /^[a-zA-Z]+$/,
               })}
@@ -89,7 +81,7 @@ const Register = () => {
               name="lastName"
               placeholder="Last Name"
               textLabel="Last Name"
-              register={register("lastName", {
+              register={register('lastName', {
                 required: true,
                 pattern: /^[a-zA-Z]+$/,
               })}
@@ -101,7 +93,7 @@ const Register = () => {
               name="displayName"
               placeholder="User Name"
               textLabel="User Name"
-              register={register("displayName", {
+              register={register('displayName', {
                 required: true,
                 pattern: /^[a-zA-Z0-9]+$/,
               })}
@@ -113,13 +105,13 @@ const Register = () => {
               name="email"
               placeholder="Email"
               textLabel="Email"
-              register={register("email", {
+              register={register('email', {
                 required: true,
                 pattern: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
               })}
               isError={errors.email ? true : false}
               errorsMsg={`Email address is ${
-                getValues("email") ? "invalid." : "required."
+                getValues('email') ? 'invalid.' : 'required.'
               }`}
             />
             <Input
@@ -127,7 +119,7 @@ const Register = () => {
               name="password"
               placeholder="Your Password"
               textLabel="Password"
-              register={register("password", {
+              register={register('password', {
                 required: true,
                 minLength: 8,
                 maxLength: 20,
@@ -140,8 +132,8 @@ const Register = () => {
               name="dob"
               placeholder="Date of Birth"
               textLabel="Date of Birth"
-              register={register("dob", {
-                required: "required",
+              register={register('dob', {
+                required: 'required',
                 validate: validateDob,
               })}
               isError={errors.dob ? true : false}
@@ -152,7 +144,7 @@ const Register = () => {
             <div className="form-group">
               <select
                 className="form-control form-gender"
-                {...register("gender", { required: true })}
+                {...register('gender', { required: true })}
               >
                 <option value="male">Male</option>
                 <option value="female">Female</option>
@@ -160,10 +152,10 @@ const Register = () => {
               <label className="label">Gender</label>
             </div>
           </div>
-          {hasError && (
+          {error && (
             <div className="error-box">
               <span className="txt-center txt-error">
-                {error.response.data?.errors}
+                {error}
               </span>
             </div>
           )}
@@ -171,26 +163,26 @@ const Register = () => {
             <Button
               classBtn="btn btn-primary btn-auth"
               text="Sign up"
-              isLoading={isLoading}
+              isLoading={isRequestingAPI}
             />
           </div>
           <p className="tip-text">
             Already have an account?
             <Link to="/auth/sign-in" className="tip-link">
-              {" "}
-              Sign In{" "}
+              {' '}
+              Sign In{' '}
             </Link>
           </p>
           <p className="tip-text">
             By signing up, you confirm that you've read and accepted our
             <Link to="/" className="tip-link">
-              {" "}
-              Terms of Service{" "}
+              {' '}
+              Terms of Service{' '}
             </Link>
             and
             <Link to="/" className="tip-link">
-              {" "}
-              Privacy Policy{" "}
+              {' '}
+              Privacy Policy{' '}
             </Link>
           </p>
         </form>

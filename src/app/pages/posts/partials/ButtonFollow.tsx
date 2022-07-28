@@ -38,7 +38,7 @@ const ButtonFollow = ({ userInfo, id, checkAuthBeforeAction }: any) => {
   return (
     <Button
       classBtn="btn btn-primary btn-follow"
-      text={userInfo.isFollowed ? 'Following' : 'Follow'}
+      text={'Follow'}
       onClick={doFollow}
     />
   );

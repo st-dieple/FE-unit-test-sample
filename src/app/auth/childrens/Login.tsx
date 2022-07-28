@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { signIn } from '../auth.actions';
 import { Input } from '../../shared/components/partials';
 import { Button } from '../../shared/components/partials';
 import Image from '../../../assets/images';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../app.reducers';
+import { AuthService } from '../../core/serivces/auth.service';
+import { storeData } from '../../core/helpers/localstorage';
+import { getUserInfo } from '../../pages/user/user.actions';
 
+const authService = new AuthService();
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,18 +20,26 @@ const Login = () => {
     getValues,
   } = useForm();
 
-  const { data, hasError, isLoading, error } = useSelector((state: RootState) => state.login);  
+  const [ isRequestingAPI, setIsRequestingAPI ] = useState<boolean>(false);
+  const [ error, setError ] = useState('');
 
   const onSubmit = (data: any) => {
-    dispatch(signIn({ dataLogin: { ...data } }));
-  };
-
-  useEffect(() => {
-    if (Object.keys(data).length) {
-      navigate('/');
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      authService
+        .signIn(data)
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          storeData('token', res.accessToken);
+          dispatch(getUserInfo({ id: res.userInfo.id }));
+          navigate('/');
+        })
+        .catch((error: any) => {
+          setIsRequestingAPI(false);
+          setError(error.response.data?.errors);
+        });
     }
-    // eslint-disable-next-line
-  }, [data]);
+  };
 
   return (
     <div className="page-content row">
@@ -72,15 +81,15 @@ const Login = () => {
             errorsMsg="Please enter at least 8 characters."
           />
         </div>
-          {hasError && (
+          {error && (
             <div className="error-box">
               <span className="txt-center txt-error">
-                {error.response.data?.errors}
+                {error}
               </span>
             </div>
           )}
         <div className="form-btn">
-          <Button classBtn="btn btn-primary btn-auth" text="Sign in" isLoading={isLoading} />
+          <Button classBtn="btn btn-primary btn-auth" text="Sign in" isLoading={isRequestingAPI} />
         </div>
         <Link to="/" className="tip-link">
           Forgot your password?
