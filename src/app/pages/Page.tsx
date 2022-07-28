@@ -18,7 +18,7 @@ const Page = () => {
   return (
     <>
       <Header />
-        <Outlet />
+      <Outlet />
     </>
   );
 };
