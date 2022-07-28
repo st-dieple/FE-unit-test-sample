@@ -9,6 +9,7 @@ import { validateDob } from '../../../shared/common/validateDob';
 import Image from '../../../../assets/images';
 import Loading from '../../../shared/components/partials/Loading';
 import Toast from '../../../shared/components/partials/Toast';
+import { nameValidator } from '../../../shared/validations/form.validation';
 
 const signaturesService = new SignaturesService();
 const UserUpdateProfile = () => {
@@ -133,37 +134,27 @@ const UserUpdateProfile = () => {
               name="firstName"
               placeholder="First Name"
               textLabel="First Name"
-              register={register('firstName', {
-                required: true,
-                pattern: /^[a-zA-Z]+$/,
-              })}
+              register={register('firstName', nameValidator())}
               isError={errors.firstName ? true : false}
-              errorsMsg="First name is required."
+              errorsMsg={`First name ${errors.firstName?.message}`}
             />
             <Input
               type="text"
               name="lastName"
               placeholder="Last Name"
               textLabel="Last Name"
-              register={register('lastName', {
-                required: true,
-                pattern: /^[a-zA-Z]+$/,
-              })}
+              register={register('lastName', nameValidator())}
               isError={errors.lastName ? true : false}
-              errorsMsg="Last name is required."
+              errorsMsg={`Last name ${errors.lastName?.message}`}
             />
             <Input
               type="text"
               name="displayName"
               placeholder="User Name"
               textLabel="User Name"
-              register={register('displayName', {
-                required: true,
-                pattern: /[A-Za-z0-9_'-]/,
-                maxLength: 20,
-              })}
+              register={register('displayName', nameValidator())}
               isError={errors.displayName ? true : false}
-              errorsMsg="User name is required."
+              errorsMsg={`User name ${errors.displayName?.message}`}
             />
             <Input
               type="text"

@@ -5,7 +5,7 @@ interface IInputProps {
   name: string;
   placeholder?: string;
   register?: any;
-  errorsMsg?: string;
+  errorsMsg?: any;
   textLabel?: string;
   isError?: boolean;
 };

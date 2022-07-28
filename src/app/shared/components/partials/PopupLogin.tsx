@@ -9,6 +9,10 @@ import { storeData } from '../../../core/helpers/localstorage';
 import { Input } from './Input';
 import { Button } from './Button';
 import Image from '../../../../assets/images';
+import {
+  emailValidator,
+  passwordValidator,
+} from '../../validations/form.validation';
 
 const authService = new AuthService();
 const PopUpLogin = () => {
@@ -21,8 +25,8 @@ const PopUpLogin = () => {
   const dispatch = useDispatch();
   const dialog = useDialog();
 
-  const [ isRequestingAPI, setIsRequestingAPI ] = useState<boolean>(false);
-  const [ error, setError ] = useState('');
+  const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
+  const [error, setError] = useState('');
 
   const onSubmit = (data: any) => {
     if (!isRequestingAPI) {
@@ -56,33 +60,22 @@ const PopUpLogin = () => {
           name="email"
           placeholder="Email"
           textLabel="Email"
-          register={register("email", {
-            required: true,
-            pattern: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-          })}
+          register={register('email', emailValidator())}
           isError={errors.email ? true : false}
-          errorsMsg={`Email address is ${
-            getValues("email") ? "valid" : "required"
-          }`}
+          errorsMsg={errors.email?.message}
         />
         <Input
           type="password"
           name="password"
           placeholder="Your Password"
           textLabel="Password"
-          register={register("password", {
-            required: true,
-            minLength: 8,
-            maxLength: 20,
-          })}
+          register={register('password', passwordValidator())}
           isError={errors.password ? true : false}
-          errorsMsg="Please enter at least 8 characters."
+          errorsMsg={errors.password?.message}
         />
         {error && (
           <div className="error-box">
-            <span className="txt-center txt-error">
-              {error}
-            </span>
+            <span className="txt-center txt-error">{error}</span>
           </div>
         )}
       </div>
@@ -98,7 +91,10 @@ const PopUpLogin = () => {
       </Link>
       <p className="tip-text">
         Don’t have an account?
-        <Link to="/auth/sign-up" className="tip-link"> Sign up </Link>
+        <Link to="/auth/sign-up" className="tip-link">
+          {' '}
+          Sign up{' '}
+        </Link>
       </p>
     </form>
   );
