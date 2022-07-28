@@ -11,7 +11,7 @@ import { PostService } from '../../../core/serivces/post.service';
 const postService = new PostService();
 const PostSideBar = (post: any) => {
   const [postsRecommend, setPostsRecommend] = useState<any>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<any>(false);
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const [userInfo, setUserInfo] = useState<any>({});
 
@@ -24,7 +24,7 @@ const PostSideBar = (post: any) => {
       setIsRequestingAPI(true);
       setLoading(true);
       postService
-        .getPostsRecommend({ page: 1, size: 5 })
+        .getPostsRecommend({ page: 2, size: 4 })
         .then((res: any) => {
           setIsRequestingAPI(false);
           setPostsRecommend([...postsRecommend, ...res.data]);

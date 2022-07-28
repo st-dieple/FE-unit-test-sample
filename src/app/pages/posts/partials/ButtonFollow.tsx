@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../app.reducers';
 import { UserService } from '../../../core/serivces/user.service';
 import withAuthChecking from '../../../shared/components/hoc/withAuthChecking';
 import { Button } from '../../../shared/components/partials';
@@ -10,7 +12,9 @@ const ButtonFollow = ({
   setUserInfo,
 }: any) => {
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
+  const userCurrent = useSelector((state: RootState) => state.users.data);
 
+  console.log(userCurrent.isFollowed);
   const handleFollow = () => {
     if (!isRequestingAPI) {
       setIsRequestingAPI(true);
@@ -18,7 +22,7 @@ const ButtonFollow = ({
         .handleUserFollow({ followingId: userInfo.id })
         .then((res: any) => {
           setIsRequestingAPI(false);
-          userInfo.isFollowed = res.followed;
+          userCurrent.isFollowed = res.followed;
           if (res.followed) {
             setUserInfo((userInfo: any) => ({
               ...userInfo,
@@ -44,7 +48,7 @@ const ButtonFollow = ({
   return (
     <Button
       classBtn="btn btn-primary btn-follow"
-      text={userInfo?.isFollowed ? 'Following' : 'Follow'}
+      text={userCurrent.isFollowed ? 'Following' : 'Follow'}
       onClick={doFollow}
     />
   );
