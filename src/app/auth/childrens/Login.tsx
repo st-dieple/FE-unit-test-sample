@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getUserInfo } from '../../pages/user/user.actions';
+import { getUserInfoSuccess } from '../../pages/user/user.actions';
 import { AuthService } from '../../core/serivces/auth.service';
 import { storeData } from '../../core/helpers/localstorage';
 import { emailValidator, passwordValidator } from '../../shared/validations/form.validation';
@@ -31,7 +31,7 @@ const Login = () => {
         .then((res: any) => {
           setIsRequestingAPI(false);
           storeData('token', res.accessToken);
-          dispatch(getUserInfo({ id: res.userInfo.id }));
+          dispatch(getUserInfoSuccess(res.userInfo));
           navigate('/');
         })
         .catch((error: any) => {
