@@ -18,7 +18,6 @@ const authService = new AuthService();
 const PopUpLogin = () => {
   const {
     register,
-    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm();

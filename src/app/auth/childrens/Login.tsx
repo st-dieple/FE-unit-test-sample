@@ -18,7 +18,6 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm();
 
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);

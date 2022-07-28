@@ -26,7 +26,6 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm();
 
   const onSubmit = (data: any) => {
