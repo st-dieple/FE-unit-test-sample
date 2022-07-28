@@ -37,42 +37,6 @@ export const postsReducer = (
   action: IAction
 ) => {
   switch (action.type) {
-    case TYPES.CREATE_POST:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case TYPES.CREATE_POST_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        error: '',
-        createData: action.payload,
-      };
-    case TYPES.CREATE_POST_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload,
-      };
-    case TYPES.UPDATE_POST:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case TYPES.UPDATE_POST_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        error: '',
-        updateData: action.payload,
-      };
-    case TYPES.UPDATE_POST_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload,
-      };
     case TYPES.DELETE_POST:
       return {
         ...state,
