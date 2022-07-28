@@ -10,7 +10,7 @@ import { UserService } from './../../../core/serivces/user.service';
 const userService = new UserService();
 const Profile = () => {
   const { id } = useParams();
-  const [userInfo, setUserInfo] = useState<any>();
+  const [authorInfo, setAuthorInfo] = useState<any>();
   const [isLoadingUser, setIsLoadingUser] = useState<boolean>(true);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Profile = () => {
         .getUserPosts(id)
         .then((res: any) => {
           setIsLoadingUser(false);
-          setUserInfo(res);
+          setAuthorInfo(res);
         })
         .catch((error: any) => {
           setIsLoadingUser(false);
@@ -31,7 +31,7 @@ const Profile = () => {
         .getUserInfo(id!)
         .then((res: any) => {
           setIsLoadingUser(false);
-          setUserInfo(res);
+          setAuthorInfo(res);
         })
         .catch((error: any) => {
           setIsLoadingUser(false);
@@ -41,13 +41,17 @@ const Profile = () => {
 
   return (
     <div className="section-user-post">
-      {isLoadingUser ? <SekeletonUserInfo /> : <UserInfo userInfo={userInfo} />}
+      {isLoadingUser ? (
+        <SekeletonUserInfo />
+      ) : (
+        <UserInfo authorInfo={authorInfo} />
+      )}
       {isLoadingUser ? (
         <SekeletonPost />
       ) : (
         <>
           {getData('token', '') ? (
-            <UserPosts postList={userInfo?.Posts} />
+            <UserPosts postList={authorInfo?.Posts} />
           ) : (
             <div className="message-post">
               Please
@@ -55,7 +59,7 @@ const Profile = () => {
                 Sign In
               </Link>
               to Lotus to view
-              <span className="message-name"> {userInfo.displayName} </span>
+              <span className="message-name"> {authorInfo.displayName} </span>
               's posts!
             </div>
           )}

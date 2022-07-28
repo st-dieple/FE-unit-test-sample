@@ -7,31 +7,30 @@ import { Button } from '../../../shared/components/partials';
 
 const userService = new UserService();
 const ButtonFollow = ({
-  userInfo,
+  id,
+  authorInfo,
   checkAuthBeforeAction,
-  setUserInfo,
+  setAuthorInfo,
 }: any) => {
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
-  const userCurrent = useSelector((state: RootState) => state.users.data);
-
-  console.log(userCurrent.isFollowed);
+  console.log(id);
   const handleFollow = () => {
     if (!isRequestingAPI) {
       setIsRequestingAPI(true);
       userService
-        .handleUserFollow({ followingId: userInfo.id })
+        .handleUserFollow({ followingId: id })
         .then((res: any) => {
           setIsRequestingAPI(false);
-          userCurrent.isFollowed = res.followed;
+          authorInfo.isFollowed = res.followed;
           if (res.followed) {
-            setUserInfo((userInfo: any) => ({
-              ...userInfo,
-              followers: userInfo.followers + 1,
+            setAuthorInfo((authorInfo: any) => ({
+              ...authorInfo,
+              followers: authorInfo.followers + 1,
             }));
           } else {
-            setUserInfo((userInfo: any) => ({
-              ...userInfo,
-              followers: userInfo.followers - 1,
+            setAuthorInfo((authorInfo: any) => ({
+              ...authorInfo,
+              followers: authorInfo.followers - 1,
             }));
           }
         })
@@ -48,7 +47,7 @@ const ButtonFollow = ({
   return (
     <Button
       classBtn="btn btn-primary btn-follow"
-      text={userCurrent.isFollowed ? 'Following' : 'Follow'}
+      text={authorInfo.isFollowed ? 'Following' : 'Follow'}
       onClick={doFollow}
     />
   );
