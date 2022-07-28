@@ -1,23 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import withAuthChecking from '../hoc/withAuthChecking';
-import { useDispatch } from 'react-redux';
-import { putLike } from '../../../pages/posts/posts.actions';
+import { PostService } from '../../../core/serivces/post.service';
 
-const ButtonLike = ({ liked, id, color, checkAuthBeforeAction }: any) => {
-  const dispatch = useDispatch();
+const postService = new PostService();
+const ButtonLike = ({ post, checkAuthBeforeAction }: any) => {
+  const [isRequestingAPI, setIsRequestingAPI] = useState(false);
+  const [isLiked, setIsLiked] = useState(post.isLiked);
+  const [like, setLike] = useState(+post.likes || 0);
+
+  useEffect(() => {
+    if (post?.likes) setLike(+post.likes);
+    setIsLiked(post.isLiked);
+  }, [post]);
+
+  const putLikePostDetail = () => {
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      postService
+        .likePostsDetail(post.id)
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          setIsLiked(res.liked);
+          res.liked ? setLike(like + 1) : setLike(like - 1);
+        })
+        .catch((error) => {
+          setIsRequestingAPI(false);
+        });
+    }
+  };
+
   const handleLike = () => {
-    checkAuthBeforeAction(() => dispatch(putLike({ id })));
+    checkAuthBeforeAction(() => putLikePostDetail());
   };
 
   return (
     <div className="interact-like">
       <i
         className={
-          color ? 'fa-solid fa-thumbs-up fa-liked' : 'fa-regular fa-thumbs-up'
+          isLiked ? 'fa-solid fa-thumbs-up fa-liked' : 'fa-regular fa-thumbs-up'
         }
         onClick={handleLike}
       ></i>
-      {liked}
+      {like}
     </div>
   );
 };

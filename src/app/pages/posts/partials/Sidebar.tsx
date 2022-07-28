@@ -1,24 +1,38 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { RootState } from '../../../app.reducers';
-import { getPostsRecommend } from '../posts.actions';
 import RecommendList from './RecommendList';
 import { Tag } from '../../../shared/components/partials';
 import Icon from '../../../../assets/icons/index';
 import SekeletonRecommendPost from '../../../shared/components/partials/SekeletonRecommendPost';
 import SekeletonTag from '../../../shared/components/partials/SekeletonTag';
+import { PostService } from '../../../core/serivces/post.service';
 
+const postService = new PostService();
 export const Sidebar = () => {
-  const dispatch = useDispatch();
-  const postsRecommend = useSelector(
-    (state: RootState) => state.postsRecommend
-  );
+  const [postsRecommend, setPostsRecommend] = useState<any>([]);
+  const [loading, setLoading] = useState<any>([]);
+  const [isRequestingAPI, setIsRequestingAPI] = useState(false);
+
+  const getPostsRecommend = () => {
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      setLoading(true);
+      postService
+        .getPostsRecommend({ page: 1, size: 3 })
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          setPostsRecommend([...postsRecommend, ...res.data]);
+          setLoading(false);
+        })
+        .catch((error) => {
+          setIsRequestingAPI(false);
+          setLoading(false);
+        });
+    }
+  };
 
   useEffect(() => {
-    dispatch(getPostsRecommend({ page: 1, size: 3 }));
-    // eslint-disable-next-line
+    getPostsRecommend();
   }, []);
 
   return (
@@ -28,7 +42,7 @@ export const Sidebar = () => {
         <ul className="tag-list">
           {/* Because there is no api for tag list
               so I use loading state of recommend list to make UI attractively */}
-          {postsRecommend.isLoading ? (
+          {loading ? (
             <SekeletonTag />
           ) : (
             <>
@@ -44,10 +58,10 @@ export const Sidebar = () => {
       </div>
       <div className="article-recommend sidebar-more">
         <h3 className="recommend-title">MORE FROM LOTUS</h3>
-        {postsRecommend.isLoading ? (
+        {loading ? (
           <SekeletonRecommendPost />
         ) : (
-          <RecommendList data={postsRecommend.data} />
+          <RecommendList data={postsRecommend} />
         )}
       </div>
       <div className="section-social">

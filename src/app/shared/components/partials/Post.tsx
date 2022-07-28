@@ -1,24 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { deletePost } from '../../../pages/posts/posts.actions';
 import { Tag } from './Tag';
 import { formatDate } from './../../common/formatDate';
 import { checkUserId } from '../../common/checkUserId';
-import { IPost } from './../../interfaces/post';
 import Image from '../../../../assets/images';
 
-interface IPostProps {
-  post: IPost;
-}
-
-export const Post = ({ post }: IPostProps) => {
-  const dispatch = useDispatch();
-
-  const handleDelete = (id: string) => {
-    dispatch(deletePost({ id: id }));
-  };
-
+export const Post = ({ post, handleDelete }: any) => {
   return (
     <li key={post.id} className="post-item">
       <article className="post">
@@ -61,9 +48,7 @@ export const Post = ({ post }: IPostProps) => {
                 </li>
                 <li
                   className="post-control-item"
-                  onClick={() => {
-                    handleDelete(post.id);
-                  }}
+                  onClick={() => handleDelete(post.id)}
                 >
                   <i className="fa-solid fa-trash-can"></i>
                   Delete

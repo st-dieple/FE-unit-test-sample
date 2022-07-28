@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from '../../../../assets/images';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import { useDialog } from '../../../shared/contexts/dialog.contexts';
@@ -12,40 +12,41 @@ interface IUserProps {
 
 const UserInfo = ({ userInfo }: IUserProps) => {
   const dialog = useDialog();
+  const [user, setUser] = useState<any>({});
+  useEffect(() => {
+    setUser(userInfo);
+  }, [userInfo]);
 
   const handleListFollowers = () => {
     dialog?.addDialog({
-      content: <UserListFollow id={userInfo.id} type="followers" />,
+      content: <UserListFollow id={user.id} type="followers" />,
     });
   };
 
   const handleListFollowing = () => {
     dialog?.addDialog({
-      content: <UserListFollow id={userInfo.id} type="followings" />,
+      content: <UserListFollow id={user.id} type="followings" />,
     });
   };
 
   return (
     <div className="author-info-content">
       <div className="author-avatar">
-        <img
-          src={userInfo?.picture || Image.Avatar}
-          alt={userInfo?.displayName}
-        />
+        <img src={user?.picture || Image.Avatar} alt={user?.displayName} />
       </div>
       <div className="author-info">
-        <h2 className="author-name">{userInfo?.displayName}</h2>
+        <h2 className="author-name">{user?.displayName}</h2>
         <ul className="author-list">
-          <li className="author-item">{userInfo.Posts?.length || 0} Posts</li>
+          <li className="author-item">{user.Posts?.length || 0} Posts</li>
           <li className="author-item" onClick={handleListFollowers}>
-            {userInfo?.followers} Followers
+            {user?.followers} Followers
           </li>
           <li className="author-item" onClick={handleListFollowing}>
-            {userInfo?.followings} Following
+            {user?.followings} Following
           </li>
         </ul>
-        {!checkUserId(userInfo.id) && (
-          <ButtonFollow userInfo={userInfo} id={userInfo.id} />
+        {!checkUserId(user.id) && (
+          <ButtonFollow userInfo={user} setUserInfo={setUser} />
         )}
       </div>
     </div>

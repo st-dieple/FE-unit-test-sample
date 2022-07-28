@@ -3,7 +3,7 @@ export const emailValidator = () => {
     required: { value: true, message: 'Email address is required.' },
     pattern: {
       value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-      message: 'Email address is valid.',
+      message: 'Email address is invalid.',
     },
   };
 };
