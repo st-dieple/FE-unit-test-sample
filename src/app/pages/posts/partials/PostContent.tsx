@@ -1,26 +1,30 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { deletePost } from '../../posts/posts.actions';
 import { formatDate } from '../../../shared/common/formatDate';
 import { convertHtml } from './../../../shared/common/convertHtml';
 import { checkUserId } from '../../../shared/common/checkUserId';
-import { Button, Tag } from '../../../shared/components/partials';
+import { Tag } from '../../../shared/components/partials';
 import ButtonLike from '../../../shared/components/partials/ButtonLike';
 import Image from '../../../../assets/images';
-import { useForm } from 'react-hook-form';
 import { PostService } from '../../../core/serivces/post.service';
 
 const postService = new PostService();
 const PostContent = ({ post, checkAuthBeforeAction }: any) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
-  const [comment, setComment] = useState<any>({});
-  
+
   const handleDelete = (id: string) => {
-    dispatch(deletePost({ id: id }));
-    navigate('/');
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      postService
+        .deletePostService(id)
+        .then((res: any) => {
+          navigate('/posts');
+        })
+        .catch((error) => {
+          setIsRequestingAPI(false);
+        });
+    }
   };
 
   return (

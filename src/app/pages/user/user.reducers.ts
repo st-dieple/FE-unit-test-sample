@@ -49,28 +49,28 @@ export const usersReducer = (
         hasError: true,
         error: action.payload,
       };
-      case TYPES.UPDATE_PROFILE_USER:
-        return {
-          ...state,
-          isLoadingUpdate: true
-        };
-  
-      case TYPES.UPDATE_PROFILE_USER_SUCCESS:
-        return {
-          ...state,
-          data: action.payload,
-          isLoadingUpdate: false
-        };
-  
-      case TYPES.UPDATE_PROFILE_USER_ERROR:
-        return {
-          ...state,
-          hasError: true,
-          error: action.payload,
-          isLoadingUpdate: false
-        };
-      case TYPES.CLEAR_USER_INFO:
-        return IInitUserProps;
+    case TYPES.UPDATE_PROFILE_USER:
+      return {
+        ...state,
+        isLoadingUpdate: true,
+      };
+
+    case TYPES.UPDATE_PROFILE_USER_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        isLoadingUpdate: false,
+      };
+
+    case TYPES.UPDATE_PROFILE_USER_ERROR:
+      return {
+        ...state,
+        hasError: true,
+        error: action.payload,
+        isLoadingUpdate: false,
+      };
+    case TYPES.CLEAR_USER_INFO:
+      return IInitUserProps;
     default:
       return state;
   }

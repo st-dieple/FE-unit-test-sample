@@ -20,18 +20,6 @@ const initialStatePosts = {
   updateData: {},
 };
 
-const initialStatePostDetail = {
-  data: {},
-  isLoading: false,
-  error: '',
-};
-
-const initialStatePostsRecommend = {
-  data: [],
-  isLoading: false,
-  error: '',
-};
-
 const initialStateComments = {
   data: [],
   isLoading: false,
@@ -108,36 +96,6 @@ export const postsReducer = (
   }
 };
 
-export const postsDetailReducer = (
-  state: IStateCommon = initialStatePostDetail,
-  action: IAction
-) => {
-  switch (action.type) {
-    case TYPES.GET_POST_BY_ID:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case TYPES.GET_POST_BY_ID_SUCCESS:
-      return {
-        ...state,
-        data: action.payload,
-        isLoading: false,
-        error: '',
-      };
-    case TYPES.GET_POST_BY_ID_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload,
-      };
-      case TYPES.RESET_POST_DETAIL_DATA:
-        return initialStatePostDetail;
-    default:
-      return state;
-  }
-};
-
 export const commentsReducer = (
   state: IStateCommon = initialStateComments,
   action: IAction
@@ -168,7 +126,7 @@ export const commentsReducer = (
     case TYPES.POST_COMMENT_SUCCESS:
       return {
         ...state,
-        data: [action.payload,...state.data],
+        data: [action.payload, ...state.data],
         isLoading: false,
         error: '',
       };
@@ -180,36 +138,6 @@ export const commentsReducer = (
       };
     case TYPES.RESET_POST_DETAIL_DATA:
       return initialStateComments;
-    default:
-      return state;
-  }
-};
-
-export const postsRecommendReducer = (
-  state: IStateCommon = initialStatePostsRecommend,
-  action: IAction
-) => {
-  switch (action.type) {
-    case TYPES.GET_POSTS_RECOMMEND:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case TYPES.GET_POSTS_RECOMMEND_SUCCESS:
-      return {
-        ...state,
-        data: action.payload,
-        isLoading: false,
-        error: '',
-      };
-    case TYPES.GET_POSTS_RECOMMEND_ERROR:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload,
-      };
-    case TYPES.RESET_POST_DETAIL_DATA:
-      return initialStatePostsRecommend;
     default:
       return state;
   }

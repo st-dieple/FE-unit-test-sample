@@ -36,7 +36,7 @@ export class PostService {
   likePostsDetail(id: number) {
     return this.http.put([`${ENDPOINT.posts.index}/${id}/likes`]);
   }
-  
+
   getCommentPostsDetail(id: string) {
     return this.http.get([`${ENDPOINT.posts.index}/${id}/comments`]);
   }
@@ -53,7 +53,7 @@ export class PostService {
     return this.http.put([`${ENDPOINT.posts.index}/${id}`], data);
   }
 
-  deleteArticle(id: string) {
+  deletePostService(id: string) {
     return this.http.delete([`${ENDPOINT.posts.index}/${id}`]);
   }
 }

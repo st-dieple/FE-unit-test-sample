@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../../app.reducers';
-import { postComment } from '../../posts/posts.actions';
 import { Button } from '../../../shared/components/partials';
 import withAuthChecking from './../../../shared/components/hoc/withAuthChecking';
 import { PostService } from '../../../core/serivces/post.service';
@@ -24,7 +22,7 @@ const FormComment = ({
   } = useForm();
 
   const onSubmit = (data: any) => {
-    postCommentPost(data);
+    checkAuthBeforeAction(() => postCommentPost(data));
   };
 
   const postCommentPost = (data: any) => {
@@ -37,7 +35,7 @@ const FormComment = ({
             ...res,
             user: { ...userInfo.data, ...{ isActive: true, isAdmin: true } },
           };
-          setListComments((pre) => ([...[newComment], ...pre]));
+          setListComments((pre) => [...[newComment], ...pre]);
           setValue('content', '');
           setIsRequestingAPI(false);
         })

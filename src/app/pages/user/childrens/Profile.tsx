@@ -30,7 +30,7 @@ const Profile = () => {
       {authorsInfo.isLoading ? (
         <SekeletonUserInfo />
       ) : (
-        <UserInfo userInfo={authorsInfo.data} />
+        <UserInfo userInfo={userPost.data} />
       )}
       {userPost.isLoading ? (
         <SekeletonPost />

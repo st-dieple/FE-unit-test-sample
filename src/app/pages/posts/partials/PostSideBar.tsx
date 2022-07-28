@@ -18,7 +18,6 @@ const PostSideBar = (post: any) => {
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const dispatch = useDispatch();
   const authorsInfo = useSelector((state: RootState) => state.authors);
-  // const post = useSelector((state: RootState) => state.postDetail);
   useEffect(() => {
     if (authorsInfo.data.id) {
       dispatch(getAuthorsInfo({ id: authorsInfo.data.id }));
