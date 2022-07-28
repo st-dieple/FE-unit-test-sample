@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { SignaturesService } from './../../../core/serivces/signatures.service';
+import { UserService } from './../../../core/serivces/user.service';
 import { RootState } from '../../../app.reducers';
-import { updateProfileUser } from '../user.actions';
+import { getUserInfoSuccess } from '../user.actions';
 import { Button, Input } from '../../../shared/components/partials';
 import { validateDob } from '../../../shared/common/validateDob';
-import Image from '../../../../assets/images';
+import { nameValidator } from '../../../shared/validations/form.validation';
 import Loading from '../../../shared/components/partials/Loading';
 import Toast from '../../../shared/components/partials/Toast';
+import Image from '../../../../assets/images';
 
+const userService = new UserService();
 const signaturesService = new SignaturesService();
 const UserUpdateProfile = () => {
   const dispatch = useDispatch();
@@ -19,6 +22,9 @@ const UserUpdateProfile = () => {
     title: '',
   });
   const [avatar, setAvatar] = useState<string>(Image.Avatar);
+  const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
+  const [error, setError] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -26,13 +32,7 @@ const UserUpdateProfile = () => {
     formState: { errors },
   } = useForm();
 
-  const {
-    data: dataUser,
-    isLoading,
-    hasError,
-    error,
-    isLoadingUpdate
-  } = useSelector((state: RootState) => state.users);
+  const { data: dataUser, isLoading } = useSelector((state: RootState) => state.users);
 
   useEffect(() => {
     if (Object.keys(dataUser).length) {
@@ -49,26 +49,29 @@ const UserUpdateProfile = () => {
   }, [dataUser]);
 
   const onSubmit = (data: any) => {
-    if(!isLoadingUpdate) {
-      dispatch(
-        updateProfileUser({
-          data: {
-            ...data,
-            dob: data.dob.split('-').reverse().join('/'),
-          },
-          resolve: setSuccessUpdate
+    const dataUpdate = {
+      ...data,
+      dob: data.dob.split('-').reverse().join('/'),
+    };
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      userService
+        .updateProfileUser(dataUpdate)
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          dispatch(getUserInfoSuccess(res));
+          setToast({
+            hasLoading: true,
+            type: 'success',
+            title: 'Update profile successfully.',
+          });
         })
-      );
+        .catch((error: any) => {
+          setIsRequestingAPI(false);
+          setError(error.response.data?.errors);
+        });
     }
   };
-
-  const setSuccessUpdate = () => {
-    setToast({
-      hasLoading: true,
-      type: 'success',
-      title: 'Update profile successfully.',
-    });
-  }
 
   const handleChangeAvatar = (e: any) => {
     const file = e.target.files[0];
@@ -133,37 +136,27 @@ const UserUpdateProfile = () => {
               name="firstName"
               placeholder="First Name"
               textLabel="First Name"
-              register={register('firstName', {
-                required: true,
-                pattern: /^[a-zA-Z]+$/,
-              })}
+              register={register('firstName', nameValidator())}
               isError={errors.firstName ? true : false}
-              errorsMsg="First name is required."
+              errorsMsg={`First name ${errors.firstName?.message}`}
             />
             <Input
               type="text"
               name="lastName"
               placeholder="Last Name"
               textLabel="Last Name"
-              register={register('lastName', {
-                required: true,
-                pattern: /^[a-zA-Z]+$/,
-              })}
+              register={register('lastName', nameValidator())}
               isError={errors.lastName ? true : false}
-              errorsMsg="Last name is required."
+              errorsMsg={`Last name ${errors.lastName?.message}`}
             />
             <Input
               type="text"
               name="displayName"
               placeholder="User Name"
               textLabel="User Name"
-              register={register('displayName', {
-                required: true,
-                pattern: /[A-Za-z0-9_'-]/,
-                maxLength: 20,
-              })}
+              register={register('displayName', nameValidator())}
               isError={errors.displayName ? true : false}
-              errorsMsg="User name is required."
+              errorsMsg={`User name ${errors.displayName?.message}`}
             />
             <Input
               type="text"
@@ -226,14 +219,18 @@ const UserUpdateProfile = () => {
               </label>
             </div>
           </div>
-          {hasError && (
+          {error && (
             <div className="error-box">
               <span className="txt-center txt-error">
-                {error.response.data.errors}
+                {error}
               </span>
             </div>
           )}
-          <Button classBtn="btn btn-primary update-btn" text="Update" isLoading={isLoadingUpdate}/>
+          <Button
+            classBtn="btn btn-primary update-btn"
+            text="Update"
+            isLoading={isRequestingAPI}
+          />
         </form>
       </div>
     </>

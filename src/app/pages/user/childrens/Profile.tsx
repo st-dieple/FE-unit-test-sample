@@ -1,43 +1,53 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../../app.reducers';
-import { getUserPosts } from '../user.actions';
-import { getAuthorsInfo } from '../../posts/posts.actions';
 import UserPosts from '../partials/UserPosts';
 import UserInfo from '../partials/UserInfo';
 import SekeletonPost from '../../../shared/components/partials/SekeletonPost';
 import SekeletonUserInfo from '../../../shared/components/partials/SekeletonUserInfo';
 import { getData } from '../../../core/helpers/localstorage';
+import { UserService } from './../../../core/serivces/user.service';
 
+const userService = new UserService();
 const Profile = () => {
-  const dispatch = useDispatch();
   const { id } = useParams();
-  const userPost = useSelector((state: RootState) => state.usersPosts);
-  const authorsInfo = useSelector((state: RootState) => state.authors);
+  const [userInfo, setUserInfo] = useState<any>();
+  const [isLoadingUser, setIsLoadingUser] = useState<boolean>(true);
 
   useEffect(() => {
-    if (getData('token', '')) {
-      dispatch(getUserPosts({ id }));
-    }
-    if (id) {
-      dispatch(getAuthorsInfo({ id }));
+    if (getData('token', '') && id) {
+      setIsLoadingUser(true);
+      userService
+        .getUserPosts(id)
+        .then((res: any) => {
+          setIsLoadingUser(false);
+          setUserInfo(res);
+        })
+        .catch((error: any) => {
+          setIsLoadingUser(false);
+        });
+    } else {
+      setIsLoadingUser(true);
+      userService
+        .getUserInfo(id!)
+        .then((res: any) => {
+          setIsLoadingUser(false);
+          setUserInfo(res);
+        })
+        .catch((error: any) => {
+          setIsLoadingUser(false);
+        });
     }
   }, [id]);
 
   return (
     <div className="section-user-post">
-      {authorsInfo.isLoading ? (
-        <SekeletonUserInfo />
-      ) : (
-        <UserInfo userInfo={userPost.data} />
-      )}
-      {userPost.isLoading ? (
+      {isLoadingUser ? <SekeletonUserInfo /> : <UserInfo userInfo={userInfo} />}
+      {isLoadingUser ? (
         <SekeletonPost />
       ) : (
         <>
           {getData('token', '') ? (
-            <UserPosts postList={userPost.data.Posts} />
+            <UserPosts postList={userInfo?.Posts} />
           ) : (
             <div className="message-post">
               Please
@@ -45,9 +55,7 @@ const Profile = () => {
                 Sign In
               </Link>
               to Lotus to view
-              <span className="message-name">
-                {authorsInfo.data.displayName}
-              </span>
+              <span className="message-name"> {userInfo.displayName} </span>
               's posts!
             </div>
           )}

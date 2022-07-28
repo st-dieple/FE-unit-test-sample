@@ -1,37 +1,49 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useSelector, useDispatch } from 'react-redux';
-import { signIn } from '../../../auth/auth.actions';
-import { RootState } from '../../../app.reducers';
+import { useDispatch } from 'react-redux';
 import { useDialog } from './../../contexts/dialog.contexts';
+import { AuthService } from './../../../core/serivces/auth.service';
+import { getUserInfoSuccess } from '../../../pages/user/user.actions';
+import { storeData } from '../../../core/helpers/localstorage';
 import { Input } from './Input';
 import { Button } from './Button';
 import Image from '../../../../assets/images';
+import {
+  emailValidator,
+  passwordValidator,
+} from '../../validations/form.validation';
 
+const authService = new AuthService();
 const PopUpLogin = () => {
   const {
     register,
-    getValues,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
   const dialog = useDialog();
 
-  const { data, hasError, isLoading, error } = useSelector(
-    (state: RootState) => state.login
-  );
+  const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
+  const [error, setError] = useState('');
 
   const onSubmit = (data: any) => {
-    dispatch(signIn({ dataLogin: { ...data } }));
-  };
-
-  useEffect(() => {
-    if (Object.keys(data).length) {
-      dialog?.closeDialog();
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      authService
+        .signIn(data)
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          storeData('token', res.accessToken);
+          dispatch(getUserInfoSuccess(res.userInfo));
+          dialog?.closeDialog();
+        })
+        .catch((error: any) => {
+          setIsRequestingAPI(false);
+          setError(error.response.data?.errors);
+        });
     }
-  }, [data]);
+  };
 
   return (
     <form className="popup-login" onSubmit={handleSubmit(onSubmit)}>
@@ -47,33 +59,22 @@ const PopUpLogin = () => {
           name="email"
           placeholder="Email"
           textLabel="Email"
-          register={register("email", {
-            required: true,
-            pattern: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-          })}
+          register={register('email', emailValidator())}
           isError={errors.email ? true : false}
-          errorsMsg={`Email address is ${
-            getValues("email") ? "valid" : "required"
-          }`}
+          errorsMsg={errors.email?.message}
         />
         <Input
           type="password"
           name="password"
           placeholder="Your Password"
           textLabel="Password"
-          register={register("password", {
-            required: true,
-            minLength: 8,
-            maxLength: 20,
-          })}
+          register={register('password', passwordValidator())}
           isError={errors.password ? true : false}
-          errorsMsg="Please enter at least 8 characters."
+          errorsMsg={errors.password?.message}
         />
-        {hasError && (
+        {error && (
           <div className="error-box">
-            <span className="txt-center txt-error">
-              {error.response.data.errors}
-            </span>
+            <span className="txt-center txt-error">{error}</span>
           </div>
         )}
       </div>
@@ -81,7 +82,7 @@ const PopUpLogin = () => {
         <Button
           classBtn="btn btn-primary popup-login-btn"
           text="Sign in"
-          isLoading={isLoading}
+          isLoading={isRequestingAPI}
         />
       </div>
       <Link to="/" className="tip-link">
@@ -89,7 +90,10 @@ const PopUpLogin = () => {
       </Link>
       <p className="tip-text">
         Don’t have an account?
-        <Link to="/auth/sign-up" className="tip-link"> Sign up </Link>
+        <Link to="/auth/sign-up" className="tip-link">
+          {' '}
+          Sign up{' '}
+        </Link>
       </p>
     </form>
   );
