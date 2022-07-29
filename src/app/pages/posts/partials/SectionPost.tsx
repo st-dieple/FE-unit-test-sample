@@ -19,50 +19,29 @@ const SectionPost = () => {
   const totalPage = useRef(0);
 
   useEffect(() => {
-    setPage((pre) => {
-      if (pre === 1) {
-        if (userCurrent) {
-          getPublicPosts();
+    if (paramsTag) {
+      setPage((pre) => {
+        if (pre === 1) {
+          getPostData();
+          return pre;
         } else {
-          getPosts();
+          return 1;
         }
-        return pre;
-      } else {
-        return 1;
-      }
-    });
+      });
+    }
   }, [paramsTag]);
 
-  const getPublicPosts = () => {
+  const getPostData = () => {
     if (!isRequestingAPI) {
       setIsRequestingAPI(true);
       setLoading(true);
-      postService
-        .getPublicPosts({ tags: paramsTag, page, size: 5 })
-        .then((res: any) => {
-          setIsRequestingAPI(false);
-          if (page === 1) {
-            setPosts(res.data);
-          } else {
-            setPosts([...posts, ...res.data]);
-          }
-          totalPage.current = res.totalPage;
-          setLoading(false);
-          setLoadMore(res.loadMore);
-        })
-        .catch((error) => {
-          setIsRequestingAPI(false);
-          setLoading(false);
-        });
-    }
-  };
-
-  const getPosts = () => {
-    if (!isRequestingAPI) {
-      setIsRequestingAPI(true);
-      setLoading(true);
-      postService
-        .getPosts({ tags: paramsTag, page, size: 5 })
+      let api: Promise<any>;
+      if (userCurrent) {
+        api = postService.getPublicPosts({ tags: paramsTag, page, size: 5 });
+      } else {
+        api = postService.getPosts({ tags: paramsTag, page, size: 5 });
+      }
+      api
         .then((res: any) => {
           setIsRequestingAPI(false);
           if (page === 1) {
@@ -82,11 +61,7 @@ const SectionPost = () => {
   };
 
   useEffect(() => {
-    if (userCurrent) {
-      getPublicPosts();
-    } else {
-      getPosts();
-    }
+    getPostData();
   }, [page]);
 
   useEffect(() => {
@@ -101,7 +76,7 @@ const SectionPost = () => {
       e.target.documentElement.scrollHeight
     ) {
       window.removeEventListener('scroll', handleScroll);
-      if(page !== totalPage.current) {
+      if (page !== totalPage.current) {
         setPage(page + 1);
       }
     }
@@ -109,7 +84,7 @@ const SectionPost = () => {
 
   return (
     <section className="section section-post">
-      { loading ? <SekeletonPost /> : <PostList posts={posts} /> }
+      {loading ? <SekeletonPost /> : <PostList posts={posts} />}
     </section>
   );
 };
