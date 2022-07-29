@@ -70,21 +70,23 @@ const UserPostItem = ({ post }: any) => {
           )}
         </div>
         <div className="post-body">
-          <div className="post-content">
-            <h3 className="post-title">
-              <Link to={`/posts/${post.id}`} className="post-title-link">
-                {post.title}
-              </Link>
-            </h3>
-            <p className="post-desc">{post.description}</p>
-            <div className="post-footer">
-              {post.tags && (
-                <ul className="post-tags">
-                  {post.tags.map((tag: any) => {
-                    return <Tag key={tag} name={tag} />;
-                  })}
-                </ul>
-              )}
+          <div className="post-body-left">
+            <div className="post-content">
+              <h3 className="post-title">
+                <Link to={`/posts/${post.id}`} className="post-title-link">
+                  {post.title}
+                </Link>
+              </h3>
+              <p className="post-desc">{post.description}</p>
+              <div className="post-footer">
+                {post.tags && (
+                  <ul className="post-tags">
+                    {post.tags.map((tag: any) => {
+                      return <Tag key={tag} name={tag} />;
+                    })}
+                  </ul>
+                )}
+              </div>
             </div>
           </div>
           <div className="post-image">
