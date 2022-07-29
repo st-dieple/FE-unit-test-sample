@@ -1,39 +1,12 @@
 import axios, { AxiosResponse } from 'axios';
 import { put, takeLatest, all } from 'redux-saga/effects';
+import { getData } from '../../core/helpers/localstorage';
 import * as TYPES from '../../shared/constants/types';
-import { PostService } from '../../core/serivces/post.service';
 import {
   getAuthorsInfoSuccess,
   getAuthorsInfoError,
-  createPostSuccess,
-  createPostErorr,
-  updatePostSuccess,
-  updatePostErorr,
 } from './posts.actions';
 import { environment, ENDPOINT } from '../../../config';
-import { getData } from '../../core/helpers/localstorage';
-
-const postService = new PostService();
-export function* createPost({ payload }: any) {
-  try {
-    const res: AxiosResponse<any> = yield postService.createArticle(payload);
-    yield put(createPostSuccess(res));
-  } catch (error) {
-    yield put(createPostErorr(error));
-  }
-}
-
-export function* updatePost({ payload }: any) {
-  try {
-    const res: AxiosResponse<any> = yield postService.updateArticle(
-      payload.id,
-      payload.data
-    );
-    yield put(updatePostSuccess(res));
-  } catch (error) {
-    yield put(updatePostErorr(error));
-  }
-}
 
 export function* getAuthorsInfo({ payload }: any) {
   const tokẹn = getData('token', '');
@@ -58,8 +31,6 @@ export function* getAuthorsInfo({ payload }: any) {
 
 export function* watchPost() {
   yield all([
-    takeLatest(TYPES.CREATE_POST, createPost),
-    takeLatest(TYPES.UPDATE_POST, updatePost),
-    takeLatest(TYPES.GET_AUTHOR_INFO, getAuthorsInfo),
+    takeLatest(TYPES.GET_AUTHOR_INFO, getAuthorsInfo)
   ]);
 }

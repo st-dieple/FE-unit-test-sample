@@ -1,1 +1,1 @@
-export const COVER_POST_IMAGE = 'https://www.w3schools.com/css/img_5terre.jpg';
+export const COVER_POST_IMAGE = 'https://picsum.photos/600/400';

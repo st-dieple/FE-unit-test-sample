@@ -38,7 +38,7 @@ const PostDetail = () => {
     if (id) {
       getPostById();
     }
-  }, []);
+  }, [id]);
 
   return (
     <main className="articles-page">

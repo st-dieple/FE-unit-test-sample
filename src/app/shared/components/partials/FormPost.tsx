@@ -1,31 +1,30 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { Editor } from '@tinymce/tinymce-react';
-// import { TagsInput } from 'react-tag-input-component';
+import { TagsInput } from 'react-tag-input-component';
 import { SignaturesService } from './../../../core/serivces/signatures.service';
-// import { createPost, updatePost } from '../../../pages/posts/posts.actions';
-// import { RootState } from '../../../app.reducers';
+import { PostService } from './../../../core/serivces/post.service';
 import { COVER_POST_IMAGE } from '../../constants/constant';
-// import { checkUserId } from '../../common/checkUserId';
 import Toast from './Toast';
+import Loading from './Loading';
+import { checkUserId } from './../../common/checkUserId';
 
 const signaturesService = new SignaturesService();
+const postService = new PostService();
 const FormPost = () => {
   const [selectedImage, setSelectedImage] = useState<string>(COVER_POST_IMAGE);
-  // const [checkSuccess, setCheckSuccess] = useState<boolean>(false);
-  // const [tags, setTags] = useState<string[]>();
+  const [tags, setTags] = useState<any>();
+  const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [toast, setToast] = useState<any>({
     hasLoading: false,
     type: '',
     title: '',
   });
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
-  // const posts = useSelector((state: RootState) => state.posts);
   const {
     register,
     handleSubmit,
@@ -42,63 +41,102 @@ const FormPost = () => {
     },
   });
 
-  // const checkPostById = (data: any) => {
-  //   if (checkUserId(data.user?.id)) {
-  //     setValue('cover', data?.cover);
-  //     setValue('title', data?.title);
-  //     setValue('description', data?.description);
-  //     setValue('content', data?.content);
-  //     setValue('status', data?.status === 'public' ? false : true);
-  //     setSelectedImage(data?.cover);
-  //   } else {
-  //     navigate('/');
-  //   }
-  // };
+  useEffect(() => {
+    if (id) {
+      getPostById();
+    }
+  }, [id]);
 
-  // useEffect(() => {
-  //   let myTimeout: any;
-  //   let path: any;
-  //   if (
-  //     (posts.createData && checkSuccess) ||
-  //     (posts.updateData && checkSuccess)
-  //   ) {
-  //     if (id) {
-  //       setToast({
-  //         hasLoading: true,
-  //         type: 'success',
-  //         title: 'Update post successfully.',
-  //       });
-  //       path = `/posts/${posts.updateData.id}`;
-  //     } else {
-  //       setToast({
-  //         hasLoading: true,
-  //         type: 'success',
-  //         title: 'Create post successfully.',
-  //       });
-  //       path = `/posts/${posts.createData.id}`;
-  //     }
-  //     myTimeout = setTimeout(() => {
-  //       navigate(path);
-  //     }, 500);
-  //   }
-  //   return () => {
-  //     clearTimeout(myTimeout);
-  //   };
-  //   // eslint-disable-next-line
-  // }, [posts.createData, posts.updateData]);
+  const getPostById = () => {
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      setLoading(true);
+      postService
+        .getPostsById({ id })
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          if (checkUserId(res.user?.id)) {
+            setValue('cover', res?.cover);
+            setValue('title', res?.title);
+            setValue('description', res?.description);
+            setValue('content', res?.content);
+            setValue('status', res?.status === 'public' ? false : true);
+            setSelectedImage(res?.cover);
+            setTags(res?.tags);
+          } else {
+            navigate('/');
+          }
+          setLoading(false);
+        })
+        .catch((error) => {
+          setIsRequestingAPI(false);
+          setLoading(false);
+          navigate('/');
+        });
+    }
+  };
 
   const onSubmitForm = (data: any) => {
     const dataPost = { ...data };
     dataPost.status = data.status ? 'private' : 'public';
-    // if (tags?.length) {
-    //   dataPost.tags = tags;
-    // }
-    // if (id) {
-    //   dispatch(updatePost({ id: id, data: dataPost }));
-    // } else {
-    //   dispatch(createPost(dataPost));
-    // }
-    // setCheckSuccess(true);
+    if (tags?.length) {
+      dataPost.tags = tags;
+    }
+    if (id) {
+      updatePost(id, dataPost);
+    } else {
+      createPost(dataPost);
+    }
+  };
+
+  const updatePost = (id: string, data: any) => {
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      postService
+        .updateArticle(id, data)
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          setToast({
+            hasLoading: true,
+            type: 'success',
+            title: 'Update post successfully.',
+          });
+          const myTimeout = setTimeout(() => {
+            navigate(`/posts/${res.id}`);
+          }, 500);
+          return () => {
+            clearTimeout(myTimeout);
+          };
+        })
+        .catch((error: any) => {
+          setIsRequestingAPI(false);
+        });
+    }
+  };
+
+  const createPost = (data: any) => {
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      postService
+        .createArticle(data)
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          setToast({
+            hasLoading: true,
+            type: 'success',
+            title: 'Create post successfully.',
+          });
+          const myTimeout = setTimeout(() => {
+            navigate(`/posts/${res.id}`);
+          }, 500);
+          return () => {
+            clearTimeout(myTimeout);
+          };
+        })
+        .catch((error: any) => {
+          setIsRequestingAPI(false);
+        });
+    }
   };
 
   const handleChangeFile = async (e: any) => {
@@ -123,6 +161,7 @@ const FormPost = () => {
     setSelectedImage(URL.createObjectURL(file));
   };
 
+  if (loading) return <Loading />;
   return (
     <>
       {toast.hasLoading && <Toast type={toast.type} title={toast.title} />}
@@ -239,12 +278,12 @@ const FormPost = () => {
           </div>
           <div className="form-post-item">
             <label htmlFor="tags">Tags</label>
-            {/* <TagsInput
-              value={data.tags || []}
+            <TagsInput
+              value={tags}
               onChange={setTags}
               name="tags"
               placeHolder="Enter tags"
-            /> */}
+            />
           </div>
           <div className="form-post-footer">
             <input
