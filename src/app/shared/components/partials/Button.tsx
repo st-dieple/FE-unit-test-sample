@@ -17,7 +17,12 @@ export const Button = ({
   onClick,
 }: IButtonProps) => {
   return (
-    <button type={type} className={classBtn} onClick={onClick}>
+    <button
+      type={type}
+      className={classBtn}
+      onClick={onClick}
+      disabled={isLoading}
+    >
       {text}
       {isLoading && <Bounce />}
     </button>
