@@ -6,7 +6,7 @@ import { PostService } from '../../../core/serivces/post.service';
 import { useParams } from 'react-router-dom';
 
 const postService = new PostService();
-const PostComment = () => {
+const PostComment = ({ setPost }) => {
   const [listcomments, setListComments] = useState<any>([]);
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const { id } = useParams();
@@ -34,7 +34,13 @@ const PostComment = () => {
 
   return (
     <>
-      <FormComment postId={id} setListComments={setListComments} />
+      <FormComment
+        postId={id}
+        setListComments={(data) => {
+          setListComments(data);
+          setPost((pre) => ({ ...pre, comments: listcomments.length + 1 }));
+        }}
+      />
       {listcomments.length ? (
         <ul className="comment-list">
           {listcomments.map((comment: IComment) => (

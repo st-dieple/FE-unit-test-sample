@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getUserInfoSuccess } from '../../pages/user/user.actions';
 import { AuthService } from '../../core/serivces/auth.service';
 import { storeData } from '../../core/helpers/localstorage';
-import { emailValidator, passwordValidator } from '../../shared/validations/form.validation';
+import {
+  emailValidator,
+  passwordValidator,
+} from '../../shared/validations/form.validation';
 import { Input } from '../../shared/components/partials';
 import { Button } from '../../shared/components/partials';
 import Image from '../../../assets/images';
@@ -14,6 +17,7 @@ const authService = new AuthService();
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { hash } = useLocation();
   const {
     register,
     handleSubmit,
@@ -32,14 +36,18 @@ const Login = () => {
           setIsRequestingAPI(false);
           storeData('token', res.accessToken);
           dispatch(getUserInfoSuccess(res.userInfo));
-          navigate('/');
+          if (hash.includes('profile')) {
+            navigate(`/profile/${hash.split('=')[1]}`);
+          } else {
+            navigate('/');
+          }
         })
         .catch((error: any) => {
           setIsRequestingAPI(false);
           setError(error.response.data?.errors);
         });
     }
-  };  
+  };
 
   return (
     <div className="page-content row">

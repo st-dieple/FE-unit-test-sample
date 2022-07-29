@@ -6,7 +6,6 @@ const Bounce = () => {
       <div></div>
       <div></div>
       <div></div>
-      <div></div>
     </div>
   );
 };

@@ -70,7 +70,7 @@
       }
     }
   }
-  label[for="status"] {
+  label[for='status'] {
     @include flexbox;
     align-items: center;
   }
@@ -102,15 +102,22 @@
     justify-content: flex-end;
   }
   &-btn {
+    @include flexbox;
+    justify-content: center;
     @include pxRem(max-width, 160);
     width: 100%;
+    &:hover {
+      background-color: map-get($color, yellow-1);
+    }
   }
   &-error {
-    input[type="text"]:focus, textarea:focus {
-      border: 1px solid map-get($color, red-2);
+    input[type='text']:focus,
+    textarea:focus {
+      border: 1px solid map-get($color, yellow-1);
     }
-    input[type="text"], textarea {
-      border: 1px solid map-get($color, red-2);
+    input[type='text'],
+    textarea {
+      border: 1px solid map-get($color, yellow-1);
     }
     span {
       @include pxRem(font-size, 14);
@@ -119,30 +126,29 @@
       font-weight: 500;
     }
     .tox-tinymce {
-      border: 1px solid map-get($color, red-2)!important;
+      border: 1px solid map-get($color, red-2) !important;
     }
   }
 }
 .tox-notifications-container {
-  display: none!important;
+  display: none !important;
 }
 
 .tox-tinymce {
-  border-radius: 4px!important;
-  border: 1px solid map-get($color, gray-7)!important;
+  border-radius: 4px !important;
+  border: 1px solid map-get($color, gray-7) !important;
 }
 
 .rti--container {
-  --rti-main: #FFC017!important;
-  --rti-border: #9EA0A8!important;
-  padding: 4px 16px!important;
+  --rti-main: #ffc017 !important;
+  --rti-border: #9ea0a8 !important;
+  padding: 4px 16px !important;
 }
 
 .rti--input {
-  border: none!important;
+  border: none !important;
 }
 
 .go2761622576:focus-within {
-  box-shadow: var(--rti-main) 0px 0px 0px 0px!important;
+  box-shadow: var(--rti-main) 0px 0px 0px 0px !important;
 }
-

@@ -5,16 +5,13 @@ import Image from '../../../../assets/images';
 const NotFound = () => {
   return (
     <div className="error">
+      <Link to="/" className="error-logo">
+        <img src={Image.Logo} alt="Lotus" />
+      </Link>
+      <h1 className="error-title">PAGE NOT FOUND</h1>
       <div className="error-image">
         <img src={Image.NotFound} alt="404 Not Found" />
       </div>
-      <h1 className="error-desc">
-        The page you are looking for might have been removed had its name
-        changed or is temporarily unavailable.
-      </h1>
-      <Link to="/" className="btn btn-primary error-btn">
-        Back Home
-      </Link>
     </div>
   );
 };

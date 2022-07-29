@@ -57,7 +57,7 @@ const Profile = () => {
           ) : (
             <div className="message-post">
               Please
-              <Link to={'/auth/sign-in'} className="message-link">
+              <Link to={`/auth/sign-in#profile=${id}`} className="message-link">
                 Sign In
               </Link>
               to Lotus to view
