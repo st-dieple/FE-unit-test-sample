@@ -87,6 +87,12 @@
       @include pxRem(margin, 16 0);
       font-size: map-get($font-size, xl);
     }
+    &-description {
+      @include pxRem(margin, 16 0);
+      font-size: map-get($font-size, lg);
+      font-weight: 400;
+      font-style: italic;
+    }
   }
 
   .interact {

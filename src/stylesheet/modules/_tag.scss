@@ -18,9 +18,9 @@
 
   &-article {
     @include flexbox;
-    @include pxRem(margin-bottom, 48);
+    @include pxRem(margin-bottom, 24);
     .tag {
-      @include pxRem(margin-right, 7);
+      @include pxRem(margin-right, 8);
     }
   }
 }

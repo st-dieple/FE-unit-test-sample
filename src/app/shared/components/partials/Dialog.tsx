@@ -8,9 +8,11 @@ const Dialog = ({ dialog, closeDialog }: any) => {
   const handleCloseDialog = () => {
     closeDialog();
   };
-  console.log('dia', dialog);
 
-  console.log('vv', dialog.button.confirm.confirmCallBack());
+  const handleConfirm = () => {
+    dialog.button?.confirm?.confirmCallback();
+    closeDialog();
+  };
 
   return createPortal(
     <div className="modal">
@@ -21,29 +23,35 @@ const Dialog = ({ dialog, closeDialog }: any) => {
           onClick={handleCloseDialog}
         />
         <div className="modal-content">
-          {dialog.tile ? <h2 className="modal-title">{dialog.tile}</h2> : <></>}
-          <p>{dialog.content}</p>
-          <div className="modal-btn-group">
-            {dialog.button?.confirm?.text ? (
-              <button
-                className="btn btn-primary btn-confirm"
-                onClick={dialog.button?.confirm?.confirmCallBack}
-              >
-                Confirm
-              </button>
+          <div className="modal-delete">
+            {dialog.title ? (
+              <h2 className="modal-title">{dialog.title}</h2>
             ) : (
               <></>
             )}
-            {dialog.button?.cancel?.text ? (
-              <button
-                className="btn btn-primary btn-cancel"
-                onClick={dialog.button?.confirm?.cancelCallback}
-              >
-                Cancel
-              </button>
-            ) : (
-              <></>
-            )}
+            <p>{dialog.content}</p>
+            <div className="modal-btn-group">
+              {dialog.button?.confirm?.text ? (
+                <button
+                  className="btn btn-primary btn-confirm"
+                  onClick={handleConfirm}
+                >
+                  {dialog.button.confirm.text}
+                </button>
+              ) : (
+                <></>
+              )}
+              {dialog.button?.cancel?.text ? (
+                <button
+                  className="btn btn-primary btn-cancel"
+                  onClick={dialog.button?.cancel?.cancelCallback}
+                >
+                  {dialog.button.cancel.text}
+                </button>
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
         </div>
       </div>
