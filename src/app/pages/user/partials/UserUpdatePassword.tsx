@@ -14,7 +14,7 @@ const UserUpdatePassword = () => {
     formState: { errors },
     watch,
   } = useForm();
-  const checkPass = watch("newPassword");
+  const checkPass = watch('newPassword');
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const [toast, setToast] = useState<any>({
     hasLoading: false,
@@ -66,7 +66,7 @@ const UserUpdatePassword = () => {
             type="password"
             placeholder="Old Password"
             textLabel="Old Password"
-            register={register("oldPassword", passwordValidator())}
+            register={register('oldPassword', passwordValidator())}
             isError={errors.oldPassword ? true : false}
             errorsMsg={errors.oldPassword?.message}
           />
@@ -75,7 +75,7 @@ const UserUpdatePassword = () => {
             type="password"
             placeholder="New Password"
             textLabel="New Password"
-            register={register("newPassword", passwordValidator())}
+            register={register('newPassword', passwordValidator())}
             isError={errors.newPassword ? true : false}
             errorsMsg={errors.newPassword?.message}
           />
@@ -84,16 +84,20 @@ const UserUpdatePassword = () => {
             type="password"
             placeholder="Confirm Password"
             textLabel="Confirm Password"
-            register={register("confirmPassword", {
+            register={register('confirmPassword', {
               validate: (value) =>
-                value === checkPass || "The password is invalid.",
+                value === checkPass || 'The password is invalid.',
             })}
             isError={errors.confirmPassword ? true : false}
             errorsMsg={`${
               errors.confirmPassword && errors.confirmPassword?.message
             }`}
           />
-          <Button classBtn="btn btn-primary update-btn" text="Change" />
+          <Button
+            classBtn="btn btn-primary update-btn"
+            text="Change"
+            isLoading={isRequestingAPI}
+          />
         </form>
       </div>
     </>

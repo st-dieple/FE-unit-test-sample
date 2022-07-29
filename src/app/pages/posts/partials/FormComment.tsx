@@ -60,7 +60,11 @@ const FormComment = ({
           <span className="txt-center txt-error">Please type comment</span>
         </div>
       )}
-      <Button classBtn="btn btn-primary btn-comment" text="Comment" />
+      <Button
+        classBtn="btn btn-primary btn-comment"
+        text="Comment"
+        isLoading={isRequestingAPI}
+      />
     </form>
   );
 };
