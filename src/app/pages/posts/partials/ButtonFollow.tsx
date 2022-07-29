@@ -11,7 +11,6 @@ const ButtonFollow = ({
   setAuthorInfo,
 }: any) => {
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
-  console.log(id);
   const handleFollow = () => {
     if (!isRequestingAPI) {
       setIsRequestingAPI(true);
