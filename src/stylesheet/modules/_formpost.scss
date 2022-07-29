@@ -102,6 +102,8 @@
     justify-content: flex-end;
   }
   &-btn {
+    @include flexbox;
+    justify-content: center;
     @include pxRem(max-width, 160);
     width: 100%;
     &:hover {

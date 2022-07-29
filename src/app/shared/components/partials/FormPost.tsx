@@ -10,6 +10,7 @@ import { COVER_POST_IMAGE } from '../../constants/constant';
 import Toast from './Toast';
 import Loading from './Loading';
 import { checkUserId } from './../../common/checkUserId';
+import { Button } from './Button';
 
 const signaturesService = new SignaturesService();
 const postService = new PostService();
@@ -286,10 +287,11 @@ const FormPost = () => {
             />
           </div>
           <div className="form-post-footer">
-            <input
+            <Button
               type="submit"
-              className="btn btn-primary form-post-btn"
-              value="Publish"
+              classBtn="btn btn-primary form-post-btn"
+              text="Publish"
+              isLoading={isRequestingAPI}
             />
           </div>
         </div>
