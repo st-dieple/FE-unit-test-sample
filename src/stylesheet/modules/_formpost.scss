@@ -107,17 +107,17 @@
     @include pxRem(max-width, 160);
     width: 100%;
     &:hover {
-      background-color: map-get($color, red-2);
+      background-color: map-get($color, yellow-1);
     }
   }
   &-error {
     input[type='text']:focus,
     textarea:focus {
-      border: 1px solid map-get($color, red-2);
+      border: 1px solid map-get($color, yellow-1);
     }
     input[type='text'],
     textarea {
-      border: 1px solid map-get($color, red-2);
+      border: 1px solid map-get($color, yellow-1);
     }
     span {
       @include pxRem(font-size, 14);
