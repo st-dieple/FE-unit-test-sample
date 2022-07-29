@@ -47,6 +47,7 @@ const ButtonFollow = ({
       classBtn="btn btn-primary btn-follow"
       text={authorInfo.isFollowed ? 'Following' : 'Follow'}
       onClick={doFollow}
+      isLoading={isRequestingAPI}
     />
   );
 };
