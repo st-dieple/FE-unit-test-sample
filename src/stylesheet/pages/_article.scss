@@ -2,7 +2,6 @@
   @include pxRem(padding, 40 0);
   .articles {
     &-item {
-      border-bottom: 5px solid map-get($color, primary);
       @include pxRem(padding-bottom, 16);
     }
   }

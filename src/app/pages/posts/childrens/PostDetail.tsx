@@ -47,7 +47,11 @@ const PostDetail = () => {
           <div className="article row">
             <div className="col-8">
               {loading ? <SekeletonPostContent /> : <PostContent post={post} />}
-              {loading ? <SekeletonComment /> : <PostComment />}
+              {loading ? (
+                <SekeletonComment />
+              ) : (
+                <PostComment setPost={setPost} />
+              )}
             </div>
             <div className="col-4">
               {loading ? <SekeletonUserSidebar /> : <PostSideBar post={post} />}

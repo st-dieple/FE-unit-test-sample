@@ -11,7 +11,6 @@ const ButtonFollow = ({
   setAuthorInfo,
 }: any) => {
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
-  console.log(id);
   const handleFollow = () => {
     if (!isRequestingAPI) {
       setIsRequestingAPI(true);
@@ -47,6 +46,7 @@ const ButtonFollow = ({
       classBtn="btn btn-primary btn-follow"
       text={authorInfo.isFollowed ? 'Following' : 'Follow'}
       onClick={doFollow}
+      isLoading={isRequestingAPI}
     />
   );
 };

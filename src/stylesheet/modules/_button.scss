@@ -15,6 +15,14 @@
   &-primary {
     color: map-get($color, white);
     background-color: map-get($color, primary);
+    &:hover {
+      background-color: map-get($color, yellow-1);
+    }
+    &:disabled {
+      background-color: map-get($color, primary);
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
   }
 
   &-auth {
@@ -29,6 +37,7 @@
     font-family: $font-primary;
   }
   &-comment {
+    @include flexbox;
     @include pxRem(margin-top, 8);
   }
   &-follow {
