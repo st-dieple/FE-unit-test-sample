@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import PostContent from '../partials/PostContent';
 import PostComment from '../partials/PostComment';
 import PostSideBar from '../partials/PostSideBar';
@@ -10,6 +10,7 @@ import SekeletonUserSidebar from '../../../shared/components/partials/SekeletonU
 
 const postService = new PostService();
 const PostDetail = () => {
+  const navigate = useNavigate();
   const [post, setPost] = useState<any>({});
   const [loading, setLoading] = useState<boolean>(false);
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
@@ -30,6 +31,7 @@ const PostDetail = () => {
         .catch((error) => {
           setIsRequestingAPI(false);
           setLoading(false);
+          navigate('/error/not-found');
         });
     }
   };

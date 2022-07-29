@@ -13,7 +13,7 @@ const pageRoutes: PageRoute[] = [
         redirect: 'posts',
       },
       ...postRoutes,
-      ...userRoutes,
+      ...userRoutes
     ],
   },
 ];

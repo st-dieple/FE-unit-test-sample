@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import UserInfo from '../partials/UserInfo';
 import SekeletonPost from '../../../shared/components/partials/SekeletonPost';
 import SekeletonUserInfo from '../../../shared/components/partials/SekeletonUserInfo';
@@ -9,6 +9,7 @@ import PostList from '../../posts/partials/PostList';
 
 const userService = new UserService();
 const Profile = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [authorInfo, setAuthorInfo] = useState<any>();
   const [isLoadingUser, setIsLoadingUser] = useState<boolean>(true);
@@ -36,6 +37,7 @@ const Profile = () => {
       })
       .catch((error: any) => {
         setIsLoadingUser(false);
+        navigate('/error/not-found');
       });
   }, [id]);
 
