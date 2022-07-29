@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
@@ -11,44 +11,45 @@ const SectionPost = () => {
   const [posts, setPosts] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [loadMore, setLoadMore] = useState<boolean>(false);
-  const [isRequestingAPI, setIsRequestingAPI] = useState(false);
-  const [page, setPage] = useState(1);
+  const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
   const [searchParams] = useSearchParams({});
   const paramsTag = searchParams.get('tags');
   const userCurrent = useSelector((state: RootState) => state.users);
+  const totalPage = useRef(0);
 
   useEffect(() => {
-    setPage(1);
+    if (paramsTag) {
+      setPage((pre) => {
+        if (pre === 1) {
+          getPostData();
+          return pre;
+        } else {
+          return 1;
+        }
+      });
+    }
   }, [paramsTag]);
 
-  const getPublicPosts = () => {
+  const getPostData = () => {
     if (!isRequestingAPI) {
       setIsRequestingAPI(true);
       setLoading(true);
-      postService
-        .getPublicPosts({ tags: paramsTag, page, size: 5 })
+      let api: Promise<any>;
+      if (userCurrent) {
+        api = postService.getPublicPosts({ tags: paramsTag, page, size: 5 });
+      } else {
+        api = postService.getPosts({ tags: paramsTag, page, size: 5 });
+      }
+      api
         .then((res: any) => {
           setIsRequestingAPI(false);
-          setPosts([...posts, ...res.data]);
-          setLoading(false);
-          setLoadMore(res.loadMore);
-        })
-        .catch((error) => {
-          setIsRequestingAPI(false);
-          setLoading(false);
-        });
-    }
-  };
-
-  const getPosts = () => {
-    if (!isRequestingAPI) {
-      setIsRequestingAPI(true);
-      setLoading(true);
-      postService
-        .getPosts({ tags: paramsTag, page, size: 5 })
-        .then((res: any) => {
-          setIsRequestingAPI(false);
-          setPosts([...posts, ...res.data]);
+          if (page === 1) {
+            setPosts(res.data);
+          } else {
+            setPosts([...posts, ...res.data]);
+          }
+          totalPage.current = res.totalPage;
           setLoading(false);
           setLoadMore(res.loadMore);
         })
@@ -60,12 +61,8 @@ const SectionPost = () => {
   };
 
   useEffect(() => {
-    if (userCurrent) {
-      getPublicPosts();
-    } else {
-      getPosts();
-    }
-  }, [page, paramsTag]);
+    getPostData();
+  }, [page]);
 
   useEffect(() => {
     if (!loading && loadMore) {
@@ -79,14 +76,15 @@ const SectionPost = () => {
       e.target.documentElement.scrollHeight
     ) {
       window.removeEventListener('scroll', handleScroll);
-      setPage(page + 1);
+      if (page !== totalPage.current) {
+        setPage(page + 1);
+      }
     }
   };
 
   return (
     <section className="section section-post">
-      <PostList posts={posts} />
-      {loading && <SekeletonPost />}
+      {loading ? <SekeletonPost /> : <PostList posts={posts} />}
     </section>
   );
 };

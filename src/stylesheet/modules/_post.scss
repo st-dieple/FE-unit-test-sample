@@ -33,6 +33,7 @@
     justify-content: space-between;
     &-left {
       @include pxRem(margin-right, 32);
+      flex: 1;
       overflow-x: hidden;
     }
   }
