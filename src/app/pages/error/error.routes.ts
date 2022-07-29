@@ -4,7 +4,7 @@ import NotFound from './childrens/NotFound';
 
 const errorRoutes: PageRoute[] = [
   {
-    path: '*',
+    path: '',
     element: Error,
     children: [{ path: '*', element: NotFound }],
   },
