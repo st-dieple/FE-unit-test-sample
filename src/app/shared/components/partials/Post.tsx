@@ -4,58 +4,49 @@ import { Tag } from './Tag';
 import { formatDate } from './../../common/formatDate';
 import { checkUserId } from '../../common/checkUserId';
 import Image from '../../../../assets/images';
+import PostAction from '../../../pages/posts/partials/PostAction';
 
-export const Post = ({ post, handleDelete }: any) => {
+export const Post = ({ post, setPost }: any) => {
   return (
     <li key={post.id} className="post-item">
       <article className="post">
         <div className="post-header">
           <div className="post-user">
-            <Link
-              to={
-                checkUserId(post.user?.id)
-                  ? `/profile/me`
-                  : `/profile/${post.user?.id}`
-              }
-              className="post-user-info"
-            >
-              <div className="post-user-image">
-                <img
-                  src={post.user.picture || Image.Avatar}
-                  alt={post.user.displayName}
-                  onError={(e: any) => {
-                    e.target['onerror'] = null;
-                    e.target['src'] = Image.Avatar;
-                  }}
-                />
+            {post.user ? (
+              <Link
+                to={
+                  checkUserId(post.user?.id)
+                    ? `/profile/me`
+                    : `/profile/${post.user?.id}`
+                }
+                className="post-user-info"
+              >
+                <div className="post-user-image">
+                  <img
+                    src={post.user.picture || Image.Avatar}
+                    alt={post.user.displayName}
+                    onError={(e: any) => {
+                      e.target['onerror'] = null;
+                      e.target['src'] = Image.Avatar;
+                    }}
+                  />
+                </div>
+                <h4 className="post-user-name">{post.user.displayName}</h4>
+              </Link>
+            ) : post.status === 'public' ? (
+              <div className="post-status">
+                <i className="fa-solid fa-unlock"></i>
+                Public
               </div>
-              <h4 className="post-user-name">{post.user.displayName}</h4>
-            </Link>
+            ) : (
+              <div className="post-status">
+                <i className="fa-solid fa-lock"></i>
+                Private
+              </div>
+            )}
             <p className="post-date">{formatDate(post.createdAt)}</p>
           </div>
-          {checkUserId(post.user.id) && (
-            <div className="post-control">
-              <i className="fa-solid fa-ellipsis"></i>
-              <ul className="post-control-list">
-                <li>
-                  <Link
-                    to={`/posts/${post.id}/edit`}
-                    className="post-control-item"
-                  >
-                    <i className="fa-solid fa-pen"></i>
-                    Edit
-                  </Link>
-                </li>
-                <li
-                  className="post-control-item"
-                  onClick={() => handleDelete(post.id)}
-                >
-                  <i className="fa-solid fa-trash-can"></i>
-                  Delete
-                </li>
-              </ul>
-            </div>
-          )}
+          <PostAction post={post} setPost={setPost} />
         </div>
         <div className="post-body">
           <div className="post-body-left">

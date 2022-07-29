@@ -9,8 +9,8 @@
   }
   &-list {
     @include flexbox;
-    @include flex-direction(column);  
-    @include pxRem(width, 400);
+    @include flex-direction(column);
+    @include pxRem(width, 340);
     @include pxRem(padding-top, 20);
     @include pxRem(max-height, 300);
     overflow-y: scroll;
@@ -19,7 +19,7 @@
     @include flexbox;
     align-items: center;
   }
-  &-image  {
+  &-image {
     @include pxRem(width, 48);
     @include pxRem(height, 48);
     @include pxRem(margin-right, 12);
@@ -32,6 +32,7 @@
   }
   &-info {
     @include pxRem(font-size, 14);
+    text-align: left;
   }
   &-username {
     color: map-get($color, text);

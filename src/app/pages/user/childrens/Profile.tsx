@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import UserPosts from '../partials/UserPosts';
 import UserInfo from '../partials/UserInfo';
 import SekeletonPost from '../../../shared/components/partials/SekeletonPost';
 import SekeletonUserInfo from '../../../shared/components/partials/SekeletonUserInfo';
 import { getData } from '../../../core/helpers/localstorage';
 import { UserService } from './../../../core/serivces/user.service';
+import PostList from '../../posts/partials/PostList';
 
 const userService = new UserService();
 const Profile = () => {
@@ -53,7 +53,7 @@ const Profile = () => {
       ) : (
         <>
           {getData('token', '') ? (
-            <UserPosts postList={authorInfo?.Posts} />
+            <PostList posts={authorInfo?.Posts} />
           ) : (
             <div className="message-post">
               Please

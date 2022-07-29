@@ -15,7 +15,7 @@
     @include box-shadow(rgba(99, 99, 99, 0.2) 0px 2px 8px 0px);
     position: relative;
     background-color: map-get($color, white);
-    animation: float-in-right .3s ease-in-out;
+    animation: float-in-right 0.3s ease-in-out;
   }
   &-close {
     @include pxRem(font-size, 20);
@@ -24,6 +24,17 @@
     position: absolute;
     background: transparent;
     cursor: pointer;
+  }
+  &-delete {
+    @include pxRem(max-width, 340);
+    text-align: center;
+  }
+  &-btn {
+    &-group {
+      @include flexbox;
+      justify-content: space-evenly;
+      @include pxRem(margin-top, 18);
+    }
   }
 }
 
