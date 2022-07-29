@@ -28,12 +28,14 @@ const PostList = (props: any) => {
     }
   };
 
-  return (
+  return posts.length ? (
     <ul className="post-list">
       {postList.map((post: IPost, index: number) => {
         return <Post key={index} post={post} handleDelete={handleDelete} />;
       })}
     </ul>
+  ) : (
+    <p className="comment-empty">There are no more posts to show right now</p>
   );
 };
 
