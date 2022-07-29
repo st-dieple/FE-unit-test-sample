@@ -8,7 +8,7 @@
   text-align: right;
 }
 .txt-center {
-  text-align: center
+  text-align: center;
 }
 .no-wrap {
   white-space: nowrap;
@@ -28,4 +28,12 @@
 
 .txt-error {
   color: map-get($color, red-1);
+}
+
+.txt-link {
+  &-primary {
+    &:hover {
+      color: map-get($color, yellow-2);
+    }
+  }
 }

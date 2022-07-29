@@ -18,7 +18,7 @@
     }
 
     &-title {
-      @include pxRem(font-size, 32);
+      @include pxRem(font-size, 28);
       @include pxRem(margin-bottom, 16);
       line-height: 40px;
       overflow-wrap: break-word;
@@ -27,10 +27,7 @@
 
     &-recommend {
       @include pxRem(margin-top, 40);
-      .recommend-title {
-        @include pxRem(font-size, 20);
-        @include pxRem(margin-bottom, 24);
-      }
+      border-top: 1px solid map-get($color, gray-5);
     }
 
     &-text {
@@ -53,7 +50,7 @@
       @include flexbox;
       justify-content: space-between;
       @include pxRem(margin, 20 0);
-      &-title a {
+      &-title {
         @include pxRem(font-size, 16);
         @include ellipsis-special(1);
         color: map-get($color, text);
@@ -88,7 +85,7 @@
     }
     &-description {
       @include pxRem(margin, 16 0);
-      font-size: map-get($font-size, lg);
+      font-size: map-get($font-size, normal);
       font-weight: 400;
       font-style: italic;
     }

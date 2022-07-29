@@ -25,12 +25,13 @@ $color: (
   red-3: #d9534f,
   pink-1: #ffdbdc,
   yellow-1: #ffc938,
+  yellow-2: #ff932f,
   green-1: #00cc00,
   stroke: #d8dfee,
   disable: #9ea0a8,
   text: #333333,
-  success: #27AE60,
-  erorr: #EB5757,
+  success: #27ae60,
+  erorr: #eb5757,
 );
 
 $font-size: (
@@ -43,4 +44,4 @@ $font-size: (
   xxxl: 30px,
 );
 
-$font-primary: 'Poppins', sans-serif;
+$font-primary: 'Roboto', sans-serif;

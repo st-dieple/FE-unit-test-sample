@@ -107,7 +107,6 @@ const UserUpdateProfile = () => {
     <>
       {toast.hasLoading && <Toast type={toast.type} title={toast.title} />}
       <div className="update-user">
-        <h2 className="update-user-title">Update profile</h2>
         <form className="update-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="update-avatar">
             <div className="update-avatar-image">

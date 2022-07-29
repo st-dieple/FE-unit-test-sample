@@ -52,7 +52,7 @@ const PostSideBar = (post: any) => {
 
   useEffect(() => {
     getPostsRecommend();
-    if(post.post?.userId) {
+    if (post.post?.userId) {
       getUserInfo();
     }
   }, []);
@@ -95,7 +95,7 @@ const PostSideBar = (post: any) => {
         </div>
       )}
       <div className="article-recommend">
-        <h3 className="recommend-title">Recommend Posts</h3>
+        <h3 className="recommend-title">MORE FROM LOTUS</h3>
         {loading ? (
           <SekeletonRecommendPost />
         ) : (

@@ -59,7 +59,6 @@ const UserUpdatePassword = () => {
     <>
       {toast.hasLoading && <Toast type={toast.type} title={toast.title} />}
       <div className="update-pass">
-        <h2 className="update-pass-title">Change Password</h2>
         <form className="update-form" onSubmit={handleSubmit(onSubmit)}>
           <Input
             name="password"
