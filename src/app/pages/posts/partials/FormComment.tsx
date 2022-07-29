@@ -17,12 +17,17 @@ const FormComment = ({
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
     setValue,
   } = useForm();
 
   const onSubmit = (data: any) => {
-    checkAuthBeforeAction(() => postCommentPost(data));
+    if (data.content.trim()) {
+      checkAuthBeforeAction(() => postCommentPost(data));
+    } else {
+      setError('content', { message: 'Please type comment' });
+    }
   };
 
   const postCommentPost = (data: any) => {
@@ -35,7 +40,7 @@ const FormComment = ({
             ...res,
             user: { ...userInfo.data, ...{ isActive: true, isAdmin: true } },
           };
-          setListComments((pre) => [...[newComment], ...pre]);
+          setListComments((pre) => [newComment, ...pre]);
           setValue('content', '');
           setIsRequestingAPI(false);
         })

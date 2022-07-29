@@ -52,8 +52,10 @@ const PostSideBar = (post: any) => {
 
   useEffect(() => {
     getPostsRecommend();
-    getUserInfo();
-  }, [post.post?.userId]);
+    if(post.post?.userId) {
+      getUserInfo();
+    }
+  }, []);
 
   return (
     <div className="article-sidebar">
