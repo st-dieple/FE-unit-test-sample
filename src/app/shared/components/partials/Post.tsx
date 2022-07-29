@@ -4,8 +4,28 @@ import { Tag } from './Tag';
 import { formatDate } from './../../common/formatDate';
 import { checkUserId } from '../../common/checkUserId';
 import Image from '../../../../assets/images';
+import { useDialog } from '../../contexts/dialog.contexts';
 
 export const Post = ({ post, handleDelete }: any) => {
+  const dialog = useDialog();
+
+  const doDelete = () => {
+    dialog?.addDialog({
+      title: 'Delete Post',
+      content: 'Are you sure you want to delete this post?',
+      button: {
+        confirm: {
+          text: 'Delete',
+          confirmCallback: () => handleDelete(post.id),
+        },
+        cancel: {
+          text: 'Cancel',
+          cancelCallback: () => dialog.closeDialog(),
+        },
+      },
+    });
+  };
+
   return (
     <li key={post.id} className="post-item">
       <article className="post">
@@ -46,10 +66,7 @@ export const Post = ({ post, handleDelete }: any) => {
                     Edit
                   </Link>
                 </li>
-                <li
-                  className="post-control-item"
-                  onClick={() => handleDelete(post.id)}
-                >
+                <li className="post-control-item" onClick={doDelete}>
                   <i className="fa-solid fa-trash-can"></i>
                   Delete
                 </li>

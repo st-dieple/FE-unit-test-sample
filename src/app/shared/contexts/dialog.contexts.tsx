@@ -5,14 +5,24 @@ export interface DialogContent {
   description?: string;
   textButton?: string;
   content: any;
-  callback?: () => void
-  setDialog?: (data: any) => void
+  callback?: () => void;
+  setDialog?: (data: any) => void;
+  button: {
+    confirm: {
+      text: string;
+      confirmCallBack: () => void;
+    };
+    cancel: {
+      text: string;
+      cancelCallback: () => void;
+    };
+  };
 }
 
-export const DialogContext  = createContext({
+export const DialogContext = createContext({
   dialog: {},
   addDialog: (data: any) => data,
-  closeDialog: () => true
+  closeDialog: () => true,
 });
 
 export const useDialog = () => {
