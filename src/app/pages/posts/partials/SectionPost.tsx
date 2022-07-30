@@ -5,6 +5,7 @@ import { RootState } from '../../../app.reducers';
 import { PostService } from '../../../core/serivces/post.service';
 import PostList from './PostList';
 import SekeletonPost from '../../../shared/components/partials/SekeletonPost';
+import { getData } from '../../../core/helpers/localstorage';
 
 const postService = new PostService();
 const SectionPost = () => {
@@ -15,7 +16,7 @@ const SectionPost = () => {
   const [page, setPage] = useState<number>(1);
   const [searchParams] = useSearchParams({});
   const paramsTag = searchParams.get('tags');
-  const userCurrent = useSelector((state: RootState) => state.users);
+  // const userCurrent = useSelector((state: RootState) => state.users);
   const totalPage = useRef(0);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const SectionPost = () => {
       setIsRequestingAPI(true);
       setLoading(true);
       let api: Promise<any>;
-      if (userCurrent) {
+      if (getData('token', '')) {
         api = postService.getPosts({ tags: paramsTag, page, size: 5 });
       } else {
         api = postService.getPublicPosts({ tags: paramsTag, page, size: 5 });
