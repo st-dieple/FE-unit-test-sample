@@ -8,11 +8,6 @@ const ButtonLike = ({ post, checkAuthBeforeAction }: any) => {
   const [isLiked, setIsLiked] = useState(post.isLiked);
   const [like, setLike] = useState(+post.likes || 0);
 
-  useEffect(() => {
-    if (post?.likes) setLike(+post.likes);
-    setIsLiked(post.isLiked);
-  }, [post]);
-
   const putLikePostDetail = () => {
     if (!isRequestingAPI) {
       setIsRequestingAPI(true);
