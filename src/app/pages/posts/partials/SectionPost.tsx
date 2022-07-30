@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
-import { RootState } from '../../../app.reducers';
 import { PostService } from '../../../core/serivces/post.service';
 import PostList from './PostList';
 import SekeletonPost from '../../../shared/components/partials/SekeletonPost';
