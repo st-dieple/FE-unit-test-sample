@@ -97,13 +97,14 @@ const FormPost = () => {
             type: 'success',
             title: 'Update post successfully.',
           });
+          navigate(`/posts/${res.id}`);
         })
         .catch((error: any) => {
           setIsRequestingAPI(false);
           toast?.addToast({
             type: 'error',
             title:
-              'Update post Error! A problem has been occurred while submitting your data.',
+              'Error! A problem has been occurred while submitting your data.',
           });
         });
     }
@@ -120,19 +121,14 @@ const FormPost = () => {
             type: 'success',
             title: 'Create post successfully.',
           });
-          const myTimeout = setTimeout(() => {
-            navigate(`/posts/${res.id}`);
-          }, 500);
-          return () => {
-            clearTimeout(myTimeout);
-          };
+          navigate(`/posts/${res.id}`);
         })
         .catch((error: any) => {
           setIsRequestingAPI(false);
           toast?.addToast({
             type: 'error',
             title:
-              'Create post Error! A problem has been occurred while submitting your data.',
+              'Error! A problem has been occurred while submitting your data.',
           });
         });
     }
@@ -155,146 +151,145 @@ const FormPost = () => {
         type: 'error',
         title: 'Error! A problem has been occurred while submitting your data.',
       });
-      setSelectedImage(URL.createObjectURL(file));
     }
+    setSelectedImage(URL.createObjectURL(file));
+  };
 
-    if (loading) return <Loading />;
-    return (
-      <>
-        <h2 className="write-title txt-center">
-          {id ? 'Edit Blog' : 'Create New Blog'}
-        </h2>
-        <form className="form-post" onSubmit={handleSubmit(onSubmitForm)}>
-          <div className="form-post-group">
-            <div className="form-post-image">
-              <img src={selectedImage} alt="post cover" />
-            </div>
-            <div className="form-post-header">
-              <div
-                className={
-                  errors.cover
-                    ? 'form-post-file form-post-error'
-                    : 'form-post-file'
-                }
-              >
-                <label htmlFor="cover">Upload file image</label>
-                <input
-                  {...register('cover')}
-                  onChange={handleChangeFile}
-                  type="file"
-                  id="cover"
-                  className="form-post-input"
-                  accept="image/png, image/jpeg"
-                />
-              </div>
-              <div className="form-post-status">
-                <label htmlFor="status">
-                  Public
-                  <input
-                    {...register('status')}
-                    type="checkbox"
-                    id="status"
-                    className="form-post-checkbox"
-                  />
-                  <span className="check"></span>
-                </label>
-              </div>
-            </div>
+  if (loading) return <Loading />;
+  return (
+    <>
+      <h2 className="write-title txt-center">
+        {id ? 'Edit Blog' : 'Create New Blog'}
+      </h2>
+      <form className="form-post" onSubmit={handleSubmit(onSubmitForm)}>
+        <div className="form-post-group">
+          <div className="form-post-image">
+            <img src={selectedImage} alt="post cover" />
+          </div>
+          <div className="form-post-header">
             <div
               className={
-                errors.title
-                  ? 'form-post-item form-post-error'
-                  : 'form-post-item'
+                errors.cover
+                  ? 'form-post-file form-post-error'
+                  : 'form-post-file'
               }
             >
-              <label htmlFor="title">Title</label>
+              <label htmlFor="cover">Upload file image</label>
               <input
-                {...register('title', { required: true, minLength: 20 })}
-                type="text"
-                id="title"
+                {...register('cover')}
+                onChange={handleChangeFile}
+                type="file"
+                id="cover"
                 className="form-post-input"
-              />
-              {errors.title && (
-                <span>Title should be at least 20 characters.</span>
-              )}
-            </div>
-            <div
-              className={
-                errors.description
-                  ? 'form-post-item form-post-error'
-                  : 'form-post-item'
-              }
-            >
-              <label htmlFor="description">Description</label>
-              <textarea
-                {...register('description', { required: true, minLength: 50 })}
-                id="description"
-                className="form-post-input"
-                rows={3}
-              />
-              {errors.title && (
-                <span>Description should be at least 50 characters.</span>
-              )}
-            </div>
-            <div
-              className={
-                errors.content
-                  ? 'form-post-item form-post-error'
-                  : 'form-post-item'
-              }
-            >
-              <label htmlFor="content">Content</label>
-              <Controller
-                control={control}
-                name="content"
-                rules={{ required: true, minLength: 100 }}
-                render={({ field: { onChange, value } }) => (
-                  <Editor
-                    initialValue={value}
-                    onEditorChange={(newText: string) => onChange(newText)}
-                    init={{
-                      height: 400,
-                      menubar: false,
-                      content_css: 'http://localhost:3000/css/tinymce.css',
-                      plugins: [
-                        'advlist autolink lists link image charmap print preview anchor',
-                        'searchreplace visualblocks code fullscreen',
-                        'insertdatetime media table paste code help wordcount',
-                      ],
-                      toolbar:
-                        'undo redo | formatselect | ' +
-                        'bold italic backcolor | alignleft aligncenter ' +
-                        'alignright alignjustify | bullist numlist outdent indent | ' +
-                        'removeformat | help | image code',
-                    }}
-                  />
-                )}
-              />
-              {errors.content && (
-                <span>Content should be at least 100 characters.</span>
-              )}
-            </div>
-            <div className="form-post-item">
-              <label htmlFor="tags">Tags</label>
-              <TagsInput
-                value={tags}
-                onChange={setTags}
-                name="tags"
-                placeHolder="Enter tags"
+                accept="image/png, image/jpeg"
               />
             </div>
-            <div className="form-post-footer">
-              <Button
-                type="submit"
-                classBtn="btn btn-primary form-post-btn"
-                text="Publish"
-                isLoading={isRequestingAPI}
-              />
+            <div className="form-post-status">
+              <label htmlFor="status">
+                Public
+                <input
+                  {...register('status')}
+                  type="checkbox"
+                  id="status"
+                  className="form-post-checkbox"
+                />
+                <span className="check"></span>
+              </label>
             </div>
           </div>
-        </form>
-      </>
-    );
-  };
+          <div
+            className={
+              errors.title ? 'form-post-item form-post-error' : 'form-post-item'
+            }
+          >
+            <label htmlFor="title">Title</label>
+            <input
+              {...register('title', { required: true, minLength: 20 })}
+              type="text"
+              id="title"
+              className="form-post-input"
+            />
+            {errors.title && (
+              <span>Title should be at least 20 characters.</span>
+            )}
+          </div>
+          <div
+            className={
+              errors.description
+                ? 'form-post-item form-post-error'
+                : 'form-post-item'
+            }
+          >
+            <label htmlFor="description">Description</label>
+            <textarea
+              {...register('description', { required: true, minLength: 50 })}
+              id="description"
+              className="form-post-input"
+              rows={3}
+            />
+            {errors.title && (
+              <span>Description should be at least 50 characters.</span>
+            )}
+          </div>
+          <div
+            className={
+              errors.content
+                ? 'form-post-item form-post-error'
+                : 'form-post-item'
+            }
+          >
+            <label htmlFor="content">Content</label>
+            <Controller
+              control={control}
+              name="content"
+              rules={{ required: true, minLength: 100 }}
+              render={({ field: { onChange, value } }) => (
+                <Editor
+                  initialValue={value}
+                  onEditorChange={(newText: string) => onChange(newText)}
+                  init={{
+                    height: 400,
+                    menubar: false,
+                    content_css: 'http://localhost:3000/css/tinymce.css',
+                    plugins: [
+                      'advlist autolink lists link image charmap print preview anchor',
+                      'searchreplace visualblocks code fullscreen',
+                      'insertdatetime media table paste code help wordcount',
+                    ],
+                    toolbar:
+                      'undo redo | formatselect | ' +
+                      'bold italic backcolor | alignleft aligncenter ' +
+                      'alignright alignjustify | bullist numlist outdent indent | ' +
+                      'removeformat | help | image code',
+                  }}
+                />
+              )}
+            />
+            {errors.content && (
+              <span>Content should be at least 100 characters.</span>
+            )}
+          </div>
+          <div className="form-post-item">
+            <label htmlFor="tags">Tags</label>
+            <TagsInput
+              value={tags}
+              onChange={setTags}
+              name="tags"
+              placeHolder="Enter tags"
+            />
+          </div>
+          <div className="form-post-footer">
+            <Button
+              type="submit"
+              classBtn="btn btn-primary form-post-btn"
+              text="Publish"
+              isLoading={isRequestingAPI}
+            />
+          </div>
+        </div>
+      </form>
+    </>
+  );
 };
+
 export default FormPost;

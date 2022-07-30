@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { PostService } from '../../../core/serivces/post.service';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import { useDialog } from '../../../shared/contexts/dialog.contexts';
+import { useToast } from '../../../shared/contexts/toast.contexts';
 
 interface IPostAction {
   post: any;
@@ -12,6 +13,7 @@ interface IPostAction {
 const postService = new PostService();
 const PostAction = ({ post, setPost }: IPostAction) => {
   const navigate = useNavigate();
+  const toast = useToast();
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
 
   const dialog = useDialog();
@@ -32,6 +34,7 @@ const PostAction = ({ post, setPost }: IPostAction) => {
             navigate('/posts');
           }
           setIsRequestingAPI(false);
+          toast?.addToast({ type: 'success', title: res });
         })
         .catch((error) => {
           setIsRequestingAPI(false);
