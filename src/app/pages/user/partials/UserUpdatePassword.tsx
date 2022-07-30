@@ -26,17 +26,14 @@ const UserUpdatePassword = () => {
         })
         .then((res: any) => {
           setIsRequestingAPI(false);
-          toast?.addToast({ type: 'success', tilte: res });
+          toast?.addToast({
+            type: 'success',
+            title: res,
+          });
         })
         .catch((error) => {
           setIsRequestingAPI(false);
-          console.log(
-            toast?.addToast({
-              type: 'error',
-              tilte: error.response.data.errors,
-            })
-          );
-          toast?.addToast({ type: 'error', tilte: error.response.data.errors });
+          toast?.addToast({ type: 'error', title: error.response.data.errors });
         });
     }
   };

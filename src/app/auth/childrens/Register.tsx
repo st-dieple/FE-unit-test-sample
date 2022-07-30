@@ -10,15 +10,12 @@ import {
   nameValidator,
   passwordValidator,
 } from '../../shared/validations/form.validation';
+import { useToast } from '../../shared/contexts/toast.contexts';
 
 const authService = new AuthService();
 const Register = () => {
   const navigate = useNavigate();
-  const [toast, setToast] = useState<any>({
-    hasLoading: false,
-    type: '',
-    title: '',
-  });
+  const toast = useToast();
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
   const [error, setError] = useState('');
   const {
@@ -38,11 +35,7 @@ const Register = () => {
         .signUp(dataRegister)
         .then((res: any) => {
           setIsRequestingAPI(false);
-          setToast({
-            hasLoading: true,
-            type: 'success',
-            title: 'Create an account successfully.',
-          });
+          toast?.addToast({ type: 'success', title: res });
           const myTimeout = setTimeout(() => {
             navigate('/auth/sign-in');
           }, 500);
@@ -52,13 +45,15 @@ const Register = () => {
         })
         .catch((error: any) => {
           setIsRequestingAPI(false);
-          setError(error.response.data?.errors);
+          toast?.addToast({
+            type: 'error',
+            title: error.response.data?.errors,
+          });
         });
     }
   };
   return (
     <>
-      {/* {toast.hasLoading && <Toast type={toast.type} title={toast.title} />} */}
       <div className="page-content row">
         <div className="page-link page-link-signup col-5">
           <Link to="/">

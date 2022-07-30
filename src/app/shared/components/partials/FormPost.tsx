@@ -10,6 +10,7 @@ import { COVER_POST_IMAGE } from '../../constants/constant';
 import Loading from './Loading';
 import { checkUserId } from './../../common/checkUserId';
 import { Button } from './Button';
+import { useToast } from '../../contexts/toast.contexts';
 
 const signaturesService = new SignaturesService();
 const postService = new PostService();
@@ -18,11 +19,7 @@ const FormPost = () => {
   const [tags, setTags] = useState<any>();
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  // const [toast, setToast] = useState<any>({
-  //   hasLoading: false,
-  //   type: '',
-  //   title: '',
-  // });
+  const toast = useToast();
   const navigate = useNavigate();
   const { id } = useParams();
   const {
@@ -96,20 +93,18 @@ const FormPost = () => {
         .updateArticle(id, data)
         .then((res: any) => {
           setIsRequestingAPI(false);
-          // setToast({
-          //   hasLoading: true,
-          //   type: 'success',
-          //   title: 'Update post successfully.',
-          // });
-          const myTimeout = setTimeout(() => {
-            navigate(`/posts/${res.id}`);
-          }, 500);
-          return () => {
-            clearTimeout(myTimeout);
-          };
+          toast?.addToast({
+            type: 'success',
+            title: 'Update post successfully.',
+          });
         })
         .catch((error: any) => {
           setIsRequestingAPI(false);
+          toast?.addToast({
+            type: 'error',
+            title:
+              'Update post Error! A problem has been occurred while submitting your data.',
+          });
         });
     }
   };
@@ -121,11 +116,10 @@ const FormPost = () => {
         .createArticle(data)
         .then((res: any) => {
           setIsRequestingAPI(false);
-          // setToast({
-          //   hasLoading: true,
-          //   type: 'success',
-          //   title: 'Create post successfully.',
-          // });
+          toast?.addToast({
+            type: 'success',
+            title: 'Create post successfully.',
+          });
           const myTimeout = setTimeout(() => {
             navigate(`/posts/${res.id}`);
           }, 500);
@@ -135,6 +129,11 @@ const FormPost = () => {
         })
         .catch((error: any) => {
           setIsRequestingAPI(false);
+          toast?.addToast({
+            type: 'error',
+            title:
+              'Create post Error! A problem has been occurred while submitting your data.',
+          });
         });
     }
   };
@@ -152,19 +151,16 @@ const FormPost = () => {
         await signaturesService.uploadImage(data, file);
       });
     } catch (err) {
-      //   setToast({
-      //     hasLoading: true,
-      //     type: 'error',
-      //     title: 'Error! Upload image.',
-      //   });
-      // }
+      toast?.addToast({
+        type: 'error',
+        title: 'Error! A problem has been occurred while submitting your data.',
+      });
       setSelectedImage(URL.createObjectURL(file));
     }
 
     if (loading) return <Loading />;
     return (
       <>
-        {/* {toast.hasLoading && <Toast type={toast.type} title={toast.title} />} */}
         <h2 className="write-title txt-center">
           {id ? 'Edit Blog' : 'Create New Blog'}
         </h2>

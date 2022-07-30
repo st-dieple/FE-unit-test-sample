@@ -10,16 +10,13 @@ import { validateDob } from '../../../shared/common/validateDob';
 import { nameValidator } from '../../../shared/validations/form.validation';
 import Loading from '../../../shared/components/partials/Loading';
 import Image from '../../../../assets/images';
+import { useToast } from '../../../shared/contexts/toast.contexts';
 
 const userService = new UserService();
 const signaturesService = new SignaturesService();
 const UserUpdateProfile = () => {
   const dispatch = useDispatch();
-  const [toast, setToast] = useState<any>({
-    hasLoading: false,
-    type: '',
-    title: '',
-  });
+  const toast = useToast();
   const [avatar, setAvatar] = useState<string>(Image.Avatar);
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
   const [error, setError] = useState('');
@@ -61,15 +58,14 @@ const UserUpdateProfile = () => {
         .then((res: any) => {
           setIsRequestingAPI(false);
           dispatch(getUserInfoSuccess(res));
-          setToast({
-            hasLoading: true,
-            type: 'success',
-            title: 'Update profile successfully.',
-          });
+          toast?.addToast({ type: 'success', title: 'Update Profile Success' });
         })
         .catch((error: any) => {
           setIsRequestingAPI(false);
-          setError(error.response.data?.errors);
+          toast?.addToast({
+            type: 'error',
+            title: error.response.data?.errors,
+          });
         });
     }
   };
@@ -87,16 +83,7 @@ const UserUpdateProfile = () => {
         await signaturesService.uploadImage(data, file);
       });
     } catch (err) {
-      const myTimeout = setTimeout(() => {
-        setToast({
-          hasLoading: true,
-          type: 'error',
-          title: 'Update profile error.',
-        });
-      }, 500);
-      return () => {
-        clearTimeout(myTimeout);
-      };
+      toast?.addToast({ type: 'error', title: 'Update profile error.' });
     }
     setAvatar(URL.createObjectURL(file));
   };
@@ -104,7 +91,6 @@ const UserUpdateProfile = () => {
   if (isLoading) return <Loading />;
   return (
     <>
-      {/* {toast.hasLoading && <Toast type={toast.type} title={toast.title} />} */}
       <div className="update-user">
         <h2 className="update-user-title">Update profile</h2>
         <form className="update-form" onSubmit={handleSubmit(onSubmit)}>
