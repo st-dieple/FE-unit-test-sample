@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import withAuthChecking from '../hoc/withAuthChecking';
 import { PostService } from '../../../core/serivces/post.service';
 
@@ -7,11 +7,6 @@ const ButtonLike = ({ post, checkAuthBeforeAction }: any) => {
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
   const [isLiked, setIsLiked] = useState(post.isLiked);
   const [like, setLike] = useState(+post.likes || 0);
-
-  useEffect(() => {
-    if (post?.likes) setLike(+post.likes);
-    setIsLiked(post.isLiked);
-  }, [post]);
 
   const putLikePostDetail = () => {
     if (!isRequestingAPI) {

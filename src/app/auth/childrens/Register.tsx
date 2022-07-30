@@ -4,24 +4,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthService } from '../../core/serivces/auth.service';
 import { Button, Input } from '../../shared/components/partials';
 import Image from '../../../assets/images';
-import Toast from '../../shared/components/partials/Toast';
 import { validateDob } from '../../shared/common/validateDob';
 import {
   emailValidator,
   nameValidator,
   passwordValidator,
 } from '../../shared/validations/form.validation';
+import { useToast } from '../../shared/contexts/toast.contexts';
 
 const authService = new AuthService();
 const Register = () => {
   const navigate = useNavigate();
-  const [toast, setToast] = useState<any>({
-    hasLoading: false,
-    type: '',
-    title: '',
-  });
+  const toast = useToast();
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
-  const [error, setError] = useState('');
+  const [error] = useState('');
   const {
     register,
     handleSubmit,
@@ -39,27 +35,24 @@ const Register = () => {
         .signUp(dataRegister)
         .then((res: any) => {
           setIsRequestingAPI(false);
-          setToast({
-            hasLoading: true,
+          toast?.addToast({
             type: 'success',
-            title: 'Create an account successfully.',
+            title: 'Create account successfully',
           });
-          const myTimeout = setTimeout(() => {
-            navigate('/auth/sign-in');
-          }, 500);
-          return () => {
-            clearTimeout(myTimeout);
-          };
+          navigate('/auth/sign-in');
         })
         .catch((error: any) => {
           setIsRequestingAPI(false);
-          setError(error.response.data?.errors);
+          toast?.addToast({
+            type: 'error',
+            title:
+              'Error! A problem has been occurred while submitting your data.',
+          });
         });
     }
   };
   return (
     <>
-      {toast.hasLoading && <Toast type={toast.type} title={toast.title} />}
       <div className="page-content row">
         <div className="page-link page-link-signup col-5">
           <Link to="/">
