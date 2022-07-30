@@ -16,7 +16,6 @@ const SectionPost = () => {
   const [page, setPage] = useState<number>(1);
   const [searchParams] = useSearchParams({});
   const paramsTag = searchParams.get('tags');
-  // const userCurrent = useSelector((state: RootState) => state.users);
   const totalPage = useRef(0);
 
   useEffect(() => {
