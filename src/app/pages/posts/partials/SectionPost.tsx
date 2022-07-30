@@ -37,9 +37,9 @@ const SectionPost = () => {
       setLoading(true);
       let api: Promise<any>;
       if (userCurrent) {
-        api = postService.getPublicPosts({ tags: paramsTag, page, size: 5 });
-      } else {
         api = postService.getPosts({ tags: paramsTag, page, size: 5 });
+      } else {
+        api = postService.getPublicPosts({ tags: paramsTag, page, size: 5 });
       }
       api
         .then((res: any) => {
