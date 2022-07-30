@@ -19,7 +19,7 @@ export const Post = ({ post, setPost }: any) => {
                     ? `/profile/me`
                     : `/profile/${post.user?.id}`
                 }
-                className="post-user-info"
+                className="post-user-info txt-link-primary"
               >
                 <div className="post-user-image">
                   <img
@@ -52,7 +52,10 @@ export const Post = ({ post, setPost }: any) => {
           <div className="post-body-left">
             <div className="post-content">
               <h3 className="post-title">
-                <Link to={`/posts/${post.id}`} className="post-title-link">
+                <Link
+                  to={`/posts/${post.id}`}
+                  className="post-title-link txt-link-primary"
+                >
                   {post.title}
                 </Link>
               </h3>

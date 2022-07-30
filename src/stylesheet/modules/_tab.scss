@@ -2,8 +2,6 @@
   &-item {
     @include pxRem(margin-bottom, 4);
     @include pxRem(padding, 12 20);
-    @include border-radius(4px);
-    @include transition(0.1s ease-in);
   }
   &-user {
     @include flexbox;
@@ -21,7 +19,7 @@
     }
   }
   &-active {
-    background-color: map-get($color, primary);
+    border-right: 6px solid map-get($color, primary);
     i {
       color: map-get($color, text);
     }

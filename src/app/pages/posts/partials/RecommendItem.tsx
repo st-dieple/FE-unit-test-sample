@@ -13,7 +13,9 @@ const RecommendItem = ({ item }: IArticleItemProps) => {
     <li key={item.id} className="article-item">
       <div className="article-item-content">
         <h4 className="article-item-title">
-          <Link to={`/posts/${item.id}`}>{item.title}</Link>
+          <Link to={`/posts/${item.id}`} className="txt-link-primary">
+            {item.title}
+          </Link>
         </h4>
         <span>{formatDate(item.createdAt)}</span>
       </div>

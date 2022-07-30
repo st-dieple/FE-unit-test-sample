@@ -12,7 +12,7 @@ const Update = () => {
   const [activeTab, setActiveTab] = useState<string>('update-profile');
 
   useEffect(() => {
-    if(getData('token', '')) {
+    if (getData('token', '')) {
       dispatch(getUserInfo({ id: 'me' }));
     }
   }, []);
@@ -26,9 +26,6 @@ const Update = () => {
               <TabNav
                 content={
                   <div className="tab-user">
-                    <div className="tab-user-icon">
-                      <i className="fa-solid fa-pen"></i>
-                    </div>
                     <span className="tab-user-title">Update profile</span>
                   </div>
                 }
@@ -39,9 +36,6 @@ const Update = () => {
               <TabNav
                 content={
                   <div className="tab-user">
-                    <div className="tab-user-icon">
-                      <i className="fa-solid fa-lock"></i>
-                    </div>
                     <span className="tab-user-title">Change Password</span>
                   </div>
                 }
@@ -53,10 +47,10 @@ const Update = () => {
           </div>
           <div className="col-9">
             <TabContent id="update-profile" activeTab={activeTab}>
-              <UserUpdateProfile/>
+              <UserUpdateProfile />
             </TabContent>
             <TabContent id="change-password" activeTab={activeTab}>
-              <UserUpdatePassword/>
+              <UserUpdatePassword />
             </TabContent>
           </div>
         </div>
