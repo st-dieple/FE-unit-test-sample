@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthService } from '../../core/serivces/auth.service';
 import { Button, Input } from '../../shared/components/partials';
 import Image from '../../../assets/images';
-import Toast from '../../shared/components/partials/Toast';
 import { validateDob } from '../../shared/common/validateDob';
 import {
   emailValidator,
@@ -59,7 +58,7 @@ const Register = () => {
   };
   return (
     <>
-      {toast.hasLoading && <Toast type={toast.type} title={toast.title} />}
+      {/* {toast.hasLoading && <Toast type={toast.type} title={toast.title} />} */}
       <div className="page-content row">
         <div className="page-link page-link-signup col-5">
           <Link to="/">

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { UserService } from '../../../core/serivces/user.service';
 import { Button, Input } from '../../../shared/components/partials';
-import Toast from '../../../shared/components/partials/Toast';
+import { useToast } from '../../../shared/contexts/toast.contexts';
 import { passwordValidator } from '../../../shared/validations/form.validation';
 
 const userService = new UserService();
@@ -16,12 +15,7 @@ const UserUpdatePassword = () => {
   } = useForm();
   const checkPass = watch('newPassword');
   const [isRequestingAPI, setIsRequestingAPI] = useState(false);
-  const [toast, setToast] = useState<any>({
-    hasLoading: false,
-    type: '',
-    title: '',
-  });
-  const navigate = useNavigate();
+  const toast = useToast();
   const onSubmit = (data: any) => {
     if (!isRequestingAPI) {
       setIsRequestingAPI(true);
@@ -32,32 +26,22 @@ const UserUpdatePassword = () => {
         })
         .then((res: any) => {
           setIsRequestingAPI(false);
-          setToast({ hasLoading: true, type: 'success', title: res });
-          const myTimeout = setTimeout(() => {
-            navigate('/profile/me');
-          }, 500);
-          return () => {
-            clearTimeout(myTimeout);
-          };
+          toast?.addToast({ type: 'success', tilte: res });
         })
         .catch((error) => {
           setIsRequestingAPI(false);
-          const myTimeout = setTimeout(() => {
-            setToast({
-              hasLoading: true,
+          console.log(
+            toast?.addToast({
               type: 'error',
-              title: error.response.data.errors,
-            });
-          }, 500);
-          return () => {
-            clearTimeout(myTimeout);
-          };
+              tilte: error.response.data.errors,
+            })
+          );
+          toast?.addToast({ type: 'error', tilte: error.response.data.errors });
         });
     }
   };
   return (
     <>
-      {toast.hasLoading && <Toast type={toast.type} title={toast.title} />}
       <div className="update-pass">
         <h2 className="update-pass-title">Change Password</h2>
         <form className="update-form" onSubmit={handleSubmit(onSubmit)}>

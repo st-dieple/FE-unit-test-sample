@@ -5,9 +5,7 @@ const New = () => {
   return (
     <section className="section section-write">
       <div className="container">
-        <div className="write-inner">
-          <FormPost />
-        </div>
+        <div className="write-inner">{/* <FormPost /> */}</div>
       </div>
     </section>
   );

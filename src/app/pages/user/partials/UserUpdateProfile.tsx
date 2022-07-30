@@ -9,7 +9,6 @@ import { Button, Input } from '../../../shared/components/partials';
 import { validateDob } from '../../../shared/common/validateDob';
 import { nameValidator } from '../../../shared/validations/form.validation';
 import Loading from '../../../shared/components/partials/Loading';
-import Toast from '../../../shared/components/partials/Toast';
 import Image from '../../../../assets/images';
 
 const userService = new UserService();
@@ -105,7 +104,7 @@ const UserUpdateProfile = () => {
   if (isLoading) return <Loading />;
   return (
     <>
-      {toast.hasLoading && <Toast type={toast.type} title={toast.title} />}
+      {/* {toast.hasLoading && <Toast type={toast.type} title={toast.title} />} */}
       <div className="update-user">
         <h2 className="update-user-title">Update profile</h2>
         <form className="update-form" onSubmit={handleSubmit(onSubmit)}>
