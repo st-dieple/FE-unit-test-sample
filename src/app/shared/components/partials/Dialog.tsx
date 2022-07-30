@@ -17,41 +17,39 @@ const Dialog = ({ dialog, closeDialog }: any) => {
   return createPortal(
     <div className="modal">
       <div className="modal-inner">
-        <Button
-          classBtn="modal-close"
-          text={<i className="fa-solid fa-xmark"></i>}
-          onClick={handleCloseDialog}
-        />
         <div className="modal-content">
-          <div className="modal-delete">
-            {dialog.title ? (
-              <h2 className="modal-title">{dialog.title}</h2>
+          <Button
+            classBtn="modal-close"
+            text={<i className="fa-solid fa-xmark"></i>}
+            onClick={handleCloseDialog}
+          />
+          {dialog.title ? (
+            <h2 className="modal-title">{dialog.title}</h2>
+          ) : (
+            <></>
+          )}
+          <div className="modal-text">{dialog.content}</div>
+          <div className="modal-btn-group">
+            {dialog.button?.cancel?.text ? (
+              <button
+                className="btn btn-action btn-cancel"
+                onClick={dialog.button?.cancel?.cancelCallback}
+              >
+                {dialog.button.cancel.text}
+              </button>
             ) : (
               <></>
             )}
-            <p>{dialog.content}</p>
-            <div className="modal-btn-group">
-              {dialog.button?.confirm?.text ? (
-                <button
-                  className="btn btn-primary btn-confirm"
-                  onClick={handleConfirm}
-                >
-                  {dialog.button.confirm.text}
-                </button>
-              ) : (
-                <></>
-              )}
-              {dialog.button?.cancel?.text ? (
-                <button
-                  className="btn btn-primary btn-cancel"
-                  onClick={dialog.button?.cancel?.cancelCallback}
-                >
-                  {dialog.button.cancel.text}
-                </button>
-              ) : (
-                <></>
-              )}
-            </div>
+            {dialog.button?.confirm?.text ? (
+              <button
+                className="btn btn-action btn-delete"
+                onClick={handleConfirm}
+              >
+                {dialog.button.confirm.text}
+              </button>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

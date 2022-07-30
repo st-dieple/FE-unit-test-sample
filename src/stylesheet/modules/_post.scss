@@ -144,14 +144,17 @@
       align-items: center;
       color: map-get($color, text);
       font-weight: 400;
-      border-bottom: 1px solid map-get($color, gray-6);
       &:hover {
         color: map-get($color, primary);
       }
       i {
         @include pxRem(font-size, 14);
-        @include pxRem(margin-right, 4);
-        @include pxRem(margin-bottom, 2);
+        @include pxRem(margin-right, 12);
+      }
+    }
+    &-trash {
+      &:hover {
+        color: map-get($color, red-2);
       }
     }
     &-link {

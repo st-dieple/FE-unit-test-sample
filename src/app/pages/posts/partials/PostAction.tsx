@@ -74,7 +74,10 @@ const PostAction = ({ post, setPost }: IPostAction) => {
                 Edit
               </Link>
             </li>
-            <li className="post-control-item" onClick={doDelete}>
+            <li
+              className="post-control-item post-control-trash"
+              onClick={doDelete}
+            >
               <i className="fa-solid fa-trash-can"></i>
               Delete
             </li>

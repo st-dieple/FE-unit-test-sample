@@ -47,7 +47,7 @@
       .dropdown-menu {
         display: none;
       }
-      &:hover .dropdown-menu{
+      &:hover .dropdown-menu {
         display: block;
       }
     }
@@ -90,22 +90,16 @@
     @include pxRem(border-radius, 5);
     @include box-shadow(rgba(99, 99, 99, 0.2) 0px 2px 8px 0px);
     background-color: map-get($color, white);
-    border: 1px solid map-get($color, text) ;
   }
 
   &-item {
-    border-bottom: 1px solid map-get($color, text);
     @include pxRem(padding, 10 22);
-    &:last-child {
-      border-bottom: 0;
-    }
-
     a {
       color: map-get($color, text);
       @include pxRem(font-size, 14);
       font-weight: 500;
       &:hover {
-      color: map-get($color, primary);
+        color: map-get($color, primary);
       }
     }
 

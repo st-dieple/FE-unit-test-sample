@@ -7,9 +7,6 @@ import { Button } from './Button';
 const Toast = ({ toast }: any) => {
   return createPortal(
     <div className={`toast toast-${toast.type}`}>
-      <div className="toast-image">
-        <img src={Icon.Check} alt="success" />
-      </div>
       <div>
         <p className="toast-title">{toast.title}</p>
       </div>
