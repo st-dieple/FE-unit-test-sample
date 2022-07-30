@@ -3,7 +3,6 @@ import { createContext, useContext } from 'react';
 export interface ToastContent {
   type: string;
   title: string;
-  setToast: (data: any) => void;
 }
 
 export const ToastContext = createContext({
