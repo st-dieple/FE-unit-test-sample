@@ -15,7 +15,7 @@ const PostAction = ({ post, setPost }: IPostAction) => {
   const navigate = useNavigate();
   const toast = useToast();
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
-
+  const [showAction, setShowAction] = useState<boolean>(false);
   const dialog = useDialog();
 
   const handleDelete = (id: string) => {
@@ -43,6 +43,7 @@ const PostAction = ({ post, setPost }: IPostAction) => {
           setIsRequestingAPI(false);
         });
     }
+    setShowAction(false);
   };
 
   const doDelete = () => {
@@ -65,17 +66,24 @@ const PostAction = ({ post, setPost }: IPostAction) => {
   return (
     <>
       {checkUserId(post.userId) && (
-        <div className="post-control">
+        <div
+          className="post-control"
+          onClick={() => setShowAction(!showAction)}
+        >
           <i className="fa-solid fa-ellipsis"></i>
-          <ul className="post-control-list">
-            <li>
-              <Link to={`/posts/${post.id}/edit`} className="post-control-item">
+          <ul
+            className={`dropdown-menu dropdown-menu-action ${
+              showAction ? '' : 'dropdown-menu-hide'
+            }`}
+          >
+            <li className="dropdown-item">
+              <Link to={`/posts/${post.id}/edit`}>
                 <i className="fa-solid fa-pen"></i>
                 Edit
               </Link>
             </li>
             <li
-              className="post-control-item post-control-trash"
+              className="dropdown-item dropdown-item-trash"
               onClick={doDelete}
             >
               <i className="fa-solid fa-trash-can"></i>

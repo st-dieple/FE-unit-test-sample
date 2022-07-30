@@ -48,7 +48,7 @@
     @include pxRem(height, 40);
     @include pxRem(border-radius, 4);
   }
-  &-delete {
+  &-danger {
     background-color: map-get($color, red-2);
     color: map-get($color, white);
     @include pxRem(margin-left, 16);
