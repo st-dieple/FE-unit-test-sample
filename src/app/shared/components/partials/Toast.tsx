@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
-import Icon from '../../../../assets/icons';
 import { ToastContent, ToastContext } from '../../contexts/toast.contexts';
 import { Button } from './Button';
 
