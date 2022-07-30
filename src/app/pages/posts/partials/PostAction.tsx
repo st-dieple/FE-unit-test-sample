@@ -34,7 +34,10 @@ const PostAction = ({ post, setPost }: IPostAction) => {
             navigate('/posts');
           }
           setIsRequestingAPI(false);
-          toast?.addToast({ type: 'success', title: res });
+          toast?.addToast({
+            type: 'success',
+            title: 'Delete post successfully',
+          });
         })
         .catch((error) => {
           setIsRequestingAPI(false);

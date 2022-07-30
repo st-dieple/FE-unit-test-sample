@@ -64,7 +64,8 @@ const UserUpdateProfile = () => {
           setIsRequestingAPI(false);
           toast?.addToast({
             type: 'error',
-            title: error.response.data?.errors,
+            title:
+              'Error! A problem has been occurred while submitting your data.',
           });
         });
     }
@@ -83,7 +84,10 @@ const UserUpdateProfile = () => {
         await signaturesService.uploadImage(data, file);
       });
     } catch (err) {
-      toast?.addToast({ type: 'error', title: 'Update profile error.' });
+      toast?.addToast({
+        type: 'error',
+        title: 'Error! A problem has been occurred while submitting your data.',
+      });
     }
     setAvatar(URL.createObjectURL(file));
   };

@@ -35,19 +35,18 @@ const Register = () => {
         .signUp(dataRegister)
         .then((res: any) => {
           setIsRequestingAPI(false);
-          toast?.addToast({ type: 'success', title: res });
-          const myTimeout = setTimeout(() => {
-            navigate('/auth/sign-in');
-          }, 500);
-          return () => {
-            clearTimeout(myTimeout);
-          };
+          toast?.addToast({
+            type: 'success',
+            title: 'Create account successfully',
+          });
+          navigate('/auth/sign-in');
         })
         .catch((error: any) => {
           setIsRequestingAPI(false);
           toast?.addToast({
             type: 'error',
-            title: error.response.data?.errors,
+            title:
+              'Error! A problem has been occurred while submitting your data.',
           });
         });
     }

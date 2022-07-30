@@ -28,12 +28,16 @@ const UserUpdatePassword = () => {
           setIsRequestingAPI(false);
           toast?.addToast({
             type: 'success',
-            title: res,
+            title: 'Update password successfully',
           });
         })
         .catch((error) => {
           setIsRequestingAPI(false);
-          toast?.addToast({ type: 'error', title: error.response.data.errors });
+          toast?.addToast({
+            type: 'error',
+            title:
+              'Error! A problem has been occurred while submitting your data.',
+          });
         });
     }
   };
