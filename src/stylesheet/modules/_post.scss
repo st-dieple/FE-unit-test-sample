@@ -124,25 +124,6 @@
   &-control {
     position: relative;
     cursor: pointer;
-    // .dropdown-menu {
-    //   display: none;
-    // }
-    // &:hover .dropdown-menu {
-    //   display: block;
-    // }
-    // &-list {
-    //   @include border-radius(4px);
-    //   @include box-shadow(rgba(99, 99, 99, 0.2) 0px 2px 8px 0px);
-    //   @include transition(0.15s linear);
-    //   opacity: 0;
-    //   visibility: hidden;
-    //   display: flex;
-    //   flex-direction: column;
-    //   position: absolute;
-    //   top: 100%;
-    //   right: 0;
-    //   background-color: map-get($color, white);
-    // }
     &-item {
       @include flexbox;
       @include pxRem(padding, 4 12);
