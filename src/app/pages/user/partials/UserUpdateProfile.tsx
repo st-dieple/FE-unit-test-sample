@@ -19,7 +19,7 @@ const UserUpdateProfile = () => {
   const toast = useToast();
   const [avatar, setAvatar] = useState<string>(Image.Avatar);
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
-  const [error, setError] = useState('');
+  const [error] = useState('');
 
   const {
     register,

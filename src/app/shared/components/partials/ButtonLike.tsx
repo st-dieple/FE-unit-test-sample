@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import withAuthChecking from '../hoc/withAuthChecking';
 import { PostService } from '../../../core/serivces/post.service';
 

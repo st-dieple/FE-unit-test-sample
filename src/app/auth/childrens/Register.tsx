@@ -17,7 +17,7 @@ const Register = () => {
   const navigate = useNavigate();
   const toast = useToast();
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
-  const [error, setError] = useState('');
+  const [error] = useState('');
   const {
     register,
     handleSubmit,
