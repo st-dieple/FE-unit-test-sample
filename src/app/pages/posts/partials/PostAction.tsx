@@ -53,6 +53,7 @@ const PostAction = ({ post, setPost }: IPostAction) => {
       button: {
         confirm: {
           text: 'Delete',
+          customClass: 'btn-danger',
           confirmCallback: () => handleDelete(post.id),
         },
         cancel: {

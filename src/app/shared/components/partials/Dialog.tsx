@@ -42,9 +42,7 @@ const Dialog = ({ dialog, closeDialog }: any) => {
             )}
             {dialog.button?.confirm?.text ? (
               <button
-                className={`btn btn-action ${
-                  dialog.button?.confirm?.text ? 'btn-danger' : ''
-                }`}
+                className={`btn btn-action ${dialog.button?.confirm?.customClass}`}
                 onClick={handleConfirm}
               >
                 {dialog.button.confirm.text}
