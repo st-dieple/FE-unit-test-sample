@@ -7,7 +7,7 @@ import { AuthService } from '../../../core/serivces/auth.service';
 import withAuthChecking from '../hoc/withAuthChecking';
 import Image from '../../../../assets/images';
 
-const WriteTemplate = ({checkAuthBeforeAction}: any) => {
+const WriteTemplate = ({ checkAuthBeforeAction }: any) => {
   const navigate = useNavigate();
   const handleWrite = (e: any) => {
     e.preventDefault();
@@ -28,7 +28,8 @@ export const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.users.data);
   const [sticky, setSticky] = useState<string>('');
-  const [ isRequestingAPI, setIsRequestingAPI ] = useState<boolean>(false);
+  const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
+  const [showAction, setShowAction] = useState<boolean>(false);
 
   useEffect(() => {
     window.addEventListener('scroll', isSticky);
@@ -44,16 +45,18 @@ export const Header = () => {
   };
 
   const handleSignOut = () => {
-    if(!isRequestingAPI) {
+    if (!isRequestingAPI) {
       setIsRequestingAPI(true);
-      authService.signOut().then((res: any) => {
-        setIsRequestingAPI(false);
-        localStorage.removeItem('token');
-        dispatch(clearUserInfo());
-      })
-      .catch((error: any) => {
-        setIsRequestingAPI(false);
-      })
+      authService
+        .signOut()
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          localStorage.removeItem('token');
+          dispatch(clearUserInfo());
+        })
+        .catch((error: any) => {
+          setIsRequestingAPI(false);
+        });
     }
   };
 
@@ -69,7 +72,10 @@ export const Header = () => {
           <ul className="nav-list">
             <Write />
             {Object.keys(user).length ? (
-              <li className="nav-item">
+              <li
+                className="nav-item"
+                onClick={() => setShowAction(!showAction)}
+              >
                 <div className="nav-image">
                   <img
                     src={user.picture || Image.Avatar}
@@ -80,7 +86,11 @@ export const Header = () => {
                     }}
                   />
                 </div>
-                <ul className="dropdown-menu">
+                <ul
+                  className={`dropdown-menu ${
+                    showAction ? '' : 'dropdown-menu-hide'
+                  }`}
+                >
                   <li className="dropdown-item">
                     <Link to={`/profile/me`}>
                       <i className="fa-solid fa-user"></i>

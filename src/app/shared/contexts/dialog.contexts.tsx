@@ -10,6 +10,7 @@ export interface DialogContent {
   button: {
     confirm: {
       text: string;
+      customClass: string;
       confirmCallBack: () => void;
     };
     cancel: {
