@@ -25,7 +25,7 @@ export const ToastProvider = (props: any) => {
     setToast(newToast);
     setTimeout(() => {
       setToast('');
-    }, 5000);
+    }, 1000);
   };
 
   const checkToast = Object.keys(toast).length || '';
