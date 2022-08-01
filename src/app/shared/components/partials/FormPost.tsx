@@ -71,7 +71,7 @@ const FormPost = () => {
           navigate('/');
         });
     }
-  };
+  };  
 
   const onSubmitForm = (data: any) => {
     const dataPost = { ...data };
@@ -245,7 +245,7 @@ const FormPost = () => {
               rules={{ required: true, minLength: 100 }}
               render={({ field: { onChange, value } }) => (
                 <Editor
-                  initialValue={value}
+                  value={value}
                   onEditorChange={(newText: string) => onChange(newText)}
                   init={{
                     height: 400,
