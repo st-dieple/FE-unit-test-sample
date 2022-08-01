@@ -82,7 +82,7 @@ export const Header = () => {
                     }}
                   />
                 </div>
-                <ul className="dropdown-menu">
+                <ul className="dropdown-menu dropdown-menu-hide">
                   <li className="dropdown-item">
                     <Link to={`/profile/me`}>
                       <i className="fa-solid fa-user"></i>
