@@ -81,9 +81,9 @@ const SectionPost = () => {
   };
 
   return (
-    <section className="section section-post">
+    <div className="section section-post">
       {loading ? <SekeletonPost /> : <PostList posts={posts} />}
-    </section>
+    </div>
   );
 };
 

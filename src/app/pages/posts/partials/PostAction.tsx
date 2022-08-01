@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PostService } from '../../../core/serivces/post.service';
 import { checkUserId } from '../../../shared/common/checkUserId';
@@ -12,11 +12,25 @@ interface IPostAction {
 
 const postService = new PostService();
 const PostAction = ({ post, setPost }: IPostAction) => {
+  const ref = useRef<any>();
   const navigate = useNavigate();
   const toast = useToast();
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
   const [showAction, setShowAction] = useState<boolean>(false);
   const dialog = useDialog();
+
+  useEffect(() => {
+    const checkIfClickedOutside = (e: any) => {
+      if (showAction && ref.current && !ref.current.contains(e.target)) {
+        setShowAction(false);
+      }
+    };
+
+    document.addEventListener('mousedown', checkIfClickedOutside);
+    return () => {
+      document.removeEventListener('mousedown', checkIfClickedOutside);
+    };
+  }, [showAction]);
 
   const handleDelete = (id: string) => {
     if (!isRequestingAPI) {
@@ -76,6 +90,7 @@ const PostAction = ({ post, setPost }: IPostAction) => {
             className={`dropdown-menu dropdown-menu-action ${
               showAction ? '' : 'dropdown-menu-hide'
             }`}
+            ref={ref}
           >
             <li className="dropdown-item">
               <Link to={`/posts/${post.id}/edit`}>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
@@ -25,6 +25,7 @@ const WriteTemplate = ({ checkAuthBeforeAction }: any) => {
 const Write = withAuthChecking(WriteTemplate);
 const authService = new AuthService();
 export const Header = () => {
+  const ref = useRef<any>();
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.users.data);
   const [sticky, setSticky] = useState<string>('');
@@ -72,10 +73,7 @@ export const Header = () => {
           <ul className="nav-list">
             <Write />
             {Object.keys(user).length ? (
-              <li
-                className="nav-item"
-                onClick={() => setShowAction(!showAction)}
-              >
+              <li className="nav-item">
                 <div className="nav-image">
                   <img
                     src={user.picture || Image.Avatar}
@@ -86,11 +84,7 @@ export const Header = () => {
                     }}
                   />
                 </div>
-                <ul
-                  className={`dropdown-menu ${
-                    showAction ? '' : 'dropdown-menu-hide'
-                  }`}
-                >
+                <ul className="dropdown-menu">
                   <li className="dropdown-item">
                     <Link to={`/profile/me`}>
                       <i className="fa-solid fa-user"></i>
