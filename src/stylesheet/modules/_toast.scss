@@ -1,6 +1,6 @@
 .toast {
   @include flexbox;
-  @include pxRem(max-width, 300);
+  @include pxRem(max-width, 480);
   @include pxRem(padding, 8 12);
   @include border-radius(4px);
   @include box-shadow(0 0 3px map-get($color, gray-3));

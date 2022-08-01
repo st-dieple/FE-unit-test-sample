@@ -84,27 +84,33 @@
     @include pxRem(border-radius, 5);
     @include box-shadow(rgba(99, 99, 99, 0.2) 0px 2px 8px 0px);
     background-color: map-get($color, white);
+    &-action {
+      @include pxRem(width, 120);
+    }
+    &-hide {
+      display: none;
+    }
   }
 
   &-item {
-    border-bottom: 1px solid map-get($color, text);
-    @include pxRem(padding, 10 12);
-    text-align: center;
-    &:last-child {
-      border-bottom: 0;
-    }
-
+    @include pxRem(padding, 10 22);
     a {
       color: map-get($color, text);
       @include pxRem(font-size, 14);
       font-weight: 500;
       &:hover {
-      color: map-get($color, primary);
+        color: map-get($color, primary);
       }
     }
-
     i {
-      @include pxRem(margin-left, 12);
+      @include pxRem(margin-right, 12);
+    }
+    &-trash {
+      @include pxRem(font-size, 14);
+      font-weight: 500;
+      &:hover {
+        color: map-get($color, red-2) !important;
+      }
     }
   }
 }

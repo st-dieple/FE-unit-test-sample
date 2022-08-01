@@ -87,6 +87,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    @include pxRem(margin-bottom, 12);
     .loading-container {
       margin-left: 12px;
     }

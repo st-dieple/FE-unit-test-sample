@@ -12,20 +12,23 @@ import rootReducer from './app.reducers';
 
 import '../stylesheet/styles.scss';
 import { DialogProvider } from './shared/components/partials/Dialog';
+import { ToastProvider } from './shared/components/partials/Toast';
 
 function App() {
   const middlewares = createSagaMiddleware();
   const store = createStore(rootReducer, applyMiddleware(middlewares, logger));
-  
+
   middlewares.run(appMiddleware);
 
   return (
     <Provider store={store}>
       <DialogProvider>
-        <RouterOutlet routes={appRoutes} />
+        <ToastProvider>
+          <RouterOutlet routes={appRoutes} />
+        </ToastProvider>
       </DialogProvider>
     </Provider>
   );
-};
+}
 
 export default App;

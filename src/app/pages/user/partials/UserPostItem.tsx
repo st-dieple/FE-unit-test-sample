@@ -1,16 +1,28 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { deletePost } from '../../home/home.actions';
+import React, { useState } from 'react';
 import { checkUserId } from '../../../shared/common/checkUserId';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Image from '../../../../assets/images';
 import { formatDate } from '../../../shared/common/formatDate';
 import { Tag } from '../../../shared/components/partials';
+import { PostService } from '../../../core/serivces/post.service';
 
+const postService = new PostService();
 const UserPostItem = ({ post }: any) => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isRequestingAPI, setIsRequestingAPI] = useState(false);
+
   const handleDelete = (id: string) => {
-    dispatch(deletePost({ id: id }));
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      postService
+        .deletePostService(id)
+        .then((res: any) => {
+          navigate('/posts');
+        })
+        .catch((error) => {
+          setIsRequestingAPI(false);
+        });
+    }
   };
 
   return (
@@ -18,7 +30,7 @@ const UserPostItem = ({ post }: any) => {
       <article className="post post-info">
         <div className="post-header">
           <div className="post-user">
-            {post.status === "public" ? (
+            {post.status === 'public' ? (
               <div className="post-status">
                 <i className="fa-solid fa-unlock"></i>
                 Public
@@ -58,20 +70,24 @@ const UserPostItem = ({ post }: any) => {
           )}
         </div>
         <div className="post-body">
-          <div className="post-content">
-            <h3 className="post-title">
-              <Link to={`/posts/${post.id}`} className="post-title-link">
-                {post.title}
-              </Link>
-            </h3>
-            <p className="post-desc">{post.description}</p>
-            {post.tags && (
-              <ul className="post-tags">
-                {post.tags.map((tag: any) => {
-                  return <Tag key={tag} name={tag} path="/" />;
-                })}
-              </ul>
-            )}
+          <div className="post-body-left">
+            <div className="post-content">
+              <h3 className="post-title">
+                <Link to={`/posts/${post.id}`} className="post-title-link">
+                  {post.title}
+                </Link>
+              </h3>
+              <p className="post-desc">{post.description}</p>
+              <div className="post-footer">
+                {post.tags && (
+                  <ul className="post-tags">
+                    {post.tags.map((tag: any) => {
+                      return <Tag key={tag} name={tag} />;
+                    })}
+                  </ul>
+                )}
+              </div>
+            </div>
           </div>
           <div className="post-image">
             <Link to="/" className="post-image-link">
@@ -79,8 +95,8 @@ const UserPostItem = ({ post }: any) => {
                 src={post.cover || Image.Empty}
                 alt={post.title}
                 onError={(e: any) => {
-                  e.target["onerror"] = null;
-                  e.target["src"] = Image.Empty;
+                  e.target['onerror'] = null;
+                  e.target['src'] = Image.Empty;
                 }}
               />
             </Link>

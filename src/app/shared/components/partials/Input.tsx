@@ -5,10 +5,10 @@ interface IInputProps {
   name: string;
   placeholder?: string;
   register?: any;
-  errorsMsg?: string;
+  errorsMsg?: any;
   textLabel?: string;
   isError?: boolean;
-};
+}
 
 export const Input = ({
   type,
@@ -18,9 +18,9 @@ export const Input = ({
   errorsMsg,
   textLabel,
   isError,
-}: IInputProps) => {  
+}: IInputProps) => {
   return (
-    <div className={isError ? "form-group form-error" : "form-group"}>
+    <div className={isError ? 'form-group form-error' : 'form-group'}>
       <div className="input-group">
         <input
           type={type}

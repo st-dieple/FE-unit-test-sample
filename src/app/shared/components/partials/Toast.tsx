@@ -1,32 +1,39 @@
-import React from 'react';
-import Icon from '../../../../assets/icons';
-import { Button }  from './Button';
+import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
+import { ToastContent, ToastContext } from '../../contexts/toast.contexts';
+import { Button } from './Button';
 
-interface IToastProp {
-  type: string,
-  title: string
-}
-
-export const Toast = ({type, title}: IToastProp) => {
-  let icon;
-  if(type === 'success') {
-    icon = Icon.Check;
-  }
-  if(type === 'error') {
-    icon = Icon.Error
-  }
-
-  return (
-    <div className={`toast toast-${type}`}>
-      <div className="toast-image">
-        <img src={icon} alt={type} />
-      </div>
+const Toast = ({ toast }: any) => {
+  return createPortal(
+    <div className={`toast toast-${toast.type}`}>
       <div>
-        <p className="toast-title">{title}</p>
+        <p className="toast-title">{toast.title}</p>
       </div>
-      <Button text={<i className="fa-solid fa-xmark"></i>} classBtn="toast-btn"/>
-    </div>
+      <Button
+        text={<i className="fa-solid fa-xmark"></i>}
+        classBtn="toast-btn"
+      />
+    </div>,
+    document.body
   );
 };
 
-export default Toast;
+export const ToastProvider = (props: any) => {
+  const [toast, setToast] = useState({});
+
+  const addToast = (newToast: ToastContent) => {
+    setToast(newToast);
+    setTimeout(() => {
+      setToast('');
+    }, 1000);
+  };
+
+  const checkToast = Object.keys(toast).length || '';
+
+  return (
+    <ToastContext.Provider value={{ toast, addToast }} {...props}>
+      {props.children}
+      {checkToast && <Toast toast={toast} />}
+    </ToastContext.Provider>
+  );
+};

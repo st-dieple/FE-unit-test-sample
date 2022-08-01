@@ -1,19 +1,10 @@
 import { combineReducers } from 'redux';
-import { loginReducer, registerReducer } from './auth/auth.reducers';
-import { postsReducer } from './pages/home/home.reducers';
-import { articlesReducer, postsRecommendReducer, commentsReducer, likesReducer } from './pages/articles/article.reducers';
-import { userPostsReducer, usersReducer } from './pages/user/user.reducers';
+import { authorsReducer } from './pages/posts/posts.reducers';
+import { usersReducer } from './pages/user/user.reducers';
 
 const rootReducer = combineReducers({
-  posts: postsReducer,
-  register: registerReducer,
-  login: loginReducer,
   users: usersReducer,
-  usersPosts: userPostsReducer,
-  articles: articlesReducer,
-  postsRecommend: postsRecommendReducer,
-  comments: commentsReducer,
-  likes: likesReducer
+  authors: authorsReducer,
 });
 
 export default rootReducer;

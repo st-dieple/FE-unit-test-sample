@@ -31,21 +31,21 @@
   &-body {
     @include flexbox;
     justify-content: space-between;
+    &-left {
+      @include pxRem(margin-right, 32);
+      flex: 1;
+      overflow-x: hidden;
+    }
   }
   &-content {
-    @include pxRem(margin-right, 32);
-    width: 100%;
-    overflow-x: hidden;
+    @include pxRem(min-height, 125);
   }
   &-title {
     @include ellipsis-special(2);
     @include transition(0.2s linear);
     @include pxRem(line-height, 19);
     @include pxRem(margin-bottom, 16);
-    min-height: 53px;
-    &:hover {
-      @include opacity(0.7);
-    }
+    max-height: 53px;
     &-link {
       @include pxRem(font-size, 22);
       @include pxRem(line-height, 26);
@@ -77,13 +77,13 @@
   }
   &-desc {
     @include ellipsis-special(3);
-    @include pxRem(margin, 16 0);
     @include pxRem(line-height, 20);
     @include pxRem(min-height, 60);
     font-weight: 400;
     color: map-get($color, gray-3);
   }
   &-footer {
+    @include pxRem(margin-top, 16);
     @include flexbox;
     justify-content: space-between;
     align-items: center;
@@ -94,8 +94,8 @@
     @include pxRem(max-width, 300);
     align-items: center;
     justify-content: flex-end;
-    gap: 8px; 
-    width: 100%; 
+    gap: 8px;
+    width: 100%;
   }
   &-user {
     @include flexbox;
@@ -124,19 +124,6 @@
   &-control {
     position: relative;
     cursor: pointer;
-    &-list {
-      @include border-radius(4px);
-      @include box-shadow(rgba(99, 99, 99, 0.2) 0px 2px 8px 0px);
-      @include transition(0.15s linear);
-      opacity: 0;
-      visibility: hidden;
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background-color: map-get($color, white);
-    }
     &-item {
       @include flexbox;
       @include pxRem(padding, 4 12);
@@ -144,14 +131,12 @@
       align-items: center;
       color: map-get($color, text);
       font-weight: 400;
-      border-bottom: 1px solid map-get($color, gray-6);
       &:hover {
         color: map-get($color, primary);
       }
       i {
         @include pxRem(font-size, 14);
-        @include pxRem(margin-right, 4);
-        @include pxRem(margin-bottom, 2);
+        @include pxRem(margin-right, 12);
       }
     }
     &-link {
@@ -177,7 +162,7 @@
 
   &-status {
     @include pxRem(margin-right, 6);
-    font-weight: 400
+    font-weight: 400;
   }
 
   &-info {
@@ -199,28 +184,27 @@
     @include flexbox;
     justify-content: space-between;
     @include pxRem(margin, 20 0);
-      &-title a {
-        @include pxRem(font-size, 16);
-        @include ellipsis-special(1);
-        color: map-get($color, text);
-        font-weight: 500;
-      }
-      &-image {
-        flex-shrink: 0;
-        width: 125px;
-        height: 75px;
-        margin-left: 16px;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
+    &-title a {
+      @include pxRem(font-size, 16);
+      @include ellipsis-special(1);
+      color: map-get($color, text);
+      font-weight: 500;
+    }
+    &-image {
+      flex-shrink: 0;
+      width: 125px;
+      height: 75px;
+      margin-left: 16px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     }
+  }
 }
 
 .recommend-title {
   @include pxRem(font-size, 14);
   @include pxRem(margin-top, 10);
 }
-

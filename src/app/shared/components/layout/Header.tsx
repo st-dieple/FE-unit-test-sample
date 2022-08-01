@@ -1,22 +1,35 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
-import { signOut } from '../../../auth/auth.actions';
-import { useDialog } from '../../contexts/dialog.contexts';
-import { getData } from '../../../core/helpers/localstorage';
-import PopUpLogin from '../partials/PopupLogin';
+import { clearUserInfo } from '../../../pages/user/user.actions';
+import { AuthService } from '../../../core/serivces/auth.service';
+import withAuthChecking from '../hoc/withAuthChecking';
 import Image from '../../../../assets/images';
 
-export const Header = () => {
+const WriteTemplate = ({ checkAuthBeforeAction }: any) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const dialog = useDialog();
-  const user = useSelector((state: RootState) => state.users.data);
+  const handleWrite = (e: any) => {
+    e.preventDefault();
+    checkAuthBeforeAction(() => navigate('/posts/new'));
+  };
+  return (
+    <li className="nav-item">
+      <Link to="/posts/new" className="nav-link" onClick={handleWrite}>
+        Write
+      </Link>
+    </li>
+  );
+};
 
+const Write = withAuthChecking(WriteTemplate);
+const authService = new AuthService();
+export const Header = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.users.data);
   const [sticky, setSticky] = useState<string>('');
-  const [open, setOpen] = useState(false);
-  const container = useRef<HTMLDivElement>(null);
+  const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
+  const [showAction, setShowAction] = useState<boolean>(false);
 
   useEffect(() => {
     window.addEventListener('scroll', isSticky);
@@ -31,30 +44,20 @@ export const Header = () => {
     setSticky(stickyClass);
   };
 
-  const handleWrite = (e: any) => {
-    e.preventDefault();
-    if(getData('token', '')) {
-      navigate('/posts/new');
-    } else {
-      dialog?.addDialog({ content: <PopUpLogin /> });
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('click', handleClick);
-    return () => {
-      document.removeEventListener('click', handleClick);
-    };
-  });
-
-  const handleClick = (e: any) => {
-    if (container.current && !container.current.contains(e.target)) {
-      setOpen(false);
-    }
-  };
-
   const handleSignOut = () => {
-    dispatch(signOut());
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      authService
+        .signOut()
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          localStorage.removeItem('token');
+          dispatch(clearUserInfo());
+        })
+        .catch((error: any) => {
+          setIsRequestingAPI(false);
+        });
+    }
   };
 
   return (
@@ -67,18 +70,13 @@ export const Header = () => {
             </Link>
           </h1>
           <ul className="nav-list">
-            <li className="nav-item">
-              <Link to="/posts/new" className="nav-link" onClick={handleWrite}> 
-                Write
-              </Link>
-            </li>
-            {getData('token', '') ? (
-              <li className="nav-item">
-                <div
-                  className="nav-image"
-                  ref={container}
-                  onClick={() => setOpen(!open)}
-                >
+            <Write />
+            {Object.keys(user).length ? (
+              <li
+                className="nav-item"
+                onClick={() => setShowAction(!showAction)}
+              >
+                <div className="nav-image">
                   <img
                     src={user.picture || Image.Avatar}
                     alt={user.displayName}
@@ -88,28 +86,30 @@ export const Header = () => {
                     }}
                   />
                 </div>
-                {open && (
-                  <ul className="dropdown-menu">
-                    <li className="dropdown-item">
-                      <Link to={`/profile/me`}>
-                        Profile
-                        <i className="fa-solid fa-user"></i>
-                      </Link>
-                    </li>
-                    <li className="dropdown-item">
-                      <Link to="/">
-                        Update Profile
-                        <i className="fa-solid fa-file-pen"></i>
-                      </Link>
-                    </li>
-                    <li className="dropdown-item" onClick={handleSignOut}>
-                      <Link to="/">
-                        Sign Out
-                        <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                      </Link>
-                    </li>
-                  </ul>
-                )}
+                <ul
+                  className={`dropdown-menu ${
+                    showAction ? '' : 'dropdown-menu-hide'
+                  }`}
+                >
+                  <li className="dropdown-item">
+                    <Link to={`/profile/me`}>
+                      <i className="fa-solid fa-user"></i>
+                      Profile
+                    </Link>
+                  </li>
+                  <li className="dropdown-item">
+                    <Link to="/profile/update">
+                      <i className="fa-solid fa-file-pen"></i>
+                      Update Profile
+                    </Link>
+                  </li>
+                  <li className="dropdown-item" onClick={handleSignOut}>
+                    <Link to="/">
+                      <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                      Sign Out
+                    </Link>
+                  </li>
+                </ul>
               </li>
             ) : (
               <>
