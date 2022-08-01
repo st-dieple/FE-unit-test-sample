@@ -36,6 +36,9 @@
         width: 100%;
       }
     }
+    &-wrapper {
+      width: 100%;
+    }
   }
   &-btn {
     @include pxRem(margin-bottom, 4);

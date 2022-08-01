@@ -9,7 +9,7 @@ import PostAction from '../../../pages/posts/partials/PostAction';
 export const Post = ({ post, setPost }: any) => {
   return (
     <li key={post.id} className="post-item">
-      <article className="post">
+      <div className="post">
         <div className="post-header">
           <div className="post-user">
             {post.user ? (
@@ -89,7 +89,7 @@ export const Post = ({ post, setPost }: any) => {
             </Link>
           </div>
         </div>
-      </article>
+      </div>
     </li>
   );
 };

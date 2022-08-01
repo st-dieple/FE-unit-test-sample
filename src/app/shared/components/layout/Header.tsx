@@ -29,7 +29,6 @@ export const Header = () => {
   const user = useSelector((state: RootState) => state.users.data);
   const [sticky, setSticky] = useState<string>('');
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
-  const [showAction, setShowAction] = useState<boolean>(false);
 
   useEffect(() => {
     window.addEventListener('scroll', isSticky);
@@ -72,10 +71,7 @@ export const Header = () => {
           <ul className="nav-list">
             <Write />
             {Object.keys(user).length ? (
-              <li
-                className="nav-item"
-                onClick={() => setShowAction(!showAction)}
-              >
+              <li className="nav-item">
                 <div className="nav-image">
                   <img
                     src={user.picture || Image.Avatar}
@@ -86,11 +82,7 @@ export const Header = () => {
                     }}
                   />
                 </div>
-                <ul
-                  className={`dropdown-menu ${
-                    showAction ? '' : 'dropdown-menu-hide'
-                  }`}
-                >
+                <ul className="dropdown-menu dropdown-menu-hide">
                   <li className="dropdown-item">
                     <Link to={`/profile/me`}>
                       <i className="fa-solid fa-user"></i>
