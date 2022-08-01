@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { RootState } from '../../../app.reducers';
@@ -25,12 +25,10 @@ const WriteTemplate = ({ checkAuthBeforeAction }: any) => {
 const Write = withAuthChecking(WriteTemplate);
 const authService = new AuthService();
 export const Header = () => {
-  const ref = useRef<any>();
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.users.data);
   const [sticky, setSticky] = useState<string>('');
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
-  const [showAction, setShowAction] = useState<boolean>(false);
 
   useEffect(() => {
     window.addEventListener('scroll', isSticky);
