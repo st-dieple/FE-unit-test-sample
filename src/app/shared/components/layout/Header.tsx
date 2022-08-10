@@ -26,6 +26,7 @@ const Write = withAuthChecking(WriteTemplate);
 const authService = new AuthService();
 export const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state: RootState) => state.users.data);
   const [sticky, setSticky] = useState<string>('');
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
@@ -52,6 +53,7 @@ export const Header = () => {
           setIsRequestingAPI(false);
           localStorage.removeItem('token');
           dispatch(clearUserInfo());
+          navigate('/');
         })
         .catch((error: any) => {
           setIsRequestingAPI(false);
@@ -96,10 +98,8 @@ export const Header = () => {
                     </Link>
                   </li>
                   <li className="dropdown-item" onClick={handleSignOut}>
-                    <Link to="/">
-                      <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                      Sign Out
-                    </Link>
+                    <i className="fa-solid fa-arrow-right-from-bracket"></i>
+                    Sign Out
                   </li>
                 </ul>
               </li>
