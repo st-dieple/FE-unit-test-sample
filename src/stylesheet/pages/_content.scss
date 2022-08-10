@@ -1,5 +1,6 @@
 .section {
   &-content {
-    @include pxRem(margin-top, 40);
+    max-width: 50%;
+    @include pxRem(margin, 40 auto);
   }
 }

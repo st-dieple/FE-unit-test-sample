@@ -6,10 +6,8 @@ const RecycleBin = () => {
 
   return (
     <section className="section-content">
-      <div className="container">
-        <h2 className="section-title txt-center">My Recycle Bin</h2>
-        <PostList posts={posts} />
-      </div>
+      <h2 className="section-title txt-center">My Recycle Bin</h2>
+      <PostList posts={posts} />
     </section>
   );
 };
