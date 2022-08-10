@@ -7,7 +7,7 @@ const RecycleBin = () => {
   return (
     <section className="section-content">
       <div className="container">
-        <h2 className="section-title txt-center">My RecycleBin</h2>
+        <h2 className="section-title txt-center">My Recycle Bin</h2>
         <PostList posts={posts} />
       </div>
     </section>
