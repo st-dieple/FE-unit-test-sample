@@ -8,6 +8,10 @@ export class BookmarkService {
   constructor() {}
 
   addBookmark(postId: string | number) {
-    return this.http.post([ENDPOINT.bookmarks.index], {postId: `${postId}`});
+    return this.http.post([ENDPOINT.bookmarks.index], { postId: `${postId}` });
+  }
+
+  getBookmark() {
+    return this.http.get([ENDPOINT.bookmarks.index]);
   }
 }
