@@ -4,7 +4,7 @@ import BookmarkList from './partials/BookmarkList';
 const Bookmark = () => {
   return (
     <section className="section-bookmark">
-      <h2 className="bookmark-title">My Bookmarks</h2>
+      <h2 className="section-title txt-center">My Bookmarks</h2>
       <BookmarkList />
     </section>
   );
