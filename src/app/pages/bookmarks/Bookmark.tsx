@@ -32,10 +32,10 @@ const Bookmark = () => {
   }, []);
 
   return (
-    <section className="section-bookmark">
+    <main className="main-content">
       <h2 className="section-title txt-center">My Bookmarks</h2>
       {isRequestingAPI ? <SekeletonPost /> : <PostList posts={posts} />}
-    </section>
+    </main>
   );
 };
 
