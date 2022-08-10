@@ -12,7 +12,7 @@ const ButtonBookmark = ({ post, checkAuthBeforeAction }: any) => {
     if (!isRequestingAPI) {
       setIsRequestingAPI(true);
       bookmarkService
-        .addBookmark({ postId: post.id.toString() })
+        .addBookmark(post.id)
         .then((res: any) => {
           setIsRequestingAPI(false);
           setIsInBookmark(res.isInBookmark);
