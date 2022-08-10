@@ -71,7 +71,7 @@ const FormPost = () => {
           navigate('/');
         });
     }
-  };  
+  };
 
   const onSubmitForm = (data: any) => {
     const dataPost = { ...data };
@@ -158,7 +158,7 @@ const FormPost = () => {
   if (loading) return <Loading />;
   return (
     <>
-      <h2 className="write-title txt-center">
+      <h2 className="section-title txt-center">
         {id ? 'Edit Blog' : 'Create New Blog'}
       </h2>
       <form className="form-post" onSubmit={handleSubmit(onSubmitForm)}>
