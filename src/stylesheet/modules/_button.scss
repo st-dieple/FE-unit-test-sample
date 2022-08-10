@@ -53,6 +53,14 @@
     color: map-get($color, white);
     @include pxRem(margin-left, 16);
   }
+  &-bookmark {
+    @include pxRem(font-size, 18);
+    cursor: pointer;
+    background-color: transparent;
+    &-active {
+      color: map-get($color, primary);
+    }
+  }
 }
 
 .fa {
