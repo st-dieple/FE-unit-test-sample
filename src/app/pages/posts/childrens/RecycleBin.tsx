@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { PostService } from '../../../core/serivces/post.service';
 import PostList from '../partials/PostList';
+import SekeletonPost from '../../../shared/components/partials/SekeletonPost';
 
 const postService = new PostService();
 const RecycleBin = () => {
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
-  const [postsRecycleBin, setPostsRecycleBin] = useState<any>([]);
+  const [posts, setPosts] = useState<any>([]);
   const [page, setPage] = useState<number>(1);
+  const [loadMore, setLoadMore] = useState<boolean>(false);
 
   const getPostsRecycleBin = () => {
     if (!isRequestingAPI) {
@@ -15,8 +17,8 @@ const RecycleBin = () => {
         .getPostsReycleBin(page, 5)
         .then((res: any) => {
           setIsRequestingAPI(false);
-          console.log(res);
-          setPostsRecycleBin(res.data);
+          setPosts([...posts, ...res.data]);
+          setLoadMore(res.loadMore);
         })
         .catch((error: any) => {
           setIsRequestingAPI(false);
@@ -25,13 +27,29 @@ const RecycleBin = () => {
   };
 
   useEffect(() => {
+    if (!isRequestingAPI && loadMore) {
+      window.addEventListener('scroll', handleScroll);
+    }
+  }, [isRequestingAPI, loadMore]);
+
+  const handleScroll = (e: any) => {
+    if (
+      window.innerHeight + e.target.documentElement.scrollTop >=
+      e.target.documentElement.scrollHeight
+    ) {
+      window.removeEventListener('scroll', handleScroll);
+      setPage(page + 1);
+    }
+  };
+
+  useEffect(() => {
     getPostsRecycleBin();
-  }, []);
+  }, [page]);
 
   return (
     <main className="main-content">
       <h2 className="section-title txt-center">My Recycle Bin</h2>
-      <PostList posts={postsRecycleBin} />
+      {isRequestingAPI ? <SekeletonPost /> : <PostList posts={posts} />}
     </main>
   );
 };
