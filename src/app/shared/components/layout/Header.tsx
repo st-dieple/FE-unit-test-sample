@@ -95,6 +95,12 @@ export const Header = () => {
                       Update Profile
                     </Link>
                   </li>
+                  <li className="dropdown-item">
+                    <Link to="/bookmarks">
+                      <i className="fa-solid fa-bookmark"></i>
+                      My Bookmarks
+                    </Link>
+                  </li>
                   <li className="dropdown-item" onClick={handleSignOut}>
                     <Link to="/">
                       <i className="fa-solid fa-arrow-right-from-bracket"></i>
