@@ -4,6 +4,7 @@ import { PostService } from '../../../core/serivces/post.service';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import { useDialog } from '../../../shared/contexts/dialog.contexts';
 import { useToast } from '../../../shared/contexts/toast.contexts';
+import ButtonBookmark from '../../../shared/components/partials/ButtonBookmark';
 
 interface IPostAction {
   post: any;
@@ -80,7 +81,7 @@ const PostAction = ({ post, setPost }: IPostAction) => {
 
   return (
     <>
-      {checkUserId(post.userId) && (
+      {checkUserId(post.userId) ? (
         <div
           className="post-control"
           onClick={() => setShowAction(!showAction)}
@@ -107,6 +108,8 @@ const PostAction = ({ post, setPost }: IPostAction) => {
             </li>
           </ul>
         </div>
+      ) : (
+        <ButtonBookmark post={post} />
       )}
     </>
   );
