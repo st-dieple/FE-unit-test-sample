@@ -100,7 +100,7 @@ export const Header = () => {
                   <li className="dropdown-item">
                     <Link to="/posts/recycle-bin">
                       <i className="fa-solid fa-file-pen"></i>
-                      My RecycleBin
+                      My Recycle Bin
                     </Link>
                   </li>
                   <li className="dropdown-item">
