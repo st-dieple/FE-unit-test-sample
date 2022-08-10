@@ -29,8 +29,8 @@ export class PostService {
     ]);
   }
 
-  getPostsReycleBin() {
-    return this.http.get([`${ENDPOINT.posts.recyclebin}`]);
+  getPostsReycleBin(page: number | string, size: number | string) {
+    return this.http.get([`${ENDPOINT.posts.recyclebin}?page=${page}&size=${size}`]);
   }
 
   getPostsById(data: any) {

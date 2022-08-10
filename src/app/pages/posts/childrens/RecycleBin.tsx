@@ -5,12 +5,13 @@ const postService = new PostService();
 const RecycleBin = () => {
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
   const [postsRecycleBin, setPostsRecycleBin] = useState<any>([]);
+  const [page, setPage] = useState<number>(1);
 
   const getPostsRecycleBin = () => {
     if (!isRequestingAPI) {
       setIsRequestingAPI(true);
       postService
-        .getPostsReycleBin()
+        .getPostsReycleBin(page, 5)
         .then((res: any) => {
           setIsRequestingAPI(false);
           console.log(res);
