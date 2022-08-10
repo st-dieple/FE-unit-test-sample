@@ -5,7 +5,7 @@ import PostList from '../posts/partials/PostList';
 
 const bookmarkService = new BookmarkService();
 const Bookmark = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<any>([]);
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
 
   const getBookmark = () => {
@@ -15,8 +15,11 @@ const Bookmark = () => {
         .getBookmark()
         .then((res: any) => {
           setIsRequestingAPI(false);
-          const newPost = res.map((item) => item.post);
-          setPosts(newPost);
+          res.map((item: any) => {
+            if (item.post) {
+              setPosts((prev: any) => [...prev, item.post]);
+            }
+          });
         })
         .catch((error) => {
           setIsRequestingAPI(false);
