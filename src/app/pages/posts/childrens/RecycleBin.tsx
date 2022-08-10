@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PostList from '../partials/PostList';
 
 const RecycleBin = () => {
-  return <div>This is RecycleBin</div>;
+  const [posts, setPosts] = useState([]);
+
+  return (
+    <section className="section-content">
+      <div className="container">
+        <h2 className="section-title txt-center">My RecycleBin</h2>
+        <PostList posts={posts} />
+      </div>
+    </section>
+  );
 };
 
 export default RecycleBin;

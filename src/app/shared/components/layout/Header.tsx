@@ -95,6 +95,12 @@ export const Header = () => {
                       Update Profile
                     </Link>
                   </li>
+                  <li className="dropdown-item">
+                    <Link to="/posts/recycle-bin">
+                      <i className="fa-solid fa-file-pen"></i>
+                      My RecycleBin
+                    </Link>
+                  </li>
                   <li className="dropdown-item" onClick={handleSignOut}>
                     <Link to="/">
                       <i className="fa-solid fa-arrow-right-from-bracket"></i>
