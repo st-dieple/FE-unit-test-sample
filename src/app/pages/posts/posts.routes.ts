@@ -1,9 +1,6 @@
 import { PageRoute } from '../../core/modules/custom-router-dom/router.interface';
-import Home from './childrens/Home';
+import { Home, Edit, New, PostDetail, RecycleBin } from './childrens/index';
 import Posts from './Posts';
-import Edit from './childrens/Edit';
-import New from './childrens/New';
-import PostDetail from './childrens/PostDetail';
 
 const postRoutes: PageRoute[] = [
   {
@@ -30,6 +27,11 @@ const postRoutes: PageRoute[] = [
       {
         path: ':id/edit',
         element: Edit,
+        isProtected: true,
+      },
+      {
+        path: 'recycle-bin',
+        element: RecycleBin,
         isProtected: true,
       },
     ],
