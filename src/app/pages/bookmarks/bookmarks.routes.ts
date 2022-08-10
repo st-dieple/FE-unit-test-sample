@@ -5,6 +5,7 @@ const bookmarkRoutes: PageRoute[] = [
   {
     path: '/bookmarks',
     element: Bookmark,
+    isProtected: true,
   },
 ];
 
