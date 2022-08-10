@@ -1,11 +1,13 @@
-import React from 'react';
-import BookmarkList from './partials/BookmarkList';
+import React, { useState } from 'react';
+import PostList from '../posts/partials/PostList';
 
 const Bookmark = () => {
+  const [posts, setPosts] = useState([]);
+
   return (
     <section className="section-bookmark">
       <h2 className="section-title txt-center">My Bookmarks</h2>
-      <BookmarkList />
+      <PostList posts={posts} />
     </section>
   );
 };
