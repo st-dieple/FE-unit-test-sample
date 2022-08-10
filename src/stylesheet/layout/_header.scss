@@ -99,6 +99,13 @@
 
   &-item {
     @include pxRem(padding, 10 22);
+    @include pxRem(font-size, 14);
+    color: map-get($color, text);
+    font-weight: 500;
+    cursor: pointer;
+    &:hover {
+      color: map-get($color, primary);
+    }
     a {
       color: map-get($color, text);
       @include pxRem(font-size, 14);
