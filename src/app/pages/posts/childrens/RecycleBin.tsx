@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PostService } from '../../../core/serivces/post.service';
+import PostList from '../partials/PostList';
 
 const postService = new PostService();
 const RecycleBin = () => {
@@ -27,7 +28,12 @@ const RecycleBin = () => {
     getPostsRecycleBin();
   }, []);
 
-  return <div>This is RecycleBin</div>;
+  return (
+    <main className="main-content">
+      <h2 className="section-title txt-center">My Recycle Bin</h2>
+      <PostList posts={postsRecycleBin} />
+    </main>
+  );
 };
 
 export default RecycleBin;
