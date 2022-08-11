@@ -15,7 +15,7 @@ const Bookmark = () => {
         .getBookmark()
         .then((res: any) => {
           setIsRequestingAPI(false);
-          res.map((item: any) => {
+          res.forEach((item: any) => {
             if (item.post) {
               setPosts((prev: any) => [...prev, item.post]);
             }
