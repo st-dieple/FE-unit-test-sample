@@ -64,15 +64,41 @@ const PostAction = ({ post, setPost }: IPostAction) => {
     setShowAction(false);
   };
 
-  const doDelete = () => {
+  const handleRestore = (id: string | number) => {
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      postService
+        .restoreArticle(id)
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          toast?.addToast({
+            type: 'success',
+            title: 'Restore post successfully.',
+          });
+          navigate(`/posts/${id}`);
+        })
+        .catch((error: any) => {
+          setIsRequestingAPI(false);
+          toast?.addToast({
+            type: 'error',
+            title: 'Restore post error.',
+          });
+        });
+    }
+  };
+
+  const doActionPost = (action: string) => {
     dialog?.addDialog({
-      title: 'Delete Post',
-      content: 'Are you sure you want to delete this post?',
+      title: `${action} Post`,
+      content: `Are you sure you want to ${action} this post?`,
       button: {
         confirm: {
-          text: 'Delete',
-          customClass: 'btn-danger',
-          confirmCallback: () => handleDelete(post.id),
+          text: action,
+          customClass: action === 'delete' ? 'btn-danger' : 'btn-primary',
+          confirmCallback: () =>
+            action === 'delete'
+              ? handleDelete(post.id)
+              : handleRestore(post.id),
         },
         cancel: {
           text: 'Cancel',
@@ -89,6 +115,7 @@ const PostAction = ({ post, setPost }: IPostAction) => {
           <Button
             classBtn="btn-restore"
             text={<i className="fa-solid fa-arrow-rotate-left"></i>}
+            onClick={() => doActionPost('restore')}
           />
         ) : (
           <div
@@ -110,7 +137,7 @@ const PostAction = ({ post, setPost }: IPostAction) => {
               </li>
               <li
                 className="dropdown-item dropdown-item-trash"
-                onClick={doDelete}
+                onClick={() => doActionPost('delete')}
               >
                 <i className="fa-solid fa-trash-can"></i>
                 Delete
