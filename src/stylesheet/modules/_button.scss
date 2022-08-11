@@ -62,7 +62,12 @@
     }
   }
   &-restore {
+    @include pxRem(font-size, 18);
     background-color: map-get($color, white);
+    cursor: pointer;
+    &:hover {
+      color: map-get($color, primary);
+    }
   }
 }
 
