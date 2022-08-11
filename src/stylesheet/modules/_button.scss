@@ -47,6 +47,7 @@
     @include pxRem(width, 146);
     @include pxRem(height, 40);
     @include pxRem(border-radius, 4);
+    text-transform: capitalize;
   }
   &-danger {
     background-color: map-get($color, red-2);
@@ -58,6 +59,14 @@
     cursor: pointer;
     background-color: transparent;
     &-active {
+      color: map-get($color, primary);
+    }
+  }
+  &-restore {
+    @include pxRem(font-size, 18);
+    background-color: transparent;
+    cursor: pointer;
+    &:hover {
       color: map-get($color, primary);
     }
   }

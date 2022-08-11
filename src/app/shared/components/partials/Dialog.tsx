@@ -24,7 +24,7 @@ const Dialog = ({ dialog, closeDialog }: any) => {
             onClick={handleCloseDialog}
           />
           {dialog.title ? (
-            <h2 className="modal-title">{dialog.title}</h2>
+            <h2 className="modal-title txt-capitalize">{dialog.title}</h2>
           ) : (
             <></>
           )}
