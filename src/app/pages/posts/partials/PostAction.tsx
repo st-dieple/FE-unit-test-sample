@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { PostService } from '../../../core/serivces/post.service';
 import { checkUserId } from '../../../shared/common/checkUserId';
 import { useDialog } from '../../../shared/contexts/dialog.contexts';
 import { useToast } from '../../../shared/contexts/toast.contexts';
 import ButtonBookmark from '../../../shared/components/partials/ButtonBookmark';
+import { Button } from '../../../shared/components/partials';
 
 interface IPostAction {
   post: any;
@@ -19,6 +20,8 @@ const PostAction = ({ post, setPost }: IPostAction) => {
   const [isRequestingAPI, setIsRequestingAPI] = useState<boolean>(false);
   const [showAction, setShowAction] = useState<boolean>(false);
   const dialog = useDialog();
+  const location = useLocation();
+  const getPath = location.pathname;
 
   useEffect(() => {
     const checkIfClickedOutside = (e: any) => {
@@ -82,32 +85,39 @@ const PostAction = ({ post, setPost }: IPostAction) => {
   return (
     <>
       {checkUserId(post.userId) ? (
-        <div
-          className="post-control"
-          onClick={() => setShowAction(!showAction)}
-        >
-          <i className="fa-solid fa-ellipsis"></i>
-          <ul
-            className={`dropdown-menu dropdown-menu-action ${
-              showAction ? '' : 'dropdown-menu-hide'
-            }`}
-            ref={ref}
+        getPath === '/posts/recycle-bin' ? (
+          <Button
+            classBtn="btn-restore"
+            text={<i className="fa-solid fa-arrow-rotate-left"></i>}
+          />
+        ) : (
+          <div
+            className="post-control"
+            onClick={() => setShowAction(!showAction)}
           >
-            <li className="dropdown-item">
-              <Link to={`/posts/${post.id}/edit`}>
-                <i className="fa-solid fa-pen"></i>
-                Edit
-              </Link>
-            </li>
-            <li
-              className="dropdown-item dropdown-item-trash"
-              onClick={doDelete}
+            <i className="fa-solid fa-ellipsis"></i>
+            <ul
+              className={`dropdown-menu dropdown-menu-action ${
+                showAction ? '' : 'dropdown-menu-hide'
+              }`}
+              ref={ref}
             >
-              <i className="fa-solid fa-trash-can"></i>
-              Delete
-            </li>
-          </ul>
-        </div>
+              <li className="dropdown-item">
+                <Link to={`/posts/${post.id}/edit`}>
+                  <i className="fa-solid fa-pen"></i>
+                  Edit
+                </Link>
+              </li>
+              <li
+                className="dropdown-item dropdown-item-trash"
+                onClick={doDelete}
+              >
+                <i className="fa-solid fa-trash-can"></i>
+                Delete
+              </li>
+            </ul>
+          </div>
+        )
       ) : (
         <ButtonBookmark post={post} />
       )}
