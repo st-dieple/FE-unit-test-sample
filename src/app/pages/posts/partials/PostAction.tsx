@@ -94,7 +94,7 @@ const PostAction = ({ post, setPost }: IPostAction) => {
       button: {
         confirm: {
           text: action,
-          customClass: 'btn-danger',
+          customClass: action === 'delete' ? 'btn-danger' : 'btn-primary',
           confirmCallback: () =>
             action === 'delete'
               ? handleDelete(post.id)
