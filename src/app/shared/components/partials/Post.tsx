@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Tag } from './Tag';
 import { formatDate } from './../../common/formatDate';
 import { checkUserId } from '../../common/checkUserId';
 import Image from '../../../../assets/images';
 import PostAction from '../../../pages/posts/partials/PostAction';
-import { Button } from './Button';
 
 export const Post = ({ post, setPost }: any) => {
   return (

@@ -63,7 +63,7 @@
   }
   &-restore {
     @include pxRem(font-size, 18);
-    background-color: map-get($color, white);
+    background-color: transparent;
     cursor: pointer;
     &:hover {
       color: map-get($color, primary);
