@@ -61,6 +61,14 @@
       color: map-get($color, primary);
     }
   }
+  &-restore {
+    @include pxRem(font-size, 18);
+    background-color: transparent;
+    cursor: pointer;
+    &:hover {
+      color: map-get($color, primary);
+    }
+  }
 }
 
 .fa {
