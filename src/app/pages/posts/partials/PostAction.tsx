@@ -61,6 +61,29 @@ const PostAction = ({ post, setPost }: IPostAction) => {
     setShowAction(false);
   };
 
+  const handleRestore = () => {
+    if (!isRequestingAPI) {
+      setIsRequestingAPI(true);
+      postService
+        .restoreArticle(post.id)
+        .then((res: any) => {
+          setIsRequestingAPI(false);
+          toast?.addToast({
+            type: 'success',
+            title: 'Restore post successfully.',
+          });
+          navigate(`posts/${post.id}`);
+        })
+        .catch((error: any) => {
+          setIsRequestingAPI(false);
+          toast?.addToast({
+            type: 'error',
+            title: 'Restore post error.',
+          });
+        });
+    }
+  };
+
   const doDelete = () => {
     dialog?.addDialog({
       title: 'Delete Post',

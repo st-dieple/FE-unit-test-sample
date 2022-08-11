@@ -60,4 +60,8 @@ export class PostService {
   deletePostService(id: string) {
     return this.http.delete([`${ENDPOINT.posts.index}/${id}`]);
   }
+
+  restoreArticle(id: string | number) {
+    return this.http.put([`${ENDPOINT.posts.index}/${id}/restore`]);
+  }
 }
