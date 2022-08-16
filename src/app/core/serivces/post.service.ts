@@ -29,6 +29,10 @@ export class PostService {
     ]);
   }
 
+  getPostsReycleBin(page: number | string, size: number | string) {
+    return this.http.get([`${ENDPOINT.posts.recyclebin}?page=${page}&size=${size}`]);
+  }
+
   getPostsById(data: any) {
     return this.http.get([`${ENDPOINT.posts.index}/${data.id}`]);
   }
@@ -55,5 +59,9 @@ export class PostService {
 
   deletePostService(id: string) {
     return this.http.delete([`${ENDPOINT.posts.index}/${id}`]);
+  }
+
+  restoreArticle(id: string | number) {
+    return this.http.put([`${ENDPOINT.posts.index}/${id}/restore`]);
   }
 }
